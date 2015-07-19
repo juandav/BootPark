@@ -13,6 +13,9 @@ namespace Boot_Park.Controller.BootPark
         private VehiculoOAD vehiculo = new VehiculoOAD();
         private EtiquetaOAD etiquetas = new EtiquetaOAD();
 
+        private UsuarioOAD usuario = new UsuarioOAD();
+        private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
+
         private General general = new General();
 
         #region GESTION DE PATICULARES
@@ -70,7 +73,16 @@ namespace Boot_Park.Controller.BootPark
                 return etiquetas.consultarEtiquetas();
             }
 
-            public bool registrarEtiquetas()
+            public DataTable consultarEtiquetas(string estado)
+            {
+                return etiquetas.consultarEtiquetas(estado);
+            }
+
+        public DataTable consultarEtiquetasSinAsignar(string tipo, string usuario) {
+            return etiquetausuario.consultarEtiquetasDisponibles(tipo, usuario);
+        }
+
+        public bool registrarEtiquetas()
             {
                 return etiquetas.registrarEtoquetas();
             }
@@ -88,6 +100,33 @@ namespace Boot_Park.Controller.BootPark
             public bool eliminalEtiqueta(string id, string tipo)
             {
                 return etiquetas.eliminarEtiqueta(id, tipo);
+            }
+        #endregion
+
+        #region ETIQUETAUSUARIO
+
+            public DataTable consultarEtiquetaUsuario() {
+                return null;
+            }
+
+            public bool registrarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
+                return etiquetausuario.registrarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
+            }
+
+            public bool actualizarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
+                return etiquetausuario.actualizarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
+            }
+
+            public bool eliminarEtiquetaUsuario(string id, string tipo, string usuario)
+            {
+                return etiquetausuario.eliminarEtiquetaUsuario(id, tipo, usuario);
+            }
+
+        #endregion
+
+        #region USUARIO
+            public DataTable consultarUsuarios() {
+                return usuario.consultarUsuarios();
             }
         #endregion
     }

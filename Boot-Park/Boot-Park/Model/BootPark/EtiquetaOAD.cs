@@ -23,6 +23,20 @@ namespace Boot_Park.Model.BootPark
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
+        public DataTable consultarEtiquetas(string estado) {
+            string sql = "SELECT"
+                        + "     E.ETIQ_ID,"
+                        + "     E.ETIQ_TIPO,"
+                        + "     E.ETIQ_ETIQUETA,"
+                        + "     E.ETIQ_DESCRIPCION,"
+                        + "     E.ETIQ_OBSERVACION"
+                        + " FROM"
+                        + "     BOOTPARK.ETIQUETA E"
+                        + " WHERE "
+                        + "     E.ETIQ_ESTADO = '" + estado + "'";
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+
         public bool registrarEtoquetas()
         {
             List<string> sql = new List<string>() {

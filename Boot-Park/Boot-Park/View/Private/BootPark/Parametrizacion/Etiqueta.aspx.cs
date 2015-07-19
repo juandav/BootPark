@@ -39,7 +39,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
 
             if (response)
             {
-                //WREGISTRO.Hide();
+                WREGISTRO.Hide();
                 X.Msg.Notify("Notificación", "Etiqueta agregado exitosamente!").Show();
             }
             else

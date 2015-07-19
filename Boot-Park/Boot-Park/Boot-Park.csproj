@@ -90,6 +90,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
+    <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
+    <Content Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx" />
+    <Content Include="View\Private\BootPark\Circulacion\Circulacion.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
@@ -99,10 +103,40 @@
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
     <Compile Include="Model\BootPark\EtiquetaOAD.cs" />
+    <Compile Include="Model\BootPark\EtiquetaUsuarioOAD.cs" />
     <Compile Include="Model\BootPark\ParticularOAD.cs" />
+    <Compile Include="Model\BootPark\UsuarioOAD.cs" />
     <Compile Include="Model\BootPark\VehiculoOAD.cs" />
     <Compile Include="Model\General.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Private\BootPark\Asignacion\Identidad.aspx.cs">
+      <DependentUpon>Identidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Asignacion\Identidad.aspx.designer.cs">
+      <DependentUpon>Identidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Asignacion\Vehiculo.aspx.cs">
+      <DependentUpon>Vehiculo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Asignacion\Vehiculo.aspx.designer.cs">
+      <DependentUpon>Vehiculo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx.cs">
+      <DependentUpon>Autorizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx.designer.cs">
+      <DependentUpon>Autorizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Circulacion\Circulacion.aspx.cs">
+      <DependentUpon>Circulacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Circulacion\Circulacion.aspx.designer.cs">
+      <DependentUpon>Circulacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx.cs">
       <DependentUpon>Etiqueta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -129,8 +163,6 @@
     <Folder Include="Content\css\" />
     <Folder Include="Content\js\" />
     <Folder Include="Content\logs\" />
-    <Folder Include="View\Private\BootPark\Autorizacion\" />
-    <Folder Include="View\Private\BootPark\Circulacion\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
