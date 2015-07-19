@@ -37,7 +37,8 @@
                                     </ext:Store>
                                 </Store>
                                 <ColumnModel>
-                                    <Columns>
+                                    <Columns>  
+                                        <ext:RowNumbererColumn />
                                         <ext:Column ColumnID="CPART_IDENTIFICACION" DataIndex="PART_IDENTIFICACION" Header="Identificación">
                                             <Editor>
                                                 <ext:SpinnerField runat="server"/>

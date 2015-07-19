@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using Boot_Park.Model.BootPark;
+using Boot_Park.Model;
 
 namespace Boot_Park.Controller.BootPark
 {
     public class ParametrizacionCOD
     {
-        ParticularOAD particular = new ParticularOAD();
-        VehiculoOAD vehiculo = new VehiculoOAD();
-        EtiquetaOAD etiqueta = new EtiquetaOAD();
+        private ParticularOAD particular = new ParticularOAD();
+        private VehiculoOAD vehiculo = new VehiculoOAD();
+        private EtiquetaOAD etiqueta = new EtiquetaOAD();
+
+        private General general = new General();
 
         #region GESTION DE PATICULARES
         public DataTable consultarParticulares() {
@@ -22,15 +25,15 @@ namespace Boot_Park.Controller.BootPark
             }
 
             public bool registrarParticular(string identificacion, string nombre, string apellido, string registradoPor) {
-                return particular.registrarParticular();
+                return particular.registrarParticular(general.nextPrimaryKey("BOOTPARK.PARTICULAR","PART_ID"), identificacion, nombre, apellido, registradoPor);
             }
 
-            public bool actualizarParticular(string identificacion, string nombre, string apellido, string registradoPor) {
-                return particular.actualizarParticular();
+            public bool actualizarParticular(string id, string identificacion, string nombre, string apellido, string registradoPor) {
+                return particular.actualizarParticular(id, identificacion, nombre, apellido, registradoPor);
             }
 
             public bool eliminalParticular(string id) {
-                return particular.eliminarParticular();
+                return particular.eliminarParticular(id);
             }
         #endregion
 

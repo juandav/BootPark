@@ -25,7 +25,9 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
 
         [DirectMethod(Namespace = "parametro")]
         public void cargarParticulares() {
-            BindData();
+            DataTable datos = parametro.consultarParticulares();
+            SPARTICULAR.DataSource = datos;
+            SPARTICULAR.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
@@ -34,6 +36,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
 
             if (response)
             {
+                WREGISTRO.Hide();
                 X.Msg.Notify("Notificación","Particular agregado exitosamente!").Show();
             }
             else {
@@ -45,7 +48,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
 
         [DirectMethod(Namespace = "parametro")]
         public void modificarParticular(string id, string identificacion, string nombre, string apellido) {
-            bool response = parametro.actualizarParticular(identificacion, nombre, apellido, pegeId);
+            bool response = parametro.actualizarParticular(id, identificacion, nombre, apellido, pegeId);
 
             if (response)
             {
