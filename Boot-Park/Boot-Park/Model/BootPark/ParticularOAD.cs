@@ -28,5 +28,17 @@ namespace Boot_Park.Model.BootPark
             return connection.sendSetDataMariaDB(sql);
         }
 
+        public bool actualizarParticular()
+        {
+            string sql = "";
+            return connection.sendSetDataMariaDB(sql);
+        }
+
+        public bool eliminarParticular()
+        {
+            string sql = "";
+            return connection.sendSetDataMariaDB(sql);
+        }
+
     }
 }

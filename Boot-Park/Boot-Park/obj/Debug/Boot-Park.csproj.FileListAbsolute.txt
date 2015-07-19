@@ -4,3 +4,9 @@ D:\SPUA\Boot-Park\Boot-Park\bin\Boot-Park.pdb
 D:\SPUA\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
 D:\SPUA\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 D:\SPUA\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
+D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
+D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
+D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
+D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
+D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
+D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
