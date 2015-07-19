@@ -48,19 +48,19 @@ namespace Boot_Park.Controller.BootPark
             return vehiculo.registrarVehiculos();
         }
 
-        public bool registrarVehiculo()
+        public bool registrarVehiculo(string observacion, string placa, string modelo, string marca, string color, string registradoPor)
         {
-            return vehiculo.registrarVehiculo();
+            return vehiculo.registrarVehiculo(general.nextPrimaryKey("BOOTPARK.VEHICULO", "VEHI_ID"), observacion, placa, modelo, marca, color, registradoPor);
         }
 
-        public bool actualizarVehiculo()
+        public bool actualizarVehiculo(string id, string observacion, string placa, string modelo, string marca, string color, string registradoPor)
         {
-            return vehiculo.actualizarVehiculo();
+            return vehiculo.actualizarVehiculo(id, observacion, placa, modelo, marca, color, registradoPor);
         }
 
-        public bool eliminalVehiculo()
+        public bool eliminalVehiculo(string id)
         {
-            return vehiculo.eliminarVehiculo();
+            return vehiculo.eliminarVehiculo(id);
         }
         #endregion
 
