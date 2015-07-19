@@ -7,11 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Particular</title>
-     <script type="text/javascript">
-         var afterEdit = function (e) {
-             parametro.modificarParticular(e.record.data.PART_ID, e.record.data.PART_IDENTIFICACION, e.record.data.PART_NOMBRE, e.record.data.PART_APELLIDO);
-         };
-     </script>
+    <script type="text/javascript">
+        var afterEdit = function (e) {
+            parametro.modificarParticular(e.record.data.PART_ID, e.record.data.PART_IDENTIFICACION, e.record.data.PART_NOMBRE, e.record.data.PART_APELLIDO);
+        };
+    </script>
 </head>
 <body>
     <ext:ResourceManager runat="server" />
@@ -27,31 +27,31 @@
                                         <Reader>
                                             <ext:JsonReader>
                                                 <Fields>
-                                                    <ext:RecordField Name="PART_ID"/>
-                                                    <ext:RecordField Name="PART_IDENTIFICACION"/>
-                                                    <ext:RecordField Name="PART_NOMBRE"/>
-                                                    <ext:RecordField Name="PART_APELLIDO"/>
+                                                    <ext:RecordField Name="PART_ID" />
+                                                    <ext:RecordField Name="PART_IDENTIFICACION" />
+                                                    <ext:RecordField Name="PART_NOMBRE" />
+                                                    <ext:RecordField Name="PART_APELLIDO" />
                                                 </Fields>
                                             </ext:JsonReader>
                                         </Reader>
                                     </ext:Store>
                                 </Store>
                                 <ColumnModel>
-                                    <Columns>  
+                                    <Columns>
                                         <ext:RowNumbererColumn />
                                         <ext:Column ColumnID="CPART_IDENTIFICACION" DataIndex="PART_IDENTIFICACION" Header="Identificación">
                                             <Editor>
-                                                <ext:SpinnerField runat="server"/>
+                                                <ext:SpinnerField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                         <ext:Column ColumnID="CPART_NOMBRE" DataIndex="PART_NOMBRE" Header="Nombre" Width="300">
+                                        <ext:Column ColumnID="CPART_NOMBRE" DataIndex="PART_NOMBRE" Header="Nombre" Width="300">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                         <ext:Column ColumnID="CPART_APELLIDO" DataIndex="PART_APELLIDO" Header="Apellido">
+                                        <ext:Column ColumnID="CPART_APELLIDO" DataIndex="PART_APELLIDO" Header="Apellido">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
                                         <ext:CommandColumn Width="60">
@@ -76,8 +76,8 @@
                                                 } 
                                             });
                                         }                                      
-                                     "/>
-                                    <AfterEdit Fn="afterEdit"/>
+                                     " />
+                                    <AfterEdit Fn="afterEdit" />
                                 </Listeners>
                             </ext:GridPanel>
                         </Items>
@@ -87,7 +87,7 @@
                                     <ext:ToolbarFill />
                                     <ext:Button runat="server" Icon="Add" Text="Nuevo Particular">
                                         <Listeners>
-                                            <Click Handler="WREGISTRO.show();"/>
+                                            <Click Handler="WREGISTRO.show();" />
                                         </Listeners>
                                     </ext:Button>
                                 </Items>
@@ -97,11 +97,11 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="User" Title="Nuevo Particular" Hidden="true" Padding="10" >
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="User" Title="Nuevo Particular" Hidden="true" Padding="10">
                 <Items>
-                    <ext:SpinnerField ID="SPIDENTIFICACION" runat="server" FieldLabel="Identificación"/>
-                    <ext:TextField ID="TFNOMBRE" runat="server" FieldLabel="Nombres"/>
-                    <ext:TextField ID="TFAPELLIDO" runat="server" FieldLabel="Apellidos"/>
+                    <ext:SpinnerField ID="SPIDENTIFICACION" runat="server" FieldLabel="Identificación" />
+                    <ext:TextField ID="TFNOMBRE" runat="server" FieldLabel="Nombres" />
+                    <ext:TextField ID="TFAPELLIDO" runat="server" FieldLabel="Apellidos" />
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
@@ -109,7 +109,7 @@
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar">
                                 <Listeners>
-                                    <Click Handler="parametro.crearParticular(SPIDENTIFICACION.getValue(), TFNOMBRE.getValue(), TFAPELLIDO.getValue());"/>
+                                    <Click Handler="parametro.crearParticular(SPIDENTIFICACION.getValue(), TFNOMBRE.getValue(), TFAPELLIDO.getValue());" />
                                 </Listeners>
                             </ext:Button>
                         </Items>

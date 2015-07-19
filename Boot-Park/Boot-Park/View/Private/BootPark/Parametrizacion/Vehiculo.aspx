@@ -8,10 +8,10 @@
 <head runat="server">
     <title>Vehiculo</title>
     <script type="text/javascript">
-        var afterEdit = function (e) { 
-            parametro.modificarVehiculo(e.record.data.VEHI_ID, e.record.data.VEHI_OBSERVACION, e.record.data.VEHI_PLACA, e.record.data.VEHI_MODELO,  e.record.data.VEHI_MARCA,  e.record.data.VEHI_COLOR);
-         };
-     </script>
+        var afterEdit = function (e) {
+            parametro.modificarVehiculo(e.record.data.VEHI_ID, e.record.data.VEHI_OBSERVACION, e.record.data.VEHI_PLACA, e.record.data.VEHI_MODELO, e.record.data.VEHI_MARCA, e.record.data.VEHI_COLOR);
+        };
+    </script>
 </head>
 <body>
     <ext:ResourceManager runat="server" />
@@ -27,43 +27,43 @@
                                         <Reader>
                                             <ext:JsonReader>
                                                 <Fields>
-                                                    <ext:RecordField Name="VEHI_ID"/>
-                                                    <ext:RecordField Name="VEHI_OBSERVACION"/>
-                                                    <ext:RecordField Name="VEHI_PLACA"/>
-                                                    <ext:RecordField Name="VEHI_MODELO"/>
-                                                    <ext:RecordField Name="VEHI_MARCA"/>
-                                                    <ext:RecordField Name="VEHI_COLOR"/>
+                                                    <ext:RecordField Name="VEHI_ID" />
+                                                    <ext:RecordField Name="VEHI_OBSERVACION" />
+                                                    <ext:RecordField Name="VEHI_PLACA" />
+                                                    <ext:RecordField Name="VEHI_MODELO" />
+                                                    <ext:RecordField Name="VEHI_MARCA" />
+                                                    <ext:RecordField Name="VEHI_COLOR" />
                                                 </Fields>
                                             </ext:JsonReader>
                                         </Reader>
                                     </ext:Store>
                                 </Store>
                                 <ColumnModel>
-                                    <Columns>  
+                                    <Columns>
                                         <ext:RowNumbererColumn />
                                         <ext:Column ColumnID="CVEHI_PLACA" DataIndex="VEHI_PLACA" Header="Placa">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                         <ext:Column ColumnID="CVEHI_MODELO" DataIndex="VEHI_MODELO" Header="Modelo">
+                                        <ext:Column ColumnID="CVEHI_MODELO" DataIndex="VEHI_MODELO" Header="Modelo">
                                             <Editor>
-                                                <ext:SpinnerField runat="server"/>
+                                                <ext:SpinnerField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                         <ext:Column ColumnID="CVEHI_MARCA" DataIndex="VEHI_MARCA" Header="Marca">
+                                        <ext:Column ColumnID="CVEHI_MARCA" DataIndex="VEHI_MARCA" Header="Marca">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                         <ext:Column ColumnID="CVEHI_COLOR" DataIndex="VEHI_COLOR" Header="Color">
+                                        <ext:Column ColumnID="CVEHI_COLOR" DataIndex="VEHI_COLOR" Header="Color">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
                                         <ext:Column ColumnID="CVEHI_OBSERVACION" DataIndex="VEHI_OBSERVACION" Header="Observaciones">
                                             <Editor>
-                                                <ext:TextField runat="server"/>
+                                                <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
                                         <ext:CommandColumn Width="60">
@@ -88,8 +88,8 @@
                                                 } 
                                             });
                                         }                                      
-                                     "/>
-                                    <AfterEdit Fn="afterEdit"/>
+                                     " />
+                                    <AfterEdit Fn="afterEdit" />
                                 </Listeners>
                             </ext:GridPanel>
                         </Items>
@@ -99,7 +99,7 @@
                                     <ext:ToolbarFill />
                                     <ext:Button runat="server" Icon="Add" Text="Nuevo Vehiculo">
                                         <Listeners>
-                                            <Click Handler="WREGISTRO.show();"/>
+                                            <Click Handler="WREGISTRO.show();" />
                                         </Listeners>
                                     </ext:Button>
                                 </Items>
@@ -109,21 +109,21 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" Padding="10" >
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" Padding="10">
                 <Items>
-                    <ext:TextField ID="TFVEHI_PLACA" runat="server" FieldLabel="Placa"/>
-                    <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" FieldLabel="Modelo"/>
-                    <ext:TextField ID="TFVEHI_MARCA" runat="server" FieldLabel="Marca"/>
-                    <ext:TextField ID="TFVEHI_COLOR" runat="server" FieldLabel="Color"/>
-                    <ext:TextArea ID="TAVEHI_OBSERVACION" runat="server" FieldLabel="Observaciones" Height="200"/> 
+                    <ext:TextField ID="TFVEHI_PLACA" runat="server" FieldLabel="Placa" />
+                    <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" FieldLabel="Modelo" />
+                    <ext:TextField ID="TFVEHI_MARCA" runat="server" FieldLabel="Marca" />
+                    <ext:TextField ID="TFVEHI_COLOR" runat="server" FieldLabel="Color" />
+                    <ext:TextArea ID="TAVEHI_OBSERVACION" runat="server" FieldLabel="Observaciones" Height="200" />
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
                         <Items>
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar">
-                                <Listeners>                    
-                                    <Click Handler="parametro.crearVehiculo(TAVEHI_OBSERVACION.getValue(), TFVEHI_PLACA.getValue(), SFVEHI_MODELO.getValue(), TFVEHI_MARCA.getValue(), TFVEHI_COLOR.getValue());"/>
+                                <Listeners>
+                                    <Click Handler="parametro.crearVehiculo(TAVEHI_OBSERVACION.getValue(), TFVEHI_PLACA.getValue(), SFVEHI_MODELO.getValue(), TFVEHI_MARCA.getValue(), TFVEHI_COLOR.getValue());" />
                                 </Listeners>
                             </ext:Button>
                         </Items>

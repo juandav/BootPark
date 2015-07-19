@@ -11,7 +11,7 @@ namespace Boot_Park.Controller.BootPark
     {
         private ParticularOAD particular = new ParticularOAD();
         private VehiculoOAD vehiculo = new VehiculoOAD();
-        private EtiquetaOAD etiqueta = new EtiquetaOAD();
+        private EtiquetaOAD etiquetas = new EtiquetaOAD();
 
         private General general = new General();
 
@@ -67,27 +67,27 @@ namespace Boot_Park.Controller.BootPark
         #region GESTION DE ETIQUETAS
             public DataTable consultarEtiquetas()
             {
-                return etiqueta.consultarEtiquetas();
+                return etiquetas.consultarEtiquetas();
             }
 
             public bool registrarEtiquetas()
             {
-                return etiqueta.registrarEtoquetas();
+                return etiquetas.registrarEtoquetas();
             }
 
-            public bool registrarEtiqueta()
+            public bool registrarEtiqueta(string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
             {
-                return etiqueta.registrarEtiqueta();
+                return etiquetas.registrarEtiqueta(general.nextPrimaryKey("BOOTPARK.ETIQUETA","ETIQ_ID"), tipo, etiqueta, descripcion, observacion, estado, registradoPor);
             }
 
-            public bool actualizarEtiqueta()
+            public bool actualizarEtiqueta(string id, string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
             {
-                return etiqueta.actualizarEtiqueta();
+                return etiquetas.actualizarEtiqueta(id, tipo, etiqueta, descripcion, observacion, estado, registradoPor);
             }
 
-            public bool eliminalEtiqueta()
+            public bool eliminalEtiqueta(string id, string tipo)
             {
-                return etiqueta.eliminarEtiqueta();
+                return etiquetas.eliminarEtiqueta(id, tipo);
             }
         #endregion
     }

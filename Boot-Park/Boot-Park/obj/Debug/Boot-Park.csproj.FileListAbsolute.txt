@@ -9,3 +9,4 @@ D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
 D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
 D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
+D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
