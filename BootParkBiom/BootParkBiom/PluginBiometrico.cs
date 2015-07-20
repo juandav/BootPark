@@ -20,5 +20,15 @@ namespace BootParkBiom
             return "Reponde desde el Plugin";
         }
 
+        /// <summary>
+        ///   Probando la Funcionalidad del Plugin en el envio por parametro.
+        /// </summary>
+        /// <param name="texto"></param>
+        /// <returns>Texto</returns>
+        public string ParametroPrueba(string texto)
+        {
+            return texto;
+        }
+
     }
 }
