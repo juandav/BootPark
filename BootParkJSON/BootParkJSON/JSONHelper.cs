@@ -6,8 +6,8 @@ namespace BootParkJSON
 {
     [ComVisibleAttribute(true)]
     [Guid("0EF89493-9339-4622-9AA4-854C20952C8E")]
-    [ProgId("BootParkJSON.JSON")]
-    public class JSON
+    [ProgId("BootParkJSON.JSONHelper")]
+    public static class JSONHelper
     {
 
         /// <summary>
