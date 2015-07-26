@@ -76,6 +76,15 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
         protected global::Ext.Net.TextField TFETIQ_TIPO;
         
         /// <summary>
+        /// CBETIQ_TIPO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox CBETIQ_TIPO;
+        
+        /// <summary>
         /// TFETIQ_ETIQUETA control.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,14 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.TextField TFETIQ_ESTADO;
+        
+        /// <summary>
+        /// CBESTADO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox CBESTADO;
     }
 }

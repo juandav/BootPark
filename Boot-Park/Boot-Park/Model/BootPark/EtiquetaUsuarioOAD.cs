@@ -9,29 +9,45 @@ namespace Boot_Park.Model.BootPark
 
         private ConexionMariaDB connection = new ConexionMariaDB();
 
-        public DataTable consultarEtiquetasDisponibles(string tipo, string usuario) {
+        public DataTable consultarCarnetsStock() {
             string sql = "SELECT"
-                            + "     E.ETIQ_ID,"
-                            + "     E.ETIQ_TIPO,"
-                            + "     E.ETIQ_ETIQUETA,"
-                            + "     E.ETIQ_DESCRIPCION,"
-                            + "     E.ETIQ_OBSERVACION"
-                            + " FROM"
-                            + "     BOOTPARK.ETIQUETA E"
-                            + " WHERE"
-                            + "     E.ETIQ_ID NOT IN"
-                            + "     ("
-                            + "         SELECT"
-                            + "             EU.ETIQ_ID"
-                            + "         FROM"
-                            + "             BOOTPARK.ETIQUETAUSUARIO EU"
-                            + "         WHERE"
-                            + "             EU.ETIQ_TIPO = '" + tipo + "' AND"
-                            + "             EU.USUA_ID = " + usuario
-                            + "     )";
+                        + "    E.ETIQ_ID,"
+                        + "    E.ETIQ_TIPO,"
+                        + "    E.ETIQ_ETIQUETA,"
+                        + "    E.ETIQ_DESCRIPCION,"
+                        + "    E.ETIQ_OBSERVACION"
+                        + " FROM"
+                        + "    BOOTPARK.ETIQUETA E"
+                        + " WHERE "
+                        + "    E.ETIQ_ESTADO = 'DISPONIBLE' AND"
+                        + "    E.ETIQ_TIPO = 'CARNET' AND"
+                        + "    E.ETIQ_ID NOT IN (SELECT EU.ETIQ_ID FROM BOOTPARK.ETIQUETAUSUARIO EU)";
             return connection.getDataMariaDB(sql).Tables[0];
 
         }
+
+        public DataTable consultarCarnetEnUso(string usuario) {
+            string sql = "SELECT"
+                        + "     E.ETIQ_ID,"
+                        + "     E.ETIQ_TIPO,"
+                        + "     E.ETIQ_ETIQUETA,"
+                        + "     E.ETIQ_DESCRIPCION,"
+                        + "     E.ETIQ_OBSERVACION,"
+                        + "     EU.ETUS_MOTIVO,"
+                        + "     EU.ETUS_FECHACADUCIDAD"
+                        + " FROM"
+                        + "     BOOTPARK.ETIQUETAUSUARIO EU"
+                        + " INNER JOIN BOOTPARK.ETIQUETA E"
+                        + " ON"
+                        + "     ("
+                        + "         EU.ETIQ_ID=E.ETIQ_ID"
+                        + "     )"
+                        + " WHERE"
+                        + "     EU.USUA_ID = '" + usuario + "'"
+                        + " AND E.ETIQ_TIPO = 'CARNET'";
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+
 
         public bool registrarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
             string sql = "INSERT"

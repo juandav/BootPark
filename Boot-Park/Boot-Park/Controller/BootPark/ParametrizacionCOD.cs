@@ -19,25 +19,30 @@ namespace Boot_Park.Controller.BootPark
         private General general = new General();
 
         #region GESTION DE PATICULARES
-        public DataTable consultarParticulares() {
-                return particular.consultarParticulares();
-            }
+        public DataTable consultarParticulares()
+        {
+            return particular.consultarParticulares();
+        }
 
-            public bool registrarParticulares() {
-                return particular.registrarParticulares();
-            }
+        public bool registrarParticulares()
+        {
+            return particular.registrarParticulares();
+        }
 
-            public bool registrarParticular(string identificacion, string nombre, string apellido, string registradoPor) {
-                return particular.registrarParticular(general.nextPrimaryKey("BOOTPARK.PARTICULAR","PART_ID"), identificacion, nombre, apellido, registradoPor);
-            }
+        public bool registrarParticular(string identificacion, string nombre, string apellido, string registradoPor)
+        {
+            return particular.registrarParticular(general.nextPrimaryKey("BOOTPARK.PARTICULAR", "PART_ID"), identificacion, nombre, apellido, registradoPor);
+        }
 
-            public bool actualizarParticular(string id, string identificacion, string nombre, string apellido, string registradoPor) {
-                return particular.actualizarParticular(id, identificacion, nombre, apellido, registradoPor);
-            }
+        public bool actualizarParticular(string id, string identificacion, string nombre, string apellido, string registradoPor)
+        {
+            return particular.actualizarParticular(id, identificacion, nombre, apellido, registradoPor);
+        }
 
-            public bool eliminalParticular(string id) {
-                return particular.eliminarParticular(id);
-            }
+        public bool eliminalParticular(string id)
+        {
+            return particular.eliminarParticular(id);
+        }
         #endregion
 
         #region GESTION DE VEHICULOS
@@ -68,66 +73,87 @@ namespace Boot_Park.Controller.BootPark
         #endregion
 
         #region GESTION DE ETIQUETAS
-            public DataTable consultarEtiquetas()
-            {
-                return etiquetas.consultarEtiquetas();
-            }
 
-            public DataTable consultarEtiquetas(string estado)
-            {
-                return etiquetas.consultarEtiquetas(estado);
-            }
+        /// <summary>
+        ///   Consulta todas las etiquetas de la Base de Datos sin importar el estado en que se encuentre
+        /// </summary>
+        /// <returns></returns>
+        public DataTable consultarEtiquetas()
+        {
+            return etiquetas.consultarEtiquetas();
+        }
 
-        public DataTable consultarEtiquetasSinAsignar(string tipo, string usuario) {
-            return etiquetausuario.consultarEtiquetasDisponibles(tipo, usuario);
+        /// <summary>
+        ///   Permite traer las etiqueras actualmente disponibles en STOCK
+        /// </summary>
+        /// <param name="estado"></param>
+        /// <returns></returns>
+        public DataTable consultarCarnetsDisponibles()
+        {
+            return etiquetausuario.consultarCarnetsStock();
+        }
+
+        /// <summary>
+        ///     Permite conocer las etiquetas que actualmente se encuentran en uso.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public DataTable consultarCarnetsEnUso(string usuario)
+        {
+            return etiquetausuario.consultarCarnetEnUso(usuario);
         }
 
         public bool registrarEtiquetas()
-            {
-                return etiquetas.registrarEtoquetas();
-            }
+        {
+            return etiquetas.registrarEtoquetas();
+        }
 
-            public bool registrarEtiqueta(string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
-            {
-                return etiquetas.registrarEtiqueta(general.nextPrimaryKey("BOOTPARK.ETIQUETA","ETIQ_ID"), tipo, etiqueta, descripcion, observacion, estado, registradoPor);
-            }
+        public bool registrarEtiqueta(string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
+        {
+            return etiquetas.registrarEtiqueta(general.nextPrimaryKey("BOOTPARK.ETIQUETA", "ETIQ_ID"), tipo, etiqueta, descripcion, observacion, estado, registradoPor);
+        }
 
-            public bool actualizarEtiqueta(string id, string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
-            {
-                return etiquetas.actualizarEtiqueta(id, tipo, etiqueta, descripcion, observacion, estado, registradoPor);
-            }
+        public bool actualizarEtiqueta(string id, string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
+        {
+            return etiquetas.actualizarEtiqueta(id, tipo, etiqueta, descripcion, observacion, estado, registradoPor);
+        }
 
-            public bool eliminalEtiqueta(string id, string tipo)
-            {
-                return etiquetas.eliminarEtiqueta(id, tipo);
-            }
+        public bool eliminalEtiqueta(string id, string tipo)
+        {
+            return etiquetas.eliminarEtiqueta(id, tipo);
+        }
         #endregion
 
         #region ETIQUETAUSUARIO
 
-            public DataTable consultarEtiquetaUsuario() {
-                return null;
-            }
+        public DataTable consultarEtiquetaUsuario()
+        {
+            return null;
+        }
 
-            public bool registrarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
-                return etiquetausuario.registrarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
-            }
+        public bool registrarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor)
+        {
+            return etiquetausuario.registrarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
+        }
 
-            public bool actualizarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
-                return etiquetausuario.actualizarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
-            }
+        public bool actualizarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor)
+        {
+            return etiquetausuario.actualizarEtiquetaUsuario(id, tipo, usuario, motivo, caducidad, registradoPor);
+        }
 
-            public bool eliminarEtiquetaUsuario(string id, string tipo, string usuario)
-            {
-                return etiquetausuario.eliminarEtiquetaUsuario(id, tipo, usuario);
-            }
+        public bool eliminarEtiquetaUsuario(string id, string tipo, string usuario)
+        {
+            return etiquetausuario.eliminarEtiquetaUsuario(id, tipo, usuario);
+        }
 
         #endregion
 
         #region USUARIO
-            public DataTable consultarUsuarios() {
-                return usuario.consultarUsuarios();
-            }
+        public DataTable consultarUsuarios()
+        {
+            return usuario.consultarUsuarios();
+        }
         #endregion
     }
 }

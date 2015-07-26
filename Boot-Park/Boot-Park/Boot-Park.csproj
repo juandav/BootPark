@@ -97,6 +97,7 @@
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
+    <Content Include="View\Public\TestPlugin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,13 @@
     </Compile>
     <Compile Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx.designer.cs">
       <DependentUpon>Vehiculo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Public\TestPlugin.aspx.cs">
+      <DependentUpon>TestPlugin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Public\TestPlugin.aspx.designer.cs">
+      <DependentUpon>TestPlugin.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

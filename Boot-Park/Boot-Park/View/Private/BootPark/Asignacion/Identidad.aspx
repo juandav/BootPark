@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Identidad.aspx.cs" Inherits="Boot_Park.View.Private.BootPark.Asignacion.Identidad" %>
+﻿
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Identidad.aspx.cs" Inherits="Boot_Park.View.Private.BootPark.Asignacion.Identidad" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 
@@ -16,7 +17,7 @@
                 <Items>
                     <ext:Panel ID="PUSUARIO" runat="server" Layout="Fit" Region="Center">
                         <Items>
-                            <ext:GridPanel ID="GPUSUARIO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CAPELLIDO">
+                            <ext:GridPanel ID="GPUSUARIO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CAPELLIDO" Title="Usuarios" Icon="User">
                                 <Store>
                                     <ext:Store ID="SUSUARIO" runat="server">
                                         <Reader>
@@ -55,7 +56,7 @@
                                                 GPUSUARIO.collapse();
                                                 PETIQUETA.expand();
                                                 parametro.cargarEtiquetasOUT();
-                                                parametro.cargarEtiquetasIN('1');"/>
+                                                parametro.cargarEtiquetasIN(record.data.ID);"/>
                                         </Listeners>
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
@@ -64,9 +65,9 @@
                                     <Expand Handler="PETIQUETA.collapse();"/>
                                 </Listeners>
                             </ext:GridPanel>
-                            <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false">
+                            <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>
-                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5">
+                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd">
                                         <Store>
                                             <ext:Store ID="SETIQUETAOUT" runat="server">
                                                 <Reader>
@@ -89,7 +90,7 @@
                                             </Columns>
                                         </ColumnModel>
                                     </ext:GridPanel>
-                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5">
+                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull">
                                          <Store>
                                             <ext:Store ID="STIQUETAIN" runat="server">
                                                 <Reader>

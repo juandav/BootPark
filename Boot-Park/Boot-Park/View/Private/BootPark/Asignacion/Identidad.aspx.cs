@@ -34,13 +34,13 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
 
         [DirectMethod(Namespace = "parametro")]
         public void cargarEtiquetasOUT() {
-            SETIQUETAOUT.DataSource = parametro.consultarEtiquetas("DISPONIBLE");
+            SETIQUETAOUT.DataSource = parametro.consultarCarnetsDisponibles();
             SETIQUETAOUT.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
         public void cargarEtiquetasIN(string usuario) {
-            STIQUETAIN.DataSource = parametro.consultarEtiquetasSinAsignar("CARNET", usuario);
+            STIQUETAIN.DataSource = parametro.consultarCarnetsEnUso(usuario);
             STIQUETAIN.DataBind();
         }
 
