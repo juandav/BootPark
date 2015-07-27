@@ -10,3 +10,11 @@ D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
 D:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
 D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 D:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\es\Microsoft.QualityTools.Testing.Fakes.resources.dll
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
+C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojFakesResolveAssemblyReference.cache
