@@ -8,11 +8,14 @@ using System.Windows.Forms;
 
 namespace BootParkBiom
 {
+    //EC2BAC05-EF0D-4217-87F9-82F66E03EEB5
     [ComVisibleAttribute(true)]
     [Guid("B9EB7A49-0E1D-4175-A554-0CD5CC5D406D")]
     [ProgId("BootParkBiom.PluginBiometrico")]
     public class PluginBiometrico
     {
+        private string tarjeta;
+
         /// <summary>
         ///     Función de prueba para verificar la conexión del plugin
         /// </summary>
@@ -49,7 +52,18 @@ namespace BootParkBiom
 
         #region
         ////////***********VARIABLES*************//////////
-        public int tarjeta { get; set; }
+        public string Tarjeta
+        {
+            get
+            {
+                return tarjeta;
+            }
+            set
+            {
+                tarjeta = value;
+            }
+        }
+
         public int huella { get; set; }
         public int usuario { get; set; }
         public bool conexion { get; set; }
@@ -168,7 +182,7 @@ namespace BootParkBiom
 
         private void ObtenerTarjetaEvent(int tarjetaEvent)
         {
-            this.tarjeta = tarjetaEvent;
+            this.tarjeta = Convert.ToString(tarjetaEvent);
             MessageBox.Show("Entro en la tarjeta: " + tarjeta, "EXTITO");
         }
 

@@ -8,17 +8,29 @@
 <head runat="server">
     <title>Etiqueta</title>
     <script type="text/javascript">
-      
-        var ob = new ActiveXObject("BootParkBiom.PluginBiometrico");
-        ob.ConectarConTerminal("192.168.1.201", "4370", "Biometrico");
+
+        var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
 
         var afterEdit = function (e) {   
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
         };
 
-        var registrarCarnet = function (e) {
-            
+        function conectar() {
+            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
+        }
+                              
+        var focus = function (e) {
+            conectar();
         };
+
+        var focus2 = function (e) {
+            TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
+        };
+
+        var probar = function () {
+            alert(obj.tarjeta());
+        };
+
     </script>
 </head>
 <body>
@@ -118,24 +130,28 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="400" Width="340" Icon="User" Title="Nuevo Particular" Hidden="true" Padding="10" LabelAlign="Top" >
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="400" Width="340" Icon="User" Title="Nuevo Particular" Hidden="true" Modal="true" Padding="10" LabelAlign="Top">
                 <Items>
-                    <ext:TextField ID="TFETIQ_TIPO" runat="server" FieldLabel="Tipo" Hidden="true"/>
-                    <ext:ComboBox ID="CBETIQ_TIPO" runat="server" FieldLabel="Tipo" Width="300" EmptyText="Tipo de la etiqueta">
+                    <ext:TextField ID="TFETIQ_TIPO" runat="server" Hidden="true"/>
+                    <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server"  Width="300" EmptyText="Tipo de la etiqueta">
                         <Items>
                             <ext:ListItem Text="Carnet" Value="CARNET"/>
                             <ext:ListItem Text="Tag" Value="TAG"/>
                         </Items>
                     </ext:ComboBox>
-                    <ext:TextField ID="TFETIQ_ETIQUETA" runat="server" FieldLabel="Etiqueta" Width="300" EmptyText="Codigo de la etiqueta">
+                    <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta"  runat="server"  Width="300" EmptyText="Codigo de la etiqueta">
                         <Listeners>
-                           <Focus Fn="registrarCarnet"/>
+                           <Focus Fn="focus"/>
                         </Listeners>
                     </ext:TextField>
-                    <ext:TextArea ID="TFETIQ_DESCRIPCION" runat="server" FieldLabel="Descripción" Width="300" EmptyText="Descripcion de la etiqueta"/>
-                    <ext:TextArea ID="TFETIQ_OBSERVACION" runat="server" FieldLabel="Observación" Width="300" EmptyText="Observaciones de la etiqueta"/>
-                    <ext:TextField ID="TFETIQ_ESTADO" runat="server" FieldLabel="Estado" Hidden="true"/>
-                    <ext:ComboBox ID="CBESTADO" runat="server" FieldLabel="Estado" Width="300" EmptyText="Estado de la etiqueta">
+                    <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción"  runat="server"  Width="300" EmptyText="Descripcion de la etiqueta">
+                    <Listeners>
+                        <Focus Fn="focus2" />
+                    </Listeners>
+                    </ext:TextArea>
+                    <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación"  runat="server"  Width="300" EmptyText="Observaciones de la etiqueta"/>
+                    <ext:TextField ID="TFETIQ_ESTADO" runat="server"  Hidden="true"/>
+                    <ext:ComboBox ID="CBESTADO" FieldLabel="Estado"  runat="server"  Width="300" EmptyText="Estado de la etiqueta">
                        <Items>
                            <ext:ListItem Text="Disponible" Value="DISPONIBLE"/>
                            <ext:ListItem Text="Inactivo" Value="INACTIVO"/> 
@@ -146,6 +162,11 @@
                     <ext:Toolbar runat="server">
                         <Items>
                             <ext:ToolbarFill />
+                             <ext:Button runat="server" Icon="Add" Text="PROBAR">
+                                <Listeners>
+                                    <Click Fn="probar" />
+                                </Listeners>
+                            </ext:Button>
                             <ext:Button runat="server" Icon="Add" Text="Guardar">
                                 <Listeners>
                                     <Click Handler="parametro.crearEtiqueta(TFETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), TFETIQ_ESTADO.getValue());" />
