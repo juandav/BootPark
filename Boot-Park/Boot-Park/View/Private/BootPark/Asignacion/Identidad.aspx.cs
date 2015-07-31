@@ -44,5 +44,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
             STIQUETAIN.DataBind();
         }
 
+        [DirectMethod(Namespace = "parametro")]
+        public bool vincularCarnetAlUsuario(string id, string usuario, string caducidad) {
+            return parametro.registrarEtiquetaUsuario(id, "CARNET", usuario,"", caducidad, pegeId);
+        }
+
+        [DirectMethod(Namespace = "parametro")]
+        public bool desvincularCarnetAlUsuario(string id, string usuario) {
+            return parametro.eliminarEtiquetaUsuario(id,"CARNET",usuario);
+        }
+
     }
 }

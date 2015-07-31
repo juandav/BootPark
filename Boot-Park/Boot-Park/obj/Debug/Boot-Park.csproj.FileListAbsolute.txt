@@ -18,3 +18,9 @@ C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\es\Microsof
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojFakesResolveAssemblyReference.cache
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
+D:\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb

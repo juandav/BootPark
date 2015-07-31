@@ -8,13 +8,15 @@ using System.Windows.Forms;
 
 namespace BootParkBiom
 {
-    //EC2BAC05-EF0D-4217-87F9-82F66E03EEB5
     [ComVisibleAttribute(true)]
     [Guid("B9EB7A49-0E1D-4175-A554-0CD5CC5D406D")]
     [ProgId("BootParkBiom.PluginBiometrico")]
     public class PluginBiometrico
     {
         private string tarjeta;
+        private string huella;
+        private string usuario;
+        private bool conexion;
 
         /// <summary>
         ///     Función de prueba para verificar la conexión del plugin
@@ -24,18 +26,6 @@ namespace BootParkBiom
         public string TextoPrueba()
         {
             return "Reponde desde el Plugin";
-        }
-
-        [ComVisible(true)]
-        public string TextoPrueba2()
-        {
-            return "Reponde desde el Plugin";
-        }
-
-        [ComVisible(true)]
-        public string TextoPrueba3()
-        {
-            return "ENTRO T3";
         }
 
         /// <summary>
@@ -64,9 +54,41 @@ namespace BootParkBiom
             }
         }
 
-        public int huella { get; set; }
-        public int usuario { get; set; }
-        public bool conexion { get; set; }
+        public string Huella
+        {
+            get
+            {
+                return huella;
+            }
+            set
+            {
+                huella = value;
+            }
+        }
+
+        public string Usuario
+        {
+            get
+            {
+                return usuario;
+            }
+            set
+            {
+                usuario = value;
+            }
+        }
+
+        public bool Conexion
+        {
+            get
+            {
+                return conexion;
+            }
+            set
+            {
+                conexion = value;
+            }
+        }
         #endregion
 
 
@@ -171,19 +193,51 @@ namespace BootParkBiom
             }
         }
 
+        /// <summary>
+        ///   Desconectar el dispositivo biometrico
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="puerto"></param>
+        /// <returns></returns>
+        public bool Conectar(string ip, string puerto)
+        {
+            bool existeConexionBiometrico = lectorObject.Connect_Net(ip, Convert.ToInt32(puerto));
+
+            if (existeConexionBiometrico == true)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///  Desconecta el dispositivo biometrico.
+        /// </summary>
+        public bool Desconectar()
+        {
+            lectorObject.Disconnect();
+            return false;
+        }
+
+
+
         #region EVENTOS
         ///////// *********EVENTOS**********/////////
 
         private void ObtenerUsuarioEvent(int usuarioEvent)
         {
-            this.usuario = usuarioEvent;
-            MessageBox.Show("El usuario es: " + usuario, "EXTITO");
+            this.usuario = Convert.ToString(usuarioEvent);
+            //MessageBox.Show("El usuario es: " + usuario, "EXTITO");
         }
 
         private void ObtenerTarjetaEvent(int tarjetaEvent)
         {
             this.tarjeta = Convert.ToString(tarjetaEvent);
-            MessageBox.Show("Entro en la tarjeta: " + tarjeta, "EXTITO");
+            //MessageBox.Show("Entro en la tarjeta: " + tarjeta, "EXTITO");
         }
 
         private void ObtenerHuellaEvent()

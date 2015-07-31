@@ -8,6 +8,58 @@
 <head runat="server">
     <title>Identidad</title>
     <script type="text/javascript">
+
+        var addRow = function (store, record, ddSource) {
+            // Search for duplicates
+            var foundItem = store.findExact('ETIQ_ID', record.data.ETIQ_ID);
+
+            // if not found
+            if (foundItem == -1) {
+                //Remove Record from the source
+                ddSource.grid.store.remove(record);
+
+                store.add(record);
+
+                // Call a sort dynamically
+                store.sort('ETIQ_ID', 'ASC');
+            }
+        };
+
+        var notifyDrop1 = function (ddSource, e, data) {
+            // Loop through the selections
+            Ext.each(ddSource.dragData.selections, function (record) {
+                parametro.desvincularCarnetAlUsuario({
+                    success: function (result) {
+                        Ext.Msg.alert("ENTRO");
+                        addRow(SETIQUETAOUT, record, ddSource);
+                    },
+                    failure: function (errorMsg) {
+                        Ext.Msg.alert("NO ENTRO");
+                    }
+
+                });
+            });
+
+            return true;
+        };
+
+        var notifyDrop2 = function (ddSource, e, data) {
+            // Loop through the selections
+            Ext.each(ddSource.dragData.selections, function (record) {
+                parametro.vincularCarnetAlUsuario({
+                    success: function (result) {
+                        Ext.Msg.alert("ENTRO");
+                        addRow(STIQUETAIN, record, ddSource);
+                    },
+                    failure: function (errorMsg) {
+                        Ext.Msg.alert("NO ENTRO");
+                    }
+                });
+            });
+
+            return true;
+        };
+
         var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
 
         function conectar() {
@@ -17,8 +69,8 @@
         var focus = function (e) {
             conectar();
         };
-       
-       
+
+
     </script>
 </head>
 <body>
@@ -80,7 +132,7 @@
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>
-                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd">
+                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
                                         <Store>
                                             <ext:Store ID="SETIQUETAOUT" runat="server">
                                                 <Reader>
@@ -102,8 +154,11 @@
                                                 <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observaciones" />
                                             </Columns>
                                         </ColumnModel>
+                                        <SelectionModel>
+                                            <ext:RowSelectionModel SingleSelect="true" />
+                                        </SelectionModel>
                                     </ext:GridPanel>
-                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull">
+                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull" EnableDragDrop="true" DDGroup="firstGridDDGroup">
                                         <Store>
                                             <ext:Store ID="STIQUETAIN" runat="server">
                                                 <Reader>
@@ -125,6 +180,9 @@
                                                 <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observaciones" />
                                             </Columns>
                                         </ColumnModel>
+                                        <SelectionModel>
+                                            <ext:RowSelectionModel SingleSelect="true" />
+                                        </SelectionModel>
                                     </ext:GridPanel>
                                 </Items>
                             </ext:Panel>
@@ -138,6 +196,13 @@
                 </Items>
             </ext:Window>
         </div>
+        <ext:DropTarget runat="server" Target="={GPETIQUETAOUT.view.scroller.dom}" Group="firstGridDDGroup">
+            <NotifyDrop Fn="notifyDrop1" />
+        </ext:DropTarget>
+
+        <ext:DropTarget runat="server" Target="={GPETIQUETAIN.view.scroller.dom}" Group="secondGridDDGroup">
+            <NotifyDrop Fn="notifyDrop2" />
+        </ext:DropTarget>
     </form>
 </body>
 </html>

@@ -8,29 +8,39 @@
 <head runat="server">
     <title>Etiqueta</title>
     <script type="text/javascript">
-
         var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
 
-        var afterEdit = function (e) {   
+        var afterEdit = function (e) {
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
         };
 
-        function conectar() {
+        function ConectarBiometrico() {
             obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
         }
-                              
+
+        function ConectarRFID() {
+           
+        }
+
         var focus = function (e) {
-            conectar();
+            if (CBETIQ_TIPO.getValue() === "CARNET") {
+                ConectarBiometrico();
+            }
+            else {
+                ConectarRFID();
+            }
         };
 
-        var focus2 = function (e) {
-            TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
+        var blur = function (e) {
+            if (CBETIQ_TIPO.getValue() === "CARNET") {
+                TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
+            }
+            else if (CBETIQ_TIPO.getValue() === "TAG") {
+                TFETIQ_ETIQUETA.setValue("000000000");
+            } else {
+                alert("CAMPO VACIO");
+            }
         };
-
-        var probar = function () {
-            alert(obj.tarjeta());
-        };
-
     </script>
 </head>
 <body>
@@ -130,53 +140,42 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="400" Width="340" Icon="User" Title="Nuevo Particular" Hidden="true" Modal="true" Padding="10" LabelAlign="Top">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="400" Width="340" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true" Padding="10" LabelAlign="Top">
                 <Items>
-                    <ext:TextField ID="TFETIQ_TIPO" runat="server" Hidden="true"/>
-                    <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server"  Width="300" EmptyText="Tipo de la etiqueta">
+                    <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de la etiqueta">
                         <Items>
-                            <ext:ListItem Text="Carnet" Value="CARNET"/>
-                            <ext:ListItem Text="Tag" Value="TAG"/>
+                            <ext:ListItem Text="Carnet" Value="CARNET" />
+                            <ext:ListItem Text="Tag" Value="TAG" />
                         </Items>
                     </ext:ComboBox>
-                    <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta"  runat="server"  Width="300" EmptyText="Codigo de la etiqueta">
+                    <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta">
                         <Listeners>
-                           <Focus Fn="focus"/>
+                            <Focus Fn="focus" />
+                            <Blur Fn="blur" />
                         </Listeners>
                     </ext:TextField>
-                    <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción"  runat="server"  Width="300" EmptyText="Descripcion de la etiqueta">
-                    <Listeners>
-                        <Focus Fn="focus2" />
-                    </Listeners>
-                    </ext:TextArea>
-                    <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación"  runat="server"  Width="300" EmptyText="Observaciones de la etiqueta"/>
-                    <ext:TextField ID="TFETIQ_ESTADO" runat="server"  Hidden="true"/>
-                    <ext:ComboBox ID="CBESTADO" FieldLabel="Estado"  runat="server"  Width="300" EmptyText="Estado de la etiqueta">
-                       <Items>
-                           <ext:ListItem Text="Disponible" Value="DISPONIBLE"/>
-                           <ext:ListItem Text="Inactivo" Value="INACTIVO"/> 
-                       </Items>
+                    <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
+                    <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación" runat="server" Width="300" EmptyText="Observaciones de la etiqueta" />
+                    <ext:ComboBox ID="CBESTADO" FieldLabel="Estado" runat="server" Width="300" EmptyText="Estado de la etiqueta">
+                        <Items>
+                            <ext:ListItem Text="Disponible" Value="DISPONIBLE" />
+                            <ext:ListItem Text="Inactivo" Value="INACTIVO" />
+                        </Items>
                     </ext:ComboBox>
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
                         <Items>
                             <ext:ToolbarFill />
-                             <ext:Button runat="server" Icon="Add" Text="PROBAR">
-                                <Listeners>
-                                    <Click Fn="probar" />
-                                </Listeners>
-                            </ext:Button>
                             <ext:Button runat="server" Icon="Add" Text="Guardar">
                                 <Listeners>
-                                    <Click Handler="parametro.crearEtiqueta(TFETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), TFETIQ_ESTADO.getValue());" />
+                                    <Click Handler="parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue());" />
                                 </Listeners>
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>
                 </BottomBar>
             </ext:Window>
-
         </div>
     </form>
 </body>
