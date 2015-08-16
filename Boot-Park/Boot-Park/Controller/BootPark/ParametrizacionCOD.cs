@@ -84,6 +84,17 @@ namespace Boot_Park.Controller.BootPark
         }
 
         /// <summary>
+        /// Consulta la existencia del TAG o Tarjeta en la Base de Datos si existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
+        public DataTable validarEtiqueta(string id, string tipo) {
+            return etiquetas.validarEtiqueta(id,tipo);
+        }
+
+
+        /// <summary>
         ///   Permite traer las etiqueras actualmente disponibles en STOCK
         /// </summary>
         /// <param name="estado"></param>

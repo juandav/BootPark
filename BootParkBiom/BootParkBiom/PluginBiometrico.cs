@@ -125,7 +125,7 @@ namespace BootParkBiom
         ///      2. (RFID)
         ///      3. (Camara)
         /// </param>
-        public void ConectarConTerminal(string ip, string puerto, string tipo)
+        public bool ConectarConTerminal(string ip, string puerto, string tipo)
         {
 
             if (tipo == "Biometrico")
@@ -190,7 +190,10 @@ namespace BootParkBiom
                 {
                     //Muestre un Mensaje de que no se puede conectar con el dispositivo.
                 }
+             return existeConexionBiometrico;
             }
+            return false;
+            
         }
 
         /// <summary>
@@ -231,18 +234,18 @@ namespace BootParkBiom
         private void ObtenerUsuarioEvent(int usuarioEvent)
         {
             this.usuario = Convert.ToString(usuarioEvent);
-            //MessageBox.Show("El usuario es: " + usuario, "EXTITO");
+        
         }
 
         private void ObtenerTarjetaEvent(int tarjetaEvent)
         {
             this.tarjeta = Convert.ToString(tarjetaEvent);
-            //MessageBox.Show("Entro en la tarjeta: " + tarjeta, "EXTITO");
+          
         }
 
         private void ObtenerHuellaEvent()
         {
-            MessageBox.Show("Entro en el evento de captura de huella.", "EXTITO");
+          
             /// Puedo validar si la huella en el dispositivo corresponde a la que hay en base de datos.
         }
         #endregion

@@ -15,7 +15,18 @@
         };
 
         function ConectarBiometrico() {
-            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
+           
+            if ( obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico')) {
+                    Ext.net.Notification.show({
+                         html     : 'Conectado correctamente',
+                         title: 'Notificación'
+                    });
+            } else {
+                    Ext.net.Notification.show({
+                        html: 'No conectado!, Asegurece que el Dispositivo este conectado a la red TCP/IP',
+                        title: 'Notificación'
+                    });
+            }
         }
 
         function ConectarRFID() {
@@ -23,28 +34,44 @@
         }
 
         var focus = function (e) {
+
             if (CBETIQ_TIPO.getValue() === "CARNET") {
                 ConectarBiometrico();
             }
             else {
                 ConectarRFID();
             }
+            
         };
 
         var blur = function (e) {
             if (CBETIQ_TIPO.getValue() === "CARNET") {
-                TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
+                var Tarjeta = obj.Tarjeta();
+                if (typeof (Tarjeta) != "undefined") {
+                    TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
+                    parametro.validarTarjeta(TFETIQ_ETIQUETA.getValue(), CBETIQ_TIPO.getValue());
+                } else {
+                    Ext.net.Notification.show({
+                        html: 'Tarjeta No Detectada!,Deslize la Tarjeta por el lector',
+                        title: 'Notificación'
+                    });
+                }
             }
             else if (CBETIQ_TIPO.getValue() === "TAG") {
                 TFETIQ_ETIQUETA.setValue("000000000");
             } else {
-                alert("CAMPO VACIO");
+                Ext.net.Notification.show({
+                    html: 'No se ha seleccionado un dispositivo todavía',
+                    title: 'Notificación'
+                });
+                CBETIQ_TIPO.isValid();
+                
             }
         };
     </script>
 </head>
 <body>
-    <ext:ResourceManager runat="server" />
+    <ext:ResourceManager ID="ResourceManager1" runat="server" />
     <form id="FETIQUETA" runat="server">
         <div>
 
@@ -140,41 +167,51 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="400" Width="340" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true" Padding="10" LabelAlign="Top">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="420" Width="340" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true">
                 <Items>
-                    <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de la etiqueta">
+                    <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
-                            <ext:ListItem Text="Carnet" Value="CARNET" />
-                            <ext:ListItem Text="Tag" Value="TAG" />
+                            <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de la etiqueta" ForceSelection="true" AllowBlank="false">
+                                <Items>
+                                    <ext:ListItem Text="Carnet" Value="CARNET" />
+                                    <ext:ListItem Text="Tag" Value="TAG" />
+                                </Items>
+                                <Listeners>
+                                    <Select Fn="focus " />
+                                </Listeners>
+                            </ext:ComboBox>
+                            <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false" >
+                                <Listeners>
+                                    <Blur Fn="blur" />
+                                   
+                                </Listeners>
+                            </ext:TextField>
+                            <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
+                            <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación" runat="server" Width="300" EmptyText="Observaciones de la etiqueta" />
+                            <ext:ComboBox ID="CBESTADO" FieldLabel="Estado" runat="server" Width="300" EmptyText="Estado de la etiqueta" AllowBlank="false">
+                                <Items>
+                                    <ext:ListItem Text="Disponible" Value="DISPONIBLE" />
+                                    <ext:ListItem Text="Inactivo" Value="INACTIVO" />
+                                </Items>
+                            </ext:ComboBox>
                         </Items>
-                    </ext:ComboBox>
-                    <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta">
-                        <Listeners>
-                            <Focus Fn="focus" />
-                            <Blur Fn="blur" />
-                        </Listeners>
-                    </ext:TextField>
-                    <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
-                    <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación" runat="server" Width="300" EmptyText="Observaciones de la etiqueta" />
-                    <ext:ComboBox ID="CBESTADO" FieldLabel="Estado" runat="server" Width="300" EmptyText="Estado de la etiqueta">
-                        <Items>
-                            <ext:ListItem Text="Disponible" Value="DISPONIBLE" />
-                            <ext:ListItem Text="Inactivo" Value="INACTIVO" />
-                        </Items>
-                    </ext:ComboBox>
+                    </ext:FormPanel>
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
                         <Items>
                             <ext:ToolbarFill />
-                            <ext:Button runat="server" Icon="Add" Text="Guardar">
+                            <ext:Button runat="server" Icon="Add" Text="Guardar" FormBind="true">
                                 <Listeners>
-                                    <Click Handler="parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue());" />
+                                    <Click Handler="if(#{FREGISTRO}.getForm().isValid()) { parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue()); }else{ Ext.Msg.show({icon: Ext.MessageBox.ERROR, msg: 'Campos vacios', buttons:Ext.Msg.OK });} " />
                                 </Listeners>
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>
                 </BottomBar>
+                <Listeners>
+                    <BeforeHide Handler="FREGISTRO.reset();" />
+                </Listeners>
             </ext:Window>
         </div>
     </form>

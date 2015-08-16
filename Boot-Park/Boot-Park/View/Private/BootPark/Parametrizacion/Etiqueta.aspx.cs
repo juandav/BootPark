@@ -82,6 +82,17 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
             }
             BindData();
         }
+        [DirectMethod(Namespace = "parametro")]
+        public void validarTarjeta(string id, string tipo)
+        {
+            string estado = parametro.validarEtiqueta(id, tipo).Rows[0]["ETIQUETAEXISTE"].ToString();
+            if (estado=="true")
+            {
+                   X.Msg.Notify("Notificación"," Este " + tipo + " ya esta registrado..").Show();
+                   TFETIQ_ETIQUETA.Text = "";
+            }
+          
+        }
 
         private void BindData()
         {

@@ -89,5 +89,17 @@ namespace Boot_Park.Model.BootPark
             return connection.sendSetDataMariaDB(sql);
         }
 
+
+        public DataTable validarEtiqueta(string id, string tipo)
+        {
+            string sql = "SELECT "
+                        + "   IF(COUNT(*) > 0,'true','false') AS ETIQUETAEXISTE "
+                        + "FROM "
+                        + "    BOOTPARK.ETIQUETA "
+                        + "WHERE "
+                        + "    ETIQ_TIPO ='" + tipo + "' "
+                        + "AND ETIQ_ETIQUETA ='" + id + "'";
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
     }
 }
