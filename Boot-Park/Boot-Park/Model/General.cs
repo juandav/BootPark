@@ -16,9 +16,9 @@ namespace Boot_Park.Model
             //            + " FROM"
             //            + "     GENERAL." + TABLA + " T";
             string sql =  " SELECT"
-                         + "    COALESCE(MAX(E.ETIQ_ID), 0) + 1 AS PK"
-                         +" FROM"
-                         +"    BOOTPARK.ETIQUETA E";
+                         + "    COALESCE(MAX(E." + TABL_ID + "), 0) + 1 AS PK"
+                         +" FROM "
+                         + TABLA + " E";
             return connection.getDataMariaDB(sql).Tables[0].Rows[0]["PK"].ToString();
         }
 

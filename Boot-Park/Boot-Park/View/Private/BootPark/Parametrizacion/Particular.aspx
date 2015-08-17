@@ -97,24 +97,31 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="User" Title="Nuevo Particular" Hidden="true" Padding="10">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="235" Width="350" Icon="User" Title="Nuevo Particular" Hidden="true" >
                 <Items>
-                    <ext:SpinnerField ID="SPIDENTIFICACION" runat="server" FieldLabel="Identificación" />
-                    <ext:TextField ID="TFNOMBRE" runat="server" FieldLabel="Nombres" />
-                    <ext:TextField ID="TFAPELLIDO" runat="server" FieldLabel="Apellidos" />
+                    <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
+                        <Items>
+                            <ext:SpinnerField ID="SPIDENTIFICACION" runat="server" Width="300" FieldLabel="Identificación" AllowBlank="false" />
+                            <ext:TextField ID="TFNOMBRE" runat="server"  Width="300" FieldLabel="Nombres" AllowBlank="false" />
+                            <ext:TextField ID="TFAPELLIDO" runat="server"  Width="300" FieldLabel="Apellidos" AllowBlank="false" />
+                        </Items>
+                    </ext:FormPanel>
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
                         <Items>
                             <ext:ToolbarFill />
-                            <ext:Button runat="server" Icon="Add" Text="Guardar">
+                            <ext:Button runat="server" Icon="Add" Text="Guardar" FormBind="true">
                                 <Listeners>
-                                    <Click Handler="parametro.crearParticular(SPIDENTIFICACION.getValue(), TFNOMBRE.getValue(), TFAPELLIDO.getValue());" />
+                                    <Click Handler="if(#{FREGISTRO}.getForm().isValid()) { parametro.crearParticular(SPIDENTIFICACION.getValue(), TFNOMBRE.getValue(), TFAPELLIDO.getValue()); }else{ return false;} " />
                                 </Listeners>
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>
                 </BottomBar>
+                <Listeners>
+                    <BeforeHide Handler="FREGISTRO.reset();" />
+                </Listeners>
             </ext:Window>
         </div>
     </form>

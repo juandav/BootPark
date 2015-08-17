@@ -8,7 +8,12 @@
 <head runat="server">
     <title>Etiqueta</title>
     <script type="text/javascript">
-        var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+        try {
+            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+        }
+        catch (e) {
+            console.log('Incompatibilidad con ActiveX');
+        }
 
         var afterEdit = function (e) {
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
@@ -74,7 +79,6 @@
     <ext:ResourceManager ID="ResourceManager1" runat="server" />
     <form id="FETIQUETA" runat="server">
         <div>
-
             <ext:Viewport ID="VPPRESENTACION" runat="server" Layout="border">
                 <Items>
                     <ext:Panel ID="PPRESENTACION" runat="server" Layout="Fit" Region="Center" Padding="5">
@@ -121,7 +125,13 @@
                                         </ext:Column>
                                         <ext:Column ColumnID="CETIQ_ESTADO" DataIndex="ETIQ_ESTADO" Header="Estado">
                                             <Editor>
-                                                <ext:TextField runat="server" />
+                                                 <ext:ComboBox runat="server">
+                                                    <Items>
+                                                        <ext:ListItem Text="DISPONIBLE" Value="DISPONIBLE" />
+                                                        <ext:ListItem Text="EN USO" Value="ENUSO" />
+                                                        <ext:ListItem Text="INACTIVO" Value="INACTIVO" />
+                                                    </Items>
+                                                </ext:ComboBox>
                                             </Editor>
                                         </ext:Column>
                                         <ext:CommandColumn Width="60">
@@ -167,7 +177,7 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="420" Width="340" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="420" Width="350" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true">
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
@@ -203,7 +213,7 @@
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar" FormBind="true">
                                 <Listeners>
-                                    <Click Handler="if(#{FREGISTRO}.getForm().isValid()) { parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue()); }else{ Ext.Msg.show({icon: Ext.MessageBox.ERROR, msg: 'Campos vacios', buttons:Ext.Msg.OK });} " />
+                                    <Click Handler="if(#{FREGISTRO}.getForm().isValid()) { parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue()); }else{ return false;} " />
                                 </Listeners>
                             </ext:Button>
                         </Items>
@@ -214,6 +224,7 @@
                 </Listeners>
             </ext:Window>
         </div>
+       
     </form>
 </body>
 </html>

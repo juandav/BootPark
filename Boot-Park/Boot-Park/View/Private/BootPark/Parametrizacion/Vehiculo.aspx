@@ -109,13 +109,17 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="400" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" Padding="10">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="345" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" >
                 <Items>
-                    <ext:TextField ID="TFVEHI_PLACA" runat="server" FieldLabel="Placa" />
-                    <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" FieldLabel="Modelo" />
-                    <ext:TextField ID="TFVEHI_MARCA" runat="server" FieldLabel="Marca" />
-                    <ext:TextField ID="TFVEHI_COLOR" runat="server" FieldLabel="Color" />
-                    <ext:TextArea ID="TAVEHI_OBSERVACION" runat="server" FieldLabel="Observaciones" Height="200" />
+                    <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
+                        <Items>
+                            <ext:TextField ID="TFVEHI_PLACA" runat="server" Width="300" FieldLabel="Placa" AllowBlank="false" />
+                            <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" Width="300" FieldLabel="Modelo" AllowBlank="false" />
+                            <ext:TextField ID="TFVEHI_MARCA" runat="server" Width="300" FieldLabel="Marca" AllowBlank="false" />
+                            <ext:TextField ID="TFVEHI_COLOR" runat="server" Width="300" FieldLabel="Color" AllowBlank="false" />
+                            <ext:TextArea ID="TAVEHI_OBSERVACION" runat="server" Width="300" FieldLabel="Observaciones" Height="90" />
+                        </Items>
+                    </ext:FormPanel>
                 </Items>
                 <BottomBar>
                     <ext:Toolbar runat="server">
@@ -123,12 +127,15 @@
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar">
                                 <Listeners>
-                                    <Click Handler="parametro.crearVehiculo(TAVEHI_OBSERVACION.getValue(), TFVEHI_PLACA.getValue(), SFVEHI_MODELO.getValue(), TFVEHI_MARCA.getValue(), TFVEHI_COLOR.getValue());" />
+                                    <Click Handler=" if(#{FREGISTRO}.getForm().isValid()) { parametro.crearVehiculo(TAVEHI_OBSERVACION.getValue(), TFVEHI_PLACA.getValue(), SFVEHI_MODELO.getValue(), TFVEHI_MARCA.getValue(), TFVEHI_COLOR.getValue()); }else{ return false;}" />
                                 </Listeners>
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>
                 </BottomBar>
+                <Listeners>
+                    <BeforeHide Handler="FREGISTRO.reset();" />
+                </Listeners>
             </ext:Window>
         </div>
     </form>
