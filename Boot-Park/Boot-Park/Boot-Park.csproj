@@ -92,6 +92,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\Desktop.js" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
@@ -100,6 +101,7 @@
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
+    <Content Include="View\Private\Desktop.aspx" />
     <Content Include="View\Public\TestPlugin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -162,6 +164,13 @@
     <Compile Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx.designer.cs">
       <DependentUpon>Vehiculo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Private\Desktop.aspx.cs">
+      <DependentUpon>Desktop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\Desktop.aspx.designer.cs">
+      <DependentUpon>Desktop.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Public\TestPlugin.aspx.cs">
       <DependentUpon>TestPlugin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,7 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />
-    <Folder Include="Content\js\" />
     <Folder Include="Content\logs\" />
   </ItemGroup>
   <PropertyGroup>

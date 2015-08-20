@@ -20,17 +20,23 @@
         };
 
         function ConectarBiometrico() {
-           
-            if ( obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico')) {
-                    Ext.net.Notification.show({
-                         html     : 'Conectado correctamente',
-                         title: 'Notificación'
-                    });
-            } else {
-                    Ext.net.Notification.show({
-                        html: 'No conectado!, Asegurece que el Dispositivo este conectado a la red TCP/IP',
-                        title: 'Notificación'
-                    });
+            try {
+                if ( obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico')) {
+                        Ext.net.Notification.show({
+                             html     : 'Conectado correctamente',
+                             title: 'Notificación'
+                        });
+                } else {
+                        Ext.net.Notification.show({
+                            html: 'No conectado!, Asegurece que el Dispositivo este conectado a la red TCP/IP',
+                            title: 'Notificación'
+                        });
+                }
+            } catch (e) {
+                Ext.net.Notification.show({
+                    html: 'Browser Imcompatible con ActiveX',
+                    title: 'Notificación'
+                });
             }
         }
 
@@ -51,6 +57,7 @@
 
         var blur = function (e) {
             if (CBETIQ_TIPO.getValue() === "CARNET") {
+
                 var Tarjeta = obj.Tarjeta();
                 if (typeof (Tarjeta) != "undefined") {
                     TFETIQ_ETIQUETA.setValue(obj.Tarjeta());

@@ -7,108 +7,99 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Boot_Park.View.Private.BootPark.Asignacion {
+namespace Boot_Park.View.Private {
     
     
-    public partial class Identidad {
+    public partial class Desktop {
         
         /// <summary>
-        /// Control FIDENTIDAD.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FIDENTIDAD;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control VPPRINCIPAL.
+        /// Control DESCRITORIO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Viewport VPPRINCIPAL;
+        protected global::Ext.Net.Desktop DESCRITORIO;
         
         /// <summary>
-        /// Control PUSUARIO.
+        /// Control MENUPARAMETRIZACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Panel PUSUARIO;
+        protected global::Ext.Net.MenuItem MENUPARAMETRIZACION;
         
         /// <summary>
-        /// Control GPUSUARIO.
+        /// Control METIQUETA.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.GridPanel GPUSUARIO;
+        protected global::Ext.Net.Menu METIQUETA;
         
         /// <summary>
-        /// Control SUSUARIO.
+        /// Control MENUASIGNACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Store SUSUARIO;
+        protected global::Ext.Net.MenuItem MENUASIGNACION;
         
         /// <summary>
-        /// Control PETIQUETA.
+        /// Control MIDENTIDAD.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Panel PETIQUETA;
+        protected global::Ext.Net.Menu MIDENTIDAD;
         
         /// <summary>
-        /// Control GPETIQUETAOUT.
+        /// Control MENUAUTORIZACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.GridPanel GPETIQUETAOUT;
+        protected global::Ext.Net.MenuItem MENUAUTORIZACION;
         
         /// <summary>
-        /// Control SETIQUETAOUT.
+        /// Control MAUTORIZACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Store SETIQUETAOUT;
+        protected global::Ext.Net.Menu MAUTORIZACION;
         
         /// <summary>
-        /// Control GPETIQUETAIN.
+        /// Control MENUCIRCULACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.GridPanel GPETIQUETAIN;
+        protected global::Ext.Net.MenuItem MENUCIRCULACION;
         
         /// <summary>
-        /// Control STIQUETAIN.
+        /// Control MCIRCULACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Store STIQUETAIN;
-        
-        /// <summary>
-        /// Control WDETALLEUSUARIO.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Ext.Net.Window WDETALLEUSUARIO;
+        protected global::Ext.Net.Menu MCIRCULACION;
     }
 }
