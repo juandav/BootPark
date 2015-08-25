@@ -24,3 +24,11 @@ C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\es\Microsof
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojFakesResolveAssemblyReference.cache
+F:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
+F:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
+F:\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
+F:\BootPark\Boot-Park\Boot-Park\bin\MySql.Data.dll
+F:\BootPark\Boot-Park\Boot-Park\bin\MySql.Web.dll
+F:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
+F:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
+F:\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb

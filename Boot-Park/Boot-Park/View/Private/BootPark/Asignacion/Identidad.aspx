@@ -27,10 +27,11 @@
 
         var notifyDrop1 = function (ddSource, e, data) {
             // Loop through the selections
+            var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.desvincularCarnetAlUsuario({
+                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, '', {
                     success: function (result) {
-                        Ext.Msg.alert("ENTRO");
+                        //Ext.Msg.alert("ENTRO");
                         addRow(SETIQUETAOUT, record, ddSource);
                     },
                     failure: function (errorMsg) {
@@ -44,9 +45,11 @@
         };
 
         var notifyDrop2 = function (ddSource, e, data) {
+           
             // Loop through the selections
+            var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularCarnetAlUsuario({
+                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, '', {
                     success: function (result) {
                         Ext.Msg.alert("ENTRO");
                         addRow(STIQUETAIN, record, ddSource);
