@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
+    <Compile Include="Model\BootPark\AutorizacionOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaUsuarioOAD.cs" />
     <Compile Include="Model\BootPark\ParticularOAD.cs" />

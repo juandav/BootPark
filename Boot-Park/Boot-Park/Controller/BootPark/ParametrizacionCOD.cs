@@ -12,7 +12,7 @@ namespace Boot_Park.Controller.BootPark
         private ParticularOAD particular = new ParticularOAD();
         private VehiculoOAD vehiculo = new VehiculoOAD();
         private EtiquetaOAD etiquetas = new EtiquetaOAD();
-
+        private AutorizacionOAD autorizacion = new AutorizacionOAD();
         private UsuarioOAD usuario = new UsuarioOAD();
         private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
 
@@ -44,6 +44,28 @@ namespace Boot_Park.Controller.BootPark
             return particular.eliminarParticular(id);
         }
         #endregion
+
+        #region AUTORIZACION
+        public DataTable consultarVehiculosEnUso(string usuario)
+        {
+            return autorizacion.consultarVehiculosEnUso(usuario);
+        }
+
+        public DataTable consultarVehiculosDisponibles(string usuario)
+        {
+            return autorizacion.consultarVehiculosStock(usuario);
+        }
+
+        public bool registrarVehiculoUsuario(string id, string usuario, string pegeId, string descripcion, string tipo)
+        {
+            return autorizacion.registrarVehiculoUsuario(id, usuario, pegeId, descripcion, tipo, "DISPONIBLE");
+        }
+        public bool desvincularVehiculoUsuario(string id, string usuario)
+        {
+            return autorizacion.desvincularVehiculoUsurio(id, usuario);
+        }
+
+        # endregion
 
         #region GESTION DE VEHICULOS
         public DataTable consultarVehiculos()
