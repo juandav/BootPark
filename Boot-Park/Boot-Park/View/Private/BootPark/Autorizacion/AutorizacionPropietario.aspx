@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Autorizacion.aspx.cs" Inherits="Boot_Park.View.Private.BootPark.Autorizacion.Autorizacion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AutorizacionPropietario.aspx.cs" Inherits="Boot_Park.View.Private.BootPark.Autorizacion.Autorizacion" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 

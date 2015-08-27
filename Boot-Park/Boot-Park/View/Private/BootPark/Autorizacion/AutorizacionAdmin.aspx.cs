@@ -4,19 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Ext.Net;
 
-namespace Boot_Park.View.Private
+namespace Boot_Park.View.Private.BootPark.Autorizacion
 {
-    public partial class Desktop : System.Web.UI.Page
+    public partial class AutorizacionAdmin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            resource1.RegisterIcon(Icon.ArrowRefresh);
-           
-        }
-        public void  prueba(){
-            
+
         }
     }
 }

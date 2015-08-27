@@ -9,9 +9,9 @@
     <title></title>
 </head>
 <body>
-   <ext:ResourceManager runat="server" />
+   <ext:ResourceManager ID="resource1" runat="server" />
     <form id="form1" runat="server">
-        <ext:Desktop runat="server" ID="DESCRITORIO">
+        <ext:Desktop runat="server" ID="DESCRITORIO" >
             <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">
                 <Items>
                     <ext:MenuItem ID="MENUPARAMETRIZACION" runat="server" Text="PARAMETRIZACIÓN" Icon="Folder" HideOnClick="false">
@@ -79,6 +79,7 @@
                     <ext:MenuSeparator />
                 </Items>
             </StartMenu>
+           
     </ext:Desktop>
     </form>
 </body>

@@ -96,14 +96,17 @@
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
-    <Content Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx" />
+    <Content Include="View\Private\BootPark\Autorizacion\AutorizacionPropietario.aspx" />
+    <Content Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx" />
     <Content Include="View\Private\BootPark\Circulacion\Circulacion.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
     <Content Include="View\Private\Desktop.aspx" />
     <Content Include="View\Public\TestPlugin.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conections\ConexionMariaDB.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Model\BootPark\AutorizacionOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaUsuarioOAD.cs" />
+    <Compile Include="Model\BootPark\EtiquetaVehiculoOAD.cs" />
     <Compile Include="Model\BootPark\ParticularOAD.cs" />
     <Compile Include="Model\BootPark\UsuarioOAD.cs" />
     <Compile Include="Model\BootPark\VehiculoOAD.cs" />
@@ -130,12 +134,19 @@
     <Compile Include="View\Private\BootPark\Asignacion\Vehiculo.aspx.designer.cs">
       <DependentUpon>Vehiculo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx.cs">
-      <DependentUpon>Autorizacion.aspx</DependentUpon>
+    <Compile Include="View\Private\BootPark\Autorizacion\AutorizacionPropietario.aspx.cs">
+      <DependentUpon>AutorizacionPropietario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\Private\BootPark\Autorizacion\Autorizacion.aspx.designer.cs">
-      <DependentUpon>Autorizacion.aspx</DependentUpon>
+    <Compile Include="View\Private\BootPark\Autorizacion\AutorizacionPropietario.aspx.designer.cs">
+      <DependentUpon>AutorizacionPropietario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx.cs">
+      <DependentUpon>AutorizacionAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx.designer.cs">
+      <DependentUpon>AutorizacionAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Private\BootPark\Circulacion\Circulacion.aspx.cs">
       <DependentUpon>Circulacion.aspx</DependentUpon>

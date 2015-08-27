@@ -7,108 +7,126 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Boot_Park.View.Private {
+namespace Boot_Park.View.Private.BootPark.Autorizacion {
     
     
-    public partial class Desktop {
+    public partial class AutorizacionAdmin {
         
         /// <summary>
-        /// Control resource1.
+        /// Control HID_USER.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.ResourceManager resource1;
+        protected global::Ext.Net.Hidden HID_USER;
         
         /// <summary>
-        /// Control form1.
+        /// Control HTIPO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::Ext.Net.Hidden HTIPO;
         
         /// <summary>
-        /// Control DESCRITORIO.
+        /// Control FVEHICULO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Desktop DESCRITORIO;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FVEHICULO;
         
         /// <summary>
-        /// Control MENUPARAMETRIZACION.
+        /// Control VPPRINCIPAL.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.MenuItem MENUPARAMETRIZACION;
+        protected global::Ext.Net.Viewport VPPRINCIPAL;
         
         /// <summary>
-        /// Control METIQUETA.
+        /// Control PUSUARIO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Menu METIQUETA;
+        protected global::Ext.Net.Panel PUSUARIO;
         
         /// <summary>
-        /// Control MENUASIGNACION.
+        /// Control GPUSUARIO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.MenuItem MENUASIGNACION;
+        protected global::Ext.Net.GridPanel GPUSUARIO;
         
         /// <summary>
-        /// Control MIDENTIDAD.
+        /// Control SUSUARIO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Menu MIDENTIDAD;
+        protected global::Ext.Net.Store SUSUARIO;
         
         /// <summary>
-        /// Control MENUAUTORIZACION.
+        /// Control PVEHICULO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.MenuItem MENUAUTORIZACION;
+        protected global::Ext.Net.Panel PVEHICULO;
         
         /// <summary>
-        /// Control MAUTORIZACION.
+        /// Control GPVEHICULOAOUT.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Menu MAUTORIZACION;
+        protected global::Ext.Net.GridPanel GPVEHICULOAOUT;
         
         /// <summary>
-        /// Control MENUCIRCULACION.
+        /// Control SVEHICULOOUT.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.MenuItem MENUCIRCULACION;
+        protected global::Ext.Net.Store SVEHICULOOUT;
         
         /// <summary>
-        /// Control MCIRCULACION.
+        /// Control GPVEHICULOIN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Menu MCIRCULACION;
+        protected global::Ext.Net.GridPanel GPVEHICULOIN;
+        
+        /// <summary>
+        /// Control SVEHICULOIN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Store SVEHICULOIN;
+        
+        /// <summary>
+        /// Control WDETALLEUSUARIO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Window WDETALLEUSUARIO;
     }
 }
