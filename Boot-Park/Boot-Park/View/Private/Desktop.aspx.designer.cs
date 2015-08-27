@@ -13,15 +13,6 @@ namespace Boot_Park.View.Private {
     public partial class Desktop {
         
         /// <summary>
-        /// Control resource1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Ext.Net.ResourceManager resource1;
-        
-        /// <summary>
         /// Control form1.
         /// </summary>
         /// <remarks>
@@ -85,13 +76,13 @@ namespace Boot_Park.View.Private {
         protected global::Ext.Net.MenuItem MENUAUTORIZACION;
         
         /// <summary>
-        /// Control MAUTORIZACION.
+        /// Control MAUTORIZACIONPROPIETARIO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Menu MAUTORIZACION;
+        protected global::Ext.Net.Menu MAUTORIZACIONPROPIETARIO;
         
         /// <summary>
         /// Control MENUCIRCULACION.

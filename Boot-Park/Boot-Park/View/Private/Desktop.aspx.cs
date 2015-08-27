@@ -12,7 +12,7 @@ namespace Boot_Park.View.Private
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            resource1.RegisterIcon(Icon.ArrowRefresh);
+          
            
         }
         public void  prueba(){
