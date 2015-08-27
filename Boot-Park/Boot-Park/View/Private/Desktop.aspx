@@ -5,13 +5,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="../../Content/js/Desktop.js"></script>
-    <title></title>
+     <script src="../../Content/js/Desktop.js"></script>
+     <LINK href="../../Content/css/desktop.css" rel="stylesheet" type="text/css">
+    <title>Boot-Park</title>
 </head>
 <body>
    <ext:ResourceManager runat="server" />
     <form id="form1" runat="server">
-        <ext:Desktop runat="server" ID="DESCRITORIO">
+        <ext:Desktop runat="server" ID="DESCRITORIO" ShortcutTextColor="Black" Wallpaper="../../Content/Images/desktop.jpg">
+            
+            <Shortcuts>
+                <ext:DesktopShortcut ShortcutID="DSVALIDACION" Text="Validación con Dispositivos" IconCls="shortcut-icon icon-circulacion" />
+            </Shortcuts>
+
+            <Listeners>
+                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://www.google.com' }else { alert('Link Malo'); }" />
+            </Listeners>
+            
             <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">
                 <Items>
                     <ext:MenuItem ID="MENUPARAMETRIZACION" runat="server" Text="PARAMETRIZACIÓN" Icon="Folder" HideOnClick="false">

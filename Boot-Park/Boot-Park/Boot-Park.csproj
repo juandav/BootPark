@@ -92,6 +92,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\desktop.css" />
+    <Content Include="Content\images\circulacion.png" />
+    <Content Include="Content\images\desktop.png" />
     <Content Include="Content\js\Desktop.js" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
@@ -102,6 +105,7 @@
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
     <Content Include="View\Private\Desktop.aspx" />
+    <Content Include="View\Public\CirculacionValidacion.aspx" />
     <Content Include="View\Public\TestPlugin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -172,6 +176,13 @@
     <Compile Include="View\Private\Desktop.aspx.designer.cs">
       <DependentUpon>Desktop.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Public\CirculacionValidacion.aspx.cs">
+      <DependentUpon>CirculacionValidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Public\CirculacionValidacion.aspx.designer.cs">
+      <DependentUpon>CirculacionValidacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Public\TestPlugin.aspx.cs">
       <DependentUpon>TestPlugin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -181,7 +192,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\css\" />
     <Folder Include="Content\logs\" />
   </ItemGroup>
   <PropertyGroup>
