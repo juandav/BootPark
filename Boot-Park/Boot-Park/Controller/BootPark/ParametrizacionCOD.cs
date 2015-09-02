@@ -45,22 +45,44 @@ namespace Boot_Park.Controller.BootPark
         }
         #endregion
 
-        #region AUTORIZACION
+        #region AUTORIZACIONADMIN
         public DataTable consultarVehiculosEnUso(string usuario)
         {
             return autorizacion.consultarVehiculosEnUso(usuario);
         }
 
-        public DataTable consultarVehiculosDisponibles(string usuario)
+        public DataTable consultarVehiculosDisponibles()
         {
-            return autorizacion.consultarVehiculosStock(usuario);
+            return autorizacion.consultarVehiculosStock();
         }
 
-        public bool registrarVehiculoUsuario(string id, string usuario, string pegeId, string descripcion, string tipo)
+        public bool registrarVehiculoUsuario(string id, string usuario, string pegeId, string descripcion)
         {
-            return autorizacion.registrarVehiculoUsuario(id, usuario, pegeId, descripcion, tipo, "DISPONIBLE");
+            return autorizacion.registrarVehiculoUsuario(id, usuario, pegeId, descripcion, "PROPIETARIO", "DISPONIBLE");
         }
         public bool desvincularVehiculoUsuario(string id, string usuario)
+        {
+            return autorizacion.desvincularVehiculoUsurio(id, usuario);
+        }
+
+        #endregion
+
+        #region AUTORIZACIONPROPIETARIO
+        public DataTable consultarVehiculosEnUsoPropietario(string usuario,string particular)
+        {
+            return autorizacion.consultarVehiculosEnUsoPropietario(usuario,particular);
+        }
+
+        public DataTable consultarVehiculosDisponiblesPropietario(string usuario)
+        {
+            return autorizacion.consultarVehiculosStockPropietario(usuario);
+        }
+
+        public bool registrarVehiculoUsuarioPropietario(string id, string usuario, string pegeId, string descripcion)
+        {
+            return autorizacion.registrarVehiculoUsuarioPropietario(id, usuario, pegeId, descripcion, "PARTICULAR", "DISPONIBLE");
+        }
+        public bool desvincularVehiculoUsuarioPropietario(string id, string usuario)
         {
             return autorizacion.desvincularVehiculoUsurio(id, usuario);
         }
@@ -186,6 +208,13 @@ namespace Boot_Park.Controller.BootPark
         public DataTable consultarUsuarios()
         {
             return usuario.consultarUsuarios();
+        }
+        public DataTable consultarUsuariosChaira() {
+            return usuario.consultarUsuariosChaira();
+        }
+        public DataTable consultarUsuarios(string id)
+        {
+            return usuario.consultarUsuarios(id);
         }
         #endregion
     }

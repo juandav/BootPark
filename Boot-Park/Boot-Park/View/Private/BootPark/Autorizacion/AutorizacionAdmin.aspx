@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Autorizacion</title>
+    <title>Autorizacion Admin</title>
     <script type="text/javascript">
 
         var addRow = function (store, record, ddSource) {
@@ -50,7 +50,7 @@
         var notifyDrop2 = function (ddSource, e, data) {
             // Loop through the selections
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularVehiculoAlUsuario(record.data.VEHI_ID, HID_USER.getValue(), HTIPO.getValue(), {
+                parametro.vincularVehiculoAlUsuario(record.data.VEHI_ID, HID_USER.getValue(), {
                     success: function (result) {
                         Ext.net.Notification.show({
                             html: 'vehiculo autorizado exitosamente', title: 'Notificación'
@@ -122,7 +122,7 @@
                                                 PVEHICULO.expand();
                                                 HID_USER.setValue(record.data.ID);
                                                 HTIPO.setValue(record.data.TIPO);
-                                                parametro.cargarVehiculosOUT(record.data.ID);
+                                                parametro.cargarVehiculosOUT();
                                                 parametro.cargarVehiculosIN(record.data.ID);" />
                                         </Listeners>
                                     </ext:RowSelectionModel>

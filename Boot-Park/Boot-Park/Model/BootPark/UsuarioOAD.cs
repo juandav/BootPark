@@ -21,5 +21,36 @@ namespace Boot_Park.Model.BootPark
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
+        public DataTable consultarUsuariosChaira()
+        {
+            string sql = "SELECT"
+                        + "     U.IDBOOTPARK AS ID,"
+                        + "     U.PART_IDENTIFICACION AS IDENT,"
+                        + "     U.PART_NOMBRE AS NOMBRE,"
+                        + "     U.PART_APELLIDO AS APELLIDO,"
+                        + "     U.TIPO"
+                        + " FROM"
+                        + "     USUARIO U"
+                        + " WHERE U.TIPO='CHAIRA'";
+      
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+        
+        public DataTable consultarUsuarios(string usuario)
+        {
+            string sql = "SELECT"
+                        + "     U.IDBOOTPARK AS ID,"
+                        + "     U.PART_IDENTIFICACION AS IDENT,"
+                        + "     U.PART_NOMBRE AS NOMBRE,"
+                        + "     U.PART_APELLIDO AS APELLIDO,"
+                        + "     U.TIPO"
+                        + " FROM "
+                        + "    USUARIO U "
+                        + " WHERE U.IDBOOTPARK <> '" + usuario + "'";
+                        ;
+
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+
     }
 }

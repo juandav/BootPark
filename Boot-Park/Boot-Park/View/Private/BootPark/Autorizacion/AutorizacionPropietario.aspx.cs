@@ -14,35 +14,36 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
         private string pegeId = "53233";
+        private string idPropietario = "4";   // El Idusuario se obtiene cuando inicia session en la plataforma Chaira.
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarUsuarios();
         }
         public void cargarUsuarios()
         {
-            DataTable datos = parametro.consultarUsuarios();
+            DataTable datos = parametro.consultarUsuarios(idPropietario);
             SUSUARIO.DataSource = datos;
             SUSUARIO.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
-        public void cargarVehiculosOUT(string usuario)
+        public void cargarVehiculosOUT()
         {
-            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponibles(usuario);
+            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponiblesPropietario(idPropietario);
             SVEHICULOOUT.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
-        public void cargarVehiculosIN(string usuario)
+        public void cargarVehiculosIN(string particular)
         {
-            SVEHICULOIN.DataSource = parametro.consultarVehiculosEnUso(usuario);
+            SVEHICULOIN.DataSource = parametro.consultarVehiculosEnUsoPropietario(idPropietario,particular);
             SVEHICULOIN.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
-        public bool vincularVehiculoAlUsuario(string id, string usuario, string tipo)
+        public bool vincularVehiculoAlUsuario(string id, string usuario)
         {
-            return parametro.registrarVehiculoUsuario(id, usuario, "", pegeId, tipo);
+            return parametro.registrarVehiculoUsuarioPropietario(id, usuario, "", pegeId);
         }
         [DirectMethod(Namespace = "parametro")]
         public bool desvincularVehiculoAlUsuario(string id, string usuario)
