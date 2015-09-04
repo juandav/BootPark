@@ -133,26 +133,36 @@ namespace Boot_Park.Model.BootPark
 
             return connection.getDataMariaDB(sql).Tables[0];
         }
-        public DataTable consultarVehiculosStockPropietario(string usuario)
+        public DataTable consultarVehiculosStockPropietario(string Idpropietario,string Idparticular)
         {
 
             string sql = "SELECT "
-                        + "    V.VEHI_ID, "
-                        + "    V.VEHI_PLACA, "
-                        + "    V.VEHI_MARCA, "
-                        + "    V.VEHI_MODELO, "
-                        + "    V.VEHI_OBSERVACION "
-                        + "FROM "
-                        + "    BOOTPARK.VEHICULO V "
-                        + "INNER JOIN BOOTPARK.AUTORIZACION A "
-                        + "ON "
-                        + "    V.VEHI_ID = A.VEHI_ID "
-                        + "WHERE "
-                        + "    A.AUTO_TIPO ='PROPIETARIO' "
-                        + "AND A.USUA_ID='"+ usuario+"'";
-           
-                        
-
+                         + "    V.VEHI_ID, "
+                         + "    V.VEHI_PLACA, "
+                         + "    V.VEHI_MARCA, "
+                         + "    V.VEHI_MODELO, "
+                         + "    V.VEHI_OBSERVACION "
+                         + "FROM BOOTPARK.VEHICULO V "
+                         + "INNER JOIN "
+                         + "(SELECT "
+                         + "    PART.VEHI_ID "
+                         + "FROM "
+                         + "    BOOTPARK.AUTORIZACION PART "
+                         + "WHERE "
+                         + "    PART.AUTO_TIPO ='PROPIETARIO' "
+                         + "AND PART.USUA_ID = '" + Idpropietario + "' "
+                         + "AND PART.VEHI_ID NOT IN "
+                         + "    ( "
+                         + "        SELECT "
+                         + "            A.VEHI_ID "
+                         + "        FROM "
+                         + "            BOOTPARK.AUTORIZACION A "
+                         + "        WHERE "
+                         + "            A.AUTO_TIPO ='PARTICULAR' "
+                         + "        AND A.USUA_ID='" + Idparticular + "' "
+                         + "    ) "
+                         + ") AU "
+                         + "ON V.VEHI_ID= AU.VEHI_ID";
 
             return connection.getDataMariaDB(sql).Tables[0];
         }

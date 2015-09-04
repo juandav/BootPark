@@ -123,7 +123,7 @@
                                                 PVEHICULO.expand();
                                                 HID_USER.setValue(record.data.ID);
                                                 HTIPO.setValue(record.data.TIPO);
-                                                parametro.cargarVehiculosOUT();
+                                                parametro.cargarVehiculosOUT(record.data.ID);
                                                 parametro.cargarVehiculosIN(record.data.ID);" />
                                         </Listeners>
                                     </ext:RowSelectionModel>

@@ -27,9 +27,9 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
         }
 
         [DirectMethod(Namespace = "parametro")]
-        public void cargarVehiculosOUT()
+        public void cargarVehiculosOUT(string particular)
         {
-            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponiblesPropietario(idPropietario);
+            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponiblesPropietario(idPropietario,particular);
             SVEHICULOOUT.DataBind();
         }
 

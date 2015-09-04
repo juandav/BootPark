@@ -73,9 +73,9 @@ namespace Boot_Park.Controller.BootPark
             return autorizacion.consultarVehiculosEnUsoPropietario(usuario,particular);
         }
 
-        public DataTable consultarVehiculosDisponiblesPropietario(string usuario)
+        public DataTable consultarVehiculosDisponiblesPropietario(string usuario, string particular)
         {
-            return autorizacion.consultarVehiculosStockPropietario(usuario);
+            return autorizacion.consultarVehiculosStockPropietario(usuario,particular);
         }
 
         public bool registrarVehiculoUsuarioPropietario(string id, string usuario, string pegeId, string descripcion)
