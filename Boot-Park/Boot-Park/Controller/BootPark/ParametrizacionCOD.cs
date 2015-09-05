@@ -209,6 +209,11 @@ namespace Boot_Park.Controller.BootPark
         {
             return usuario.consultarUsuarios();
         }
+
+        public DataTable consultarUsuariosHuellas()
+        {
+            return usuario.consultarUsuariosHuellas();
+        }
         public DataTable consultarUsuariosChaira() {
             return usuario.consultarUsuariosChaira();
         }

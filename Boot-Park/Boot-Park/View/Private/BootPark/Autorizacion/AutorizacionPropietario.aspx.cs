@@ -13,7 +13,7 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
     public partial class Autorizacion : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233"; // Ususario Chaira al iniciar session
+        private string pegeId = "53233"; // Usuario Chaira al iniciar session
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarUsuarios();

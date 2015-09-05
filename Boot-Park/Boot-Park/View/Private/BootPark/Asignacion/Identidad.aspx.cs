@@ -27,7 +27,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
         [DirectMethod(Namespace = "parametro")]
         public void cargarUsuarios()
         {
-            DataTable datos = parametro.consultarUsuarios();
+            DataTable datos = parametro.consultarUsuariosHuellas();
             SUSUARIO.DataSource = datos;
             SUSUARIO.DataBind();
         }

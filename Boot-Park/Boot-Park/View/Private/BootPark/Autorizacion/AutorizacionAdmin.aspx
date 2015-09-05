@@ -24,7 +24,7 @@
             }
             return foundItem;
         };
-
+        
         var notifyDrop1 = function (ddSource, e, data) {
             // Loop through the selections
             Ext.each(ddSource.dragData.selections, function (record) {
@@ -92,7 +92,7 @@
                                                     <ext:RecordField Name="IDENT" />
                                                     <ext:RecordField Name="NOMBRE" />
                                                     <ext:RecordField Name="APELLIDO" />
-                                                    <ext:RecordField Name="TIPO" />
+                                                    <ext:RecordField Name="TIPOUSUARIO" />
                                                 </Fields>
                                             </ext:JsonReader>
                                         </Reader>
@@ -104,7 +104,7 @@
                                         <ext:Column ColumnID="CIDENT" DataIndex="IDENT" Header="Identificación" />
                                         <ext:Column ColumnID="CNOMBRE" DataIndex="NOMBRE" Header="Nombre" Width="300" />
                                         <ext:Column ColumnID="CAPELLIDO" DataIndex="APELLIDO" Header="Apellido" />
-                                        <ext:Column ColumnID="CTIPO" DataIndex="TIPO" Header="Tipo" />
+                                        <ext:Column ColumnID="CTIPO" DataIndex="TIPOUSUARIO" Header="Tipo" />
                                         <ext:CommandColumn Width="60">
                                             <Commands>
                                                 <ext:GridCommand Icon="ApplicationViewDetail" CommandName="Detalle">

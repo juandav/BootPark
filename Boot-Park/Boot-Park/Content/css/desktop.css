@@ -8,4 +8,13 @@
 .icon-circulacion {
     background-image: url(../images/circulacion.png) !important;
 }
+
+.shortcut-icon-footprint {
+     width: 20px;
+    height: 20px;
+}
+
+.icon-footprint {
+    background-image: url(../images/footprint.ico) !important;
+}
         

@@ -21,6 +21,31 @@ namespace Boot_Park.Model.BootPark
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
+         public DataTable consultarUsuariosHuellas()
+        {
+            string sql = "SELECT "
+                        + "    U.PEGE_ID         AS ID, "
+                        + "    U.IDENTIFICACION AS IDENT, "
+                        + "    U.NOMBRE         AS NOMBRE, "
+                        + "    U.APELLIDO       AS APELLIDO, "
+                        + "    U.TIPOUSUARIO AS TIPO, "
+                        + "IF( "
+                        + "    ( "
+                        + "        SELECT "
+                        + "            COUNT(*) "
+                        + "        FROM "
+                        + "            HUELLA "
+                        + "        WHERE "
+                        + "            USUA_ID = U.PEGE_ID "
+                        + "    ) "
+                        + "    != 0, 'EXISTE','NO_EXISTE') AS HUEL_ESTADO "
+                        + "FROM "
+                        + "    USUARIO U";
+            
+                         
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+
         public DataTable consultarUsuariosChaira()
         {
             string sql = "SELECT"

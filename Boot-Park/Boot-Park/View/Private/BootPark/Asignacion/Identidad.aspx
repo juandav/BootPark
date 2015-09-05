@@ -6,8 +6,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="../../../../Content/css/desktop.css" rel="stylesheet" />
     <title>Identidad</title>
+    <script src="../../../../Content/js/BiometricDevice.js"></script>
     <script type="text/javascript">
+
+        var prepareCommand = function (grid, command, record, row) {
+            if (command.command == 'footprint' && record.get("HUEL_ESTADO") == 'EXISTE') {
+                command.hidden = true;
+                command.hideMode = 'display'; //you can try 'visibility' also     
+            }
+
+        };
+
 
         var addRow = function (store, record, ddSource) {
             // Search for duplicates
@@ -45,7 +56,7 @@
         };
 
         var notifyDrop2 = function (ddSource, e, data) {
-           
+
             // Loop through the selections
             var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
@@ -96,6 +107,7 @@
                                                     <ext:RecordField Name="NOMBRE" />
                                                     <ext:RecordField Name="APELLIDO" />
                                                     <ext:RecordField Name="TIPO" />
+                                                    <ext:RecordField Name="HUEL_ESTADO" />
                                                 </Fields>
                                             </ext:JsonReader>
                                         </Reader>
@@ -108,6 +120,14 @@
                                         <ext:Column ColumnID="CNOMBRE" DataIndex="NOMBRE" Header="Nombre" Width="300" />
                                         <ext:Column ColumnID="CAPELLIDO" DataIndex="APELLIDO" Header="Apellido" />
                                         <ext:Column ColumnID="CTIPO" DataIndex="TIPO" Header="Tipo" />
+                                        <ext:ImageCommandColumn Width="50" DataIndex="HUEL_ESTADO" Header="Huella">
+                                            <Commands>
+                                                <ext:ImageCommand IconCls="shortcut-icon-footprint icon-footprint" CommandName="footprint">
+                                                    <ToolTip Text="Registrar la huella vinculado al Chaira." />
+                                                </ext:ImageCommand>
+                                            </Commands>
+                                            <PrepareCommand Fn="prepareCommand" />
+                                        </ext:ImageCommandColumn>
                                         <ext:CommandColumn Width="60">
                                             <Commands>
                                                 <ext:GridCommand Icon="ApplicationViewDetail" CommandName="Detalle">
@@ -129,7 +149,7 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                    <Command Handler="WDETALLEUSUARIO.show();" />
+                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}else{conectar();}" />
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
                             </ext:GridPanel>
