@@ -1,4 +1,4 @@
-<center> BootPark! </center>
+<center> BootPark </center>
 =========================
 
 <center>“Desarrollo del Sistema de Gestión Vehicular apoyado en Tecnologías RFID y Sistemas Biométricos.”</center>
@@ -9,9 +9,50 @@ Bootpark es un software propietario de la **Universidad de la Amazonia**. Proyec
 
 ----------
 
+Planteamiento del Problema
+----------------------------------
+La Universidad de la Amazonia en la actualidad cuenta con un área destinada para el parqueadero de los docentes de la institución, la cual está siendo utilizada por distintas personas (estudiantes, particulares, administrativos, terceros vinculados con la Universidad y los docentes). Esto hace que dicha área sea insuficiente y que no satisfaga las necesidades para la cual fue destinada, ya que presenta problemas de congestión impidiendo una buena movilidad en la zona.
 
-Documents
--------------
+La situación antes planteada se da debido a que no existe una administración adecuada de dicha área, la cual está a cargo de los guardas de vigilancia y seguridad de la Universidad quienes de manera flexible, por muchas circunstancias, permiten el acceso a dicha área de vehículos no autorizados para utilizar este servicio en este sitio.
+
+
+Objetivo General
+--------------------
+Desarrollar un prototipo de entrada y salida para los vehículos apoyado en tecnologías de identificación por radio frecuencia y biométrico.
+
+Objetivos Específicos
+-------------------------
+> - Identificar requerimientos funcionales. 
+> - Diseñar el sistema de información.
+> - Implementar un prototipo.
+
+Propósito del sistema 
+-------------------------
+> - Validar ingreso y salida de personas al paqueadero.
+> - Validar la entrada y salida de vehículos de la zona docente.
+> - Integrar con chaira el prototipo
+
+Alcance del Sistema
+-----------------------
+> -  Parqueadero de la Zona docente de la Universidad de la Amazonia.
+
+Restricción del Sistema
+---------------------------
+> - Personal docente de la Universidad de la Amazonia.
+> - Personal autorizado por docentes de la Institución.
+
+Marco Conceptual
+---------------------
+Es toda la concepción y documentación para poder entender el proyecto.
+
+Estado del Arte
+------------------
+Es la comparación de varios proyectos similares y entender que es lo novedoso que el actual escrito ofrece.
+
+Capitulo 1: Identificación de Requerimientos.
+Capitulo 2: Diseño del Sistema de Información.
+Capitulo 3: Implementación del prototipo.
+Capitulo de Anexos.
 
 StackEdit stores your documents in your browser, which means all your documents are automatically saved locally and are accessible **offline!**
 
