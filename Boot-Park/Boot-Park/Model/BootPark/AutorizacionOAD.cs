@@ -115,7 +115,7 @@ namespace Boot_Park.Model.BootPark
                          + "        SELECT "
                          + "            VEHI_ID "
                          + "        FROM "
-                         + "            BOOTPARK.autorizacion a1 "
+                         + "            BOOTPARK.AUTORIZACION a1 "
                          + "        WHERE "
                          + "            a1.AUTO_TIPO ='PROPIETARIO' "
                          + "        AND a1.USUA_ID='"+ IdPropietario+ "'" 

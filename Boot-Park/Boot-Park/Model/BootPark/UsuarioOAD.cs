@@ -11,11 +11,11 @@ namespace Boot_Park.Model.BootPark
 
         public DataTable consultarUsuarios() {
             string sql = "SELECT"
-                        + "     U.IDBOOTPARK AS ID,"
-                        + "     U.PART_IDENTIFICACION AS IDENT,"
-                        + "     U.PART_NOMBRE AS NOMBRE,"
-                        + "     U.PART_APELLIDO AS APELLIDO,"
-                        + "     U.TIPO"
+                        + "     U.PEGE_ID AS ID,"
+                        + "     U.IDENTIFICACION AS IDENT,"
+                        + "     U.NOMBRE AS NOMBRE,"
+                        + "     U.APELLIDO AS APELLIDO,"
+                        + "     U.TIPOUSUARIO"
                         + " FROM"
                         + "     USUARIO U";
             return connection.getDataMariaDB(sql).Tables[0];
@@ -24,14 +24,14 @@ namespace Boot_Park.Model.BootPark
         public DataTable consultarUsuariosChaira()
         {
             string sql = "SELECT"
-                        + "     U.IDBOOTPARK AS ID,"
-                        + "     U.PART_IDENTIFICACION AS IDENT,"
-                        + "     U.PART_NOMBRE AS NOMBRE,"
-                        + "     U.PART_APELLIDO AS APELLIDO,"
-                        + "     U.TIPO"
+                        + "     U.PEGE_ID AS ID,"
+                        + "     U.IDENTIFICACION AS IDENT,"
+                        + "     U.NOMBRE AS NOMBRE,"
+                        + "     U.APELLIDO AS APELLIDO,"
+                        + "     U.TIPOUSUARIO"
                         + " FROM"
                         + "     USUARIO U"
-                        + " WHERE U.TIPO='CHAIRA'";
+                        + " WHERE U.TIPOUSUARIO='DOCENTE'";
       
             return connection.getDataMariaDB(sql).Tables[0];
         }
@@ -39,14 +39,14 @@ namespace Boot_Park.Model.BootPark
         public DataTable consultarUsuarios(string usuario)
         {
             string sql = "SELECT"
-                        + "     U.IDBOOTPARK AS ID,"
-                        + "     U.PART_IDENTIFICACION AS IDENT,"
-                        + "     U.PART_NOMBRE AS NOMBRE,"
-                        + "     U.PART_APELLIDO AS APELLIDO,"
-                        + "     U.TIPO"
+                        + "     U.PEGE_ID AS ID,"
+                        + "     U.IDENTIFICACION AS IDENT,"
+                        + "     U.NOMBRE AS NOMBRE,"
+                        + "     U.APELLIDO AS APELLIDO,"
+                        + "     U.TIPOUSUARIO AS TIPO"
                         + " FROM "
                         + "    USUARIO U "
-                        + " WHERE U.IDBOOTPARK <> '" + usuario + "'";
+                        + " WHERE U.PEGE_ID <> '" + usuario + "'";
                         ;
 
             return connection.getDataMariaDB(sql).Tables[0];

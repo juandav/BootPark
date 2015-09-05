@@ -17,27 +17,27 @@ namespace Boot_Park.Model.BootPark
                         + "        P.PART_REGISTRADOPOR,"
                         + "        P.PART_FECHACAMBIO"
                         + " FROM  " 
-                        + "        BOOTPARK.particular P";
+                        + "        BOOTPARK.PARTICULAR P";
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
         public bool registrarParticulares() {
             List<string> sql = new List<string>() {
-                "INSERT INTO BOOTPARK.particular (PART_ID, PART_IDENTIFICACION, PART_NOMBRE, PART_APELLIDO, PART_REGISTRADOPOR, PART_FECHACAMBIO) VALUES (7, 1117515612, 'Lineth Johana', 'Figueroa', '53233', CURRENT_DATE())",
-                "INSERT INTO BOOTPARK.particular (PART_ID, PART_IDENTIFICACION, PART_NOMBRE, PART_APELLIDO, PART_REGISTRADOPOR, PART_FECHACAMBIO) VALUES (6, 1117515612, 'Lineth Johana', 'Figueroa', '53233', CURRENT_DATE())"
+                "INSERT INTO BOOTPARK.PARTICULAR (PART_ID, PART_IDENTIFICACION, PART_NOMBRE, PART_APELLIDO, PART_REGISTRADOPOR, PART_FECHACAMBIO) VALUES (7, 1117515612, 'Lineth Johana', 'Figueroa', '53233', CURRENT_DATE())",
+                "INSERT INTO BOOTPARK.PARTICULAR (PART_ID, PART_IDENTIFICACION, PART_NOMBRE, PART_APELLIDO, PART_REGISTRADOPOR, PART_FECHACAMBIO) VALUES (6, 1117515612, 'Lineth Johana', 'Figueroa', '53233', CURRENT_DATE())"
             };
             return connection.sendSetDataTransaction(sql);
         }
 
         //int id, int identificacion, string nombre, string apellido, string registradoPor
         public bool registrarParticular(string id, string identificacion, string nombre, string apellido, string registradoPor) {
-            string sql = "INSERT INTO bootpark.particular"
-                        + "             (part_id,"
-                        + "              part_identificacion,"
-                        + "              part_nombre,"
-                        + "              part_apellido,"
-                        + "              part_registradopor,"
-                        + "              part_fechacambio)"
+            string sql = "INSERT INTO BOOTPARK.PARTICULAR"
+                        + "             (PART_ID,"
+                        + "              PART_IDENTIFICACION,"
+                        + "              PART_NOMBRE,"
+                        + "              PART_APELLIDO,"
+                        + "              PART_REGISTRADOPOR,"
+                        + "              PART_FECHACAMBIO)"
                         + " VALUES      (" + id + ","
                         + "              " + identificacion + ","
                         + "             '" + nombre  + "',"
@@ -49,22 +49,22 @@ namespace Boot_Park.Model.BootPark
 
         public bool actualizarParticular(string id, string identificacion, string nombre, string apellido, string registradoPor)
         {
-            string sql = "UPDATE bootpark.particular"
+            string sql = "UPDATE BOOTPARK.PARTICULAR"
                         + " SET "
-                        + "      part_identificacion = " + identificacion + ","
-                        + "      part_nombre = '" + nombre + "',"
-                        + "      part_apellido = '" +apellido + "',"
-                        + "      part_registradopor = '" + registradoPor + "',"
-                        + "      part_fechacambio = CURRENT_DATE()"
+                        + "      PART_IDENTIFICACION = " + identificacion + ","
+                        + "      PART_NOMBRE = '" + nombre + "',"
+                        + "      PART_APELLIDO = '" +apellido + "',"
+                        + "      PART_REGISTRADOPOR = '" + registradoPor + "',"
+                        + "      PART_FECHACAMBIO = CURRENT_DATE()"
                         + " WHERE"
-                        +"       part_id = " + id;
+                        +"       PART_ID = " + id;
             return connection.sendSetDataMariaDB(sql);
         }
 
         public bool eliminarParticular(string id)
         {
             string sql = "DELETE"
-                        + "  FROM   bootpark.PARTICULAR"
+                        + "  FROM   BOOTPARK.PARTICULAR"
                         + "  WHERE  "
                         + "         PART_ID = " + id;
             return connection.sendSetDataMariaDB(sql);

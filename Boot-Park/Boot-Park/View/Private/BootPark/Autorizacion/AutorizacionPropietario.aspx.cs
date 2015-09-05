@@ -13,15 +13,14 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
     public partial class Autorizacion : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233";
-        private string idPropietario = "4";   // El Idusuario se obtiene cuando inicia session en la plataforma Chaira.
+        private string pegeId = "53233"; // Ususario Chaira al iniciar session
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarUsuarios();
         }
         public void cargarUsuarios()
         {
-            DataTable datos = parametro.consultarUsuarios(idPropietario);
+            DataTable datos = parametro.consultarUsuarios(pegeId);
             SUSUARIO.DataSource = datos;
             SUSUARIO.DataBind();
         }
@@ -29,14 +28,14 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
         [DirectMethod(Namespace = "parametro")]
         public void cargarVehiculosOUT(string particular)
         {
-            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponiblesPropietario(idPropietario,particular);
+            SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponiblesPropietario(pegeId ,particular);
             SVEHICULOOUT.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]
         public void cargarVehiculosIN(string particular)
         {
-            SVEHICULOIN.DataSource = parametro.consultarVehiculosEnUsoPropietario(idPropietario,particular);
+            SVEHICULOIN.DataSource = parametro.consultarVehiculosEnUsoPropietario(pegeId, particular);
             SVEHICULOIN.DataBind();
         }
 
