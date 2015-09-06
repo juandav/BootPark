@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Etiqueta</title>
+    <script src="../../../../Content/js/BiometricDevice.js"></script>
     <script type="text/javascript">
         try {
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
@@ -18,27 +19,6 @@
         var afterEdit = function (e) {
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
         };
-
-        function ConectarBiometrico() {
-            try {
-                if ( obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico')) {
-                        Ext.net.Notification.show({
-                             html     : 'Conectado correctamente',
-                             title: 'Notificación'
-                        });
-                } else {
-                        Ext.net.Notification.show({
-                            html: 'No conectado!, Asegurece que el Dispositivo este conectado a la red TCP/IP',
-                            title: 'Notificación'
-                        });
-                }
-            } catch (e) {
-                Ext.net.Notification.show({
-                    html: 'Browser Imcompatible con ActiveX',
-                    title: 'Notificación'
-                });
-            }
-        }
 
         function ConectarRFID() {
            

@@ -7,9 +7,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link href="../../../../Content/css/desktop.css" rel="stylesheet" />
-    <title>Identidad</title>
     <script src="../../../../Content/js/BiometricDevice.js"></script>
+    <title>Identidad</title>
     <script type="text/javascript">
+        try {
+            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+        }
+        catch (e) {
+            console.log('Incompatibilidad con ActiveX');
+        }
+
+        function ProcesarCaptura() {
+            ConectarBiometrico();
+            obj.CapturarHuella(12);
+            //if (EstadoBiometrico == false) {
+            //    alert('Dispositivo no conectado');
+            //} else {
+            //    alert(dataUser[0].data.ID);
+              //  obj.CapturarHuella(dataUser[0].data.ID);
+            //}
+        }
 
         var prepareCommand = function (grid, command, record, row) {
             if (command.command == 'footprint' && record.get("HUEL_ESTADO") == 'EXISTE') {
@@ -74,16 +91,10 @@
             return true;
         };
 
-        var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-
-        function conectar() {
-            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
-        }
-
+      
         var focus = function (e) {
             conectar();
         };
-
 
     </script>
 </head>
@@ -149,9 +160,10 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}else{conectar();}" />
+                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}else{ProcesarCaptura();}" />
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
+                                
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>

@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\desktop.css" />
+    <Content Include="Content\js\BiometricDevice.js" />
     <Content Include="Content\js\Desktop.js" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
