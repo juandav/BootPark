@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using Ext.Net;
 
 namespace Boot_Park.View.Public.BootPark.Circulacion
 {
@@ -11,7 +13,64 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack) {
+
+            }
+        }
+
+        /// <summary>
+        ///     Consulta la huella en la base de datos.
+        /// </summary>
+        [DirectMethod]
+        public void  validarHuella()
+        {
 
         }
+
+        /// <summary>
+        ///     Valida el tag en la base de datos.
+        /// </summary>
+        [DirectMethod]
+        public void validarTag()
+        {
+
+        }
+
+        /// <summary>
+        ///     Carga un datatable de los usuarios que coinciden con un tag y huella
+        /// </summary>
+        [DirectMethod]
+        public void cargarUsuario(string huella, string tag) {
+
+        }
+
+        /// <summary>
+        ///     Verifica si el usuario se encuemtra autorizado de sacar un vehiculo.
+        /// </summary>
+        [DirectMethod]
+        public void verificarAutorizacion()
+        {
+
+        }
+  
+        /// <summary>
+        ///     Verifica si es una terminal de ingreso o salida de un vehiculo.
+        /// </summary>
+        [DirectMethod]
+        public void verificarTerminal()
+        {
+
+        }
+
+        /// <summary>
+        ///     Registra el movimiento del vehiculo.
+        /// </summary>
+        [DirectMethod]
+        public void registrarCirculacion()
+        {
+
+        }
+
+
     }
 }
