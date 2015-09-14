@@ -7,24 +7,51 @@
 <head runat="server">
     <title>Validación Biometrico-RFID</title>
     <script type="text/javascript">
+        "use strict";
 
-        // Contiene los llamados a los metodos de de conexion de los dispositivos e inicia como tal la app
-        var init = function () {
+        // 1. Se crea la clase circulación
+        class Circulacion{
+            constructor() {
+                console.log("Metodo que iniciar la conexion de los dispositivos");
+            }
 
-        };
+            //1. Detectar la Huella en el dispositivo biometrico
+            detectarHuella() {
 
-        //Función que permite la validación
-        var verificarAutorizacion = function (algo, callback) {
-            callback('mi error', 'la data');
-        };
+            }
 
-        //1. Non-Blocking I/O de la validación
-        // verificarAutorizacion(algo, function(err, data){
+            //2. Validar la Huella en la base de datos
+            validarHuella() {
 
-        //});
+            }//y devuelve el pege, junto a la lista de vehiculos
 
-        // Inicia la aplicación
-        init();
+            // 3. Detectar el tag del vehiculo
+            detectarTag() {
+
+            } //Devuelve el tag leido del RFID
+
+            // 4. Validar el tag del vehiculo con los traidos en el arreglo de vehiculos de la BD.
+            validarTag() {
+
+            }
+
+            // 5. Verificar si el usuario tiene autorización con el vehiculo
+            verificarAutorizacion() {
+
+            }
+
+            // 6. Verificar si la terminal de lectura biometrica es de entrada o salida.
+            verificarTerminal() {
+
+            }
+
+            // 7. Registrar la circulacion del vehiculo de entrada o de salida segun sea el caso.
+            registrarCirculacion() {
+
+            }
+        }
+
+        var deteccion = new Circulacion();  
     </script>
 </head>
 <body>
@@ -38,20 +65,20 @@
                         <%--queda esperando que el usuario ingrese la huella.--%>
                         <ext:Panel ID="PPRESENTACION" runat="server" Collapsible="true" Layout="Fit" Title="Iniciando Validación" Icon="Application">
                             <Items>
-                                <ext:Image runat="server" ImageUrl="../../../Content/Images/desktop.jpg">
+                                <ext:Image runat="server" ImageUrl="../../../../Content/Images/desktop.jpg">
                                     <LoadMask />
                                 </ext:Image>
                             </Items>
                         </ext:Panel>
                         <%-- 2. Segunda vista para la información del que ingresa o sale de la institución  --%>
-                        <ext:Panel ID="PINFORMACION" runat="server" Collapsible="true" Layout="Fit" Title="Info. Usuario" Padding="5" Icon="User">
+                        <ext:Panel ID="PINFORMACION" runat="server" Collapsible="true" Collapsed="true" Layout="Fit" Title="Info. Usuario" Padding="5" Icon="User">
                             <Items>
                             </Items>
                         </ext:Panel>
                         <%-- 3. Muestra al usuario las gracias por confiar en la institución, esta pantalla es netamente innecesaria, sirve solo para adornar--%>
-                        <ext:Panel ID="PDESPEDIDA" runat="server" Collapsible="true" Layout="Fit" Title="BootPark" Icon="ApplicationDelete">
+                        <ext:Panel ID="PDESPEDIDA" runat="server" Collapsible="true" Collapsed="true" Layout="Fit" Title="BootPark" Icon="ApplicationDelete">
                             <Items>
-                                <ext:Image runat="server" ImageUrl="../../../Content/Images/desktop.jpg" />
+                                <ext:Image runat="server" ImageUrl="../../../../Content/Images/desktop.jpg" />
                             </Items>
                         </ext:Panel>
                     </Items>
