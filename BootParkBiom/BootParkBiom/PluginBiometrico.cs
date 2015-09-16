@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using zkemkeeper;
 using System.Windows.Forms;
+using JSONLibrary;
 
 namespace BootParkBiom
 {
@@ -17,6 +18,10 @@ namespace BootParkBiom
         private string huella;
         private string usuario;
         private bool conexion;
+        private int Dispositivo = 1;
+        int iFingerIndex = 2;
+        int iFlag = 2;
+        
 
         /// <summary>
         ///     Función de prueba para verificar la conexión del plugin
@@ -173,7 +178,7 @@ namespace BootParkBiom
                     /// <returns>
                     ///    Devuelve True o False: Dependiendo si tiene exito en registrar los eventos u ocurre errores.
                     /// </returns>
-                    bool existenEventos = lectorObject.RegEvent(1, 65535);
+                    bool existenEventos = lectorObject.RegEvent(Dispositivo, 65535);
 
                     if (existenEventos == true)
                     {
@@ -202,6 +207,7 @@ namespace BootParkBiom
         /// <param name="ip"></param>
         /// <param name="puerto"></param>
         /// <returns></returns>
+        [ComVisible(true)]
         public bool Conectar(string ip, string puerto)
         {
             bool existeConexionBiometrico = lectorObject.Connect_Net(ip, Convert.ToInt32(puerto));
@@ -218,18 +224,98 @@ namespace BootParkBiom
         }
 
         /// <summary>
-        ///  Desconecta el dispositivo biometrico.
+        /// COnfigura el Lector en modo Captura.
+        ///  Nota: El usuarioId interno del Lector solo acepta como maximo 9 caracteres.
+        /// De lo contrario a partir 10 seran ignorados.
         /// </summary>
-        public bool Desconectar()
+        /// <param name="usuarioID"></param>
+        /// <returns></returns>
+        [ComVisible(true)]
+        public bool CapturarHuella(String usuarioID)
+        {
+            lectorObject.CancelOperation();
+            if (lectorObject.StartEnrollEx(usuarioID, iFingerIndex, iFlag))
+            {
+                lectorObject.StartIdentify();
+                lectorObject.RefreshData(Dispositivo);
+                lectorObject.EnableDevice(Dispositivo, true);
+                return true;
+            }
+            lectorObject.RefreshData(Dispositivo);
+            return false;
+        }
+        /// <summary>
+        /// Recupera la huella de un UsuarioID especifico.
+        /// Nota: El usuarioId Interno del lector no debe superar los 9 caracteres
+        /// </summary>
+        /// <param name="usuarioID"></param>
+        /// <returns></returns>
+        public string RecuperarHuella(string usuarioID)
+        {
+
+            List<HuellaDactilar> Huella = new List<HuellaDactilar>();
+            int iTmpLength;
+            byte[] ibyTmpData = new byte[2000];
+            lectorObject.EnableDevice(Dispositivo, false);
+            lectorObject.ReadAllTemplate(Dispositivo);
+            if (lectorObject.GetUserTmpEx(Dispositivo, usuarioID, iFingerIndex, out iFlag, out ibyTmpData[0], out iTmpLength))
+            {
+                Huella.Add(new HuellaDactilar
+                {
+                    Identidad = usuarioID,
+                    FingerIndex = iFingerIndex,
+                    byTmpData = ibyTmpData,
+                    TmpLength = iTmpLength
+                });
+                lectorObject.RefreshData(Dispositivo);
+                lectorObject.EnableDevice(Dispositivo, true);
+                lectorObject.PlayVoiceByIndex(9);
+                return Huella.ToJSON();
+            }
+            else
+            {
+                lectorObject.RefreshData(Dispositivo);
+                lectorObject.EnableDevice(Dispositivo, true);
+                return null;
+            }
+        }
+        /// <summary>
+        /// Vinculo El carnet al Usuario en el dispositivo
+        /// </summary>
+        /// <param name="usuarioID"></param>
+        /// <param name="Carnet"></param>
+        /// <returns></returns>
+        public bool RegistrarCarnet(string usuarioID, String Carnet)
+        {
+            bool estado = false;
+            lectorObject.EnableDevice(Dispositivo, false);
+            lectorObject.ReadAllTemplate(Dispositivo);
+            if (lectorObject.SSR_SetUserInfo(Dispositivo, Carnet, usuarioID, " ", 0, true))
+            {
+                lectorObject.RefreshData(Dispositivo);
+                lectorObject.EnableDevice(Dispositivo, true);
+                lectorObject.PlayVoiceByIndex(9);
+                estado = true;
+            }
+            else
+            {
+                estado = false;
+            }
+
+            return estado;
+        }
+
+    /// <summary>
+    ///  Desconecta el dispositivo biometrico.
+    /// </summary>
+    public bool Desconectar()
         {
             lectorObject.Disconnect();
             return false;
         }
 
-
-
         #region EVENTOS
-        ///////// *********EVENTOS**********/////////
+            ///////// *********EVENTOS**********/////////
 
         private void ObtenerUsuarioEvent(int usuarioEvent)
         {
@@ -250,6 +336,14 @@ namespace BootParkBiom
         }
         #endregion
 
+        public class HuellaDactilar
+        {
+            public string Identidad { get; set; }
+            public int FingerIndex { get; set; }
+            public int Flag { get; set; }
+            public byte[] byTmpData { get; set; }
+            public int TmpLength { get; set; }
+        }
 
     }
 }
