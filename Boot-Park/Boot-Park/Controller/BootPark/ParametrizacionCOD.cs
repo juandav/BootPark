@@ -15,7 +15,7 @@ namespace Boot_Park.Controller.BootPark
         private AutorizacionOAD autorizacion = new AutorizacionOAD();
         private UsuarioOAD usuario = new UsuarioOAD();
         private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
-
+        private EtiquetaVehiculoOAD etiquetaVehiculo = new EtiquetaVehiculoOAD();
         private General general = new General();
 
         #region GESTION DE PATICULARES
@@ -203,7 +203,16 @@ namespace Boot_Park.Controller.BootPark
         }
 
         #endregion
-
+        #region ETIQUETAVEHICULO
+        public DataTable consultarEtiquetaDisponible()
+        {
+            return etiquetaVehiculo.consultarEtiquetaDisponible();
+        }
+        public DataTable consultarEtiquetaVehiculoEnUso(string vehiculo)
+        {
+            return etiquetaVehiculo.consultarEtiquetaVehiculoEnUso(vehiculo);
+        }
+        #endregion
         #region USUARIO
         public DataTable consultarUsuarios()
         {

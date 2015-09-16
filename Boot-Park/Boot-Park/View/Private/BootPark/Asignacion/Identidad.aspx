@@ -20,12 +20,7 @@
         function ProcesarCaptura() {
             ConectarBiometrico();
             obj.CapturarHuella(12);
-            //if (EstadoBiometrico == false) {
-            //    alert('Dispositivo no conectado');
-            //} else {
-            //    alert(dataUser[0].data.ID);
-              //  obj.CapturarHuella(dataUser[0].data.ID);
-            //}
+       
         }
 
         var prepareCommand = function (grid, command, record, row) {
@@ -131,14 +126,18 @@
                                         <ext:Column ColumnID="CNOMBRE" DataIndex="NOMBRE" Header="Nombre" Width="300" />
                                         <ext:Column ColumnID="CAPELLIDO" DataIndex="APELLIDO" Header="Apellido" />
                                         <ext:Column ColumnID="CTIPO" DataIndex="TIPO" Header="Tipo" />
-                                        <ext:ImageCommandColumn Width="50" DataIndex="HUEL_ESTADO" Header="Huella">
+                                        <ext:CommandColumn Width="60" DataIndex="HUEL_ESTADO" Header="Huella">
                                             <Commands>
-                                                <ext:ImageCommand IconCls="shortcut-icon-footprint icon-footprint" CommandName="footprint">
+                                                 <ext:GridCommand IconCls=".shortcut-icon-enrollment-Footprint icon-enrollment-Footprint" CommandName="enrollmentFootprint">
+                                                    <ToolTip Text="incripcion de la Huella" />
+                                                </ext:GridCommand>
+                                                 <ext:CommandSeparator />
+                                                    <ext:GridCommand IconCls="shortcut-icon-footprint icon-footprint" CommandName="footprint">
                                                     <ToolTip Text="Registrar la huella vinculado al Chaira." />
-                                                </ext:ImageCommand>
+                                                </ext:GridCommand>
                                             </Commands>
-                                            <PrepareCommand Fn="prepareCommand" />
-                                        </ext:ImageCommandColumn>
+                                            <PrepareToolbar Fn="prepareCommand" />
+                                        </ext:CommandColumn>
                                         <ext:CommandColumn Width="60">
                                             <Commands>
                                                 <ext:GridCommand Icon="ApplicationViewDetail" CommandName="Detalle">
@@ -160,10 +159,11 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}else{ProcesarCaptura();}" />
+                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){parametro.inscribirHuella(record.data.ID);} if(command=='footprint'){Ext.net.Mask.show({ msg : 'Extrayendo huella del dispositivo' }); parametro.registraHuellausuario(record.data.ID);}" />
+                                                      
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
-                                
+
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>

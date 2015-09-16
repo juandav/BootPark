@@ -17,4 +17,12 @@
 .icon-footprint {
     background-image: url(../images/footprint.ico) !important;
 }
-        
+   
+.shortcut-icon-enrollment-Footprint {
+     width: 24px;
+    height: 20px;
+}
+
+.icon-enrollment-Footprint {
+    background-image: url(../images/enrollmentFootprint.ico) !important;
+}

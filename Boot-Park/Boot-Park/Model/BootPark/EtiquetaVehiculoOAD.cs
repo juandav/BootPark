@@ -30,7 +30,7 @@ namespace Boot_Park.Model.BootPark
 
         }
 
-        public DataTable consultarVehiculoEnUso(string vehiculo)
+        public DataTable consultarEtiquetaVehiculoEnUso(string vehiculo)
         {
             string sql = "SELECT"
                         + "     E.ETIQ_ID,"
@@ -81,31 +81,30 @@ namespace Boot_Park.Model.BootPark
             return connection.sendSetDataMariaDB(sql);
         }
 
-        public bool actualizarEtiquetaVehiculo(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor)
+        public bool actualizarEtiquetaVehiculo(string id, string tipo, string vehiculo, string observacion, string registradoPor)
         {
             string sql = "UPDATE"
                         + "     BOOTPARK.ETIQUETAUSUARIO"
                         + " SET"
-                        + "     ETUS_MOTIVO = '" + motivo + "',"
-                        + "     ETUS_FECHACADUCIDAD = '" + caducidad + "',"
+                        + "     ETVE_OBSERVACION = '" + observacion + "',"
                         + "     ETUS_REGISTRADOPOR = '" + registradoPor + "',"
                         + "     ETUS_FECHACAMBIO = CURRENT_DATE()"
                         + " WHERE"
-                        + "     ETIQ_ID = '" + id + "' AND"
+                        + "     VEHI_ID = '" + id + "' AND"
                         + "     ETIQ_TIPO = '" + tipo + "' AND"
-                        + "     USUA_ID = '" + usuario + "'";
+                        + "     VEHI_ID = '" + vehiculo + "'";
             return connection.sendSetDataMariaDB(sql);
         }
 
-        public bool eliminarEtiquetaVehiculo(string id, string tipo, string usuario)
+        public bool eliminarEtiquetaVehiculo(string id, string tipo, string vehiculo)
         {
             string sql = "DELETE"
                         + " FROM"
-                        + "     BOOTPARK.ETIQUETAUSUARIO"
+                        + "     BOOTPARK.ETIQUETAVEHICULO"
                         + " WHERE"
                         + "     ETIQ_ID = '" + id + "' AND"
                         + "     ETIQ_TIPO = '" + tipo + "' AND"
-                        + "     USUA_ID = '" + usuario + "'";
+                        + "     VEHI_ID = '" + vehiculo + "'";
             return connection.sendSetDataMariaDB(sql);
         }
     }
