@@ -48,8 +48,8 @@ namespace Boot_Park.Model.BootPark
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
-
         public bool registrarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor) {
+            List<string> sentencia =new List<string>();
             string sql = "INSERT"
                         + " INTO"
                         + "     BOOTPARK.ETIQUETAUSUARIO"
@@ -68,11 +68,24 @@ namespace Boot_Park.Model.BootPark
                         + "         '" + tipo + "',"
                         + "         '" + usuario + "',"
                         + "         '" + motivo + "',"
-                        + "         '" + caducidad + "',"
+                        + "          " + caducidad + ","
                         + "         '" + registradoPor + "',"
                         + "              CURRENT_DATE()"
                         + "     )";
-            return connection.sendSetDataMariaDB(sql);
+            sentencia.Add(sql);
+            sentencia.Add(ActualizarEtiquetaEstado(id,tipo, "ENUSO"));
+            return connection.sendSetDataTransaction(sentencia);
+        }
+
+        public string ActualizarEtiquetaEstado(string id, string tipo,string estado) {
+            string sql = "UPDATE "
+                      + "    ETIQUETA "
+                      + "SET "
+                      + "    ETIQ_ESTADO = '" +estado + "' "
+                      + "WHERE "
+                      + "    ETIQ_ID = '" + id + "' "
+                      + "AND ETIQ_TIPO = '" + tipo + "'";
+            return sql;
         }
 
         public bool actualizarEtiquetaUsuario(string id, string tipo, string usuario, string motivo, string caducidad, string registradoPor)
@@ -93,6 +106,8 @@ namespace Boot_Park.Model.BootPark
 
         public bool eliminarEtiquetaUsuario(string id, string tipo, string usuario)
         {
+            List<string> sentencia = new List<string>();
+
             string sql = "DELETE"
                         + " FROM"
                         + "     BOOTPARK.ETIQUETAUSUARIO"
@@ -100,8 +115,11 @@ namespace Boot_Park.Model.BootPark
                         + "     ETIQ_ID = '" + id + "' AND"
                         + "     ETIQ_TIPO = '" + tipo + "' AND"
                         + "     USUA_ID = '" + usuario + "'";
-            return connection.sendSetDataMariaDB(sql);
+            sentencia.Add(sql);
+            sentencia.Add(ActualizarEtiquetaEstado(id, tipo, "DISPONIBLE"));
+            return connection.sendSetDataTransaction(sentencia);
         }
+
 
     }
 }

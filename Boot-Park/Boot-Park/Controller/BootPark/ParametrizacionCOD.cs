@@ -14,6 +14,7 @@ namespace Boot_Park.Controller.BootPark
         private EtiquetaOAD etiquetas = new EtiquetaOAD();
         private AutorizacionOAD autorizacion = new AutorizacionOAD();
         private UsuarioOAD usuario = new UsuarioOAD();
+        private HuellaOAD huella = new HuellaOAD();
         private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
         private EtiquetaVehiculoOAD etiquetaVehiculo = new EtiquetaVehiculoOAD();
         private General general = new General();
@@ -229,6 +230,12 @@ namespace Boot_Park.Controller.BootPark
         public DataTable consultarUsuarios(string id)
         {
             return usuario.consultarUsuarios(id);
+        }
+        #endregion
+        #region GESTIONAR HUELLA
+        public bool registrarHuella(string IdUsuario, int FingerIndex, string Huella, int Flag, int Length, string registradoPor)
+        {
+            return huella.registraHuella(IdUsuario, FingerIndex, Huella, Flag, Length, registradoPor);
         }
         #endregion
     }

@@ -21,32 +21,11 @@ namespace BootParkBiom
         private int Dispositivo = 1;
         int iFingerIndex = 2;
         int iFlag = 2;
-        
-
         /// <summary>
-        ///     Función de prueba para verificar la conexión del plugin
+        ///    Objeto que instancia al dispositivo biometrico
         /// </summary>
-        /// <returns>Texto</returns>
-        [ComVisible(true)]
-        public string TextoPrueba()
-        {
-            return "Reponde desde el Plugin";
-        }
-
-        /// <summary>
-        ///   Probando la Funcionalidad del Plugin en el envio por parametro.
-        /// </summary>
-        /// <param name="texto"></param>
-        /// <returns>Texto</returns>
-        [ComVisible(true)]
-        public string ParametroPrueba(string texto)
-        {
-            return texto;
-        }
-
-
-        #region
-        ////////***********VARIABLES*************//////////
+        private CZKEM lectorObject = new CZKEM();
+        #region VARIABLES
         public string Tarjeta
         {
             get
@@ -94,24 +73,8 @@ namespace BootParkBiom
                 conexion = value;
             }
         }
-        #endregion
-
-
-        /// <summary>
-        ///    Objeto que instancia al dispositivo biometrico
-        /// </summary>
-        private CZKEM lectorObject = new CZKEM();
-
-        /// <summary>
-        ///     Función de prueba para verificar la conexión del control ActiveX
-        /// </summary>
-        /// <param name="texto">Texto JavaScript</param>
-        /// <returns>Texto del dll concatenado con el de JavaScript</returns>
-        public string TextoPrueba(string texto)
-        {
-            return "El Texto Prueba concatenado con: " + texto + " de JavaScript";
-        }
-
+        #endregion  VARIABLES
+        #region METODOS
         /// <summary>
         ///    Permite conectar con una terminal:
         ///      1. Lector Biometrico
@@ -195,12 +158,11 @@ namespace BootParkBiom
                 {
                     //Muestre un Mensaje de que no se puede conectar con el dispositivo.
                 }
-             return existeConexionBiometrico;
+                return existeConexionBiometrico;
             }
             return false;
-            
-        }
 
+        }
         /// <summary>
         ///   Desconectar el dispositivo biometrico
         /// </summary>
@@ -222,7 +184,6 @@ namespace BootParkBiom
                 return false;
             }
         }
-
         /// <summary>
         /// COnfigura el Lector en modo Captura.
         ///  Nota: El usuarioId interno del Lector solo acepta como maximo 9 caracteres.
@@ -253,24 +214,21 @@ namespace BootParkBiom
         public string RecuperarHuella(string usuarioID)
         {
 
-            List<HuellaDactilar> Huella = new List<HuellaDactilar>();
             int iTmpLength;
-            byte[] ibyTmpData = new byte[2000];
+            string ibyTmpData;
             lectorObject.EnableDevice(Dispositivo, false);
             lectorObject.ReadAllTemplate(Dispositivo);
-            if (lectorObject.GetUserTmpEx(Dispositivo, usuarioID, iFingerIndex, out iFlag, out ibyTmpData[0], out iTmpLength))
+            if (lectorObject.GetUserTmpExStr(Dispositivo, usuarioID, iFingerIndex, out iFlag, out ibyTmpData, out iTmpLength))
             {
-                Huella.Add(new HuellaDactilar
-                {
-                    Identidad = usuarioID,
-                    FingerIndex = iFingerIndex,
-                    byTmpData = ibyTmpData,
-                    TmpLength = iTmpLength
-                });
+                HuellaDactilar h = new HuellaDactilar();
                 lectorObject.RefreshData(Dispositivo);
                 lectorObject.EnableDevice(Dispositivo, true);
                 lectorObject.PlayVoiceByIndex(9);
-                return Huella.ToJSON();
+                h.Identidad = usuarioID;
+                h.FingerIndex = iFingerIndex;
+                h.byTmpData = ibyTmpData;
+                h.TmpLength = iTmpLength;
+                return h.ToJSON();
             }
             else
             {
@@ -285,12 +243,12 @@ namespace BootParkBiom
         /// <param name="usuarioID"></param>
         /// <param name="Carnet"></param>
         /// <returns></returns>
-        public bool RegistrarCarnet(string usuarioID, String Carnet)
+        public bool RegistrarCarnet(string Carnet, string Nombre, string usuarioID)
         {
             bool estado = false;
             lectorObject.EnableDevice(Dispositivo, false);
-            lectorObject.ReadAllTemplate(Dispositivo);
-            if (lectorObject.SSR_SetUserInfo(Dispositivo, Carnet, usuarioID, " ", 0, true))
+            lectorObject.SetStrCardNumber(Carnet);
+            if (lectorObject.SSR_SetUserInfo(Dispositivo, usuarioID, Nombre, usuarioID, 0, true)) //SSR_SetUserInfo(dispositivo,IdInterno,NombreEtiqueta,Contraseña,privilegio,estado);
             {
                 lectorObject.RefreshData(Dispositivo);
                 lectorObject.EnableDevice(Dispositivo, true);
@@ -304,46 +262,46 @@ namespace BootParkBiom
 
             return estado;
         }
-
-    /// <summary>
-    ///  Desconecta el dispositivo biometrico.
-    /// </summary>
-    public bool Desconectar()
+        /// <summary>
+        ///  Desconecta el dispositivo biometrico.
+        /// </summary>
+        public bool Desconectar()
         {
             lectorObject.Disconnect();
             return false;
         }
-
+        #endregion
         #region EVENTOS
-            ///////// *********EVENTOS**********/////////
+        ///////// *********EVENTOS**********/////////
 
         private void ObtenerUsuarioEvent(int usuarioEvent)
         {
             this.usuario = Convert.ToString(usuarioEvent);
-        
+
         }
 
         private void ObtenerTarjetaEvent(int tarjetaEvent)
         {
             this.tarjeta = Convert.ToString(tarjetaEvent);
-          
+
         }
 
         private void ObtenerHuellaEvent()
         {
-          
+
             /// Puedo validar si la huella en el dispositivo corresponde a la que hay en base de datos.
         }
         #endregion
-
+        #region ENTIDADES
         public class HuellaDactilar
         {
             public string Identidad { get; set; }
             public int FingerIndex { get; set; }
             public int Flag { get; set; }
-            public byte[] byTmpData { get; set; }
+            public string byTmpData { get; set; }
             public int TmpLength { get; set; }
         }
+        #endregion
 
     }
 }

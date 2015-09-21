@@ -3,25 +3,42 @@
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 
 <!DOCTYPE html>
-
+<%--<embed type="application/x-my-extension" id="pluginId">--%>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<%--    <script>
+  var plugin = document.getElementById("pluginId");
+  var result = plugin.myPluginMethod();  // call a method in your plugin
+  console.log("my plugin returned: " + result);
+</script>--%>
 <head runat="server">
     <link href="../../../../Content/css/desktop.css" rel="stylesheet" />
     <script src="../../../../Content/js/BiometricDevice.js"></script>
     <title>Identidad</title>
+
     <script type="text/javascript">
         try {
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
         }
         catch (e) {
             console.log('Incompatibilidad con ActiveX');
         }
-
-        function ProcesarCaptura() {
-            ConectarBiometrico();
-            obj.CapturarHuella(12);
-       
+        function registrarHuella(idusuario) {
+            var r = obj.RecuperarHuella(idusuario);
+            if (typeof r === 'undefined') {
+                Ext.net.Notification.show({
+                    html: 'Huella no registrada en el dispositivo!!',
+                    title: 'Notificación'
+                });
+            } else {
+                parametro.registraHuellausuario(r, idusuario);
+            }
         }
+
+        var afterEdit = function (e) {
+            var dataUser = GPUSUARIO.selModel.getSelections();
+            parametro.modificarCarnetUsuario(e.record.data.ETIQ_ID, dataUser[0].data.ID,e.record.data.ETUS_MOTIVO);
+        };
 
         var prepareCommand = function (grid, command, record, row) {
             if (command.command == 'footprint' && record.get("HUEL_ESTADO") == 'EXISTE') {
@@ -30,7 +47,6 @@
             }
 
         };
-
 
         var addRow = function (store, record, ddSource) {
             // Search for duplicates
@@ -54,11 +70,9 @@
             Ext.each(ddSource.dragData.selections, function (record) {
                 parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, '', {
                     success: function (result) {
-                        //Ext.Msg.alert("ENTRO");
                         addRow(SETIQUETAOUT, record, ddSource);
                     },
                     failure: function (errorMsg) {
-                        Ext.Msg.alert("NO ENTRO");
                     }
 
                 });
@@ -72,23 +86,18 @@
             // Loop through the selections
             var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, '', {
+                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, {
                     success: function (result) {
-                        Ext.Msg.alert("ENTRO");
+                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, dataUser[0].data.NOMBRE, dataUser[0].data.ID);
                         addRow(STIQUETAIN, record, ddSource);
                     },
                     failure: function (errorMsg) {
-                        Ext.Msg.alert("NO ENTRO");
+                        
                     }
                 });
             });
 
             return true;
-        };
-
-      
-        var focus = function (e) {
-            conectar();
         };
 
     </script>
@@ -159,15 +168,14 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){parametro.inscribirHuella(record.data.ID);} if(command=='footprint'){Ext.net.Mask.show({ msg : 'Extrayendo huella del dispositivo' }); parametro.registraHuellausuario(record.data.ID);}" />
-                                                      
+                                          <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){ obj.CapturarHuella(record.data.ID);} if(command=='footprint'){registrarHuella(record.data.ID);}" />          
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
 
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>
-                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
+                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
                                         <Store>
                                             <ext:Store ID="SETIQUETAOUT" runat="server">
                                                 <Reader>
@@ -176,7 +184,7 @@
                                                             <ext:RecordField Name="ETIQ_ID" />
                                                             <ext:RecordField Name="ETIQ_TIPO" />
                                                             <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_OBSERVACION" />
+                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
                                                         </Fields>
                                                     </ext:JsonReader>
                                                 </Reader>
@@ -186,14 +194,14 @@
                                             <Columns>
                                                 <ext:RowNumbererColumn />
                                                 <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
-                                                <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observaciones" />
+                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
                                             </Columns>
                                         </ColumnModel>
                                         <SelectionModel>
                                             <ext:RowSelectionModel SingleSelect="true" />
                                         </SelectionModel>
                                     </ext:GridPanel>
-                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETUS_MOTIVO" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull" EnableDragDrop="true" DDGroup="firstGridDDGroup">
                                         <Store>
                                             <ext:Store ID="STIQUETAIN" runat="server">
                                                 <Reader>
@@ -202,7 +210,8 @@
                                                             <ext:RecordField Name="ETIQ_ID" />
                                                             <ext:RecordField Name="ETIQ_TIPO" />
                                                             <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_OBSERVACION" />
+                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                            <ext:RecordField Name="ETUS_MOTIVO" />
                                                         </Fields>
                                                     </ext:JsonReader>
                                                 </Reader>
@@ -212,12 +221,19 @@
                                             <Columns>
                                                 <ext:RowNumbererColumn />
                                                 <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
-                                                <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observaciones" />
+                                                <ext:Column ColumnID="CETUS_MOTIVO" DataIndex="ETUS_MOTIVO" Header="Motivo">
+                                                    <Editor>
+                                                        <ext:TextField runat="server"/>
+                                                    </Editor>
+                                                </ext:Column>
                                             </Columns>
                                         </ColumnModel>
                                         <SelectionModel>
                                             <ext:RowSelectionModel SingleSelect="true" />
                                         </SelectionModel>
+                                        <Listeners>
+                                            <AfterEdit Fn="afterEdit" />
+                                        </Listeners>
                                     </ext:GridPanel>
                                 </Items>
                             </ext:Panel>
