@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ReaderB;
+using System;
 using System.Text;
 using System.Threading;
-using ReaderB;
 
-namespace rfid.io
+namespace RFID.CLASE
 {
     public class RFID
     {
@@ -125,8 +125,7 @@ namespace rfid.io
                     desconectarRFID();
                 }
             }
-            else
-            {
+            else {
                 return "Ha ocurrido un error al conectar con el dispositivo";
             }
         }
@@ -134,8 +133,7 @@ namespace rfid.io
         /// <summary>
         ///     Detiene la deteccion del TAG del dispositivo RFID.
         /// </summary>
-        public void detenerDeteccion()
-        {
+        public void detenerDeteccion() {
             detecion = true;
         }
 
@@ -144,55 +142,55 @@ namespace rfid.io
         /// </summary>
         private bool detectarEtiqueta()
         {
+           
+                byte[] EPC = new byte[5000];
+                //byte maskMemory = 0;
+                byte[] maskAdr = HexStringToByteArray("0000");
+                byte maskLen = Convert.ToByte("00");
+                byte[] maskData = HexStringToByteArray("00");
+                //byte maskFlag = 0;
+                //byte adrTID = 0;
+                //byte lenTID = 0;
+                //byte tIDFlag = 0;
+                byte Ant = 0;
+                int CardNum = 0;
+                int longitud = 0;
 
-            byte[] EPC = new byte[5000];
-            //byte maskMemory = 0;
-            byte[] maskAdr = HexStringToByteArray("0000");
-            byte maskLen = Convert.ToByte("00");
-            byte[] maskData = HexStringToByteArray("00");
-            //byte maskFlag = 0;
-            //byte adrTID = 0;
-            //byte lenTID = 0;
-            //byte tIDFlag = 0;
-            byte Ant = 0;
-            int CardNum = 0;
-            int longitud = 0;
-
-            int responseReader = StaticClassReaderB.Inventory_G2(ref ipHandle, (byte)0, maskAdr, maskLen, maskData, (byte)0, (byte)0, (byte)0, (byte)0, EPC, ref Ant, ref longitud, ref CardNum, portHandle);
-            if ((responseReader == 1) | (responseReader == 2) | (responseReader == 3) | (responseReader == 4) | (responseReader == 0xFB))
-            {
-
-                byte[] daw = new byte[longitud];   //EPC Extraido en longitud.
-                Array.Copy(EPC, daw, longitud);    //Copia la info del EPC al arreglo de extaracción
-
-                string TAG_EPC = ByteArrayToHexString(daw); // Transforma el EPC extraido en string.
-
-                if (CardNum == 0)
+                int responseReader = StaticClassReaderB.Inventory_G2(ref ipHandle, (byte)0, maskAdr, maskLen, maskData, (byte)0, (byte)0, (byte)0, (byte)0, EPC, ref Ant, ref longitud, ref CardNum, portHandle);
+                if ((responseReader == 1) | (responseReader == 2) | (responseReader == 3) | (responseReader == 4) | (responseReader == 0xFB))
                 {
-                    return false; // TAG NO DETECTADO
-                }
-                else
-                {
-                    int longitudEPC = daw[0] * 2;
-                    string tags = TAG_EPC.Substring(2, longitudEPC);
 
-                    if (tags.Length == longitudEPC && tags != "")
-                    {
-                        this.Tag = tags; // Metodo de retorno
-                        this.Antena = Convert.ToString(Ant, 2); // Metodo de retorno
-                    }
-                    else
+                    byte[] daw = new byte[longitud];   //EPC Extraido en longitud.
+                    Array.Copy(EPC, daw, longitud);    //Copia la info del EPC al arreglo de extaracción
+
+                    string TAG_EPC = ByteArrayToHexString(daw); // Transforma el EPC extraido en string.
+
+                    if (CardNum == 0)
                     {
                         return false; // TAG NO DETECTADO
                     }
-                }
-                return true; // TAG DETECTADO
-            }
-            else
-            {
-                return false; // TAG NO DETECTADO
-            }
+                    else
+                    {
+                        int longitudEPC = daw[0] * 2;
+                        string tags = TAG_EPC.Substring(2, longitudEPC);
 
+                        if (tags.Length == longitudEPC && tags != "")
+                        {
+                            this.Tag = tags; // Metodo de retorno
+                            this.Antena = Convert.ToString(Ant, 2); // Metodo de retorno
+                        }
+                        else
+                        {
+                            return false; // TAG NO DETECTADO
+                        }
+                    }
+                    return true; // TAG DETECTADO
+                }
+                else
+                {
+                    return false; // TAG NO DETECTADO
+                }
+          
             //return false; // Es false si no la ha detectado.
             //return true; // Es true cuando el tag fue detectado.
         }

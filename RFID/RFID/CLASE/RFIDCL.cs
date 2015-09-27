@@ -22,13 +22,13 @@ namespace RFID.CLASE
 
         public RFIDCL(string ip, string puerto, string tipo)
         {
-            if (tipo == "RFID") 
+            if (tipo == "RFID")
             {
                 int existeConexionRFID = StaticClassReaderB.OpenNetPort(Convert.ToInt32(puerto), ip, ref readerAdress, ref fOpenComIndex);
                 StaticClassReaderB.SetBeepNotification(ref readerAdress, 0, fOpenComIndex);
-                if (existeConexionRFID!=0) //si ocurrio un error en la conexion TCP/IP..  cierro puerto de  conexion.
+                if (existeConexionRFID != 0) //si ocurrio un error en la conexion TCP/IP..  cierro puerto de  conexion.
                 {
-                     StaticClassReaderB.CloseNetPort(fOpenComIndex);
+                    StaticClassReaderB.CloseNetPort(fOpenComIndex);
                 }
             }
         }
@@ -46,9 +46,9 @@ namespace RFID.CLASE
             }
             catch (Exception e)
             {
-               
+
             }
-           
+
         }
 
         private void Inventory()
@@ -56,7 +56,6 @@ namespace RFID.CLASE
 
             int CardNum = 0;
             int Totallen = 0;
-            int EPClen, m;
             byte[] EPC = new byte[5000];
             int CardIndex;
             string temps;
@@ -86,28 +85,26 @@ namespace RFID.CLASE
             fCmdRet = StaticClassReaderB.Inventory_G2(ref readerAdress, MaskMem, MaskAdr, MaskLen, MaskData, MaskFlag, AdrTID, LenTID, TIDFlag, EPC, ref Ant, ref Totallen, ref CardNum, fOpenComIndex);
             if ((fCmdRet == 1) | (fCmdRet == 2) | (fCmdRet == 3) | (fCmdRet == 4) | (fCmdRet == 0xFB))//代表已查找结束，
             {
-                byte[] daw = new byte[Totallen];   // cuando  no detecta tag retorna 0
-                Array.Copy(EPC, daw, Totallen);
-                temps = ByteArrayToHexString(daw);
-                fInventory_EPC_List = temps;            //存贮记录
-                m = 0;
+                byte[] daw = new byte[Totallen];   //EPC Extraido en longitud.
+                Array.Copy(EPC, daw, Totallen);    //Copia la info del EPC al arreglo de extaracción
+
+                string TAG_EPC = ByteArrayToHexString(daw); // Transforma el EPC extraido en string.
+               
                 if (CardNum == 0)
                 {
                     fIsInventoryScan = false;
-                    return;
+
                 }
-                antstr = Convert.ToString(Ant, 2);
-                for (CardIndex = 0; CardIndex < CardNum; CardIndex++)
-                {
-                    EPClen = daw[m];
-                    sEPC = temps.Substring(m * 2 + 2, EPClen * 2);
-                    m = m + EPClen + 1;
-                    if (sEPC.Length != EPClen * 2)
-                        return;
-                    if (sEPC != "") lastepc = sEPC;
-                    this.Tag = lastepc;
-                    this.Antena = antstr;
-                    fIsInventoryScan = true;
+                else {
+                    int longitudEPC = daw[0] * 2;
+                    string tag = TAG_EPC.Substring(2, longitudEPC);
+                 
+                    if (tag.Length == longitudEPC && tag != "")
+                    {
+                        this.Tag = tag;
+                        this.Antena = Convert.ToString(Ant, 2); ;
+                        fIsInventoryScan = true;
+                    }
                 }
             }
 

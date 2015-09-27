@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,7 +57,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="UHFReader28CSharp">
-      <HintPath>..\..\..\..\..\..\..\Windows\SysWOW64\UHFReader28CSharp.dll</HintPath>
+      <HintPath>..\..\BootParkRFID\rfid.io\bin\UHFReader28CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLASE\RFID.cs" />
     <Compile Include="CLASE\RFIDCL.cs" />
     <Compile Include="ConsultarTag_Prueba.aspx.cs">
       <DependentUpon>ConsultarTag_Prueba.aspx</DependentUpon>
