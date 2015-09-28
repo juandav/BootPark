@@ -20,6 +20,7 @@ namespace BootParkBiom
         private bool conexion;
         private int Dispositivo = 1;
         int iFingerIndex = 2;
+        int iDataFlag = 5;
         int iFlag = 2;
         /// <summary>
         ///    Objeto que instancia al dispositivo biometrico
@@ -263,8 +264,39 @@ namespace BootParkBiom
             return estado;
         }
         /// <summary>
+        /// Registrar en Bloques
+        /// </summary>
+        /// <param name="HuellasUsuariosBD"></param>
+        /// <returns></returns>
+        public bool RegistrarHuellasTodos(string HuellasUsuariosBD) {
+            return true;
+
+        }
+        /// <summary>
+        /// Registrar en Bloques
+        /// </summary>
+        /// <param name="HuellasUsuariosBD"></param>
+        /// <returns></returns>
+        public bool RegistrarHuellaUnoaUno(string HuellasUsuario)
+        {
+            return true;
+
+        }
+
+
+        /// <summary>
+        /// Desactiva el carnet asociado al usuario
+        /// </summary>
+        /// <param name="carnet"></param>
+        /// <param name="UsuarioID"></param>
+        /// <returns></returns>
+        public bool DesactivarCarnet(string carnet, string UsuarioID) {
+            return true;
+        }
+        /// <summary>
         ///  Desconecta el dispositivo biometrico.
         /// </summary>
+        /// 
         public bool Desconectar()
         {
             lectorObject.Disconnect();
@@ -301,6 +333,59 @@ namespace BootParkBiom
             public string byTmpData { get; set; }
             public int TmpLength { get; set; }
         }
+        #endregion
+        #region COMANDO DE ADMINISTRACION DEL LECTOR BIOMETRICO.
+
+
+        /// <summary>
+        /// Borra los datos de un lector biometrico.
+        /// tipo de Borrado:
+        /// 1. Asistencias.
+        /// 2.  Los datos de la plantilla de huellas dactilares.
+        /// 3. 3. Ninguno Registro
+        /// 4. Operación
+        /// 5. Información del usuario Cuando el valor de este parámetro es 5, se borran todos los datos del usuario en el dispositivo.Nota: eso incluye
+        ///    eliminan las plantillas de huellas digitales y tarjetas.
+        /// </summary>
+        /// <returns></returns>
+        public bool BorrarDatos() {
+
+            if (lectorObject.ClearData(Dispositivo, iDataFlag))
+            {
+                lectorObject.RefreshData(Dispositivo);//the data in the device should be refreshed
+                return true;
+
+            }
+            return false;
+            
+        }
+        /// <summary>
+        /// Borrar todos los  usuarios que tienen privilegios sobre el lector. 
+        /// </summary>
+        /// <returns></returns>
+        public bool BorrarAdminstradores() {
+            if (lectorObject.ClearAdministrators(Dispositivo))
+            {
+                lectorObject.RefreshData(Dispositivo);
+                return true;
+
+            }
+            return false;
+        }
+        /// <summary>
+        ///  Borrar absolutamente todos los datos del lector
+        /// </summary>
+        /// <returns></returns>
+        public bool BorrarTodo() {
+            if (lectorObject.ClearAdministrators(Dispositivo))
+            {
+                lectorObject.RefreshData(Dispositivo);
+                return true;
+
+            }
+            return false;
+        }
+
         #endregion
 
     }
