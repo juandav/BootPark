@@ -15,17 +15,20 @@ namespace RFID
         {
             if (!IsPostBack)
             {
-                string valor;
-                string antena;
-                // Cada vez que se vaya a consultar debes abrir la conexion y cerrarla al finalizar para evitar 
-                // errores de conexion con otros formularios. 
-                RFIDCL r = new RFIDCL("192.168.1.250", "27011", "RFID");
-                r.consultartag();
-                valor = r.Tag;
-                antena = r.Antena;
-                r.CloseConnection();
+                //string valor;
+                //string antena;
+                //// Cada vez que se vaya a consultar debes abrir la conexion y cerrarla al finalizar para evitar 
+                //// errores de conexion con otros formularios. 
+                //RFIDCL r = new RFIDCL("192.168.1.250", "27011", "RFID");
+                //r.consultartag();
+                //valor = r.Tag;
+                //antena = r.Antena;
+                //r.CloseConnection();
 
-
+                RFID.CLASE.RFID r = new RFID.CLASE.RFID("192.168.1.250", "27011");
+                string response = r.iniciarDeteccion();
+                string etiqueta = r.Tag;
+                string antena = r.Antena;
 
             }
         }
