@@ -31,6 +31,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
             SVEHICULO.DataBind();
 
         }
+       
         [DirectMethod(Namespace = "parametro")]
         public void cargarEtiquetasOUT()
         {
@@ -47,11 +48,21 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
             STIQUETAIN.DataBind();
 
         }
-        public bool vincularTagAlVehiculo(string etiqueta, string usuario, string observacion)
+        [DirectMethod(Namespace = "parametro")]
+        public bool vincularTagAlVehiculo(string etiqueta, string vehiculo, string observacion)
         {
-            return false;
+            return parametro.registrarEtiquetaVehiculo(etiqueta,vehiculo,observacion,pegeId);
         }
-
-
+        [DirectMethod(Namespace = "parametro")]
+        public bool DesvincularTagalVehiculo(string etiqueta,string vehiculo) {
+            return parametro.eliminarEtiquetaVehiculo(etiqueta,vehiculo);
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public bool modificarTagalVehiculo(string etiqueta, string vehiculo,string observacion)
+        {
+           
+            return parametro.modificarEtiquetaVehiculo(etiqueta,vehiculo,observacion,pegeId);
+        }
+        
     }
 }

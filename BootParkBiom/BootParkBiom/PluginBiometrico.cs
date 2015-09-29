@@ -22,6 +22,7 @@ namespace BootParkBiom
         int iFingerIndex = 2;
         int iDataFlag = 5;
         int iFlag = 2;
+        string tipoValidacion;
         /// <summary>
         ///    Objeto que instancia al dispositivo biometrico
         /// </summary>
@@ -74,27 +75,39 @@ namespace BootParkBiom
                 conexion = value;
             }
         }
-        #endregion  VARIABLES
-        #region METODOS
-        /// <summary>
-        ///    Permite conectar con una terminal:
-        ///      1. Lector Biometrico
-        ///      2. Lector RFID
-        ///      3. Camara 
-        /// </summary>
-        /// <param name="ip">
-        ///     La ip de la terminal a conectar
-        /// </param>
-        /// <param name="puerto">
-        ///     Puerto por donde transmite la información
-        /// </param>
-        /// <param name="tipo">
-        ///     tipo de terminal ya sea:
-        ///      1. (Biometrico)
-        ///      2. (RFID)
-        ///      3. (Camara)
-        /// </param>
-        public bool ConectarConTerminal(string ip, string puerto, string tipo)
+        public string TipoValidacion
+        { 
+
+            get
+        {
+                return tipoValidacion;
+        }
+        set
+            {
+                tipoValidacion = value;
+            }
+         }
+    #endregion  VARIABLES
+    #region M1ETODOS
+    /// <summary>
+    ///    Permite conectar con una terminal:
+    ///      1. Lector Biometrico
+    ///      2. Lector RFID
+    ///      3. Camara 
+    /// </summary>
+    /// <param name="ip">
+    ///     La ip de la terminal a conectar
+    /// </param>
+    /// <param name="puerto">
+    ///     Puerto por donde transmite la información
+    /// </param>
+    /// <param name="tipo">
+    ///     tipo de terminal ya sea:
+    ///      1. (Biometrico)
+    ///      2. (RFID)
+    ///      3. (Camara)
+    /// </param>
+    public bool ConectarConTerminal(string ip, string puerto, string tipo)
         {
 
             if (tipo == "Biometrico")
@@ -148,7 +161,7 @@ namespace BootParkBiom
                     {
                         lectorObject.OnVerify += new _IZKEMEvents_OnVerifyEventHandler(ObtenerUsuarioEvent);
                         lectorObject.OnHIDNum += new _IZKEMEvents_OnHIDNumEventHandler(ObtenerTarjetaEvent);
-                        lectorObject.OnFinger += new _IZKEMEvents_OnFingerEventHandler(ObtenerHuellaEvent);
+                        lectorObject.OnAttTransactionEx +=new _IZKEMEvents_OnAttTransactionExEventHandler(ObtenerAtributosPostValidacion);
                     }
                     else
                     {
@@ -317,12 +330,13 @@ namespace BootParkBiom
             this.tarjeta = Convert.ToString(tarjetaEvent);
 
         }
-
-        private void ObtenerHuellaEvent()
-        {
-
-            /// Puedo validar si la huella en el dispositivo corresponde a la que hay en base de datos.
+        private void ObtenerAtributosPostValidacion(string idUsuario, int validacion, int estado, int metodoVerificacion, int año, int mes, int dia, int hora, int miuto, int segundo, int codigoTrabajo) {
+            this.TipoValidacion = (metodoVerificacion == 1 ? "HUELLA":"TARJETA");
+            this.usuario = idUsuario;
         }
+
+
+
         #endregion
         #region ENTIDADES
         public class HuellaDactilar

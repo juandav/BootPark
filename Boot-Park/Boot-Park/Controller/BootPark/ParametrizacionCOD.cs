@@ -213,6 +213,15 @@ namespace Boot_Park.Controller.BootPark
         {
             return etiquetaVehiculo.consultarEtiquetaVehiculoEnUso(vehiculo);
         }
+        public bool registrarEtiquetaVehiculo(string etiqueta, string vehiculo, string observacion, string registradoPor) {
+            return etiquetaVehiculo.registrarEtiquetaVehiculo(etiqueta,"TAG",vehiculo,observacion,registradoPor);
+        }
+        public bool eliminarEtiquetaVehiculo(string etiqueta,string vehiculo) {
+            return etiquetaVehiculo.eliminarEtiquetaVehiculo(etiqueta,"TAG",vehiculo);
+        }
+        public bool modificarEtiquetaVehiculo(string etiqueta, string vehiculo, string observacion, string registradoPor) {
+            return etiquetaVehiculo.actualizarEtiquetaVehiculo(etiqueta,"TAG",vehiculo,observacion,registradoPor);
+        }
         #endregion
         #region USUARIO
         public DataTable consultarUsuarios()

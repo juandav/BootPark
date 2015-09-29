@@ -5,53 +5,71 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <script src="../../../../Content/js/BiometricDevice.js"></script>
     <title>Validación Biometrico-RFID</title>
     <script type="text/javascript">
-        "use strict";
-
-        // 1. Se crea la clase circulación
-        class Circulacion{
-            constructor() {
-                console.log("Metodo que iniciar la conexion de los dispositivos");
-            }
-
-            //1. Detectar la Huella en el dispositivo biometrico
-            detectarHuella() {
-
-            }
-
-            //2. Validar la Huella en la base de datos
-            validarHuella() {
-
-            }//y devuelve el pege, junto a la lista de vehiculos
-
-            // 3. Detectar el tag del vehiculo
-            detectarTag() {
-
-            } //Devuelve el tag leido del RFID
-
-            // 4. Validar el tag del vehiculo con los traidos en el arreglo de vehiculos de la BD.
-            validarTag() {
-
-            }
-
-            // 5. Verificar si el usuario tiene autorización con el vehiculo
-            verificarAutorizacion() {
-
-            }
-
-            // 6. Verificar si la terminal de lectura biometrica es de entrada o salida.
-            verificarTerminal() {
-
-            }
-
-            // 7. Registrar la circulacion del vehiculo de entrada o de salida segun sea el caso.
-            registrarCirculacion() {
-
-            }
+        
+        try {
+            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
+        }
+        catch (e) {
+            console.log('Incompatibilidad con ActiveX');
         }
 
-        var deteccion = new Circulacion();  
+        function ValidadoDato() {
+            alert('ID usuario: ' +  obj.Usuario() + '   Tipo Validacion:' + obj.TipoValidacion());
+    
+        } 
+
+
+        "use strict";
+        // 1. Se crea la clase circulación
+        //class Circulacion{
+        //    constructor() {
+                
+        //        console.log("Metodo que iniciar la conexion de los dispositivos");
+
+        //    }
+
+        //    //1. Detectar la Huella en el dispositivo biometrico
+        //    detectarHuella() {
+        //        alert('entro');
+        //    }
+
+        //    //2. Validar la Huella en la base de datos
+        //    validarHuella() {
+
+        //    }//y devuelve el pege, junto a la lista de vehiculos
+
+        //    // 3. Detectar el tag del vehiculo
+        //    detectarTag() {
+
+        //    } //Devuelve el tag leido del RFID
+
+        //    // 4. Validar el tag del vehiculo con los traidos en el arreglo de vehiculos de la BD.
+        //    validarTag() {
+
+        //    }
+
+        //    // 5. Verificar si el usuario tiene autorización con el vehiculo
+        //    verificarAutorizacion() {
+
+        //    }
+
+        //    // 6. Verificar si la terminal de lectura biometrica es de entrada o salida.
+        //    verificarTerminal() {
+
+        //    }
+
+        //    // 7. Registrar la circulacion del vehiculo de entrada o de salida segun sea el caso.
+        //    registrarCirculacion() {
+
+        //    }
+        //}
+
+        //var deteccion = new Circulacion();
+        
     </script>
 </head>
 <body>
@@ -66,6 +84,9 @@
                         <ext:Panel ID="PPRESENTACION" runat="server" Collapsible="true" Layout="Fit" Title="Iniciando Validación" Icon="Application">
                             <Items>
                                 <ext:Image runat="server" ImageUrl="../../../../Content/Images/desktop.jpg">
+                                    <Listeners>
+                                        <Click Handler="ValidadoDato();" />
+                                    </Listeners>
                                     <LoadMask />
                                 </ext:Image>
                             </Items>

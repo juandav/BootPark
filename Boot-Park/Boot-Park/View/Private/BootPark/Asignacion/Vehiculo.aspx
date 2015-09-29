@@ -11,6 +11,24 @@
     <title>Vehiculo - Tag</title>
     <script type="text/javascript">
 
+        var afterEdit = function (e) {
+            var dataVehiculo = GPVEHICULO.selModel.getSelections();
+            parametro.modificarTagalVehiculo(e.record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, e.record.data.ETVE_OBSERVACION, {
+                success: function (result) {
+                    Ext.net.Notification.show({
+                        html: 'Actualización existosamente', title: 'Notificación'
+                    });
+                    GPETIQUETAIN.store.commitChanges();
+                },
+                failure: function (errorMsg) {
+                    Ext.net.Notification.show({
+                        html: 'Ha ocurrido un error!!', title: 'Notificación'
+                    });
+                }
+
+            });
+        };
+
         var addRow = function (store, record, ddSource) {
             // Search for duplicates
             var foundItem = store.findExact('ETIQ_ID', record.data.ETIQ_ID);
@@ -31,33 +49,43 @@
             // Loop through the selections
             var dataVehiculo = GPVEHICULO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataVehiculo[0].data.ID, '', {
+                parametro.DesvincularTagalVehiculo(record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, {
                     success: function (result) {
-                        //Ext.Msg.alert("ENTRO");
+                        Ext.net.Notification.show({
+                            html: 'Tag desvinculado existosamente', title: 'Notificación'
+                        });
                         addRow(SETIQUETAOUT, record, ddSource);
                     },
                     failure: function (errorMsg) {
-                        Ext.Msg.alert("NO ENTRO");
+                        Ext.net.Notification.show({
+                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                        });
                     }
 
                 });
             });
-
             return true;
+        }
+
 
         var notifyDrop2 = function (ddSource, e, data) {
-
             // Loop through the selections
             var dataVehiculo = GPVEHICULO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularTagAlVehiculo(record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID,dataVehiculo[0].data.VEHI_ID,record.data.ETIQ_OBSERVACION {
+                parametro.vincularTagAlVehiculo(record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, '', {
                     success: function (result) {
-                        Ext.Msg.alert("ENTRO");
+                        Ext.net.Notification.show({
+                            html: 'Tag asignado existosamente', title: 'Notificación'
+                        });
                         addRow(STIQUETAIN, record, ddSource);
                     },
                     failure: function (errorMsg) {
-                        Ext.Msg.alert("NO ENTRO");
+                        Ext.net.Notification.show({
+                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                        });
+
                     }
+
                 });
             });
 
@@ -74,7 +102,7 @@
                 <Items>
                     <ext:Panel ID="PVEHICULO" runat="server" Layout="Fit" Region="Center">
                         <Items>
-                            <ext:GridPanel ID="GPVEHICULO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CVEHI_OBSERVACION"  Title="Vehiculos" Icon="Car">
+                            <ext:GridPanel ID="GPVEHICULO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CVEHI_OBSERVACION" Title="Vehiculos" Icon="Car">
                                 <Store>
                                     <ext:Store ID="SVEHICULO" runat="server">
                                         <Reader>
@@ -156,7 +184,7 @@
                                                             <ext:RecordField Name="ETIQ_TIPO" />
                                                             <ext:RecordField Name="ETIQ_ETIQUETA" />
                                                             <ext:RecordField Name="ETIQ_DESCRIPCION" />
-                                                            <ext:RecordField Name="ETIQ_OBSERVACION" />
+                                                            <ext:RecordField Name="ETVE_OBSERVACION" />
                                                         </Fields>
                                                     </ext:JsonReader>
                                                 </Reader>
@@ -166,13 +194,20 @@
                                             <Columns>
                                                 <ext:RowNumbererColumn />
                                                 <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
-                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
-                                                <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observaciones" />
+                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Width="150" Header="Descripción" />
+                                                <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETVE_OBSERVACION" Header="Observaciones">
+                                                    <Editor>
+                                                        <ext:TextField runat="server" />
+                                                    </Editor>
+                                                </ext:Column>
                                             </Columns>
                                         </ColumnModel>
                                         <SelectionModel>
-                                            <ext:RowSelectionModel SingleSelect="true" />
+                                            <ext:RowSelectionModel runat="server" SingleSelect="true" />
                                         </SelectionModel>
+                                        <Listeners>
+                                              <AfterEdit Fn="afterEdit" />
+                                        </Listeners>
                                     </ext:GridPanel>
                                 </Items>
                             </ext:Panel>

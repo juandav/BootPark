@@ -33,79 +33,93 @@ namespace Boot_Park.Model.BootPark
         public DataTable consultarEtiquetaVehiculoEnUso(string vehiculo)
         {
             string sql = "SELECT"
-                        + "     E.ETIQ_ID,"
-                        + "     E.ETIQ_TIPO,"
-                        + "     E.ETIQ_ETIQUETA,"
-                        + "     E.ETIQ_DESCRIPCION,"
-                        + "     E.ETIQ_OBSERVACION,"
-                        + "     EU.ETUS_MOTIVO,"
-                        + "     EU.ETUS_FECHACADUCIDAD"
-                        + " FROM"
-                        + "     BOOTPARK.ETIQUETAUSUARIO EU"
-                        + " INNER JOIN BOOTPARK.ETIQUETA E"
-                        + " ON"
-                        + "     ("
-                        + "         EU.ETIQ_ID=E.ETIQ_ID"
-                        + "     )"
-                        + " WHERE"
-                        + "     EU.USUA_ID = '" + vehiculo + "'"
-                        + " AND E.ETIQ_TIPO = 'TAG'";
+                        + "    EV.VEHI_ID, "
+                        + "    EV.ETIQ_ID, "
+                        + "    E.ETIQ_ETIQUETA, "
+                        + "    E.ETIQ_DESCRIPCION, "
+                        + "    EV.ETVE_OBSERVACION "
+                        + "FROM "
+                        + "    BOOTPARK.ETIQUETAVEHICULO EV "
+                        + "INNER JOIN BOOTPARK.ETIQUETA E "
+                        + "ON "
+                        + "    ( "
+                        + "        EV.ETIQ_ID=E.ETIQ_ID "
+                        + "    ) "
+                        + "WHERE "
+                        + "    EV.VEHI_ID = '" + vehiculo + "' "
+                        + "AND EV.ETIQ_TIPO = 'TAG'";
+                        
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
 
-        public bool registrarEtiquetaVehiculo(string id, string tipo, string vehiculo, string motivo, string caducidad, string registradoPor)
+        public bool registrarEtiquetaVehiculo(string etiqueta, string tipo, string vehiculo, string observacion, string registradoPor)
         {
+            List<string> sentencia = new List<string>();
+
             string sql = "INSERT"
                         + " INTO"
                         + "     BOOTPARK.ETIQUETAVEHICULO"
-                        + "     ("
-                        + "         ETIQ_ID,"
-                        + "         ETIQ_TIPO,"
-                        + "         USUA_ID,"
-                        + "         ETUS_MOTIVO,"
-                        + "         ETUS_FECHACADUCIDAD,"
-                        + "         ETUS_REGISTRADOPOR,"
-                        + "         ETUS_FECHACAMBIO"
-                        + "     )"
+                        + "  ( "
+                        + "        ETIQ_ID, "
+                        + "        ETIQ_TIPO, "
+                        + "        VEHI_ID, "
+                        + "        ETVE_OBSERVACION, "
+                        + "        ETVE_FECHACAMBIO, "
+                        + "        ETVE_REGISTRADOPOR "
+                        + "    )"
                         + "     VALUES"
                         + "     ("
-                        + "         " + id + ","
+                        + "         " + etiqueta + ","
                         + "         '" + tipo + "',"
                         + "         '" + vehiculo + "',"
-                        + "         '" + motivo + "',"
-                        + "         '" + caducidad + "',"
+                        + "         '" + observacion + "',"
                         + "         '" + registradoPor + "',"
                         + "              CURRENT_DATE()"
                         + "     )";
-            return connection.sendSetDataMariaDB(sql);
+            sentencia.Add(sql);
+            sentencia.Add(ActualizarTagEstado(etiqueta, tipo, "ENUSO"));
+            return connection.sendSetDataTransaction(sentencia);
         }
-
-        public bool actualizarEtiquetaVehiculo(string id, string tipo, string vehiculo, string observacion, string registradoPor)
+        public string ActualizarTagEstado(string etiqueta, string tipo, string estado) {
+            string sql = "UPDATE "
+                    + "    ETIQUETA "
+                    + "SET "
+                    + "    ETIQ_ESTADO = '" + estado + "' "
+                    + "WHERE "
+                    + "    ETIQ_ID = '" + etiqueta + "' "
+                    + "AND ETIQ_TIPO = '" + tipo + "'";
+            return sql;
+        }
+        
+        public bool actualizarEtiquetaVehiculo(string etiqueta, string tipo, string vehiculo, string observacion, string registradoPor)
         {
             string sql = "UPDATE"
-                        + "     BOOTPARK.ETIQUETAUSUARIO"
+                        + "     BOOTPARK.ETIQUETAVEHICULO "
                         + " SET"
                         + "     ETVE_OBSERVACION = '" + observacion + "',"
-                        + "     ETUS_REGISTRADOPOR = '" + registradoPor + "',"
-                        + "     ETUS_FECHACAMBIO = CURRENT_DATE()"
+                        + "     ETVE_REGISTRADOPOR = '" + registradoPor + "',"
+                        + "     ETVE_FECHACAMBIO = CURRENT_DATE()"
                         + " WHERE"
-                        + "     VEHI_ID = '" + id + "' AND"
+                        + "     ETIQ_ID = '" + etiqueta + "' AND"
                         + "     ETIQ_TIPO = '" + tipo + "' AND"
                         + "     VEHI_ID = '" + vehiculo + "'";
             return connection.sendSetDataMariaDB(sql);
         }
 
-        public bool eliminarEtiquetaVehiculo(string id, string tipo, string vehiculo)
+        public bool eliminarEtiquetaVehiculo(string etiqueta, string tipo, string vehiculo)
         {
+            List<string> sentencia = new List<string>();
             string sql = "DELETE"
                         + " FROM"
                         + "     BOOTPARK.ETIQUETAVEHICULO"
                         + " WHERE"
-                        + "     ETIQ_ID = '" + id + "' AND"
+                        + "     ETIQ_ID = '" + etiqueta + "' AND"
                         + "     ETIQ_TIPO = '" + tipo + "' AND"
                         + "     VEHI_ID = '" + vehiculo + "'";
-            return connection.sendSetDataMariaDB(sql);
+            sentencia.Add(sql);
+            sentencia.Add(ActualizarTagEstado(etiqueta, tipo, "DISPONIBLE"));
+            return connection.sendSetDataTransaction(sentencia);
         }
     }
 }
