@@ -8,11 +8,15 @@ using System.Data;
 using Ext.Net;
 using JSONLibrary;
 using rfid.io;
+using Boot_Park.Controller.BootPark;
 
 namespace Boot_Park.View.Public.BootPark.Circulacion
 {
     public partial class Validacion : System.Web.UI.Page
     {
+
+        private ParametrizacionCOD _integracion = new ParametrizacionCOD();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
@@ -29,6 +33,9 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
             if (user.Equals("undefined")) {
                 return false;
             }
+
+            Session["BT-Usuario"] = user;
+            Session["BT-Tipo"] = type;
             return true;
         }
 
@@ -43,10 +50,17 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
 
             if (response.Equals("YES"))
             {
+                //string antena = r.Antena; // Numero de antena de entrada y salida de datos.
+
                 string etiqueta = r.Tag;
-                string antena = r.Antena;
+                Session["BT-Etiqueta"] = etiqueta;
+                string user = Convert.ToString(Session["BT-Usuario"]);
+                string tipo = Convert.ToString(Session["BT-Tipo"]);
+
+                string message = _integracion.ValidarTagAndHuella(user, etiqueta, tipo);
+
                 X.Msg.Alert("Notificación", etiqueta).Show();
-                return etiqueta + "" + antena;
+                return etiqueta;
             }
 
             return response;
