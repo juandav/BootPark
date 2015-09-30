@@ -52,7 +52,6 @@
       <HintPath>..\..\BootParkBiom\JSONLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Mono.Security.dll</HintPath>
@@ -121,6 +120,7 @@
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
     <Compile Include="Model\BootPark\AutorizacionOAD.cs" />
+    <Compile Include="Model\BootPark\CirculacionOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaUsuarioOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaVehiculoOAD.cs" />

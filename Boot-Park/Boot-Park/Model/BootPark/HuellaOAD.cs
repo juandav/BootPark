@@ -1,9 +1,6 @@
 ﻿using Boot_Park.Conections;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 namespace Boot_Park.Model.BootPark
 {

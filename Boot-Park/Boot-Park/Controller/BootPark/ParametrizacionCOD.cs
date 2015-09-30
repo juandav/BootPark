@@ -17,6 +17,7 @@ namespace Boot_Park.Controller.BootPark
         private HuellaOAD huella = new HuellaOAD();
         private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
         private EtiquetaVehiculoOAD etiquetaVehiculo = new EtiquetaVehiculoOAD();
+        private CirculacionOAD _circulacion = new CirculacionOAD();
         private General general = new General();
 
         #region GESTION DE PATICULARES
@@ -247,5 +248,20 @@ namespace Boot_Park.Controller.BootPark
             return huella.registraHuella(IdUsuario, FingerIndex, Huella, Flag, Length, registradoPor);
         }
         #endregion
+
+
+
+        #region INTEGRACION RFID + BIOMETRICO
+
+        public string ValidarTagAndHuella(string user, string tag, string tipo) {
+            return _circulacion.ValidarUsuario(user, tag, tipo);
+        }
+
+        #endregion
+
+
+
+
+
     }
 }
