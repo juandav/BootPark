@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using Ext.Net;
+using JSONLibrary;
+using rfid.io;
 
 namespace Boot_Park.View.Public.BootPark.Circulacion
 {
@@ -21,44 +23,40 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
         /// <summary>
         ///     VALIDA SI EL USUARIO TIENE AUTORIZACION
         /// </summary>
-        [DirectMethod(Namespace = "VALIDACION")]
+        [DirectMethod(Namespace = "parametro")]
         public bool ValidarUsuario(string user, string type)
         {
+            if (user.Equals("undefined")) {
+                return false;
+            }
             return true;
         }
 
         /// <summary>
         ///     Valida el tag en la base de datos.
         /// </summary>
-        [DirectMethod]
-        public void validarTag()
+        [DirectMethod(Namespace = "parametro")]
+        public string ValidarTag()
         {
+            RFID r = new RFID("192.168.1.250", "27011");
+            string response = r.iniciarDeteccion();
 
+            if (response.Equals("YES"))
+            {
+                string etiqueta = r.Tag;
+                string antena = r.Antena;
+                X.Msg.Alert("Notificación", etiqueta).Show();
+                return etiqueta + "" + antena;
+            }
+
+            return response;
         }
 
         /// <summary>
         ///     Carga un datatable de los usuarios que coinciden con un tag y huella
         /// </summary>
         [DirectMethod]
-        public void cargarUsuario(string huella, string tag) {
-
-        }
-
-        /// <summary>
-        ///     Verifica si el usuario se encuemtra autorizado de sacar un vehiculo.
-        /// </summary>
-        [DirectMethod]
-        public void verificarAutorizacion()
-        {
-
-        }
-  
-        /// <summary>
-        ///     Verifica si es una terminal de ingreso o salida de un vehiculo.
-        /// </summary>
-        [DirectMethod]
-        public void verificarTerminal()
-        {
+        public void CargarUsuario() {
 
         }
 
@@ -66,7 +64,7 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
         ///     Registra el movimiento del vehiculo.
         /// </summary>
         [DirectMethod]
-        public void registrarCirculacion()
+        public void RegistrarCirculacion()
         {
 
         }

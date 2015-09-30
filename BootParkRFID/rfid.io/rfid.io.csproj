@@ -39,7 +39,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UHFReader28CSharp">
-      <HintPath>bin\UHFReader28CSharp.dll</HintPath>
+      <HintPath>..\..\bin\UHFReader28CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

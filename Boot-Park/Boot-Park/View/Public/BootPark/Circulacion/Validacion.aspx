@@ -8,6 +8,15 @@
     <script src="../../../../Content/js/BiometricDevice.js"></script>
     <title>Validación Biometrico-RFID</title>
     <script type="text/javascript">
+
+        try {
+            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+            obj.ConectarConTerminal("192.168.1.201", "4370", 'Biometrico');
+        }
+        catch (e) {
+            callback("Incompatibilidad con ActiveX", "", "");
+        }
+
         /*
             For Example:
             //user: El identificador del usuario en el biometrico.
@@ -20,25 +29,22 @@
         //var data = {ip: "192.168.1.201", port: "4370" }
         var _DetectarUsuarioBiometrico = function (data, callback) // 1. Consulta el Usuario en Biometrico
         {
-            try {
-                var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-                obj.ConectarConTerminal(data.ip, data.port, 'Biometrico');
+            if (typeof (obj.Usuario) != undefined) {
+                callback("", obj.Usuario(), obj.TipoValidacion());
+            } else {
+                callback("El usuario no ha puesto su huella o tarjeta en el lector", "", "");
             }
-            catch (e) {
-                console.log('Incompatibilidad con ActiveX');
-                callback("Incompatibilidad con ActiveX", "", "");
-            }
-
-            callback("", obj.Usuario(), obj.TipoValidacion());
         }
 
         //var data = {ip: "192.168.1.201", port: "4370" }
         var _ValidarUsuario = function (data, callback) {
+            
             _DetectarUsuarioBiometrico(data, function (err, user, type) {
                 if (err != "")
                     callback(err, false);
 
-                VALIDACION.ValidarUsuario(user, type, {
+               
+                parametro.ValidarUsuario("" + user, "" + type, {
                     success: function (result) {
                         callback("", result);
                     }
@@ -50,24 +56,24 @@
         var ValidarTag = function () { }
         var RegistrarCirculacion = function () { }
 
-        function main() {
-
+        var main = function (){
+           
             var data = {
                 ip: "192.168.1.201",
                 port: "4370"
             }
 
-            _ValidarUsuario(data, function (err, value) {
-
-                if (value) {
-                    Ext.Msg.alert('PENDIENTE', "Pendiente por desarrollar.");
+            _ValidarUsuario(data, function (err, data) {
+               
+                if (data) {
+                   var a = parametro.ValidarTag();
                 } else {
                     Ext.Msg.alert('Error', err||"El usuario no existe en CHAIRA");
                 }
             });
         }
         
-        main();
+       // main();
 
         //"use strict";
         // 1. Se crea la clase circulación
@@ -128,11 +134,19 @@
                         <%-- 1. Primera vista de presentación para la validación --%>
                         <%--queda esperando que el usuario ingrese la huella.--%>
                         <ext:Panel ID="PPRESENTACION" runat="server" Collapsible="true" Layout="Fit" Title="Iniciando Validación" Icon="Application">
+                            <BottomBar>
+                                <ext:Toolbar runat="server">
+                                    <Items>
+                                        <ext:Button runat="server" Text="Validar">
+                                            <Listeners>
+                                                <Click Fn="main"/>
+                                            </Listeners>
+                                        </ext:Button>
+                                    </Items>
+                                </ext:Toolbar>
+                            </BottomBar>
                             <Items>
                                 <ext:Image runat="server" ImageUrl="../../../../Content/Images/desktop.jpg">
-                                    <Listeners>
-                                        <Click Handler="ValidadoDato();" />
-                                    </Listeners>
                                     <LoadMask />
                                 </ext:Image>
                             </Items>
