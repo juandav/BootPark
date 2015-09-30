@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Boot_Park.Controller.BootPark;
 using System.Data;
 using Ext.Net;
+using rfid.io;
 
 namespace Boot_Park.View.Private.BootPark.Parametrizacion
 {
@@ -92,6 +93,21 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
                    TFETIQ_ETIQUETA.Text = "";
             }
           
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public string detectarTag()
+        {
+            RFID r = new RFID("192.168.1.250", "27011");
+            string response = r.iniciarDeteccion();
+
+            if (response.Equals("YES"))
+            {
+                string etiqueta = r.Tag;
+                TFETIQ_ETIQUETA.SetValue(etiqueta);
+                validarTarjeta(etiqueta, CBETIQ_TIPO.Text);
+            }
+
+            return response;
         }
 
         private void BindData()
