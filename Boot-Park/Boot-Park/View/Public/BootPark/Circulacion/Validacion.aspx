@@ -8,26 +8,72 @@
     <script src="../../../../Content/js/BiometricDevice.js"></script>
     <title>Validación Biometrico-RFID</title>
     <script type="text/javascript">
+        /*
+            For Example:
+            //user: El identificador del usuario en el biometrico.
+            //type: Define si es Huella o Tarjeta
+            DetectarUsuarioBiometrico(function(user, type){
+                console.log(user + type);
+            });
+        */
+
+        //var data = {ip: "192.168.1.201", port: "4370" }
+        var _DetectarUsuarioBiometrico = function (data, callback) // 1. Consulta el Usuario en Biometrico
+        {
+            try {
+                var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
+                obj.ConectarConTerminal(data.ip, data.port, 'Biometrico');
+            }
+            catch (e) {
+                console.log('Incompatibilidad con ActiveX');
+                callback("Incompatibilidad con ActiveX", "", "");
+            }
+
+            callback("", obj.Usuario(), obj.TipoValidacion());
+        }
+
+        //var data = {ip: "192.168.1.201", port: "4370" }
+        var _ValidarUsuario = function (data, callback) {
+            _DetectarUsuarioBiometrico(data, function (err, user, type) {
+                if (err != "")
+                    callback(err, false);
+
+                VALIDACION.ValidarUsuario(user, type, {
+                    success: function (result) {
+                        callback("", result);
+                    }
+                });
+            });
+        }
+
+        var DetectarTag = function () { }
+        var ValidarTag = function () { }
+        var RegistrarCirculacion = function () { }
+
+        function main() {
+
+            var data = {
+                ip: "192.168.1.201",
+                port: "4370"
+            }
+
+            _ValidarUsuario(data, function (err, value) {
+
+                if (value) {
+                    Ext.Msg.alert('PENDIENTE', "Pendiente por desarrollar.");
+                } else {
+                    Ext.Msg.alert('Error', err||"El usuario no existe en CHAIRA");
+                }
+            });
+        }
         
-        try {
-            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
-        }
-        catch (e) {
-            console.log('Incompatibilidad con ActiveX');
-        }
+        main();
 
-        function ValidadoDato() {
-            alert('ID usuario: ' +  obj.Usuario() + '   Tipo Validacion:' + obj.TipoValidacion());
-    
-        } 
-
-
-        "use strict";
+        //"use strict";
         // 1. Se crea la clase circulación
         //class Circulacion{
         //    constructor() {
-                
+
         //        console.log("Metodo que iniciar la conexion de los dispositivos");
 
         //    }
@@ -69,7 +115,7 @@
         //}
 
         //var deteccion = new Circulacion();
-        
+
     </script>
 </head>
 <body>

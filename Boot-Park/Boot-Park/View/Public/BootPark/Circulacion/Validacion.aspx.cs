@@ -19,12 +19,12 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
         }
 
         /// <summary>
-        ///     Consulta la huella en la base de datos.
+        ///     VALIDA SI EL USUARIO TIENE AUTORIZACION
         /// </summary>
-        [DirectMethod]
-        public void  validarHuella()
+        [DirectMethod(Namespace = "VALIDACION")]
+        public bool ValidarUsuario(string user, string type)
         {
-
+            return true;
         }
 
         /// <summary>
