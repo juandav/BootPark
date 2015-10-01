@@ -50,8 +50,9 @@
                 }
             }
             else if (CBETIQ_TIPO.getValue() === "TAG") {
-
-                parametro.detectarTag();
+                
+                var r = parametro.detectarTag();
+              
             } else {
                 Ext.net.Notification.show({
                     html: 'No se ha seleccionado un dispositivo todavía',

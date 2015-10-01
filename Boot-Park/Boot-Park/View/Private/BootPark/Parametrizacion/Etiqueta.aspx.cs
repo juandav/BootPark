@@ -105,9 +105,13 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
                 string etiqueta = r.Tag;
                 TFETIQ_ETIQUETA.SetValue(etiqueta);
                 validarTarjeta(etiqueta, CBETIQ_TIPO.Text);
-            }
 
-            return response;
+            }
+            else
+            {
+                X.Msg.Notify("Notificación", "'No conectado!, Asegurece que la lectora RFID este conectado a la red TCP/IP").Show();
+            }
+            return "dfdfdf";
         }
 
         private void BindData()

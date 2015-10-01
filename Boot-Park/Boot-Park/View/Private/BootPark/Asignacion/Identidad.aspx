@@ -37,7 +37,21 @@
 
         var afterEdit = function (e) {
             var dataUser = GPUSUARIO.selModel.getSelections();
-            parametro.modificarCarnetUsuario(e.record.data.ETIQ_ID, dataUser[0].data.ID,e.record.data.ETUS_MOTIVO);
+            parametro.modificarCarnetUsuario(e.record.data.ETIQ_ID, dataUser[0].data.ID, e.record.data.ETUS_MOTIVO, {
+                success: function (result) {
+                    Ext.net.Notification.show({
+                        html: 'Actualización existosamente', title: 'Notificación'
+                    });
+                    GPETIQUETAIN.store.commitChanges();
+                },
+                failure: function (errorMsg) {
+                    Ext.net.Notification.show({
+                        html: 'Ha ocurrido un error!!', title: 'Notificación'
+                    });
+                }
+
+            });
+
         };
 
         var prepareCommand = function (grid, command, record, row) {
@@ -68,7 +82,7 @@
             // Loop through the selections
             var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, '', {
+                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, {
                     success: function (result) {
                         addRow(SETIQUETAOUT, record, ddSource);
                     },
@@ -221,6 +235,7 @@
                                             <Columns>
                                                 <ext:RowNumbererColumn />
                                                 <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
+                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
                                                 <ext:Column ColumnID="CETUS_MOTIVO" DataIndex="ETUS_MOTIVO" Header="Motivo">
                                                     <Editor>
                                                         <ext:TextField runat="server"/>

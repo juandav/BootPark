@@ -26,3 +26,11 @@
 .icon-enrollment-Footprint {
     background-image: url(../images/enrollmentFootprint.ico) !important;
 }
+.shortcut-icon-TagCar {
+    width: 15px;
+    height: 16px;
+}
+
+.icon-TagCart {
+    background-image: url(../images/carrotag.ico) !important;
+}

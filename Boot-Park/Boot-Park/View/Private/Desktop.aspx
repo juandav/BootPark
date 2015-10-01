@@ -56,6 +56,11 @@
                                             <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Asignacion/Identidad.aspx','Identidad',1000,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
+                                    <ext:MenuItem Text="Tag" IconCls="shortcut-icon-TagCar icon-TagCart" >
+                                        <Listeners>
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Asignacion/Vehiculo.aspx','Tag',1000,500);" />
+                                        </Listeners>
+                                    </ext:MenuItem>
                                 </Items>
                             </ext:Menu>
                         </Menu>
