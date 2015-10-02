@@ -40,6 +40,15 @@ namespace Boot_Park.View.Public.BootPark.Circulacion {
         protected global::Ext.Net.Panel PPRESENTACION;
         
         /// <summary>
+        /// USUARIO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Store USUARIO;
+        
+        /// <summary>
         /// PINFORMACION control.
         /// </summary>
         /// <remarks>

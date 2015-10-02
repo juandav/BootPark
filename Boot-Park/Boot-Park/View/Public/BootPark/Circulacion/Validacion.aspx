@@ -52,9 +52,9 @@
             });
         }
 
-        var DetectarTag = function () { }
-        var ValidarTag = function () { }
-        var RegistrarCirculacion = function () { }
+        //var DetectarTag = function () { }
+        //var ValidarTag = function () { }
+        //var RegistrarCirculacion = function () { }
 
         var main = function (){
            
@@ -66,7 +66,25 @@
             _ValidarUsuario(data, function (err, data) {
                
                 if (data) {
-                   var a = parametro.ValidarTag();
+                    var response = parametro.ValidarTag({
+                        success: function (result) {
+                            if (result) {
+                                parametro.CargarUsuario();
+                                parametro.RegistrarCirculacion();
+                                var apertura = parametro.SeñalDeApertura({
+                                    success: function (result) {
+                                        alert('PUERTA ABRIENDOSE');
+                                        //PASA SOBRE EL SENSOR AL NO DETECTAR EL VEHICULO SE PROCEDE A CERRAR ES DECIR SI DEJA DE DETECTAR EL SENSOR OBSTRUCCION CIERRA PUERTA
+                                        var apertura = parametro.SeñalDeCierre({
+                                            success: function (result) {
+                                                alert('PUERTA CERRANDOSE');
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
                 } else {
                     Ext.Msg.alert('Error', err||"El usuario no existe en CHAIRA");
                 }
@@ -146,10 +164,33 @@
                                 </ext:Toolbar>
                             </BottomBar>
                             <Items>
-                                <ext:Image runat="server" ImageUrl="../../../../Content/Images/desktop.jpg">
-                                    <LoadMask />
-                                </ext:Image>
+                                <ext:GridPanel runat="server">
+                                    <Store>
+                                        <ext:Store ID="USUARIO" runat="server">
+                                            <Reader>
+                                                <ext:JsonReader>
+                                                    <Fields>
+                                                        <ext:RecordField Name="IDENTIFICACION" />
+                                                        <ext:RecordField Name="NOMBRE" />
+                                                        <ext:RecordField Name="APELLIDO" />
+                                                        <ext:RecordField Name="TIPOUSUARIO" />
+                                                    </Fields>
+                                                </ext:JsonReader>
+                                            </Reader>
+                                        </ext:Store>
+                                    </Store>
+                                    <ColumnModel>
+                                        <Columns>
+                                            <ext:RowNumbererColumn />
+                                            <ext:Column ColumnID="CIDENTIFICACION" DataIndex="IDENTIFICACION" Header="Identificación" />
+                                            <ext:Column ColumnID="CNOMBRE" DataIndex="NOMBRE" Header="Nombre" />
+                                            <ext:Column ColumnID="CAPELLIDO" DataIndex="APELLIDO" Header="Apellido" />
+                                            <ext:Column ColumnID="CTIPOUSUARIO" DataIndex="TIPOUSUARIO" Header="Tipo de Usuario" />
+                                        </Columns>
+                                    </ColumnModel>
+                                </ext:GridPanel>
                             </Items>
+                            
                         </ext:Panel>
                         <%-- 2. Segunda vista para la información del que ingresa o sale de la institución  --%>
                         <ext:Panel ID="PINFORMACION" runat="server" Collapsible="true" Collapsed="true" Layout="Fit" Title="Info. Usuario" Padding="5" Icon="User">

@@ -249,14 +249,34 @@ namespace Boot_Park.Controller.BootPark
         }
         #endregion
 
-
-
         #region INTEGRACION RFID + BIOMETRICO
 
-        public string ValidarTagAndHuella(string user, string tag, string tipo) {
-            return _circulacion.ValidarUsuario(user, tag, tipo);
+        /// <summary>
+        ///     COMPRUEBA DE QUE EL USUARIO ESTE AUTORIZADO EN CHAIRA
+        /// </summary>
+        public DataTable ValidarUsuario(string user) {
+            return _circulacion.ValidarUsuario(user);
         }
 
+        /// <summary>
+        ///     VALIDA LA HUELLA O LA TARJETA DE USUARIO
+        /// </summary>
+        public DataTable ValidarTagAndHuella(string user, string tag, string tipo) {
+            return _circulacion.ValidarTagAndHuella(user, tag, tipo);
+        }
+
+        public DataTable ComprobarTipoTerminal(string ip, string puerto) {
+            return _circulacion.ComprobarTipoTerminal(ip, puerto);
+        }
+
+        public DataTable ConsultarUsuarioCirculacion(string user) {
+            return _circulacion.ConsultarUsuarioCirculacion(user);
+        }
+
+        public bool RegistrarCirculacion(string user, string vehiculo, string tipo) {
+            string circId = general.nextPrimaryKey("BOOTPARK.CIRCULACION", "CIRC_ID");
+            return _circulacion.RegistrarCirculacion(user, vehiculo, circId, tipo, "ENTRADA");
+        }
         #endregion
 
 

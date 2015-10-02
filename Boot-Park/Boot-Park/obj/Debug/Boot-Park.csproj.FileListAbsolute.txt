@@ -60,3 +60,6 @@ C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\es\System.W
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\JSONLibrary.dll
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\rfid.io.dll
 C:\Users\oswaldp\Documents\Proyecto\BootPark\Boot-Park\Boot-Park\bin\UHFReader28CSharp.dll
+F:\BootPark\Boot-Park\Boot-Park\bin\JSONLibrary.dll
+F:\BootPark\Boot-Park\Boot-Park\bin\rfid.io.dll
+F:\BootPark\Boot-Park\Boot-Park\bin\UHFReader28CSharp.dll
