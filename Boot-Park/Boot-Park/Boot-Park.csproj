@@ -108,6 +108,7 @@
     <Content Include="View\Private\BootPark\Circulacion\Circulacion.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
+    <Content Include="View\Private\BootPark\Parametrizacion\Terminal.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
     <Content Include="View\Private\Desktop.aspx" />
     <Content Include="View\Public\BootPark\Circulacion\Validacion.aspx" />
@@ -126,6 +127,7 @@
     <Compile Include="Model\BootPark\EtiquetaVehiculoOAD.cs" />
     <Compile Include="Model\BootPark\HuellaOAD.cs" />
     <Compile Include="Model\BootPark\ParticularOAD.cs" />
+    <Compile Include="Model\BootPark\TerminalOAD.cs" />
     <Compile Include="Model\BootPark\UsuarioOAD.cs" />
     <Compile Include="Model\BootPark\VehiculoOAD.cs" />
     <Compile Include="Model\General.cs" />
@@ -178,6 +180,13 @@
     </Compile>
     <Compile Include="View\Private\BootPark\Parametrizacion\Particular.aspx.designer.cs">
       <DependentUpon>Particular.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Parametrizacion\Terminal.aspx.cs">
+      <DependentUpon>Terminal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Parametrizacion\Terminal.aspx.designer.cs">
+      <DependentUpon>Terminal.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx.cs">
       <DependentUpon>Vehiculo.aspx</DependentUpon>

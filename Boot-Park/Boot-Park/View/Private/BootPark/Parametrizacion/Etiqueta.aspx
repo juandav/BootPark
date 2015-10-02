@@ -21,7 +21,7 @@
         };
 
         function ConectarRFID() {
-           
+
         }
 
         var focus = function (e) {
@@ -32,7 +32,7 @@
             else {
                 ConectarRFID();
             }
-            
+
         };
 
         var blur = function (e) {
@@ -50,14 +50,16 @@
                 }
             }
             else if (CBETIQ_TIPO.getValue() === "TAG") {
-                TFETIQ_ETIQUETA.setValue("000000000");
+                
+                var r = parametro.detectarTag();
+              
             } else {
                 Ext.net.Notification.show({
                     html: 'No se ha seleccionado un dispositivo todavía',
                     title: 'Notificación'
                 });
                 CBETIQ_TIPO.isValid();
-                
+
             }
         };
     </script>
@@ -112,7 +114,7 @@
                                         </ext:Column>
                                         <ext:Column ColumnID="CETIQ_ESTADO" DataIndex="ETIQ_ESTADO" Header="Estado">
                                             <Editor>
-                                                 <ext:ComboBox runat="server">
+                                                <ext:ComboBox runat="server">
                                                     <Items>
                                                         <ext:ListItem Text="DISPONIBLE" Value="DISPONIBLE" />
                                                         <ext:ListItem Text="EN USO" Value="ENUSO" />
@@ -177,10 +179,10 @@
                                     <Select Fn="focus " />
                                 </Listeners>
                             </ext:ComboBox>
-                            <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false" >
+                            <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false">
                                 <Listeners>
                                     <Blur Fn="blur" />
-                                   
+
                                 </Listeners>
                             </ext:TextField>
                             <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
@@ -211,7 +213,7 @@
                 </Listeners>
             </ext:Window>
         </div>
-       
+
     </form>
 </body>
 </html>

@@ -18,6 +18,7 @@ namespace Boot_Park.Controller.BootPark
         private EtiquetaUsuarioOAD etiquetausuario = new EtiquetaUsuarioOAD();
         private EtiquetaVehiculoOAD etiquetaVehiculo = new EtiquetaVehiculoOAD();
         private CirculacionOAD _circulacion = new CirculacionOAD();
+        private TerminalOAD terminal = new TerminalOAD();
         private General general = new General();
 
         #region GESTION DE PATICULARES
@@ -161,11 +162,6 @@ namespace Boot_Park.Controller.BootPark
             return etiquetausuario.consultarCarnetEnUso(usuario);
         }
 
-        public bool registrarEtiquetas()
-        {
-            return etiquetas.registrarEtoquetas();
-        }
-
         public bool registrarEtiqueta(string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
         {
             return etiquetas.registrarEtiqueta(general.nextPrimaryKey("BOOTPARK.ETIQUETA", "ETIQ_ID"), tipo, etiqueta, descripcion, observacion, estado, registradoPor);
@@ -179,6 +175,28 @@ namespace Boot_Park.Controller.BootPark
         public bool eliminalEtiqueta(string id, string tipo)
         {
             return etiquetas.eliminarEtiqueta(id, tipo);
+        }
+        #endregion
+
+        #region GESTION DE TERMINALES
+
+        public DataTable consultarTerminales() {
+            return terminal.consultarTerminales();
+        }
+
+        public bool registrarTerminal(string puerto, string ip, string tipo, string registradoPor)
+        {
+            return terminal.registrarTerminal(general.nextPrimaryKey("BOOTPARK.TERMINAL", "TERM_ID"), puerto, ip, tipo, registradoPor);
+        }
+
+        public bool actualizarTerminal(string id,string puerto, string ip, string tipo, string registradoPor)
+        {
+            return terminal.actualizarTerminal(id, puerto, ip, tipo, registradoPor);
+        }
+
+        public bool eliminalEtiqueta(string id)
+        {
+            return terminal.eliminarTerminal(id);
         }
         #endregion
 

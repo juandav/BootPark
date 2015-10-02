@@ -24,7 +24,8 @@ namespace Boot_Park.Model.BootPark
                         + "    ( "
                         + "        A.VEHI_ID=V.VEHI_ID "
                         + "    ) "
-                        + " WHERE A.USUA_ID='"+ usuario +"'";
+                        + " WHERE A.USUA_ID='"+ usuario +"'"
+                        + " AND AUTO_TIPO ='PROPIETARIO'";
 
             return connection.getDataMariaDB(sql).Tables[0];
         }
