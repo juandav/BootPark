@@ -22,16 +22,7 @@ namespace Boot_Park.Model.BootPark
                         + "     BOOTPARK.ETIQUETA E";
             return connection.getDataMariaDB(sql).Tables[0];
         }
-
-        public bool registrarEtoquetas()
-        {
-            List<string> sql = new List<string>() {
-                "",
-                ""
-            };
-            return connection.sendSetDataTransaction(sql);
-        }
-
+              
         public bool registrarEtiqueta(string id, string tipo, string etiqueta, string descripcion, string observacion, string estado, string registradoPor)
         {
             string sql = "INSERT"
