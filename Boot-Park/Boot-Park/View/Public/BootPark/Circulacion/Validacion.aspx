@@ -69,19 +69,22 @@
                     var response = parametro.ValidarTag({
                         success: function (result) {
                             if (result) {
+                                alert("Tag Validado");
                                 parametro.CargarUsuario();
                                 parametro.RegistrarCirculacion();
                                 var apertura = parametro.SeñalDeApertura({
                                     success: function (result) {
-                                        alert('PUERTA ABRIENDOSE');
+                                        Ext.Msg.alert("PUERTA ABRIENDOSE");
                                         //PASA SOBRE EL SENSOR AL NO DETECTAR EL VEHICULO SE PROCEDE A CERRAR ES DECIR SI DEJA DE DETECTAR EL SENSOR OBSTRUCCION CIERRA PUERTA
                                         var apertura = parametro.SeñalDeCierre({
                                             success: function (result) {
-                                                alert('PUERTA CERRANDOSE');
+                                                Ext.Msg.alert("CERRANDOSE");
                                             }
                                         });
                                     }
                                 });
+                            } else {
+                                Ext.Msg.alert('Error', err || "El Tag no se encuentra registrado en CHAIRA");
                             }
                         }
                     });
@@ -164,7 +167,7 @@
                                 </ext:Toolbar>
                             </BottomBar>
                             <Items>
-                                <ext:GridPanel runat="server">
+                                <ext:GridPanel runat="server" AutoExpandColumn="NOMBRE">
                                     <Store>
                                         <ext:Store ID="USUARIO" runat="server">
                                             <Reader>

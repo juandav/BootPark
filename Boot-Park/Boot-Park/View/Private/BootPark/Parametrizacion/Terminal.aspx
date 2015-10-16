@@ -7,6 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Terminal</title>
+    <script type="text/javascript">
+        var afterEdit = function (e) {
+            parametro.modificarTerminal(e.record.data.TERM_ID, e.record.data.TERM_PUERTO, e.record.data.TERM_IP, e.record.data.TERM_TIPO);
+        };
+    </script>
 </head>
 <body>
     <ext:ResourceManager ID="ResourceManager1" runat="server" />
@@ -34,7 +39,7 @@
                                 <ColumnModel>
                                     <Columns>
                                         <ext:RowNumbererColumn />
-                                         <ext:Column ColumnID="CTERM_TIPO" DataIndex="TERM_TIPO" Header="Tipo">
+                                        <ext:Column ColumnID="CTERM_TIPO" DataIndex="TERM_TIPO" Header="Tipo">
                                             <Editor>
                                                 <ext:TextField runat="server" />
                                             </Editor>
@@ -49,7 +54,7 @@
                                                 <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                       
+
                                         <ext:CommandColumn Width="60">
                                             <Commands>
                                                 <ext:GridCommand Icon="Delete" CommandName="del">
@@ -68,12 +73,12 @@
                                             Ext.Msg.confirm('Confirmación', 'Estas seguro de eliminar el Terminal?', 
                                             function(btn) {
                                                 if (btn === 'yes') {
-                                                    parametro.eliminarEtiqueta(record.data.TERM_ID, record.data.TERM_TIPO);
+                                                    parametro.eliminarTerminal(record.data.TERM_ID);
                                                 } 
                                             });
                                         }                                      
                                      " />
-                                   <%-- <AfterEdit Fn="afterEdit" />--%>
+                                     <AfterEdit Fn="afterEdit" />
                                 </Listeners>
                             </ext:GridPanel>
                         </Items>
@@ -97,18 +102,15 @@
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
-                             <ext:ComboBox ID="CTIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de terminal" ForceSelection="true" AllowBlank="false">
+                            <ext:ComboBox ID="CTIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de terminal" ForceSelection="true" AllowBlank="false">
                                 <Items>
                                     <ext:ListItem Text="Biometrico" Value="Biometrico" />
                                     <ext:ListItem Text="Rfid" Value="Rfid" />
                                 </Items>
-                                <Listeners>
-                                    <Select Fn="focus " />
-                                </Listeners>
                             </ext:ComboBox>
-                            <ext:TextField ID="TTERM_IP" FieldLabel="Ip" runat="server" Width="300" EmptyText="Dirección del dispositivo" AllowBlank="false"/>
-                            <ext:TextField ID="TTERM_PUERTO" FieldLabel="Puerto" runat="server" Width="300" EmptyText="Puerto de comunicación" AllowBlank="false"/>
-                           
+                            <ext:TextField ID="TTERM_IP" FieldLabel="Ip" runat="server" Width="300" EmptyText="Dirección del dispositivo" AllowBlank="false"  />
+                            <ext:TextField ID="TTERM_PUERTO" FieldLabel="Puerto" runat="server" Width="300" EmptyText="Puerto de comunicación" AllowBlank="false" />
+
                         </Items>
                     </ext:FormPanel>
                 </Items>
@@ -118,7 +120,7 @@
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar" FormBind="true">
                                 <Listeners>
-                                    <Click Handler="if(#{FTERMINAL}.getForm().isValid()) { parametro.crearEtiqueta(CBETIQ_TIPO.getValue(), TFETIQ_ETIQUETA.getValue(), TFETIQ_DESCRIPCION.getValue(), TFETIQ_OBSERVACION.getValue(), CBESTADO.getValue()); }else{ return false;} " />
+                                    <Click Handler="if(#{FREGISTRO}.getForm().isValid()) {parametro.crearTerminal(TTERM_PUERTO.getValue(), TTERM_IP.getValue(), CTIPO.getValue());}else{ return false;}  " />
                                 </Listeners>
                             </ext:Button>
                         </Items>

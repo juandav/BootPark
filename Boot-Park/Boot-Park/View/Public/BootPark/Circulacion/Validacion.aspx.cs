@@ -86,6 +86,7 @@ namespace Boot_Park.View.Public.BootPark.Circulacion
         }
 
         // DETERMINA SI LA CIRCULACION ES DE ENTRADA O SALIDA DEPENDIENDO LA UBICACION DEL LECTOR
+        // SIN USO AUN
         public bool VerificarTipoCirculacion(string ip, string puerto) {
             DataTable data = _integracion.ComprobarTipoTerminal(ip, puerto);
 

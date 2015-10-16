@@ -22,15 +22,6 @@ namespace Boot_Park.Model.BootPark
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
-        public bool registrarVehiculos()
-        {
-            List<string> sql = new List<string>() {
-                "",
-                ""
-            };
-            return connection.sendSetDataTransaction(sql);
-        }
-
         public bool registrarVehiculo(string id, string observacion, string placa, string modelo, string marca, string color, string registradoPor)
         {
             string sql = "INSERT"

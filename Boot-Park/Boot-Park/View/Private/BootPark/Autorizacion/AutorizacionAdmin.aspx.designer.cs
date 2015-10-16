@@ -119,14 +119,5 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::Ext.Net.Store SVEHICULOIN;
-        
-        /// <summary>
-        /// Control WDETALLEUSUARIO.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Ext.Net.Window WDETALLEUSUARIO;
     }
 }

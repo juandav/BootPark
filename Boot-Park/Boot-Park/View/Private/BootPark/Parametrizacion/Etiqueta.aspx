@@ -8,6 +8,7 @@
 <head runat="server">
     <title>Etiqueta</title>
     <script src="../../../../Content/js/BiometricDevice.js"></script>
+    <script src="../../../../Content/js/Filter.js"></script>
     <script type="text/javascript">
         try {
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
@@ -50,9 +51,9 @@
                 }
             }
             else if (CBETIQ_TIPO.getValue() === "TAG") {
-                
-                var r = parametro.detectarTag();
-              
+
+                parametro.detectarTag();
+
             } else {
                 Ext.net.Notification.show({
                     html: 'No se ha seleccionado un dispositivo todavía',
@@ -92,12 +93,14 @@
                                 <ColumnModel>
                                     <Columns>
                                         <ext:RowNumbererColumn />
+                                        <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" Width="100" />
                                         <ext:Column ColumnID="CETIQ_TIPO" DataIndex="ETIQ_TIPO" Header="Tipo">
+
                                             <Editor>
                                                 <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                        <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Etiqueta">
+                                        <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Etiqueta" Width="180">
                                             <Editor>
                                                 <ext:TextField runat="server" />
                                             </Editor>
@@ -107,7 +110,7 @@
                                                 <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                        <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observación">
+                                        <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETIQ_OBSERVACION" Header="Observación" Width="200">
                                             <Editor>
                                                 <ext:TextField runat="server" />
                                             </Editor>
@@ -148,6 +151,7 @@
                                      " />
                                     <AfterEdit Fn="afterEdit" />
                                 </Listeners>
+                              
                             </ext:GridPanel>
                         </Items>
                         <BottomBar>

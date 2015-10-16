@@ -64,7 +64,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
         [DirectMethod(Namespace = "parametro")]
         public void eliminarParticular(string id) {
 
-            bool response = parametro.eliminalParticular(id);
+            bool response = parametro.eliminarParticular(id);
 
             if (response)
             {

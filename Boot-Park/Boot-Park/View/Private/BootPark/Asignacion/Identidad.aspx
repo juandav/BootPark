@@ -149,7 +149,7 @@
                                         <ext:Column ColumnID="CNOMBRE" DataIndex="NOMBRE" Header="Nombre" Width="300" />
                                         <ext:Column ColumnID="CAPELLIDO" DataIndex="APELLIDO" Header="Apellido" />
                                         <ext:Column ColumnID="CTIPO" DataIndex="TIPO" Header="Tipo" />
-                                        <ext:CommandColumn Width="60" DataIndex="HUEL_ESTADO" Header="Huella">
+                                        <ext:CommandColumn Width="65" DataIndex="HUEL_ESTADO" Header="Huella">
                                             <Commands>
                                                  <ext:GridCommand IconCls=".shortcut-icon-enrollment-Footprint icon-enrollment-Footprint" CommandName="enrollmentFootprint">
                                                     <ToolTip Text="incripcion de la Huella" />
@@ -161,13 +161,7 @@
                                             </Commands>
                                             <PrepareToolbar Fn="prepareCommand" />
                                         </ext:CommandColumn>
-                                        <ext:CommandColumn Width="60">
-                                            <Commands>
-                                                <ext:GridCommand Icon="ApplicationViewDetail" CommandName="Detalle">
-                                                    <ToolTip Text="Información adicional del usuario vinculado al CHAIRA." />
-                                                </ext:GridCommand>
-                                            </Commands>
-                                        </ext:CommandColumn>
+                                     
                                     </Columns>
                                 </ColumnModel>
                                 <SelectionModel>
@@ -256,11 +250,7 @@
                     </ext:Panel>
                 </Items>
             </ext:Viewport>
-
-            <ext:Window ID="WDETALLEUSUARIO" runat="server" Modal="true" Hidden="true" Icon="User" Title="Información del Usuario" Width="800" Height="400">
-                <Items>
-                </Items>
-            </ext:Window>
+                    
         </div>
         <ext:DropTarget runat="server" Target="={GPETIQUETAOUT.view.scroller.dom}" Group="firstGridDDGroup">
             <NotifyDrop Fn="notifyDrop1" />

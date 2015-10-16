@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\MySql.Web.fakes" />
+    <None Include="Properties\PublishProfiles\BookPark.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -98,7 +99,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\desktop.css" />
+    <Content Include="Content\images\carrotag.ico" />
+    <Content Include="Content\images\circulacion.png" />
+    <Content Include="Content\images\desktop.jpg" />
+    <Content Include="Content\images\desktop.png" />
+    <Content Include="Content\images\enrollmentFootprint.ico" />
+    <Content Include="Content\images\footprint.ico" />
+    <Content Include="Content\images\suma.png" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\images\vehiculo.png" />
     <Content Include="Content\js\BiometricDevice.js" />
+    <Content Include="Content\js\Concurrent.Thread.js" />
     <Content Include="Content\js\Desktop.js" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
@@ -113,6 +124,8 @@
     <Content Include="View\Private\Desktop.aspx" />
     <Content Include="View\Public\BootPark\Circulacion\Validacion.aspx" />
     <Content Include="View\Public\TestPlugin.aspx" />
+    <Content Include="View\Public\test\index.aspx" />
+    <Content Include="View\Public\test\test.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -215,6 +228,20 @@
     </Compile>
     <Compile Include="View\Public\TestPlugin.aspx.designer.cs">
       <DependentUpon>TestPlugin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Public\test\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Public\test\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Public\test\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Public\test\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

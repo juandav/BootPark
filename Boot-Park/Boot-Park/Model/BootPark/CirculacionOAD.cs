@@ -43,7 +43,7 @@ namespace Boot_Park.Model.BootPark
                 + "INNER JOIN BOOTPARK.AUTORIZACION A ON (EV.VEHI_ID = A.VEHI_ID) "
                 + "WHERE "
                 + "	E.ETIQ_ETIQUETA = '" + tag + "' "
-                + "AND A.USUA_ID = " + user;
+                + "AND A.USUA_ID = '" + user + "'";
 
             return _connection.getDataMariaDB(sql).Tables[0];
         }
@@ -77,7 +77,7 @@ namespace Boot_Park.Model.BootPark
                 + "FROM "
                 + "	BOOTPARK.USUARIO U "
                 + "WHERE "
-                + "	U.PEGE_ID = ''";
+                + "	U.PEGE_ID = '" + user + "'";
             return _connection.getDataMariaDB(sql).Tables[0];
         }
 
@@ -105,6 +105,19 @@ namespace Boot_Park.Model.BootPark
                 + "		'" + vehiculo + "' "
                 + "	)";
             return _connection.sendSetDataMariaDB(sql);
+        }
+        public DataTable ConsultarTipoEntradaVehiculo(string vehiculo) {
+            string sql = 
+                "SELECT "
+                + "    c.CIRC_TIPO "
+                + "FROM "
+                + "    bootpark.circulacion c "
+                + "WHERE "
+                + "    c.VEHI_ID='"+ vehiculo+"' "
+                + "ORDER BY "
+                + "    CIRC_ID ASC "
+                + "LIMIT 1";
+            return _connection.getDataMariaDB(sql).Tables[0];
         }
     }
 }

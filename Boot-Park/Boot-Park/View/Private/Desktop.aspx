@@ -19,7 +19,7 @@
             </Shortcuts>
 
             <Listeners>
-                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://www.google.com' }else { alert('Link Malo'); }" />
+                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost:56075/View/Private/BootPark/Circulacion/Circulacion.aspx' }else { alert('Link Malo'); }" />
             </Listeners>
             
             <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">
@@ -83,19 +83,19 @@
                             </ext:Menu>
                         </Menu>
                    </ext:MenuItem>
-                     <ext:MenuItem ID="MENUCIRCULACION" runat="server" Text="CIRCULACIÓN" Icon="Folder" HideOnClick="false">
+                     <%--<ext:MenuItem ID="MENUCIRCULACION" runat="server" Text="CIRCULACIÓN" Icon="Folder" HideOnClick="false">
                         <Menu>
                             <ext:Menu ID="MCIRCULACION" runat="server">
                                 <Items>
                                     <ext:MenuItem Text="CIRCULACIÓN" Icon="CarRed" >
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Circulacion/Circulacion.aspx','Circulacion',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'Public/BootPark/Circulacion/Circula.aspx','Circulacion',800,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                 </Items>
                             </ext:Menu>
                         </Menu>
-                    </ext:MenuItem>
+                    </ext:MenuItem>--%>
                     <ext:MenuSeparator />
                 </Items>
             </StartMenu>

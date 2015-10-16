@@ -74,8 +74,8 @@ namespace Boot_Park.Model.BootPark
                         + "         '" + tipo + "',"
                         + "         '" + vehiculo + "',"
                         + "         '" + observacion + "',"
-                        + "         '" + registradoPor + "',"
-                        + "              CURRENT_DATE()"
+                        + "              CURRENT_DATE(),"
+                        + "          " + registradoPor
                         + "     )";
             sentencia.Add(sql);
             sentencia.Add(ActualizarTagEstado(etiqueta, tipo, "ENUSO"));
@@ -120,6 +120,33 @@ namespace Boot_Park.Model.BootPark
             sentencia.Add(sql);
             sentencia.Add(ActualizarTagEstado(etiqueta, tipo, "DISPONIBLE"));
             return connection.sendSetDataTransaction(sentencia);
+        }
+        public DataTable ConsultarVehiculoTagAsignado(string tag) {
+           string sql = "SELECT   "
+                        + "CONCAT('', v.VEHI_PLACA, ' ', v.VEHI_MARCA, ' ', v.VEHI_MODELO) AS IdVehiculo,v.VEHI_ID "
+                        + "FROM   bootpark.vehiculo v "
+                        + "       INNER JOIN bootpark.etiquetavehiculo ev "
+                        + "               ON v.vehi_id = ev.vehi_id "
+                        + "       INNER JOIN bootpark.etiqueta e "
+                        + "               ON ev.etiq_id = e.etiq_id "
+                        + "WHERE  e.etiq_tipo = 'TAG' "
+                        + "       AND e.etiq_estado = 'ENUSO' "
+                        + "       AND e.etiq_etiqueta = '" + tag + "'";
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
+        public DataTable ConsultarVehiculoValidacion(string tag) // ME TRAE EL VEHICULO UNA VEZ VALIDADO EN EL MODULO DE CIRCULACION 
+        {
+            string sql = "SELECT   "
+                         + "v.VEHI_PLACA AS PLACA, v.VEHI_MARCA AS VEHICULO,  v.VEHI_MODELO AS MODELO, v.VEHI_OBSERVACION AS OBSERVACION "
+                         + "FROM   bootpark.vehiculo v "
+                         + "       INNER JOIN bootpark.etiquetavehiculo ev "
+                         + "               ON v.vehi_id = ev.vehi_id "
+                         + "       INNER JOIN bootpark.etiqueta e "
+                         + "               ON ev.etiq_id = e.etiq_id "
+                         + "WHERE  e.etiq_tipo = 'TAG' "
+                         + "       AND e.etiq_estado = 'ENUSO' "
+                         + "       AND e.etiq_etiqueta = '" + tag + "'";
+            return connection.getDataMariaDB(sql).Tables[0];
         }
     }
 }

@@ -82,7 +82,7 @@ namespace Boot_Park.Model.BootPark
             return connection.sendSetDataMariaDB(sql);
         }
 
-        public bool desvincularVehiculoUsurio(string id, string usuario)
+        public bool desvincularVehiculoUsuario(string id, string usuario)
         {
             string sql = "DELETE "
                          + "FROM "
@@ -193,7 +193,7 @@ namespace Boot_Park.Model.BootPark
             return connection.sendSetDataMariaDB(sql);
         }
 
-        public bool desvincularVehiculoUsurioPropietario(string id, string usuario)
+        public bool desvincularVehiculoUsuarioPropietario(string id, string usuario)
         {
             string sql = "DELETE "
                          + "FROM "

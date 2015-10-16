@@ -21,16 +21,12 @@ namespace Boot_Park.Controller.BootPark
         private TerminalOAD terminal = new TerminalOAD();
         private General general = new General();
 
-        #region GESTION DE PATICULARES
+        #region GESTION DE PARTICULARES
         public DataTable consultarParticulares()
         {
             return particular.consultarParticulares();
         }
-
-        public bool registrarParticulares()
-        {
-            return particular.registrarParticulares();
-        }
+             
 
         public bool registrarParticular(string identificacion, string nombre, string apellido, string registradoPor)
         {
@@ -42,7 +38,7 @@ namespace Boot_Park.Controller.BootPark
             return particular.actualizarParticular(id, identificacion, nombre, apellido, registradoPor);
         }
 
-        public bool eliminalParticular(string id)
+        public bool eliminarParticular(string id)
         {
             return particular.eliminarParticular(id);
         }
@@ -65,7 +61,7 @@ namespace Boot_Park.Controller.BootPark
         }
         public bool desvincularVehiculoUsuario(string id, string usuario)
         {
-            return autorizacion.desvincularVehiculoUsurio(id, usuario);
+            return autorizacion.desvincularVehiculoUsuario(id, usuario);
         }
 
         #endregion
@@ -85,9 +81,9 @@ namespace Boot_Park.Controller.BootPark
         {
             return autorizacion.registrarVehiculoUsuarioPropietario(id, usuario, pegeId, descripcion, "PARTICULAR", "DISPONIBLE");
         }
-        public bool desvincularVehiculoUsuarioPropietario(string id, string usuario)
+        public bool desvincularVehiculoUsuarioPropietario(string idvehiculo, string usuario)
         {
-            return autorizacion.desvincularVehiculoUsurio(id, usuario);
+            return autorizacion.desvincularVehiculoUsuario(idvehiculo, usuario);
         }
 
         # endregion
@@ -96,11 +92,6 @@ namespace Boot_Park.Controller.BootPark
         public DataTable consultarVehiculos()
         {
             return vehiculo.consultarVehiculos();
-        }
-
-        public bool registrarVehiculos()
-        {
-            return vehiculo.registrarVehiculos();
         }
 
         public bool registrarVehiculo(string observacion, string placa, string modelo, string marca, string color, string registradoPor)
@@ -194,7 +185,7 @@ namespace Boot_Park.Controller.BootPark
             return terminal.actualizarTerminal(id, puerto, ip, tipo, registradoPor);
         }
 
-        public bool eliminalEtiqueta(string id)
+        public bool eliminaTerminal(string id)
         {
             return terminal.eliminarTerminal(id);
         }
@@ -220,6 +211,15 @@ namespace Boot_Park.Controller.BootPark
         public bool eliminarEtiquetaUsuario(string id, string tipo, string usuario)
         {
             return etiquetausuario.eliminarEtiquetaUsuario(id, tipo, usuario);
+        }
+        public DataTable ConsultarVehiculoTagAsignado(string tag) {
+            return etiquetaVehiculo.ConsultarVehiculoTagAsignado(tag);
+        }
+
+        public DataTable ConsultarVehiculoCirculacion(string tag) // TRAE EL VEHICULO VALIDADO AL MODULO DE CIRCULACION
+        {
+            return etiquetaVehiculo.ConsultarVehiculoValidacion(tag);
+
         }
 
         #endregion
@@ -293,7 +293,10 @@ namespace Boot_Park.Controller.BootPark
 
         public bool RegistrarCirculacion(string user, string vehiculo, string tipo) {
             string circId = general.nextPrimaryKey("BOOTPARK.CIRCULACION", "CIRC_ID");
-            return _circulacion.RegistrarCirculacion(user, vehiculo, circId, tipo, "ENTRADA");
+            return _circulacion.RegistrarCirculacion(user, vehiculo, circId, tipo, "SYSTEM");
+        }
+        public DataTable ConsultarTipoEntradaVehiculo(string vehiculo) {
+            return _circulacion.ConsultarTipoEntradaVehiculo(vehiculo);
         }
         #endregion
 

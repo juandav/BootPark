@@ -15,6 +15,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
     {
 
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
+        RFID r = new RFID("192.168.1.250", "27011");
         private string pegeId = "53233";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -95,9 +96,9 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
           
         }
         [DirectMethod(Namespace = "parametro")]
-        public string detectarTag()
+        public void detectarTag()
         {
-            RFID r = new RFID("192.168.1.250", "27011");
+          
             string response = r.iniciarDeteccion();
 
             if (response.Equals("YES"))
@@ -111,7 +112,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
             {
                 X.Msg.Notify("Notificación", "'No conectado!, Asegurece que la lectora RFID este conectado a la red TCP/IP").Show();
             }
-            return "dfdfdf";
+            
         }
 
         private void BindData()
