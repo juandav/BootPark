@@ -108,6 +108,9 @@ namespace Boot_Park.Controller.BootPark
         {
             return vehiculo.eliminarVehiculo(id);
         }
+        public DataTable consultarMarcaVehiculo() {
+            return vehiculo.ConsultarMarcaVehiculo();
+        }
         #endregion
 
         #region GESTION DE ETIQUETAS

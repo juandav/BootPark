@@ -11,10 +11,12 @@
         var afterEdit = function (e) {
             parametro.modificarVehiculo(e.record.data.VEHI_ID, e.record.data.VEHI_OBSERVACION, e.record.data.VEHI_PLACA, e.record.data.VEHI_MODELO, e.record.data.VEHI_MARCA, e.record.data.VEHI_COLOR);
         };
+      
     </script>
 </head>
 <body>
     <ext:ResourceManager runat="server" />
+    <ext:Hidden ID="Hidden1" runat="server" />
     <form id="FVEHICULO" runat="server">
         <div>
             <ext:Viewport ID="VPPRESENTACION" runat="server" Layout="border">
@@ -115,7 +117,20 @@
                         <Items>
                             <ext:TextField ID="TFVEHI_PLACA" runat="server" Width="300" FieldLabel="Placa" AllowBlank="false" />
                             <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" Width="300" FieldLabel="Modelo" AllowBlank="false" />
-                            <ext:TextField ID="TFVEHI_MARCA" runat="server" Width="300" FieldLabel="Marca" AllowBlank="false" />
+                            <ext:ComboBox ID="TFVEHI_MARCA"  runat="server" Width="300" ValueField="MAR_MARCA"  DisplayField="MAR_MARCA" FieldLabel="Marca" AllowBlank="false">
+                               <Store>
+                                   <ext:Store ID="SMARCA" runat="server">
+                                       <Reader>
+                                           <ext:JsonReader>
+                                               <Fields>
+                                                   <ext:RecordField Name="MAR_ID" />
+                                                   <ext:RecordField Name="MAR_MARCA" Type="String" />
+                                               </Fields>
+                                           </ext:JsonReader>
+                                       </Reader>
+                                   </ext:Store>
+                               </Store>
+                            </ext:ComboBox>
                             <ext:TextField ID="TFVEHI_COLOR" runat="server" Width="300" FieldLabel="Color" AllowBlank="false" />
                             <ext:TextArea ID="TAVEHI_OBSERVACION" runat="server" Width="300" FieldLabel="Observaciones" Height="90" />
                         </Items>

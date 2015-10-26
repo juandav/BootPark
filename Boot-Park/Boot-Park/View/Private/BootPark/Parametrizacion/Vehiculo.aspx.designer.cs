@@ -13,6 +13,15 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
     public partial class Vehiculo {
         
         /// <summary>
+        /// Control Hidden1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Hidden Hidden1;
+        
+        /// <summary>
         /// Control FVEHICULO.
         /// </summary>
         /// <remarks>
@@ -100,7 +109,16 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.TextField TFVEHI_MARCA;
+        protected global::Ext.Net.ComboBox TFVEHI_MARCA;
+        
+        /// <summary>
+        /// Control SMARCA.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Store SMARCA;
         
         /// <summary>
         /// Control TFVEHI_COLOR.

@@ -93,8 +93,8 @@
                                 <ColumnModel>
                                     <Columns>
                                         <ext:RowNumbererColumn />
-                                        <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" Width="100" />
-                                        <ext:Column ColumnID="CETIQ_TIPO" DataIndex="ETIQ_TIPO" Header="Tipo">
+                                        <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" Width="80" />
+                                        <ext:Column ColumnID="CETIQ_TIPO" DataIndex="ETIQ_TIPO" Header="Tipo" Width="90">
 
                                             <Editor>
                                                 <ext:TextField runat="server" />
@@ -105,7 +105,7 @@
                                                 <ext:TextField runat="server" />
                                             </Editor>
                                         </ext:Column>
-                                        <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción">
+                                        <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" Width="200">
                                             <Editor>
                                                 <ext:TextField runat="server" />
                                             </Editor>

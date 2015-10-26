@@ -17,6 +17,8 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarUsuarios();
+            DataTable data = parametro.ConsultarUsuarioCirculacion(pegeId);
+            GPUSUARIO.Title = data.Rows[0]["NOMBRE"].ToString() + " " + data.Rows[0]["APELLIDO"].ToString();
         }
         public void cargarUsuarios()
         {

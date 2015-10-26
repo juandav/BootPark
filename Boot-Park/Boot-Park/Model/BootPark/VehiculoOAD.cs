@@ -77,5 +77,9 @@ namespace Boot_Park.Model.BootPark
                         + "     VEHI_ID = '" + id + "'";
             return connection.sendSetDataMariaDB(sql);
         }
+        public DataTable ConsultarMarcaVehiculo() {
+            string sql = "SELECT m.MAR_ID,m.MAR_MARCA  FROM marcavehiculo m";
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
     }
 }

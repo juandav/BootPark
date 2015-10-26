@@ -170,6 +170,7 @@
                                             <RowSelect Handler="
                                                 GPUSUARIO.collapse();
                                                 PETIQUETA.expand();
+                                                PETIQUETA.setTitle('Carnet para asignar a: '+ record.data.NOMBRE + ' ' + record.data.APELLIDO + '(' + record.data.TIPO + ') ' );
                                                 parametro.cargarEtiquetasOUT();
                                                 parametro.cargarEtiquetasIN(record.data.ID);" />
                                         </Listeners>

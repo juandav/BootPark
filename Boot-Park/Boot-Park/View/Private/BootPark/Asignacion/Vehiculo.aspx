@@ -135,6 +135,7 @@
                                             <RowSelect Handler="
                                                 GPVEHICULO.collapse();
                                                 PETIQUETA.expand();
+                                                PETIQUETA.setTitle('Etiqueta para asignar al Vehiculo:  ' + record.data.VEHI_MARCA + ' ' + record.data.VEHI_MODELO + '(' + record.data.VEHI_PLACA + ')' );
                                                 parametro.cargarEtiquetasOUT();
                                                 parametro.cargarEtiquetasIN(record.data.VEHI_ID);" />
                                         </Listeners>
@@ -147,67 +148,147 @@
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Etiqueta" Icon="TagBlue">
                                 <Items>
-                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Etiquetas Disponibles" Icon="TagBlueAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
-                                        <Store>
-                                            <ext:Store ID="SETIQUETAOUT" runat="server">
-                                                <Reader>
-                                                    <ext:JsonReader>
-                                                        <Fields>
-                                                            <ext:RecordField Name="ETIQ_ID" />
-                                                            <ext:RecordField Name="ETIQ_TIPO" />
-                                                            <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
-                                                        </Fields>
-                                                    </ext:JsonReader>
-                                                </Reader>
-                                            </ext:Store>
-                                        </Store>
-                                        <ColumnModel>
-                                            <Columns>
-                                                <ext:RowNumbererColumn />
-                                                <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
-                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
-                                            </Columns>
-                                        </ColumnModel>
-                                        <SelectionModel>
-                                            <ext:RowSelectionModel SingleSelect="true" />
-                                        </SelectionModel>
-                                    </ext:GridPanel>
-                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Etiquetas Asignados" Icon="TagBlueEdit" EnableDragDrop="true" DDGroup="firstGridDDGroup">
-                                        <Store>
-                                            <ext:Store ID="STIQUETAIN" runat="server">
-                                                <Reader>
-                                                    <ext:JsonReader>
-                                                        <Fields>
-                                                            <ext:RecordField Name="ETIQ_ID" />
-                                                            <ext:RecordField Name="ETIQ_TIPO" />
-                                                            <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
-                                                            <ext:RecordField Name="ETVE_OBSERVACION" />
-                                                        </Fields>
-                                                    </ext:JsonReader>
-                                                </Reader>
-                                            </ext:Store>
-                                        </Store>
-                                        <ColumnModel>
-                                            <Columns>
-                                                <ext:RowNumbererColumn />
-                                                <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
-                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Width="150" Header="Descripción" />
-                                                <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETVE_OBSERVACION" Header="Observaciones">
-                                                    <Editor>
-                                                        <ext:TextField runat="server" />
-                                                    </Editor>
-                                                </ext:Column>
-                                            </Columns>
-                                        </ColumnModel>
-                                        <SelectionModel>
-                                            <ext:RowSelectionModel runat="server" SingleSelect="true" />
-                                        </SelectionModel>
-                                        <Listeners>
-                                              <AfterEdit Fn="afterEdit" />
-                                        </Listeners>
-                                    </ext:GridPanel>
+                                    <ext:ColumnLayout runat="server" FitHeight="true">
+                                        <Columns>
+                                            <ext:LayoutColumn ColumnWidth="0.5">
+                                                <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Etiquetas Disponibles" Icon="TagBlueAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
+                                                    <Store>
+                                                        <ext:Store ID="SETIQUETAOUT" runat="server">
+                                                            <Reader>
+                                                                <ext:JsonReader>
+                                                                    <Fields>
+                                                                        <ext:RecordField Name="ETIQ_ID" />
+                                                                        <ext:RecordField Name="ETIQ_TIPO" />
+                                                                        <ext:RecordField Name="ETIQ_ETIQUETA" />
+                                                                        <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                                    </Fields>
+                                                                </ext:JsonReader>
+                                                            </Reader>
+                                                        </ext:Store>
+                                                    </Store>
+                                                    <ColumnModel>
+                                                        <Columns>
+                                                            <ext:RowNumbererColumn />
+                                                            <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" />
+                                                            <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
+                                                            <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
+                                                        </Columns>
+                                                    </ColumnModel>
+                                                    <SelectionModel>
+                                                        <ext:RowSelectionModel SingleSelect="true" />
+                                                    </SelectionModel>
+                                                </ext:GridPanel>
+                                            </ext:LayoutColumn>
+
+                                            <ext:LayoutColumn>
+                                                <ext:Panel
+                                                    runat="server"
+                                                    Width="35"
+                                                    BodyStyle="background-color: transparent;"
+                                                    Border="false"
+                                                    Layout="Anchor">
+                                                    <Items>
+                                                        <ext:Panel runat="server" Border="false" BodyStyle="background-color: transparent;" AnchorVertical="40%" />
+                                                        <ext:Panel runat="server" Border="false" BodyStyle="background-color: transparent;" Padding="5">
+                                                            <Items>
+                                                                <ext:Button runat="server" Icon="ResultsetNext" StyleSpec="margin-bottom:2px;">
+                                                                    <Listeners>
+
+                                                                      <%--  <Click Handler=" var records  = GPVEHICULOAOUT.selModel.getSelections();
+                                                                                            Ext.each(records, function (record) {
+                                                                                                parametro.vincularVehiculoAlUsuario(records[0].data.VEHI_ID, HID_USER.getValue(), {
+                                                                                                    success: function (result) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'vehiculo autorizado exitosamente', title: 'Notificación'
+                                                                                                        });
+                                                                                                        GPVEHICULOAOUT.deleteSelected();
+                                                                                                        GPVEHICULOIN.store.addSorted(records);  
+                                                                                                    },
+                                                                                                    failure: function (errorMsg) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                                                                                                        });
+                                                                                                    }
+                                                                                                });
+                                                                                            });
+
+                                                                                       " />--%>
+                                                                    </Listeners>
+                                                                    <ToolTips>
+                                                                        <ext:ToolTip runat="server" Title="Add" Html="Add Selected Rows" />
+                                                                    </ToolTips>
+                                                                </ext:Button>
+                                                                <ext:Button runat="server" Icon="ResultsetPrevious" StyleSpec="margin-bottom:2px;">
+                                                                    <Listeners>
+                                                                      <%--  <Click Handler=" var records = GPVEHICULOIN.selModel.getSelections();
+                                                                                           Ext.each(records, function (record) {
+                                                                                                parametro.desvincularVehiculoAlUsuario(records[0].data.VEHI_ID, HID_USER.getValue(), {
+                                                                                                    success: function (result) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'vehiculo desautorizado exitosamente', title: 'Notificación'
+                                                                                                        });
+                                                                                                        GPVEHICULOIN.deleteSelected();
+                                                                                                        GPVEHICULOAOUT.store.addSorted(records); 
+                                                                                                    },
+                                                                                                    failure: function (errorMsg) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                                                                                                        });
+                                                                                                    }
+
+                                                                                                });
+                                                                                            });
+                                                                                       " />--%>
+                                                                    </Listeners>
+                                                                    <ToolTips>
+                                                                        <ext:ToolTip runat="server" Title="Remove" Html="Remove Selected Rows" />
+                                                                    </ToolTips>
+                                                                </ext:Button>
+                                                            </Items>
+                                                        </ext:Panel>
+                                                    </Items>
+                                                </ext:Panel>
+                                            </ext:LayoutColumn>
+                                            <ext:LayoutColumn>
+                                                <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Etiquetas Asignados" Icon="TagBlueEdit" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                                    <Store>
+                                                        <ext:Store ID="STIQUETAIN" runat="server">
+                                                            <Reader>
+                                                                <ext:JsonReader>
+                                                                    <Fields>
+                                                                        <ext:RecordField Name="ETIQ_ID" />
+                                                                        <ext:RecordField Name="ETIQ_TIPO" />
+                                                                        <ext:RecordField Name="ETIQ_ETIQUETA" />
+                                                                        <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                                        <ext:RecordField Name="ETVE_OBSERVACION" />
+                                                                    </Fields>
+                                                                </ext:JsonReader>
+                                                            </Reader>
+                                                        </ext:Store>
+                                                    </Store>
+                                                    <ColumnModel>
+                                                        <Columns>
+                                                            <ext:RowNumbererColumn />
+                                                            <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" />
+                                                            <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
+                                                            <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Width="150" Header="Descripción" />
+                                                            <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETVE_OBSERVACION" Header="Observaciones">
+                                                                <Editor>
+                                                                    <ext:TextField runat="server" />
+                                                                </Editor>
+                                                            </ext:Column>
+                                                        </Columns>
+                                                    </ColumnModel>
+                                                    <SelectionModel>
+                                                        <ext:RowSelectionModel runat="server" SingleSelect="true" />
+                                                    </SelectionModel>
+                                                    <Listeners>
+                                                        <AfterEdit Fn="afterEdit" />
+                                                    </Listeners>
+                                                </ext:GridPanel>
+                                            </ext:LayoutColumn>
+                                        </Columns>
+                                    </ext:ColumnLayout>
                                 </Items>
                             </ext:Panel>
                         </Items>

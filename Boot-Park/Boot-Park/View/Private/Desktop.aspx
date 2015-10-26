@@ -30,7 +30,7 @@
                                 <Items>
                                     <ext:MenuItem Text="Etiqueta" Icon="Cart">
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Etiqueta.aspx','Etiqueta',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Etiqueta.aspx','Etiqueta',850,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                      <ext:MenuItem Text="Particular" Icon="User">
@@ -41,6 +41,11 @@
                                      <ext:MenuItem Text="Vehiculo" Icon="Car">
                                         <Listeners>
                                             <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Vehiculo.aspx','Vehiculo',800,500);" />
+                                        </Listeners>
+                                    </ext:MenuItem>
+                                      <ext:MenuItem Text="Terminal" Icon="LaptopAdd">
+                                        <Listeners>
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Terminal.aspx','Terminal',800,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                 </Items>

@@ -21,6 +21,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
             if (!IsPostBack)
             {
                 cargarVehiculos();
+                cargarMarcas();
             }
         }
 
@@ -30,6 +31,13 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
             DataTable datos = parametro.consultarVehiculos();
             SVEHICULO.DataSource = datos;
             SVEHICULO.DataBind();
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public void cargarMarcas()
+        {
+            DataTable datos = parametro.consultarMarcaVehiculo();
+            SMARCA.DataSource = datos;
+            SMARCA.DataBind();
         }
 
         [DirectMethod(Namespace = "parametro")]

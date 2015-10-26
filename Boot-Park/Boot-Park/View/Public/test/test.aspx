@@ -7,7 +7,9 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>TEST</title>
+    <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     <script type="text/javascript" src="../../../Content/js/Concurrent.Thread.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
@@ -20,6 +22,11 @@
         catch (e) {
             alert("Incompatibilidad con ActiveX", "", "");
         }
+
+        var socket = io.connect('http://192.168.1.44');
+       
+            
+            socket.emit('open', { my: 'derecha' });
 
         function proceso() {
             var user = null;
@@ -59,6 +66,8 @@
                                                         TEST.CargarAspirante(aspirante);// CARGA EL ASPIRANTE
                                                         TEST.CargarVehiculo(data); // CARGA EL VEHICULO
                                                         TEST.RegistrarCirculacion(aspirante, data); // REGISTRA LA CIRCULACION
+
+                                                      
                                                         TEST.AbrirPuerta(); // ABRE LA PUERTA
                                                     } else {
                                                         alert('VEHICULO NO AUTORIZADO');
@@ -89,6 +98,9 @@
         }
 
         Concurrent.Thread.create(proceso);
+
+        
+
     </script>
 
     <ext:ResourceManager runat="server" />
