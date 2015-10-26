@@ -1,0 +1,99 @@
+<center> **BootPark** </center>
+=========================
+
+<center>**“Desarrollo del Sistema de Gestión Vehicular apoyado en Tecnologías RFID y Sistemas Biométricos.”**</center>
+=========================
+
+
+Bootpark es un software propietario de la **Universidad de la Amazonia**. Proyecto enfocado al control de ingreso y salida de vehículos de la institución.  su <i class="icon-cog"></i> **Configuración** esta documentada paso a paso para lograr una correcta implementación del prototipo.
+
+----------
+
+**Planteamiento del Problema**
+----------------------------------
+La Universidad de la Amazonia en la actualidad cuenta con un área destinada para el parqueadero de los docentes de la institución, la cual está siendo utilizada por distintas personas (estudiantes, particulares, administrativos, terceros vinculados con la Universidad y los docentes). Esto hace que dicha área sea insuficiente y que no satisfaga las necesidades para la cual fue destinada, ya que presenta problemas de congestión impidiendo una buena movilidad en la zona.
+
+La situación antes planteada se da debido a que no existe una administración adecuada de dicha área, la cual está a cargo de los guardas de vigilancia y seguridad de la Universidad quienes de manera flexible, por muchas circunstancias, permiten el acceso a dicha área de vehículos no autorizados para utilizar este servicio en este sitio.
+
+**Justificación**
+--------------
+Debido al incremento de hurtos de vehículo en la institución y a al poco ordenamiento de zonas reservadas a su parqueo en horas críticas, es necesario la implementación de un plan de contingencia que apoye al control de asignación, verificación y autorización de los mismos.
+
+
+**Objetivo General**
+--------------------
+Desarrollar un prototipo de entrada y salida para los vehículos apoyado en tecnologías de identificación por radio frecuencia y biométrico.
+
+**Objetivos Específicos**
+-------------------------
+> - Identificar requerimientos funcionales. 
+> - Diseñar el sistema de información.
+> - Implementar un prototipo.
+
+**Propósito del Sistema** 
+-------------------------
+> - Validar ingreso y salida de personas al paqueadero.
+> - Validar la entrada y salida de vehículos de la zona docente.
+> - Integrar con chaira el prototipo
+
+**Alcance del Sistema**
+-----------------------
+> -  Parqueadero de la Zona docente de la Universidad de la Amazonia.
+
+**Restricción del Sistema**
+---------------------------
+> - Personal docente de la Universidad de la Amazonia.
+> - Personal autorizado por docentes de la Institución.
+
+**Marco Conceptual**
+---------------------
+Es toda la concepción y documentación para poder entender el proyecto.
+
+**Estado del Arte**
+------------------
+Es la comparación de varios proyectos similares y entender que es lo novedoso que el actual escrito ofrece.
+
+
+##**Capitulo 1: Identificación de Requerimientos.**
+
+### **1.1. Requerimientos Funcionales**
+
+
+| - REQUERIMIENTO      |  - DESCRIPCIÓN            |
+| :-----------------:  | :------------------------ | 
+| FRQ-001              | Gestionar Asignación      | 
+| FRQ-002              | Gestionar Autorización    | 
+| FRQ-003              | Gestionar Parametrización |  
+| FRQ-004              | Gestionar Circulación     |  
+
+#### **FRQ-001: Gestionar Asignación**
+ - El sistema deberá permitir asignar identificadores únicos  a los vehículos.
+ - El sistema deberá permitir asignar carnet a los usuarios del mismo. 
+ 
+#### **FRQ-002: Gestionar Autorización**
+ - El sistema deberá permitir el ingreso y salida de vehículos al personal autorizado.
+
+#### **FRQ-003: Gestionar Parametrización**
+ - El sistema deberá permitir registrar información relevante de los vehículos.
+ -  El sistema deberá permitir registrar información a los carnet del personal autorizado como los identificadores únicos de los vehículos.
+ -  El sistema deberá permitir registrar usuarios externos al sistema Universidad de la Amazonia.
+
+#### **FRQ-004: Gestionar Circulación**
+ - El sistema deberá permitir controlar el ingreso y salida de vehículos a personal autorizado docente.
+
+### **1.2. Actores del Sistema**
+
+| - Actor     |  - Nombre       | - Descripción         |
+| :---------: | :-------------- | :-------------------- |
+| - ACT-01    | - Administrador | - Super Administrador |
+| - ACT-02    | - Docente       | - Usuario objetivo    |
+| - ACT-03    | - Particular    | - Usuario participante              |
+
+#### **ACT-01: Administrador**
+Es el super administrador  al que se le permite tener el máximo de privilegios, estará representado por el celador.
+
+#### **ACT-02: Docente**
+Es el usuario cliente al que se desea desarrollar el sistema de información.
+
+#### **ACT-03: Particular**
+Es el usuario que el docente autoriza para que se le permita ingresar y salir temporalmente con un vehículo.

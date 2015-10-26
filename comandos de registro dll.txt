@@ -1,3 +1,0 @@
-cd D:\BootPark\BootParkBiom\BootParkBiom\bin\Debug
-
-regasm.exe BootParkBiom.dll /tlb /codebase
