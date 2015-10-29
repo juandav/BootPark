@@ -1,0 +1,4 @@
+Capitulo 1: Analisis de Requerimientos
+Capitulo 2: Diseño de los sistemas de información
+Capitulo 3: Implementación del prototipo
+Capitulo 4: Metodologia SCRUM
