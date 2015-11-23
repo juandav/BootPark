@@ -113,6 +113,24 @@
 
             return true;
         };
+        
+      var findUser = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.IDENT + node.data.NOMBRE + node.data.APELLIDO;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+
 
     </script>
 </head>
@@ -126,6 +144,19 @@
                     <ext:Panel ID="PUSUARIO" runat="server" Layout="Fit" Region="Center">
                         <Items>
                             <ext:GridPanel ID="GPUSUARIO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CAPELLIDO" Title="Usuarios" Icon="User">
+                                
+                                <TopBar>
+                                    <ext:Toolbar runat="server">
+                                        <Items>
+                                            <ext:TextField ID="TFfindUser" runat="server" EmptyText="Cedula, nombre o apellido para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                <Listeners>
+                                                    <KeyPress Handler="findUser(SUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
+                                                </Listeners>
+                                            </ext:TextField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
+
                                 <Store>
                                     <ext:Store ID="SUSUARIO" runat="server">
                                         <Reader>
