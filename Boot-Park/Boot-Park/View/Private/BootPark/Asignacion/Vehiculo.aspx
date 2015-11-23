@@ -90,6 +90,23 @@
 
             return true;
         };
+        
+        var findCar = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.VEHI_PLACA + node.data.VEHI_MARCA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
     </script>
 </head>
 <body>
@@ -102,6 +119,19 @@
                     <ext:Panel ID="PVEHICULO" runat="server" Layout="Fit" Region="Center">
                         <Items>
                             <ext:GridPanel ID="GPVEHICULO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CVEHI_OBSERVACION" Title="Vehiculos" Icon="Car">
+                                
+                                <TopBar>
+                                    <ext:Toolbar runat="server">
+                                        <Items>
+                                            <ext:TextField ID="TFfindCar" runat="server" EmptyText="Escriba la placa o marca del vehiculo" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                <Listeners>
+                                                    <KeyPress Handler="findCar(SVEHICULO.store, TFfindCar.getValue(), Ext.EventObject);" />
+                                                </Listeners>
+                                            </ext:TextField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
+                                
                                 <Store>
                                     <ext:Store ID="SVEHICULO" runat="server">
                                         <Reader>
