@@ -88,7 +88,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\MySql.Web.fakes" />
     <None Include="Properties\PublishProfiles\BookPark.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
