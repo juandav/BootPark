@@ -117,14 +117,14 @@
                         <Items>
                             <ext:TextField ID="TFVEHI_PLACA" runat="server" Width="300" FieldLabel="Placa" AllowBlank="false" />
                             <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" Width="300" FieldLabel="Modelo" AllowBlank="false" />
-                            <ext:ComboBox ID="TFVEHI_MARCA"  runat="server" Width="300" ValueField="MAR_MARCA"  DisplayField="MAR_MARCA" FieldLabel="Marca" AllowBlank="false">
+                            <ext:ComboBox ID="TFVEHI_MARCA"  runat="server" Width="300" ValueField="MAVE_MARCA"  DisplayField="MAVE_MARCA" FieldLabel="Marca" AllowBlank="false">
                                <Store>
                                    <ext:Store ID="SMARCA" runat="server">
                                        <Reader>
                                            <ext:JsonReader>
                                                <Fields>
-                                                   <ext:RecordField Name="MAR_ID" />
-                                                   <ext:RecordField Name="MAR_MARCA" Type="String" />
+                                                   <ext:RecordField Name="MAVE_ID" />
+                                                   <ext:RecordField Name="MAVE_MARCA" Type="String" />
                                                </Fields>
                                            </ext:JsonReader>
                                        </Reader>
