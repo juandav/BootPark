@@ -12,8 +12,7 @@
 <body>
    <ext:ResourceManager runat="server" />
     <form id="form1" runat="server">
-        <ext:Desktop runat="server" ID="DESCRITORIO" ShortcutTextColor="Black" Wallpaper="../../Content/Images/desktop.jpg">
-            
+        <ext:Desktop runat="server" ID="DESCRITORIO" ShortcutTextColor="Black" Wallpaper="../../Content/Images/fondo.jpg">
             <Shortcuts>
                 <ext:DesktopShortcut ShortcutID="DSVALIDACION" Text="Validación con Dispositivos" IconCls="shortcut-icon icon-circulacion" />
             </Shortcuts>

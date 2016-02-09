@@ -117,7 +117,7 @@
                         <Items>
                             <ext:TextField ID="TFVEHI_PLACA" runat="server" Width="300" FieldLabel="Placa" AllowBlank="false" />
                             <ext:SpinnerField ID="SFVEHI_MODELO" runat="server" Width="300" FieldLabel="Modelo" AllowBlank="false" />
-                            <ext:ComboBox ID="TFVEHI_MARCA"  runat="server" Width="300" ValueField="MAVE_MARCA"  DisplayField="MAVE_MARCA" FieldLabel="Marca" AllowBlank="false">
+                            <ext:ComboBox ID="TFVEHI_MARCA"  runat="server" Width="300" ValueField="MAVE_ID"  DisplayField="MAVE_MARCA" FieldLabel="Marca" AllowBlank="false">
                                <Store>
                                    <ext:Store ID="SMARCA" runat="server">
                                        <Reader>

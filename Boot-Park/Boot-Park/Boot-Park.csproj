@@ -60,15 +60,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.6\Assemblies\v4.5\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Web, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.6\Assemblies\v4.5\MySql.Web.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="rfid.io">
+    <Reference Include="rfid.io, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\rfid.io.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -100,9 +97,8 @@
     <Content Include="Content\css\desktop.css" />
     <Content Include="Content\images\carrotag.ico" />
     <Content Include="Content\images\circulacion.png" />
-    <Content Include="Content\images\desktop.jpg" />
-    <Content Include="Content\images\desktop.png" />
     <Content Include="Content\images\enrollmentFootprint.ico" />
+    <Content Include="Content\images\fondo.jpg" />
     <Content Include="Content\images\footprint.ico" />
     <Content Include="Content\images\suma.png" />
     <Content Include="Content\images\user.png" />

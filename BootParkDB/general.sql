@@ -1,35 +1,30 @@
-/*
-Navicat MySQL Data Transfer
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               5.5.10 - MySQL Community Server (GPL)
+-- Server OS:                    Win32
+-- HeidiSQL version:             7.0.0.4053
+-- Date/time:                    2016-02-09 18:17:42
+-- --------------------------------------------------------
 
-Source Server         : LOCAL
-Source Server Version : 50542
-Source Host           : localhost:3306
-Source Database       : general
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50542
-File Encoding         : 65001
+-- Dumping database structure for general
+CREATE DATABASE IF NOT EXISTS `general` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `general`;
 
-Date: 2015-12-22 01:41:25
-*/
 
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for personanaturalgeneral
--- ----------------------------
-DROP TABLE IF EXISTS `personanaturalgeneral`;
-CREATE TABLE `personanaturalgeneral` (
-  `PEGE_ID` int(10) NOT NULL AUTO_INCREMENT,
-  `PENG_IDENTIFICACION` int(10) NOT NULL,
-  `PENG_NOMBRE` varchar(30) NOT NULL,
-  `PENG_APELLIDO` varchar(30) NOT NULL,
-  `PENG_REGISTRADOPOR` varchar(30) NOT NULL,
-  `PENG_FECHACAMBIO` date NOT NULL,
-  PRIMARY KEY (`PEGE_ID`),
-  UNIQUE KEY `PENG_IDENTIFICACION` (`PENG_IDENTIFICACION`)
+-- Dumping structure for table general.personachaira
+CREATE TABLE IF NOT EXISTS `personachaira` (
+  `PEGE_ID` decimal(30,0) DEFAULT NULL,
+  `IDENTIFICACION` varchar(30) DEFAULT NULL,
+  `NOMBRE` varchar(30) DEFAULT NULL,
+  `APELLIDO` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of personanaturalgeneral
--- ----------------------------
+-- Dumping data for table general.personachaira: ~0 rows (approximately)
+/*!40000 ALTER TABLE `personachaira` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personachaira` ENABLE KEYS */;
+/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

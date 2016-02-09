@@ -57,7 +57,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="UHFReader28CSharp">
-      <HintPath>..\..\BootParkRFID\rfid.io\bin\UHFReader28CSharp.dll</HintPath>
+      <HintPath>..\..\bin\UHFReader28CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

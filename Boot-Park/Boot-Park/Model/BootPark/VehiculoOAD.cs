@@ -10,15 +10,20 @@ namespace Boot_Park.Model.BootPark
 
         public DataTable consultarVehiculos()
         {
-            string sql = "SELECT"
-                        + "     V.VEHI_ID,"
-                        + "     V.VEHI_OBSERVACION,"
-                        + "     V.VEHI_PLACA,"
-                        + "     V.VEHI_MODELO,"
-                        + "     V.VEHI_MARCA,"
-                        + "     V.VEHI_COLOR"
-                        + " FROM"
-                        + "     BOOTPARK.VEHICULO V";
+            string sql = "SELECT "
+                        + "    V.VEHI_ID, "
+                        + "    V.VEHI_OBSERVACION, "
+                        + "    UPPER(M.MAVE_MARCA) AS VEHI_MARCA, "
+                        + "    V.VEHI_PLACA, "
+                        + "    V.VEHI_MODELO, "
+                        + "    V.VEHI_COLOR, "
+                        + "    V.VEHI_REGISTRADOPOR, "
+                        + "    V.VEHI_FECHACAMBIO "
+                        + "FROM "
+                        + "    BOOTPARK.VEHICULO V "
+                        + "INNER JOIN BOOTPARK.MARCAVEHICULO M "
+                        + "ON "
+                        + "    V.MAVE_ID = M.MAVE_ID"; 
             return connection.getDataMariaDB(sql).Tables[0];
         }
 
@@ -32,7 +37,7 @@ namespace Boot_Park.Model.BootPark
                         + "         VEHI_OBSERVACION,"
                         + "         VEHI_PLACA,"
                         + "         VEHI_MODELO,"
-                        + "         VEHI_MARCA,"
+                        + "         MAVE_ID,"
                         + "         VEHI_COLOR,"
                         + "         VEHI_REGISTRADOPOR,"
                         + "         VEHI_FECHACAMBIO"
@@ -59,7 +64,7 @@ namespace Boot_Park.Model.BootPark
                         + "     VEHI_OBSERVACION = '" + observacion + "',"
                         + "     VEHI_PLACA = '" + placa + "',"
                         + "     VEHI_MODELO = " + modelo + ","
-                        + "     VEHI_MARCA = '" + marca + "',"
+                        + "     MAVE_ID = '" + marca + "',"
                         + "     VEHI_COLOR = '" + color + "',"
                         + "     VEHI_REGISTRADOPOR = '" + registradoPor + "',"
                         + "     VEHI_FECHACAMBIO = CURRENT_DATE()"

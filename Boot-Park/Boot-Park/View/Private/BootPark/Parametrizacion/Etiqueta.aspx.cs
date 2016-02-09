@@ -88,18 +88,23 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
         public void validarTarjeta(string id, string tipo)
         {
             string estado = parametro.validarEtiqueta(id, tipo).Rows[0]["ETIQUETAEXISTE"].ToString();
-            if (estado=="true")
+            if (estado == "true")
             {
-                   X.Msg.Notify("Notificación"," Este " + tipo + " ya esta registrado..").Show();
-                   TFETIQ_ETIQUETA.Text = "";
+                X.Msg.Notify("Notificación", " Este " + tipo + " ya esta registrado..").Show();
+                TFETIQ_ETIQUETA.Text = "";
             }
-          
+
         }
         [DirectMethod(Namespace = "parametro")]
         public void detectarTag()
         {
-          
-            string response = r.iniciarDeteccion();
+            string response = "NO";
+
+            try
+            {
+                response = r.iniciarDeteccion();
+            }
+            catch (Exception) { response = "Fail"; }
 
             if (response.Equals("YES"))
             {
@@ -108,11 +113,18 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
                 validarTarjeta(etiqueta, CBETIQ_TIPO.Text);
 
             }
+
+            if (response == "Fail")
+            {
+                X.Msg.Notify("Fail", "Error en la detección del tag").Show();
+            }
             else
             {
-                X.Msg.Notify("Notificación", "'No conectado!, Asegurece que la lectora RFID este conectado a la red TCP/IP").Show();
+
+                X.Msg.Notify("Error", "'No conectado!, Asegurece que la lectora RFID este conectado a la red TCP/IP").Show();
+
             }
-            
+
         }
 
         private void BindData()
