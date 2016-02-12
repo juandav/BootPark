@@ -49,6 +49,15 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
         protected global::Ext.Net.GridPanel GPPARTICULAR;
         
         /// <summary>
+        /// Control TFfindUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindUser;
+        
+        /// <summary>
         /// Control SPARTICULAR.
         /// </summary>
         /// <remarks>

@@ -11,6 +11,22 @@
         var afterEdit = function (e) {
             parametro.modificarParticular(e.record.data.PART_ID, e.record.data.PART_IDENTIFICACION, e.record.data.PART_NOMBRE, e.record.data.PART_APELLIDO);
         };
+        var findUser = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.PART_IDENTIFICACION + node.data.PART_NOMBRE + node.data.PART_APELLIDO;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
     </script>
 </head>
 <body>
@@ -22,6 +38,17 @@
                     <ext:Panel ID="PPRESENTACION" runat="server" Layout="Fit" Region="Center" Padding="5">
                         <Items>
                             <ext:GridPanel ID="GPPARTICULAR" runat="server" AutoExpandColumn="PART_APELLIDO">
+                                 <TopBar>
+                                    <ext:Toolbar runat="server">
+                                        <Items>
+                                            <ext:TextField ID="TFfindUser" runat="server" EmptyText="Cedula, nombre o apellido para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                <Listeners>
+                                                    <KeyPress Handler="findUser(GPPARTICULAR.store, TFfindUser.getValue(), Ext.EventObject);" />
+                                                </Listeners>
+                                            </ext:TextField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
                                 <Store>
                                     <ext:Store ID="SPARTICULAR" runat="server">
                                         <Reader>

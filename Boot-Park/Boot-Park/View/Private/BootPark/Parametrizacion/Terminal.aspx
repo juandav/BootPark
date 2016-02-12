@@ -11,6 +11,22 @@
         var afterEdit = function (e) {
             parametro.modificarTerminal(e.record.data.TERM_ID, e.record.data.TERM_PUERTO, e.record.data.TERM_IP, e.record.data.TERM_TIPO);
         };
+        var findTerminal = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.TERM_PUERTO + node.data.TERM_IP + node.data.TERM_TIPO;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
     </script>
 </head>
 <body>
@@ -22,6 +38,17 @@
                     <ext:Panel ID="PPRESENTACION" runat="server" Layout="Fit" Region="Center" Padding="5">
                         <Items>
                             <ext:GridPanel ID="GPTERMINAL" runat="server" AutoExpandColumn="TERM_IP">
+                                <TopBar>
+                                    <ext:Toolbar runat="server">
+                                        <Items>
+                                            <ext:TextField ID="TFfindTerminal" runat="server" EmptyText="Ip, puerto o tipo para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                <Listeners>
+                                                    <KeyPress Handler="findTerminal(GPTERMINAL.store, TFfindTerminal.getValue(), Ext.EventObject);" />
+                                                </Listeners>
+                                            </ext:TextField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
                                 <Store>
                                     <ext:Store ID="STERMINAL" runat="server">
                                         <Reader>

@@ -11,7 +11,22 @@
         var afterEdit = function (e) {
             parametro.modificarVehiculo(e.record.data.VEHI_ID, e.record.data.VEHI_OBSERVACION, e.record.data.VEHI_PLACA, e.record.data.VEHI_MODELO, e.record.data.VEHI_MARCA, e.record.data.VEHI_COLOR);
         };
-      
+        var findVehiculo = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.VEHI_PLACA + node.data.VEHI_MODELO + node.data.VEHI_MARCA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
     </script>
 </head>
 <body>
@@ -24,6 +39,17 @@
                     <ext:Panel ID="PPRESENTACION" runat="server" Layout="Fit" Region="Center" Padding="5">
                         <Items>
                             <ext:GridPanel ID="GPVEHICULO" runat="server" AutoExpandColumn="CVEHI_OBSERVACION">
+                                <TopBar>
+                                    <ext:Toolbar runat="server">
+                                        <Items>
+                                            <ext:TextField ID="TFfindVehiculo" runat="server" EmptyText="Placa, modelo o marca para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                <Listeners>
+                                                    <KeyPress Handler="findVehiculo(GPVEHICULO.store, TFfindVehiculo.getValue(), Ext.EventObject);" />
+                                                </Listeners>
+                                            </ext:TextField>
+                                        </Items>
+                                    </ext:Toolbar>
+                                </TopBar>
                                 <Store>
                                     <ext:Store ID="SVEHICULO" runat="server">
                                         <Reader>
