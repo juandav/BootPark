@@ -20,7 +20,7 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
             DataTable data = parametro.ConsultarUsuarioCirculacion(pegeId);
             if (data.Rows.Count > 0)
             {
-                GPUSUARIO.Title = data.Rows[0]["NOMBRE"].ToString() + " " + data.Rows[0]["APELLIDO"].ToString();    
+                GPUSUARIO.Title = data.Rows[0]["NOMBRE"].ToString() + " " + data.Rows[0]["APELLIDO"].ToString();
             }
             
         }

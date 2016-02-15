@@ -70,7 +70,7 @@
             return true;
         };
     
-    var findUser = function (Store, texto, e) {
+        var findUser = function (Store, texto, e) {
             if (e.getKey() == 13) {
                 var store = Store,
                     text = texto;
@@ -80,7 +80,40 @@
                 }
                 var re = new RegExp(".*" + text + ".*", "i");
                 store.filterBy(function (node) {
-                    var RESUMEN = node.data.IDENT;
+                    var RESUMEN = node.data.IDENT + node.data.NOMBRE + node.data.APELLIDO;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+
+        var findVehiculoOUT = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.VEHI_PLACA + node.data.VEHI_MODELO + node.data.VEHI_MARCA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+        var findVehiculoIn = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.VEHI_PLACA + node.data.VEHI_MODELO + node.data.VEHI_MARCA;
                     var a = re.test(RESUMEN);
                     return a;
                 });
@@ -102,11 +135,11 @@
                             <ext:GridPanel ID="GPUSUARIO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CAPELLIDO" Title="Usuarios" Icon="User">
                                 
                                 <TopBar>
-                                    <ext:Toolbar runat="server">
+                                    <ext:Toolbar ID="Toolbar2" runat="server">
                                         <Items>
-                                            <ext:TextField ID="TFfindUser" runat="server" EmptyText="Digite la cedula del propietario" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                            <ext:TextField ID="TFfindUser" runat="server" EmptyText="identificacion, nombre o apellido para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                 <Listeners>
-                                                    <KeyPress Handler="findUser(SUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
+                                                    <KeyPress Handler="findUser(GPUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
                                                 </Listeners>
                                             </ext:TextField>
                                         </Items>
@@ -164,6 +197,17 @@
                                         <Columns>
                                             <ext:LayoutColumn ColumnWidth="0.5">
                                                 <ext:GridPanel ID="GPVEHICULOAOUT" runat="server" AutoExpandColumn="CVEHI_OBSERVACION" ColumnWidth="0.5" Title="Vehiculos Disponibles" Icon="CarAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
+                                                    <TopBar>
+                                                        <ext:Toolbar runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindVehiculoOut" runat="server" EmptyText="Placa, modelo o marca para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findVehiculoOUT(GPVEHICULOAOUT.store, TFfindVehiculoOut.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
                                                     <Store>
                                                         <ext:Store ID="SVEHICULOOUT" runat="server">
                                                             <Reader>
@@ -261,6 +305,17 @@
                                             </ext:LayoutColumn>
                                             <ext:LayoutColumn>
                                                 <ext:GridPanel ID="GPVEHICULOIN" runat="server" AutoExpandColumn="CVEHI_OBSERVACION" ColumnWidth="0.5" Title="Vehiculos Asignados" Icon="CarRed" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                                     <TopBar>
+                                                        <ext:Toolbar ID="Toolbar1" runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindVehiculoIn" runat="server" EmptyText="Placa, modelo o marca para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findVehiculoIn(GPVEHICULOIN.store, TFfindVehiculoIn.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
                                                     <Store>
                                                         <ext:Store ID="SVEHICULOIN" runat="server">
                                                             <Reader>

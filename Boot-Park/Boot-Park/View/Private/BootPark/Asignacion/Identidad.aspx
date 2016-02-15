@@ -82,7 +82,7 @@
             // Loop through the selections
             var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, {
+                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
                     success: function (result) {
                         addRow(SETIQUETAOUT, record, ddSource);
                     },
@@ -100,21 +100,21 @@
             // Loop through the selections
             var dataUser = GPUSUARIO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, dataUser[0].data.ID, {
+                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
                     success: function (result) {
-                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, dataUser[0].data.NOMBRE, dataUser[0].data.ID);
+                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, HNOMBRE_USER.getValue(), HID_USER.getValue());
                         addRow(STIQUETAIN, record, ddSource);
                     },
                     failure: function (errorMsg) {
-                        
+
                     }
                 });
             });
 
             return true;
         };
-        
-      var findUser = function (Store, texto, e) {
+
+        var findUser = function (Store, texto, e) {
             if (e.getKey() == 13) {
                 var store = Store,
                     text = texto;
@@ -131,12 +131,47 @@
             }
         };
 
+        var findEtiquetaOUT = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+        var findEtiquetaIN = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+
 
     </script>
 </head>
 <body>
 
     <ext:ResourceManager runat="server" />
+    <ext:Hidden ID="HID_USER" runat="server" />
+    <ext:Hidden ID="HNOMBRE_USER" runat="server" />
     <form id="FIDENTIDAD" runat="server">
         <div>
             <ext:Viewport ID="VPPRINCIPAL" runat="server" Layout="border">
@@ -144,13 +179,12 @@
                     <ext:Panel ID="PUSUARIO" runat="server" Layout="Fit" Region="Center">
                         <Items>
                             <ext:GridPanel ID="GPUSUARIO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CAPELLIDO" Title="Usuarios" Icon="User">
-                                
                                 <TopBar>
                                     <ext:Toolbar runat="server">
                                         <Items>
                                             <ext:TextField ID="TFfindUser" runat="server" EmptyText="Cedula, nombre o apellido para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                 <Listeners>
-                                                    <KeyPress Handler="findUser(SUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
+                                                    <KeyPress Handler="findUser(GPUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
                                                 </Listeners>
                                             </ext:TextField>
                                         </Items>
@@ -182,17 +216,17 @@
                                         <ext:Column ColumnID="CTIPO" DataIndex="TIPO" Header="Tipo" />
                                         <ext:CommandColumn Width="65" DataIndex="HUEL_ESTADO" Header="Huella">
                                             <Commands>
-                                                 <ext:GridCommand IconCls=".shortcut-icon-enrollment-Footprint icon-enrollment-Footprint" CommandName="enrollmentFootprint">
+                                                <ext:GridCommand IconCls=".shortcut-icon-enrollment-Footprint icon-enrollment-Footprint" CommandName="enrollmentFootprint">
                                                     <ToolTip Text="incripcion de la Huella" />
                                                 </ext:GridCommand>
-                                                 <ext:CommandSeparator />
-                                                    <ext:GridCommand IconCls="shortcut-icon-footprint icon-footprint" CommandName="footprint">
+                                                <ext:CommandSeparator />
+                                                <ext:GridCommand IconCls="shortcut-icon-footprint icon-footprint" CommandName="footprint">
                                                     <ToolTip Text="Registrar la huella vinculado al Chaira." />
                                                 </ext:GridCommand>
                                             </Commands>
                                             <PrepareToolbar Fn="prepareCommand" />
                                         </ext:CommandColumn>
-                                     
+
                                     </Columns>
                                 </ColumnModel>
                                 <SelectionModel>
@@ -201,6 +235,8 @@
                                             <RowSelect Handler="
                                                 GPUSUARIO.collapse();
                                                 PETIQUETA.expand();
+                                                HID_USER.setValue(record.data.ID);
+                                                HNOMBRE_USER.setValue(record.data.NOMBRE);
                                                 PETIQUETA.setTitle('Carnet para asignar a: '+ record.data.NOMBRE + ' ' + record.data.APELLIDO + '(' + record.data.TIPO + ') ' );
                                                 parametro.cargarEtiquetasOUT();
                                                 parametro.cargarEtiquetasIN(record.data.ID);" />
@@ -208,81 +244,182 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                          <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){ obj.CapturarHuella(record.data.ID);} if(command=='footprint'){registrarHuella(record.data.ID);}" />          
+                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){ obj.CapturarHuella(record.data.ID);} if(command=='footprint'){registrarHuella(record.data.ID);}" />
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
 
                             </ext:GridPanel>
                             <ext:Panel ID="PETIQUETA" runat="server" Layout="Column" Padding="5" Collapsible="true" Collapsed="false" Title="Carnets" Icon="Cart">
                                 <Items>
-                                    <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
-                                        <Store>
-                                            <ext:Store ID="SETIQUETAOUT" runat="server">
-                                                <Reader>
-                                                    <ext:JsonReader>
-                                                        <Fields>
-                                                            <ext:RecordField Name="ETIQ_ID" />
-                                                            <ext:RecordField Name="ETIQ_TIPO" />
-                                                            <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
-                                                        </Fields>
-                                                    </ext:JsonReader>
-                                                </Reader>
-                                            </ext:Store>
-                                        </Store>
-                                        <ColumnModel>
-                                            <Columns>
-                                                <ext:RowNumbererColumn />
-                                                <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
-                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
-                                            </Columns>
-                                        </ColumnModel>
-                                        <SelectionModel>
-                                            <ext:RowSelectionModel SingleSelect="true" />
-                                        </SelectionModel>
-                                    </ext:GridPanel>
-                                    <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETUS_MOTIVO" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull" EnableDragDrop="true" DDGroup="firstGridDDGroup">
-                                        <Store>
-                                            <ext:Store ID="STIQUETAIN" runat="server">
-                                                <Reader>
-                                                    <ext:JsonReader>
-                                                        <Fields>
-                                                            <ext:RecordField Name="ETIQ_ID" />
-                                                            <ext:RecordField Name="ETIQ_TIPO" />
-                                                            <ext:RecordField Name="ETIQ_ETIQUETA" />
-                                                            <ext:RecordField Name="ETIQ_DESCRIPCION" />
-                                                            <ext:RecordField Name="ETUS_MOTIVO" />
-                                                        </Fields>
-                                                    </ext:JsonReader>
-                                                </Reader>
-                                            </ext:Store>
-                                        </Store>
-                                        <ColumnModel>
-                                            <Columns>
-                                                <ext:RowNumbererColumn />
-                                                <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
-                                                <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
-                                                <ext:Column ColumnID="CETUS_MOTIVO" DataIndex="ETUS_MOTIVO" Header="Motivo">
-                                                    <Editor>
-                                                        <ext:TextField runat="server"/>
-                                                    </Editor>
-                                                </ext:Column>
-                                            </Columns>
-                                        </ColumnModel>
-                                        <SelectionModel>
-                                            <ext:RowSelectionModel SingleSelect="true" />
-                                        </SelectionModel>
-                                        <Listeners>
-                                            <AfterEdit Fn="afterEdit" />
-                                        </Listeners>
-                                    </ext:GridPanel>
+                                    <ext:ColumnLayout ID="ColumnLayout1" runat="server" FitHeight="true">
+                                        <Columns>
+                                            <ext:LayoutColumn ColumnWidth="0.5">
+                                                <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Carnets Disponibles" Icon="CartAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
+                                                    <TopBar>
+                                                        <ext:Toolbar runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindEtiquetaOut" runat="server" EmptyText="codigo o etiqueta para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findEtiquetaOUT(GPETIQUETAOUT.store, TFfindEtiquetaOut.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
+                                                    <Store>
+                                                        <ext:Store ID="SETIQUETAOUT" runat="server">
+                                                            <Reader>
+                                                                <ext:JsonReader>
+                                                                    <Fields>
+                                                                        <ext:RecordField Name="ETIQ_ID" />
+                                                                        <ext:RecordField Name="ETIQ_TIPO" />
+                                                                        <ext:RecordField Name="ETIQ_ETIQUETA" />
+                                                                        <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                                    </Fields>
+                                                                </ext:JsonReader>
+                                                            </Reader>
+                                                        </ext:Store>
+                                                    </Store>
+                                                    <ColumnModel>
+                                                        <Columns>
+                                                            <ext:RowNumbererColumn />
+                                                            <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
+                                                            <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
+                                                        </Columns>
+                                                    </ColumnModel>
+                                                    <SelectionModel>
+                                                        <ext:RowSelectionModel SingleSelect="true" />
+                                                    </SelectionModel>
+                                                </ext:GridPanel>
+                                            </ext:LayoutColumn>
+
+                                            <ext:LayoutColumn>
+                                                <ext:Panel ID="Panel1"
+                                                    runat="server"
+                                                    Width="35"
+                                                    BodyStyle="background-color: transparent;"
+                                                    Border="false"
+                                                    Layout="Anchor">
+                                                    <Items>
+                                                        <ext:Panel ID="Panel2" runat="server" Border="false" BodyStyle="background-color: transparent;" AnchorVertical="40%" />
+                                                        <ext:Panel ID="Panel3" runat="server" Border="false" BodyStyle="background-color: transparent;" Padding="5">
+                                                            <Items>
+                                                                <ext:Button ID="Button1" runat="server" Icon="ResultsetNext" StyleSpec="margin-bottom:2px;">
+                                                                    <Listeners>
+
+                                                                        <Click Handler=" var records  = GPETIQUETAOUT.selModel.getSelections();
+                                                                                             Ext.each(records, function (record) {
+                                                                                                parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
+                                                                                                    success: function (result) {
+                                                                                                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, HNOMBRE_USER.getValue(), HID_USER.getValue());
+                                                                                                        GPETIQUETAOUT.deleteSelected();
+                                                                                                        GPETIQUETAIN.store.addSorted(record);  
+                                                                                                         Ext.net.Notification.show({
+                                                                                                                 html: 'Tarjeta Vinculada exitosamente', title: 'Notificación'
+                                                                                                         });
+                                                                                                    },
+                                                                                                    failure: function (errorMsg) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                                                                                                        });
+                                                                                                    }
+                                                                                                });
+                                                                                            });
+
+                                                                                       " />
+                                                                    </Listeners>
+                                                                    <ToolTips>
+                                                                        <ext:ToolTip ID="ToolTip1" runat="server" Title="Add" Html="Add Selected Rows" />
+                                                                    </ToolTips>
+                                                                </ext:Button>
+                                                                <ext:Button ID="Button2" runat="server" Icon="ResultsetPrevious" StyleSpec="margin-bottom:2px;">
+                                                                    <Listeners>
+                                                                        <Click Handler=" var records = GPETIQUETAIN.selModel.getSelections();
+                                                                                            Ext.each(records, function (record) {
+                                                                                                parametro.desvincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
+                                                                                                    success: function (result) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'Carnet desvinculado exitosamente', title: 'Notificación'
+                                                                                                        });
+                                                                                                        GPETIQUETAIN.deleteSelected();
+                                                                                                        GPETIQUETAOUT.store.addSorted(records); 
+                                                                                                    },
+                                                                                                    failure: function (errorMsg) {
+                                                                                                        Ext.net.Notification.show({
+                                                                                                            html: 'Ha ocurrido un error!!', title: 'Notificación'
+                                                                                                        });
+                                                                                                    }
+
+                                                                                                });
+                                                                                            });
+                                                                                       " />
+                                                                    </Listeners>
+                                                                    <ToolTips>
+                                                                        <ext:ToolTip ID="ToolTip2" runat="server" Title="Remove" Html="Remove Selected Rows" />
+                                                                    </ToolTips>
+                                                                </ext:Button>
+                                                            </Items>
+                                                        </ext:Panel>
+                                                    </Items>
+                                                </ext:Panel>
+                                            </ext:LayoutColumn>
+                                            <ext:LayoutColumn>
+                                                <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETUS_MOTIVO" ColumnWidth="0.5" Title="Carnets Asignados" Icon="CartFull" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                                    <TopBar>
+                                                        <ext:Toolbar runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindEtiquetaIN" runat="server" EmptyText="codigo o etiqueta para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findEtiquetaIN(GPETIQUETAIN.store, TFfindEtiquetaIN.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
+                                                    <Store>
+                                                        <ext:Store ID="STIQUETAIN" runat="server">
+                                                            <Reader>
+                                                                <ext:JsonReader>
+                                                                    <Fields>
+                                                                        <ext:RecordField Name="ETIQ_ID" />
+                                                                        <ext:RecordField Name="ETIQ_TIPO" />
+                                                                        <ext:RecordField Name="ETIQ_ETIQUETA" />
+                                                                        <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                                        <ext:RecordField Name="ETUS_MOTIVO" />
+                                                                    </Fields>
+                                                                </ext:JsonReader>
+                                                            </Reader>
+                                                        </ext:Store>
+                                                    </Store>
+                                                    <ColumnModel>
+                                                        <Columns>
+                                                            <ext:RowNumbererColumn />
+                                                            <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Carnet" />
+                                                            <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Header="Descripción" />
+                                                            <ext:Column ColumnID="CETUS_MOTIVO" DataIndex="ETUS_MOTIVO" Header="Motivo">
+                                                                <Editor>
+                                                                    <ext:TextField runat="server" />
+                                                                </Editor>
+                                                            </ext:Column>
+                                                        </Columns>
+                                                    </ColumnModel>
+                                                    <SelectionModel>
+                                                        <ext:RowSelectionModel SingleSelect="true" />
+                                                    </SelectionModel>
+                                                    <Listeners>
+                                                        <AfterEdit Fn="afterEdit" />
+                                                    </Listeners>
+                                                </ext:GridPanel>
+                                            </ext:LayoutColumn>
+                                        </Columns>
+                                    </ext:ColumnLayout>
                                 </Items>
-                            </ext:Panel>
-                        </Items>
+                             </ext:Panel>
+                         </Items>
                     </ext:Panel>
                 </Items>
             </ext:Viewport>
-                    
+
         </div>
         <ext:DropTarget runat="server" Target="={GPETIQUETAOUT.view.scroller.dom}" Group="firstGridDDGroup">
             <NotifyDrop Fn="notifyDrop1" />

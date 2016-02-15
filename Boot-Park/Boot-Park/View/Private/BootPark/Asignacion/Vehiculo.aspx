@@ -46,9 +46,8 @@
 
         var notifyDrop1 = function (ddSource, e, data) {
             // Loop through the selections
-            var dataVehiculo = GPVEHICULO.selModel.getSelections();
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.DesvincularTagalVehiculo(record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, {
+                parametro.DesvincularTagalVehiculo(record.data.ETIQ_ID, HID_VEHI.getValue(), {
                     success: function (result) {
                         Ext.net.Notification.show({
                             html: 'Tag desvinculado existosamente', title: 'Notificación'
@@ -69,9 +68,9 @@
 
         var notifyDrop2 = function (ddSource, e, data) {
             // Loop through the selections
-            var dataVehiculo = GPVEHICULO.selModel.getSelections();
+           
             Ext.each(ddSource.dragData.selections, function (record) {
-                parametro.vincularTagAlVehiculo(record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, '', {
+                parametro.vincularTagAlVehiculo(record.data.ETIQ_ID, HID_VEHI.getValue(), '', {
                     success: function (result) {
                         Ext.net.Notification.show({
                             html: 'Tag asignado existosamente', title: 'Notificación'
@@ -101,17 +100,52 @@
                 }
                 var re = new RegExp(".*" + text + ".*", "i");
                 store.filterBy(function (node) {
-                    var RESUMEN = node.data.VEHI_PLACA + node.data.VEHI_MARCA;
+                    var RESUMEN = node.data.VEHI_MARCA + node.data.VEHI_PLACA;
                     var a = re.test(RESUMEN);
                     return a;
                 });
             }
         };
+
+        var findEtiquetaOUT = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+        var findEtiquetaIN = function (Store, texto, e) {
+            if (e.getKey() == 13) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                if (Ext.isEmpty(text, false)) {
+                    return;
+                }
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+            }
+        };
+       
     </script>
 </head>
 <body>
 
     <ext:ResourceManager runat="server" />
+     <ext:Hidden ID="HID_VEHI" runat="server" />
     <form id="TAG" runat="server">
         <div>
             <ext:Viewport ID="VPPRINCIPAL" runat="server" Layout="border">
@@ -119,25 +153,24 @@
                     <ext:Panel ID="PVEHICULO" runat="server" Layout="Fit" Region="Center">
                         <Items>
                             <ext:GridPanel ID="GPVEHICULO" runat="server" Height="300" Collapsible="True" Split="True" AutoExpandColumn="CVEHI_OBSERVACION" Title="Vehiculos" Icon="Car">
-                                
                                 <TopBar>
                                     <ext:Toolbar runat="server">
                                         <Items>
-                                            <ext:TextField ID="TFfindCar" runat="server" EmptyText="Escriba la placa o marca del vehiculo" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                            <ext:TextField ID="TFfindCar" runat="server" EmptyText="Escriba la placa o marca del vehiculo para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                 <Listeners>
-                                                    <KeyPress Handler="findCar(SVEHICULO.store, TFfindCar.getValue(), Ext.EventObject);" />
+                                                    <KeyPress Handler="findCar(GPVEHICULO.store, TFfindCar.getValue(), Ext.EventObject);" />
                                                 </Listeners>
                                             </ext:TextField>
                                         </Items>
                                     </ext:Toolbar>
                                 </TopBar>
-                                
+                                                                
                                 <Store>
                                     <ext:Store ID="SVEHICULO" runat="server">
                                         <Reader>
                                             <ext:JsonReader>
                                                 <Fields>
-                                                    <ext:RecordField Name="VEHI_ID" />
+                                                    <ext:RecordField Name="VEHI_ID" Type="String" />
                                                     <ext:RecordField Name="VEHI_OBSERVACION" />
                                                     <ext:RecordField Name="VEHI_PLACA" />
                                                     <ext:RecordField Name="VEHI_MODELO" />
@@ -166,6 +199,7 @@
                                                 GPVEHICULO.collapse();
                                                 PETIQUETA.expand();
                                                 PETIQUETA.setTitle('Etiqueta para asignar al Vehiculo:  ' + record.data.VEHI_MARCA + ' ' + record.data.VEHI_MODELO + '(' + record.data.VEHI_PLACA + ')' );
+                                                HID_VEHI.setValue(record.data.VEHI_ID);
                                                 parametro.cargarEtiquetasOUT();
                                                 parametro.cargarEtiquetasIN(record.data.VEHI_ID);" />
                                         </Listeners>
@@ -182,12 +216,23 @@
                                         <Columns>
                                             <ext:LayoutColumn ColumnWidth="0.5">
                                                 <ext:GridPanel ID="GPETIQUETAOUT" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Etiquetas Disponibles" Icon="TagBlueAdd" EnableDragDrop="true" DDGroup="secondGridDDGroup">
+                                                     <TopBar>
+                                                        <ext:Toolbar   runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindEtiquetaOut" runat="server" EmptyText="codigo o etiqueta para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findEtiquetaOUT(GPETIQUETAOUT.store, TFfindEtiquetaOut.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
                                                     <Store>
                                                         <ext:Store ID="SETIQUETAOUT" runat="server">
                                                             <Reader>
                                                                 <ext:JsonReader>
                                                                     <Fields>
-                                                                        <ext:RecordField Name="ETIQ_ID" />
+                                                                        <ext:RecordField Name="ETIQ_ID" Type="String" />
                                                                         <ext:RecordField Name="ETIQ_TIPO" />
                                                                         <ext:RecordField Name="ETIQ_ETIQUETA" />
                                                                         <ext:RecordField Name="ETIQ_DESCRIPCION" />
@@ -224,15 +269,15 @@
                                                                 <ext:Button runat="server" Icon="ResultsetNext" StyleSpec="margin-bottom:2px;">
                                                                     <Listeners>
 
-                                                                      <%--  <Click Handler=" var records  = GPVEHICULOAOUT.selModel.getSelections();
+                                                                        <Click Handler=" var records  = GPETIQUETAOUT.selModel.getSelections();
                                                                                             Ext.each(records, function (record) {
-                                                                                                parametro.vincularVehiculoAlUsuario(records[0].data.VEHI_ID, HID_USER.getValue(), {
+                                                                                               parametro.vincularTagAlVehiculo(record.data.ETIQ_ID, HID_VEHI.getValue(), '', {
                                                                                                     success: function (result) {
                                                                                                         Ext.net.Notification.show({
-                                                                                                            html: 'vehiculo autorizado exitosamente', title: 'Notificación'
+                                                                                                            html: 'Tag asignado existosamente', title: 'Notificación'
                                                                                                         });
-                                                                                                        GPVEHICULOAOUT.deleteSelected();
-                                                                                                        GPVEHICULOIN.store.addSorted(records);  
+                                                                                                        GPETIQUETAOUT.deleteSelected();
+                                                                                                        GPETIQUETAIN.store.addSorted(records);  
                                                                                                     },
                                                                                                     failure: function (errorMsg) {
                                                                                                         Ext.net.Notification.show({
@@ -242,7 +287,7 @@
                                                                                                 });
                                                                                             });
 
-                                                                                       " />--%>
+                                                                                       " />
                                                                     </Listeners>
                                                                     <ToolTips>
                                                                         <ext:ToolTip runat="server" Title="Add" Html="Add Selected Rows" />
@@ -250,15 +295,15 @@
                                                                 </ext:Button>
                                                                 <ext:Button runat="server" Icon="ResultsetPrevious" StyleSpec="margin-bottom:2px;">
                                                                     <Listeners>
-                                                                      <%--  <Click Handler=" var records = GPVEHICULOIN.selModel.getSelections();
+                                                                        <Click Handler=" var records = GPETIQUETAIN.selModel.getSelections();
                                                                                            Ext.each(records, function (record) {
-                                                                                                parametro.desvincularVehiculoAlUsuario(records[0].data.VEHI_ID, HID_USER.getValue(), {
+                                                                                                parametro.DesvincularTagalVehiculo(record.data.ETIQ_ID, HID_VEHI.getValue(), {
                                                                                                     success: function (result) {
                                                                                                         Ext.net.Notification.show({
-                                                                                                            html: 'vehiculo desautorizado exitosamente', title: 'Notificación'
+                                                                                                            html: 'Tag desvinculado existosamente', title: 'Notificación'
                                                                                                         });
-                                                                                                        GPVEHICULOIN.deleteSelected();
-                                                                                                        GPVEHICULOAOUT.store.addSorted(records); 
+                                                                                                        GPETIQUETAIN.deleteSelected();
+                                                                                                        GPETIQUETAOUT.store.addSorted(records); 
                                                                                                     },
                                                                                                     failure: function (errorMsg) {
                                                                                                         Ext.net.Notification.show({
@@ -268,7 +313,7 @@
 
                                                                                                 });
                                                                                             });
-                                                                                       " />--%>
+                                                                                       " />
                                                                     </Listeners>
                                                                     <ToolTips>
                                                                         <ext:ToolTip runat="server" Title="Remove" Html="Remove Selected Rows" />
@@ -281,6 +326,17 @@
                                             </ext:LayoutColumn>
                                             <ext:LayoutColumn>
                                                 <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Etiquetas Asignados" Icon="TagBlueEdit" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                                    <TopBar>
+                                                        <ext:Toolbar runat="server">
+                                                            <Items>
+                                                                <ext:TextField ID="TFfindEtiquetaIN" runat="server" EmptyText="codigo o etiqueta para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
+                                                                    <Listeners>
+                                                                        <KeyPress Handler="findEtiquetaIN(GPETIQUETAIN.store, TFfindEtiquetaIN.getValue(), Ext.EventObject);" />
+                                                                    </Listeners>
+                                                                </ext:TextField>
+                                                            </Items>
+                                                        </ext:Toolbar>
+                                                    </TopBar>
                                                     <Store>
                                                         <ext:Store ID="STIQUETAIN" runat="server">
                                                             <Reader>
