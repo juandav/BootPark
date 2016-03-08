@@ -19,10 +19,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 cargarUsuarios();
-            }
         }
 
         [DirectMethod(Namespace = "parametro")]

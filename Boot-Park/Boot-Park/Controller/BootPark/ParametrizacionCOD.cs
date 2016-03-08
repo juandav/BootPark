@@ -266,7 +266,8 @@ namespace Boot_Park.Controller.BootPark
         #region GESTIONAR HUELLA
         public bool registrarHuella(string IdUsuario, int FingerIndex, string Huella, int Flag, int Length, string registradoPor)
         {
-            return huella.registraHuella(IdUsuario, FingerIndex, Huella, Flag, Length, registradoPor);
+            string huella_id = general.nextPrimaryKey("HUELLA", "HUEL_ID");
+            return huella.registraHuella(IdUsuario, FingerIndex, Huella, Flag, Length, registradoPor, huella_id);
         }
         #endregion
 

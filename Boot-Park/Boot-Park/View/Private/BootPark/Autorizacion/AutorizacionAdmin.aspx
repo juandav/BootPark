@@ -136,7 +136,7 @@
                                         <Items>
                                             <ext:TextField ID="TFfindUser" runat="server" EmptyText="identificacion, nombre o apellido para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                 <Listeners>
-                                                    <KeyPress Handler="findVehiculo(GPUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
+                                                    <KeyPress Handler="findUser(GPUSUARIO.store, TFfindUser.getValue(), Ext.EventObject);" />
                                                 </Listeners>
                                             </ext:TextField>
                                         </Items>
@@ -196,7 +196,7 @@
                                                             <Items>
                                                                 <ext:TextField ID="TFfindVehiculoOut" runat="server" EmptyText="Placa, modelo o marca para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                                     <Listeners>
-                                                                        <KeyPress Handler="findVehiculoOut(GPVEHICULOAOUT.store, TFfindVehiculoOut.getValue(), Ext.EventObject);" />
+                                                                        <KeyPress Handler="findVehiculoOUT(GPVEHICULOAOUT.store, TFfindVehiculoOut.getValue(), Ext.EventObject);" />
                                                                     </Listeners>
                                                                 </ext:TextField>
                                                             </Items>
@@ -308,7 +308,7 @@
                                                             <Items>
                                                                 <ext:TextField ID="TFfindVehiculoIn" runat="server" EmptyText="Placa, modelo o marca para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
                                                                     <Listeners>
-                                                                        <KeyPress Handler="findVehiculo(GPVEHICULOIN.store, TFfindVehiculoIn.getValue(), Ext.EventObject);" />
+                                                                        <KeyPress Handler="findVehiculoIn(GPVEHICULOIN.store, TFfindVehiculoIn.getValue(), Ext.EventObject);" />
                                                                     </Listeners>
                                                                 </ext:TextField>
                                                             </Items>

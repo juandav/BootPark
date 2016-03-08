@@ -91,23 +91,28 @@ namespace Boot_Park.View.Public.test
         [DirectMethod(Namespace = "TEST")]
         public void RegistrarCirculacion(string user, string tag) // REGISTRA LA CIRCULACION DEL VEHICULO
         {
+            string tipo = "SALIDA";
             string vehiculo = _integracion.ConsultarVehiculoTagAsignado(tag).Rows[0]["VEHI_ID"].ToString().ToUpper();
-            string tipo = _integracion.ConsultarTipoEntradaVehiculo(vehiculo).Rows[0]["CIRC_TIPO"].ToString();
+            if (_integracion.ConsultarTipoEntradaVehiculo(vehiculo).Rows.Count==0)
+            {
+                tipo = "ENTRADA";
+            }
+            
             if (tipo == "ENTRADA")
             {
+                
                 if (_integracion.RegistrarCirculacion(user, vehiculo, "SALIDA")) //REGISTRO LA CIRCULACION SALIDA DEL PARQUEADERO
                 {
-                    AbrirPuerta();
-                    CerrarPuerta();
+                    Entrar();
                 }
 
             }
             else
             {
+                
                 if (_integracion.RegistrarCirculacion(user, vehiculo, "ENTRADA"))//REGISTRO LA CIRCULACION ENTRADA PARQUEADERO
                 {
-                    AbrirPuerta();
-                    CerrarPuerta();
+                    Salir();
                 }
 
             }
@@ -115,12 +120,23 @@ namespace Boot_Park.View.Public.test
         [DirectMethod(Namespace = "TEST")]
         public void AbrirPuerta() // ABRE LA PUERTA PARA QUE PASE EL VEHICULO. // SEÑAL DE APERTURA
         {
-            X.Msg.Notify("Notificación","Puerta Abierta.").Show();
+            X.Msg.Notify("Notificación","Sale el vehiculo.").Show();
         }
         [DirectMethod(Namespace = "TEST")]
         private void CerrarPuerta() // CIERRA LA PUERTA UNA VES EL SENSOR DE PROXIMIDAD DETECTA EL VEHICULO A UNA DISTANCIA INFERIROR A 10 cm. // SEÑAL DE CIERRA
         {
-            X.Msg.Notify("Notificación", "Puerta Cerrada.").Show();
+            X.Msg.Notify("Notificación", "entra el vehiculo.").Show();
+        }
+
+        [DirectMethod(Namespace = "TEST")]
+        public void Salir() // ABRE LA PUERTA PARA QUE PASE EL VEHICULO. // SEÑAL DE APERTURA
+        {
+            X.Msg.Notify("Notificación", "Sale el vehiculo.").Show();
+        }
+        [DirectMethod(Namespace = "TEST")]
+        private void Entrar() // CIERRA LA PUERTA UNA VES EL SENSOR DE PROXIMIDAD DETECTA EL VEHICULO A UNA DISTANCIA INFERIROR A 10 cm. // SEÑAL DE CIERRA
+        {
+            X.Msg.Notify("Notificación", "entra el vehiculo.").Show();
         }
     }
 

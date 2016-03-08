@@ -17,10 +17,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                cargarVehiculos();
-            }
+                this.cargarVehiculos(); 
         }
 
         [DirectMethod(Namespace = "parametro")]

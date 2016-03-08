@@ -137,7 +137,7 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="400" Width="345" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" >
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Height="410" Width="350" Icon="CarAdd" Title="Nuevo Vehiculo" Hidden="true" >
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>

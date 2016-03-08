@@ -7,7 +7,8 @@ namespace Boot_Park.Model.BootPark
     public class HuellaOAD
     {
         private ConexionMariaDB connection = new ConexionMariaDB();
-        public bool registraHuella(string IdUsuario, int FingerIndex, string Huella, int Flag, int Length, string registradoPor)
+
+        public bool registraHuella(string IdUsuario, int FingerIndex, string Huella, int Flag, int Length, string registradoPor, string huella_id)
         {
             String sql = "INSERT "
                          + "INTO "
@@ -19,7 +20,8 @@ namespace Boot_Park.Model.BootPark
                          + "        HUEL_REGISTRADOPOR, "
                          + "        HUEL_FECHACAMBIO, "
                          + "        USUA_ID, "
-                         + "        HUEL_LENGTH "
+                         + "        HUEL_LENGTH ,"
+                         + "        HUEL_ID"
                          + "    ) "
                          + "    VALUES "
                          + "    ( "
@@ -29,7 +31,8 @@ namespace Boot_Park.Model.BootPark
                          + "       '" + registradoPor + "', "
                          + "        CURRENT_DATE(), "
                          + "       '" + IdUsuario + "', "
-                         + "        " + Length + " "
+                         + "        " + Length + ", "
+                         + "        " + huella_id
                          + "    )";
             return connection.sendSetDataMariaDB(sql);
 

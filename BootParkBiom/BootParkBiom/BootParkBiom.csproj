@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>true</RegisterForComInterop>
     <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.zkemkeeper">
-      <HintPath>..\..\bin\Interop.zkemkeeper.dll</HintPath>
+      <HintPath>F:\SDK&amp;DEMO\SDK&amp;DEMO\Demo_for 64bit OS\C#\TFT_x64\AccessControl\bin\x64\Release\Interop.zkemkeeper.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="JSONLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

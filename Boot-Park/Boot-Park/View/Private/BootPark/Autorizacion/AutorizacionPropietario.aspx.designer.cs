@@ -67,6 +67,24 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion {
         protected global::Ext.Net.GridPanel GPUSUARIO;
         
         /// <summary>
+        /// Control Toolbar2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Toolbar Toolbar2;
+        
+        /// <summary>
+        /// Control TFfindUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindUser;
+        
+        /// <summary>
         /// Control SUSUARIO.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,15 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion {
         protected global::Ext.Net.GridPanel GPVEHICULOAOUT;
         
         /// <summary>
+        /// Control TFfindVehiculoOut.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindVehiculoOut;
+        
+        /// <summary>
         /// Control SVEHICULOOUT.
         /// </summary>
         /// <remarks>
@@ -110,6 +137,24 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::Ext.Net.GridPanel GPVEHICULOIN;
+        
+        /// <summary>
+        /// Control Toolbar1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Toolbar Toolbar1;
+        
+        /// <summary>
+        /// Control TFfindVehiculoIn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindVehiculoIn;
         
         /// <summary>
         /// Control SVEHICULOIN.

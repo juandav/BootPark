@@ -13,6 +13,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion {
     public partial class Vehiculo {
         
         /// <summary>
+        /// Control HID_VEHI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Hidden HID_VEHI;
+        
+        /// <summary>
         /// Control TAG.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion {
         protected global::Ext.Net.GridPanel GPVEHICULO;
         
         /// <summary>
+        /// Control TFfindCar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindCar;
+        
+        /// <summary>
         /// Control SVEHICULO.
         /// </summary>
         /// <remarks>
@@ -76,6 +94,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion {
         protected global::Ext.Net.GridPanel GPETIQUETAOUT;
         
         /// <summary>
+        /// Control TFfindEtiquetaOut.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindEtiquetaOut;
+        
+        /// <summary>
         /// Control SETIQUETAOUT.
         /// </summary>
         /// <remarks>
@@ -92,6 +119,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::Ext.Net.GridPanel GPETIQUETAIN;
+        
+        /// <summary>
+        /// Control TFfindEtiquetaIN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.TextField TFfindEtiquetaIN;
         
         /// <summary>
         /// Control STIQUETAIN.

@@ -118,12 +118,6 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
             {
                 X.Msg.Notify("Fail", "Error en la detección del tag").Show();
             }
-            else
-            {
-
-                X.Msg.Notify("Error", "'No conectado!, Asegurece que la lectora RFID este conectado a la red TCP/IP").Show();
-
-            }
 
         }
 

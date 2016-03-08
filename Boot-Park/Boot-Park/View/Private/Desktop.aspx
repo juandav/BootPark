@@ -18,7 +18,7 @@
             </Shortcuts>
 
             <Listeners>
-                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost:56075/View/Private/BootPark/Circulacion/Circulacion.aspx' }else { alert('Link Malo'); }" />
+                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost:56075/View/Public/test/test.aspx' }else { alert('Link Malo'); }" />
             </Listeners>
             
             <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">
@@ -29,22 +29,22 @@
                                 <Items>
                                     <ext:MenuItem Text="Etiqueta" Icon="Cart">
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Etiqueta.aspx','Etiqueta',850,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Etiqueta.aspx','Etiqueta',900,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                      <ext:MenuItem Text="Particular" Icon="User">
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Particular.aspx','Particular',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Particular.aspx','Particular',900,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                      <ext:MenuItem Text="Vehiculo" Icon="Car">
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Vehiculo.aspx','Vehiculo',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Vehiculo.aspx','Vehiculo',900,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                       <ext:MenuItem Text="Terminal" Icon="LaptopAdd">
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Terminal.aspx','Terminal',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Parametrizacion/Terminal.aspx','Terminal',900,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                 </Items>
@@ -93,7 +93,7 @@
                                 <Items>
                                     <ext:MenuItem Text="CIRCULACIÓN" Icon="CarRed" >
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'Public/BootPark/Circulacion/Circula.aspx','Circulacion',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'Public/test/test.aspx','Circulacion',800,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                 </Items>

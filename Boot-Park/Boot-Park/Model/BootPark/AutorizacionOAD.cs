@@ -14,7 +14,7 @@ namespace Boot_Park.Model.BootPark
             string sql = "SELECT "
                         + "    V.VEHI_ID, "
                         + "    V.VEHI_PLACA, "
-                        + "    V.VEHI_MARCA, "
+                        + "    M.MAVE_MARCA AS VEHI_MARCA, "
                         + "    V.VEHI_MODELO, "
                         + "    V.VEHI_OBSERVACION "
                         + "FROM "
@@ -24,8 +24,11 @@ namespace Boot_Park.Model.BootPark
                         + "    ( "
                         + "        A.VEHI_ID=V.VEHI_ID "
                         + "    ) "
-                        + " WHERE A.USUA_ID='"+ usuario +"'"
-                        + " AND AUTO_TIPO ='PROPIETARIO'";
+                        + "INNER JOIN BOOTPARK.MARCAVEHICULO M "
+                        + "ON V.MAVE_ID = M.MAVE_ID "
+                        + "WHERE "
+                        + "    A.USUA_ID='" + usuario + "' "
+                        + "AND AUTO_TIPO ='PROPIETARIO'";
 
             return connection.getDataMariaDB(sql).Tables[0];
         }
@@ -145,7 +148,7 @@ namespace Boot_Park.Model.BootPark
             string sql = "SELECT "
                          + "    V.VEHI_ID, "
                          + "    V.VEHI_PLACA, "
-                         + "    V.VEHI_MARCA, "
+                         + "    M.MAVE_MARCA AS VEHI_MARCA, "
                          + "    V.VEHI_MODELO, "
                          + "    V.VEHI_OBSERVACION "
                          + "FROM BOOTPARK.VEHICULO V "
@@ -168,7 +171,10 @@ namespace Boot_Park.Model.BootPark
                          + "        AND A.USUA_ID='" + Idparticular + "' "
                          + "    ) "
                          + ") AU "
-                         + "ON V.VEHI_ID= AU.VEHI_ID";
+                         + "ON V.VEHI_ID= AU.VEHI_ID "
+                         + "INNER JOIN BOOTPARK.MARCAVEHICULO M "
+                         + "ON "
+                         + "    V.MAVE_ID = M.MAVE_ID ";
 
             return connection.getDataMariaDB(sql).Tables[0];
         }

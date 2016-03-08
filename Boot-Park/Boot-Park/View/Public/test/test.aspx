@@ -23,10 +23,10 @@
             alert("Incompatibilidad con ActiveX", "", "");
         }
 
-        var socket = io.connect('http://192.168.1.44');
+        //var socket = io.connect('http://192.168.1.44');
        
             
-            socket.emit('open', { my: 'derecha' });
+        //    socket.emit('open', { my: 'derecha' });
 
         function proceso() {
             var user = null;
@@ -88,7 +88,7 @@
                     /*FIN DEL MANIN DEL CODIGO*/
 
                     obj.Usuario = null;// REINICIA EL USUARIO
-                    Concurrent.Thread.sleep(5850); // NO SE COMO CUADRAR ESTE HPTA
+                    Concurrent.Thread.sleep(6000); // NO SE COMO CUADRAR ESTE SEÑOR // 5850 
                 }
                 else {
                     console.log("Sin Validado"); // ESCRIBE UN MENSAJE
@@ -173,7 +173,7 @@
                             <ColumnModel>
                                 <Columns>
                                     <ext:RowNumbererColumn />
-                                    <ext:Column ColumnID="CVEHICULO" DataIndex="VEHICULO" Header="Vehiculo" />
+                                    <%--<ext:Column ColumnID="CVEHICULO" DataIndex="VEHICULO" Header="Vehiculo" />--%>
                                     <ext:Column ColumnID="CPLACA" DataIndex="PLACA" Header="Placa del Vehiculo" />
                                     <ext:Column ColumnID="CMODELO" DataIndex="MODELO" Header="Placa del Vehiculo" />
                                     <ext:Column ColumnID="COBSERVACION" DataIndex="OBSERVACION" Header="Observaciones" />
