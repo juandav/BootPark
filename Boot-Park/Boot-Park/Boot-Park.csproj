@@ -107,6 +107,7 @@
     <Content Include="Content\js\BiometricDevice.js" />
     <Content Include="Content\js\Concurrent.Thread.js" />
     <Content Include="Content\js\Desktop.js" />
+    <Content Include="Content\js\NUIP_Parser.js" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />

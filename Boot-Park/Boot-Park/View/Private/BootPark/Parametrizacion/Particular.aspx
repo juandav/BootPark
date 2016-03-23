@@ -128,7 +128,7 @@
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
-                            <ext:SpinnerField ID="SPIDENTIFICACION" runat="server" Width="300" FieldLabel="Identificación" AllowBlank="false" />
+                            <ext:TextField ID="SPIDENTIFICACION" runat="server" Width="300" FieldLabel="Identificación"  MaskRe="/[0-9]/" AllowBlank="false" />
                             <ext:TextField ID="TFNOMBRE" runat="server"  Width="300" FieldLabel="Nombres" AllowBlank="false" />
                             <ext:TextField ID="TFAPELLIDO" runat="server"  Width="300" FieldLabel="Apellidos" AllowBlank="false" />
                         </Items>
@@ -152,5 +152,8 @@
             </ext:Window>
         </div>
     </form>
+     <script src="https://code.jquery.com/jquery-2.2.1.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/scannerdetection/1.2.0/jquery.scannerdetection.min.js"></script>
+	<script src="../../../../Content/js/NUIP_Parser.js"></script>
 </body>
 </html>
