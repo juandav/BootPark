@@ -16,6 +16,7 @@
     <script type="text/javascript">
 
         try {
+            debugger;
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
             obj.ConectarConTerminal("192.168.1.201", "4370", 'Biometrico');
         }
@@ -28,8 +29,8 @@
             
         //    socket.emit('open', { my: 'derecha' });
 
-        function proceso() {
-            var user = null;
+        function proceso(user) {
+
             while (true) {
 
                 if (typeof (obj.Usuario()) != 'undefined' || user != null) {
@@ -37,67 +38,70 @@
 
                     /*MAIN DEL CODIGO*/
                     var aspirante = '' + obj.Usuario(); // OBTENGO EL USUARIO DE LA TARJETA
+                    
+                    if (eval(aspirante)){
+                        Ext.net.Notification.show({
+                            html: 'BIEN HECHO! El aspirante es:' + aspirante,
+                            title: 'Notificación'
+                        });
 
-                    Ext.net.Notification.show({
-                        html: 'BIEN HECHO! El aspirante es:' + aspirante,
-                        title: 'Notificación'
-                    });
-                   
-                    TEST.ValidaAspirante(aspirante,
-                    {
-                        success: function (response) {
-                            if (response) // SI ES VERDADERO VALIDE EL TAG
-                            {
-                                var tag = TEST.DetectarTag(
+                        TEST.ValidaAspirante(aspirante,
+                        {
+                            success: function (response) {
+                                if (response) // SI ES VERDADERO VALIDE EL TAG
                                 {
-                                    success: function (data) // TAG DETECTADO
+                                    var tag = TEST.DetectarTag(
                                     {
-                                        if (data != '') {
-                                            Ext.net.Notification.show({
-                                                html: 'BIEN HECHO! El tag es:' + data,
-                                                title: 'Notificación'
-                                            });
-                                            TEST.ValidarVehiculo(aspirante, data,
-                                            {
-                                                success: function (resp) //LO QUE RESPONDE AL VALIDAR EL TAG
+                                        success: function (data) // TAG DETECTADO
+                                        {
+                                            if (data != '') {
+                                                Ext.net.Notification.show({
+                                                    html: 'BIEN HECHO! El tag es:' + data,
+                                                    title: 'Notificación'
+                                                });
+                                                TEST.ValidarVehiculo(aspirante, data,
                                                 {
-                                                    if (resp) // SI ES VERDADERO
+                                                    success: function (resp) //LO QUE RESPONDE AL VALIDAR EL TAG
                                                     {
-                                                        TEST.CargarAspirante(aspirante);// CARGA EL ASPIRANTE
-                                                        TEST.CargarVehiculo(data); // CARGA EL VEHICULO
-                                                        TEST.RegistrarCirculacion(aspirante, data); // REGISTRA LA CIRCULACION
+                                                        if (resp) // SI ES VERDADERO
+                                                        {
+                                                            TEST.CargarAspirante(aspirante);// CARGA EL ASPIRANTE
+                                                            TEST.CargarVehiculo(data); // CARGA EL VEHICULO
+                                                            TEST.RegistrarCirculacion(aspirante, data); // REGISTRA LA CIRCULACION
 
-                                                      
-                                                        TEST.AbrirPuerta(); // ABRE LA PUERTA
-                                                    } else {
-                                                        alert('VEHICULO NO AUTORIZADO');
+
+                                                            TEST.AbrirPuerta(); // ABRE LA PUERTA
+                                                        } else {
+                                                            alert('VEHICULO NO AUTORIZADO');
+                                                        }
                                                     }
-                                                }
-                                            });
+                                                });
+                                            }
                                         }
-                                    }
-                                });
+                                    });
 
-                            } else // COMO NO ES VERDADERO: PEDOR AL USUARIO QUE SE RETIRE
-                            {
-                                alert('RETIRESE POR FAVOR');
+                                } else // COMO NO ES VERDADERO: PEDOR AL USUARIO QUE SE RETIRE
+                                {
+                                    alert('RETIRESE POR FAVOR');
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    /*FIN DEL MANIN DEL CODIGO*/
+                        /*FIN DEL MANIN DEL CODIGO*/
 
-                    obj.Usuario = null;// REINICIA EL USUARIO
-                    Concurrent.Thread.sleep(6000); // NO SE COMO CUADRAR ESTE SEÑOR // 5850 
+                        obj.Usuario = null;// REINICIA EL USUARIO
+                        Concurrent.Thread.sleep(6000); // NO SE COMO CUADRAR ESTE SEÑOR // 5850 
+                    }
+
+                    
                 }
                 else {
                     console.log("Sin Validado"); // ESCRIBE UN MENSAJE
                 }
             }
-
         }
 
-        Concurrent.Thread.create(proceso);
+        Concurrent.Thread.create(proceso, null);
 
         
 
