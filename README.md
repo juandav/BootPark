@@ -15,7 +15,7 @@ Bootpark es un software propietario de la **Universidad de la Amazonia**. Proyec
 
 regasm.exe myDll.dll /tlb /codebase
 
-Oswaldo Pamo: git clone -b v1.5 https://github.com/juandav/BootPark.git
-Juan David: git clone -b v2.0 https://github.com/juandav/BootPark.git
+1. Oswaldo Pamo: git clone -b v1.5 https://github.com/juandav/BootPark.git
+2. Juan David: git clone -b v2.0 https://github.com/juandav/BootPark.git
 
 
