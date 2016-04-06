@@ -19,11 +19,13 @@
         try {
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
             obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
+            //  obj.ConectarConTerminal('172.16.20.61', '4370', 'Biometrico');
         }
         catch (e) {
             console.log('Incompatibilidad con ActiveX');
         }
         function registrarHuella(idusuario) {
+            
             var r = obj.RecuperarHuella(idusuario);
             if (typeof r === 'undefined') {
                     Ext.net.Notification.show({

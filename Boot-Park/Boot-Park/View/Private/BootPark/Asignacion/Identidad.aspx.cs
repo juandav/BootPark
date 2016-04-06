@@ -15,7 +15,8 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
     {
 
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233";
+        //  private string pegeId = "53233";
+        private string pegeId = "1";
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -128,7 +128,7 @@
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
-                            <ext:TextField ID="SPIDENTIFICACION" runat="server" Width="300" FieldLabel="Identificación"  MaskRe="/[0-9]/" AllowBlank="false" />
+                            <ext:TextField ID="SPIDENTIFICACION" runat="server" Width="300" FieldLabel="Identificación"  MaskRe="/[0-9]/" AllowBlank="false" Disabled="true" />
                             <ext:TextField ID="TFNOMBRE" runat="server"  Width="300" FieldLabel="Nombres" AllowBlank="false" />
                             <ext:TextField ID="TFAPELLIDO" runat="server"  Width="300" FieldLabel="Apellidos" AllowBlank="false" />
                         </Items>

@@ -16,9 +16,10 @@
     <script type="text/javascript">
 
         try {
-            debugger;
+            //  debugger;
             var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
             obj.ConectarConTerminal("192.168.1.201", "4370", 'Biometrico');
+            //  obj.ConectarConTerminal("172.16.20.61", "4370", 'Biometrico');
         }
         catch (e) {
             alert("Incompatibilidad con ActiveX", "", "");
