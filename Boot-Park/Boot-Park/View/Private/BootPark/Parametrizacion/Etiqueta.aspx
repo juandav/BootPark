@@ -8,60 +8,41 @@
 <head runat="server">
     <title>Etiqueta</title>
     <script src="../../../../Content/js/BiometricDevice.js"></script>
-    <script src="../../../../Content/js/Filter.js"></script>
     <script type="text/javascript">
-        try {
-            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-        }
-        catch (e) {
-            console.log('Incompatibilidad con ActiveX');
-        }
+  
+        var socket = new WebSocket('ws://127.0.0.1:2012');
+        var i = 0;
+        var card = 0;
+        socket.onmessage = function (evt) {
+            if (i == 0) {
+                var spli = evt.data.split(',');
+                eval(evt.data);
+                console.log(card);
+                i++;
+            } else {
+                i = 0;
+            }
+        };
 
         var afterEdit = function (e) {
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
         };
 
-        function ConectarRFID() {
-
-        }
-
         var focus = function (e) {
-
-            if (CBETIQ_TIPO.getValue() === "CARNET") {
-                ConectarBiometrico();
+            if (CBETIQ_TIPO.getValue() === "TAG") {
+                
             }
-            else {
-                ConectarRFID();
-            }
-
         };
 
         var blur = function (e) {
-            if (CBETIQ_TIPO.getValue() === "CARNET") {
-
-                var Tarjeta = obj.Tarjeta();
-                if (typeof (Tarjeta) != "undefined") {
-                    TFETIQ_ETIQUETA.setValue(obj.Tarjeta());
-                    parametro.validarTarjeta(TFETIQ_ETIQUETA.getValue(), CBETIQ_TIPO.getValue());
-                } else {
-                    Ext.net.Notification.show({
-                        html: 'Tarjeta No Detectada!,Deslize la Tarjeta por el lector',
-                        title: 'Notificación'
-                    });
-                }
-            }
-            else if (CBETIQ_TIPO.getValue() === "TAG") {
-
+            if (CBETIQ_TIPO.getValue() === "TAG") {
                 parametro.detectarTag();
-
-            } else {
-                Ext.net.Notification.show({
-                    html: 'No se ha seleccionado un dispositivo todavía',
-                    title: 'Notificación'
-                });
-                CBETIQ_TIPO.isValid();
-
             }
+
+            if (CBETIQ_TIPO.getValue() === "CARNET") {
+                TFETIQ_ETIQUETA.setValue(card);
+            }
+            
         };
         var findCarnet = function (Store, texto, e) {
             if (e.getKey() == 13) {
@@ -214,7 +195,6 @@
                             <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false">
                                 <Listeners>
                                     <Blur Fn="blur" />
-
                                 </Listeners>
                             </ext:TextField>
                             <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
