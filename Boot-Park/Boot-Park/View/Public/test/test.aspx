@@ -7,104 +7,68 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>TEST</title>
-    <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
-    <script type="text/javascript" src="../../../Content/js/Concurrent.Thread.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
     <script type="text/javascript">
+        var socket = new WebSocket('ws://127.0.0.1:2012');
+        var card = 0;
+        var user = 0;
+        var i = 0;
 
-        try {
-            //  debugger;
-            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-            obj.ConectarConTerminal("192.168.1.201", "4370", 'Biometrico');
-            //  obj.ConectarConTerminal("172.16.20.61", "4370", 'Biometrico');
-        }
-        catch (e) {
-            alert("Incompatibilidad con ActiveX", "", "");
-        }
+        socket.onmessage = function (evt) {
+            if (i == 0) {
+                eval(evt.data);
+                console.log(card);
+                i++;
+            } else {
+                i = 0;
+                var spli = evt.data.split(',');
+                eval(spli[1])
+                console.log(user);
 
-        //var socket = io.connect('http://192.168.1.44');
-       
-            
-        //    socket.emit('open', { my: 'derecha' });
+                TEST.ValidaAspirante(user,
+                  {
+                      success: function (response) {
+                          debugger;
+                          if (response) // SI ES VERDADERO VALIDE EL TAG
+                          {
+                              var tag = TEST.DetectarTag(
+                              {
+                                  success: function (data) // TAG DETECTADO
+                                  {
+                                      if (data != '') {
+                                          Ext.net.Notification.show({
+                                              html: 'BIEN HECHO! El tag es:' + data,
+                                              title: 'Notificación'
+                                          });
+                                          TEST.ValidarVehiculo(user, data,
+                                          {
+                                              success: function (resp) //LO QUE RESPONDE AL VALIDAR EL TAG
+                                              {
+                                                  if (resp) // SI ES VERDADERO
+                                                  {
+                                                      TEST.CargarAspirante(user);// CARGA EL ASPIRANTE
+                                                      TEST.CargarVehiculo(data); // CARGA EL VEHICULO
+                                                      TEST.RegistrarCirculacion(user, data); // REGISTRA LA CIRCULACION
+                                                      TEST.AbrirPuerta(); // ABRE LA PUERTA
+                                                  } else {
+                                                      alert('VEHICULO NO AUTORIZADO');
+                                                  }
+                                              }
+                                          });
+                                      }
+                                  }
+                              });
 
-        function proceso(user) {
-
-            while (true) {
-
-                if (typeof (obj.Usuario()) != 'undefined' || user != null) {
-                    console.log("Validado"); // ESCRIBE UN MENSAJE
-
-                    /*MAIN DEL CODIGO*/
-                    var aspirante = '' + obj.Usuario(); // OBTENGO EL USUARIO DE LA TARJETA
-                    
-                    if (eval(aspirante)){
-                        Ext.net.Notification.show({
-                            html: 'BIEN HECHO! El aspirante es:' + aspirante,
-                            title: 'Notificación'
-                        });
-
-                        TEST.ValidaAspirante(aspirante,
-                        {
-                            success: function (response) {
-                                if (response) // SI ES VERDADERO VALIDE EL TAG
-                                {
-                                    var tag = TEST.DetectarTag(
-                                    {
-                                        success: function (data) // TAG DETECTADO
-                                        {
-                                            if (data != '') {
-                                                Ext.net.Notification.show({
-                                                    html: 'BIEN HECHO! El tag es:' + data,
-                                                    title: 'Notificación'
-                                                });
-                                                TEST.ValidarVehiculo(aspirante, data,
-                                                {
-                                                    success: function (resp) //LO QUE RESPONDE AL VALIDAR EL TAG
-                                                    {
-                                                        if (resp) // SI ES VERDADERO
-                                                        {
-                                                            TEST.CargarAspirante(aspirante);// CARGA EL ASPIRANTE
-                                                            TEST.CargarVehiculo(data); // CARGA EL VEHICULO
-                                                            TEST.RegistrarCirculacion(aspirante, data); // REGISTRA LA CIRCULACION
-
-
-                                                            TEST.AbrirPuerta(); // ABRE LA PUERTA
-                                                        } else {
-                                                            alert('VEHICULO NO AUTORIZADO');
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    });
-
-                                } else // COMO NO ES VERDADERO: PEDOR AL USUARIO QUE SE RETIRE
-                                {
-                                    alert('RETIRESE POR FAVOR');
-                                }
-                            }
-                        });
-
-                        /*FIN DEL MANIN DEL CODIGO*/
-
-                        obj.Usuario = null;// REINICIA EL USUARIO
-                        Concurrent.Thread.sleep(6000); // NO SE COMO CUADRAR ESTE SEÑOR // 5850 
-                    }
-
-                    
-                }
-                else {
-                    console.log("Sin Validado"); // ESCRIBE UN MENSAJE
-                }
+                          } else // COMO NO ES VERDADERO: PEDOR AL USUARIO QUE SE RETIRE
+                          {
+                              alert('El usuario no existe en nuestra base de datos.');
+                          }
+                      }
+                  });
             }
-        }
-
-        Concurrent.Thread.create(proceso, null);
-
-        
+        };
 
     </script>
 
