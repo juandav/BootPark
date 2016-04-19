@@ -1,9 +1,17 @@
-var five = require("johnny-five");
+var app = require('http').createServer(),
+     io = require('socket.io').listen(app),
+     five = require('johnny-five');
+
+app.listen(2016);
+
 var board = new five.Board();
 
 board.on("ready", function() {
-  // Create an Led on pin 13
   var led = new five.Led(13);
-  // Blink every half second
-  led.blink(500); 
+
+  io.sockets.on('connection', function (socket) {
+    socket.on('click', function () {
+      led.toggle();
+    });
+  });
 });
