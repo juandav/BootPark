@@ -44,8 +44,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UHFReader28CSharp">
-      <HintPath>bin\UHFReader28CSharp.dll</HintPath>
+    <Reference Include="UHFReader28CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Videos\BootPark-0af27b0e7ba48b40ca5ca0ebdff825ef2abbe313\bin\UHFReader28CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
