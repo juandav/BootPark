@@ -16,27 +16,39 @@
     <title>Identidad</title>
 
     <script type="text/javascript">
-        try {
-            var obj = new ActiveXObject("BootParkBiom.PluginBiometrico");
-            obj.ConectarConTerminal('192.168.1.201', '4370', 'Biometrico');
-            //  obj.ConectarConTerminal('172.16.20.61', '4370', 'Biometrico');
-        }
-        catch (e) {
-            console.log('Incompatibilidad con ActiveX');
-        }
-        function registrarHuella(idusuario) {
-            
-            var r = obj.RecuperarHuella(idusuario);
-            if (typeof r === 'undefined') {
-                    Ext.net.Notification.show({
-                    html: 'Huella no registrada en el dispositivo!!',
-                    title: 'Notificación'
-                });
+        var io = new WebSocket("ws://127.0.0.1:2012");
 
-            } else {
-                parametro.registraHuellausuario(r, idusuario);
-            }
+        function emit(event, data) {
+
+            var msg = {
+                type: event,
+                payload: []
+            };
+
+            msg.payload.push(data)
+
+            io.send(JSON.stringify(msg));
         }
+      
+        io.onmessage = function (evt) {
+            var data;
+            eval(evt.data);
+            console.log(data);
+            switch (data.type) {
+                case "card":
+                    break;
+                case "user":
+                    break;
+                case "fingerout":
+                    var r = data.payload[0];
+                    parametro.registraHuellausuario(r.data, r.index, r.length, r.user);
+                    break;
+                default:
+
+            }
+            
+        }
+
 
         var afterEdit = function (e) {
             var dataUser = GPUSUARIO.selModel.getSelections();
@@ -108,7 +120,7 @@
             Ext.each(ddSource.dragData.selections, function (record) {
                 parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
                     success: function (result) {
-                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, HNOMBRE_USER.getValue(), HID_USER.getValue());
+                        emit('cardin', { user: String(HID_USER.getValue()), name: String(HNOMBRE_USER.getValue()), card: String(record.data.ETIQ_ETIQUETA) })
                         addRow(STIQUETAIN, record, ddSource);
                     },
                     failure: function (errorMsg) {
@@ -250,7 +262,21 @@
                                     </ext:RowSelectionModel>
                                 </SelectionModel>
                                 <Listeners>
-                                    <Command Handler="if(command=='Detalle'){WDETALLEUSUARIO.show();}if(command=='enrollmentFootprint'){ obj.CapturarHuella(record.data.ID);} if(command=='footprint'){registrarHuella(record.data.ID);}" />
+                                    <Command Handler="
+                                        if(command=='Detalle'){
+                                           WDETALLEUSUARIO.show();
+                                        } 
+
+                                        if(command=='enrollmentFootprint'){
+                                           emit('fingerin', { user:  String(record.data.ID)  });
+                                        } 
+
+                                        if(command=='footprint'){
+                                            emit('fingerout', { user:  String(record.data.ID)  });
+                                            
+                                        }
+                                        " />
+                                                        
                                     <Expand Handler="PETIQUETA.collapse();" />
                                 </Listeners>
 
@@ -317,7 +343,9 @@
                                                                                              Ext.each(records, function (record) {
                                                                                                 parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
                                                                                                     success: function (result) {
-                                                                                                        obj.RegistrarCarnet(record.data.ETIQ_ETIQUETA, HNOMBRE_USER.getValue(), HID_USER.getValue());
+                                                                                                          
+                                                                                                        emit('cardin', { user: String(HID_USER.getValue()), name: String(HNOMBRE_USER.getValue()), card: String(record.data.ETIQ_ETIQUETA) })
+
                                                                                                         GPETIQUETAOUT.deleteSelected();
                                                                                                         GPETIQUETAIN.store.addSorted(record);  
                                                                                                          Ext.net.Notification.show({

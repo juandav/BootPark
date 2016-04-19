@@ -59,21 +59,10 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
 
         
         [DirectMethod(Namespace = "parametro")]
-        public void registraHuellausuario(string Huella,string usuario)
+        public void registraHuellausuario(string data,string Index,string length ,string usuario)
         {
-           
-            if (Huella == null)
-            {
-                X.Msg.Notify("Notificación", "Huella no registrada en el dispositivo!!").Show();
-                X.Mask.Hide();
-            }
-            else
-            {
-               
-                HuellaDactilar HuellaUsuario = new HuellaDactilar();
-                HuellaUsuario = JsonConvert.DeserializeObject<HuellaDactilar>(Huella);
 
-                if (parametro.registrarHuella(usuario, HuellaUsuario.FingerIndex, HuellaUsuario.byTmpData, HuellaUsuario.Flag, HuellaUsuario.TmpLength, pegeId))
+            if (parametro.registrarHuella(usuario,Convert.ToInt32(Index), data, 2,Convert.ToInt32(length), pegeId))
                 {
                     X.Msg.Notify("Notificación", "Huella guardada exitosamente!").Show();
                     cargarUsuarios();
@@ -82,7 +71,6 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
                 {
                     X.Msg.Notify("Notificación", "Ha ocurrido un error!!").Show();
                 }
-            }
 
         }
 
