@@ -154,6 +154,7 @@
     </form>
      <script src="https://code.jquery.com/jquery-2.2.1.js" ></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/scannerdetection/1.2.0/jquery.scannerdetection.min.js"></script>
+  
 	<script src="../../../../Content/js/NUIP_Parser.js"></script>
 </body>
 </html>

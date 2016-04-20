@@ -16,3 +16,7 @@ C:\Proyecto Grado\BootPark\TolBarad\Test\bin\Debug\TolBarad.dll
 C:\Proyecto Grado\BootPark\TolBarad\Test\bin\Debug\UHFReader28CSharp.dll
 C:\Proyecto Grado\BootPark\TolBarad\Test\bin\Debug\TolBarad.pdb
 C:\Proyecto Grado\BootPark\TolBarad\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\GIECOM 3\Desktop\BootPark\TolBarad\Test\bin\Debug\Test.exe.config
+C:\Users\GIECOM 3\Desktop\BootPark\TolBarad\Test\obj\Debug\Test.exe
+C:\Users\GIECOM 3\Desktop\BootPark\TolBarad\Test\obj\Debug\Test.pdb
+C:\Users\GIECOM 3\Desktop\BootPark\TolBarad\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache

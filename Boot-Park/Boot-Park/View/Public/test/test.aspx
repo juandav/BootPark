@@ -7,11 +7,15 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>TEST</title>
+    <script src="../../../Content/js/socket.io.js"></script>
+    <script type="text/javascript">
+        var io = io.connect('http://localhost:2016');
+    </script>
 </head>
 <body>
 
     <script type="text/javascript">
-        var socket = new WebSocket('ws://127.0.0.1:2012');
+        var socket= new WebSocket('ws://127.0.0.1:2012');
         var card = 0;
         var user = 0;
         var i = 0;
@@ -51,7 +55,8 @@
                                                       TEST.CargarAspirante(user);// CARGA EL ASPIRANTE
                                                       TEST.CargarVehiculo(data); // CARGA EL VEHICULO
                                                       TEST.RegistrarCirculacion(user, data); // REGISTRA LA CIRCULACION
-                                                      TEST.AbrirPuerta(); // ABRE LA PUERTA
+                                                      io.emit('click');
+                                                      //TEST.AbrirPuerta(); // ABRE LA PUERTA
                                                   } else {
                                                       alert('VEHICULO NO AUTORIZADO');
                                                   }
@@ -74,9 +79,9 @@
 
     <ext:ResourceManager runat="server" />
     <form id="test" runat="server">
+             
         <ext:Viewport ID="VPPRINCIPAL" runat="server" Layout="border">
             <Items>
-
                 <ext:Panel ID="PUSUARIO" runat="server" Region="North" Title="Validación" Height="300" Icon="User" Padding="1" Layout="Column">
                     <Items>
                         <ext:Panel runat="server" ID="FOTO" ColumnWidth=".3">
@@ -92,7 +97,7 @@
                         </ext:Panel>
                         <ext:Panel runat="server" ID="PDATOS" ColumnWidth=".7" Padding="2">
                             <Items>
-                                <ext:GridPanel runat="server" ID="GPDATOS" AutoExpandColumn="NOMBRE">
+                                <ext:GridPanel runat="server" ID="GPDATOS" AutoExpandColumn="NOMBRE" Height="200">
                                     <Store>
                                         <ext:Store ID="SDATOS" runat="server">
                                             <Reader>
@@ -154,6 +159,8 @@
 
             </Items>
         </ext:Viewport>
+                     
+                   
         <ext:Window runat="server" ID="AUTORIZA" Hidden="true" Height="300" Width="300" Modal="true">
             <Items>
                 <ext:Label runat="server" ID="VALIDACION" Text="ACA VA SI SE ACEPTA O RECHAZA" />
