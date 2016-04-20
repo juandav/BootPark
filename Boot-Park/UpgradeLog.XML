@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Boot-Park">
+</Property><Property Name="Archivo de la solución" Value="C:\Users\casa\Desktop\Proyecto Grado\BootPark\Boot-Park\Boot-Park.sln">
+</Property><Property Name="Date" Value="lunes, 18 de abril de 2016">
+</Property><Property Name="Time" Value="22:14 p.m.">
+</Property></Properties><Event ErrorLevel="0" Project="Boot-Park" Source="Boot-Park\Boot-Park.csproj" Description="El archivo de proyecto no requiere conversión.">
+</Event><Event ErrorLevel="3" Project="Boot-Park" Source="Boot-Park\Boot-Park.csproj" Description="No requiere conversión">
+</Event><Event ErrorLevel="0" Project="" Source="Boot-Park.sln" Description="La solución se convirtió correctamente">
+</Event><Event ErrorLevel="3" Project="" Source="Boot-Park.sln" Description="Converted">
+</Event></UpgradeLog>

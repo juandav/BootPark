@@ -1,0 +1,23 @@
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\bin\Debug\Rfid_Plintec.exe.config
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\Rfid_Plintec.csprojResolveAssemblyReference.cache
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\RFid_Plintec.ConfigForm.resources
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\RFid_Plintec.Form1.resources
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\Rfid_Plintec.Properties.Resources.resources
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\Rfid_Plintec.csproj.GenerateResource.Cache
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\bin\Debug\Rfid_Plintec.exe
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\bin\Debug\Rfid_Plintec.pdb
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\bin\Debug\UHFReader28CSharp.dll
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\RFid_Plintec.LoginForm.resources
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\Rfid_Plintec.exe
+C:\Users\José Uriel Yaya\Desktop\RFid_Plintec\Rfid_Plintec\obj\Debug\Rfid_Plintec.pdb
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\bin\Debug\Rfid_Plintec.exe.config
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\Rfid_Plintec.exe
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\Rfid_Plintec.pdb
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\bin\Debug\Rfid_Plintec.exe
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\bin\Debug\Rfid_Plintec.pdb
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\Rfid_Plintec.csprojResolveAssemblyReference.cache
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\RFid_Plintec.ConfigForm.resources
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\RFid_Plintec.Form1.resources
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\RFid_Plintec.LoginForm.resources
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\Rfid_Plintec.Properties.Resources.resources
+C:\Users\oswaldo\Google Drive\Proyecto Parqueadero\SDK LIBRERIAS\CD Lectora fija UHF\Codigo ejemplo\Rfid_Plintec_Linea_Base\obj\Debug\Rfid_Plintec.csproj.GenerateResource.Cache
