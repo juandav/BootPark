@@ -7,8 +7,9 @@ using System.Web.UI.WebControls;
 using Ext.Net;
 using System.Data;
 using JSONLibrary;
-using rfid.io;
+
 using Boot_Park.Controller.BootPark;
+using Boot_Park.Class;
 
 namespace Boot_Park.View.Public.test
 {

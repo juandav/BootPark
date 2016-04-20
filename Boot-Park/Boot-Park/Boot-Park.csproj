@@ -65,9 +65,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="rfid.io">
-      <HintPath>..\..\..\..\Proyecto\BootPark\bin\rfid.io.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,6 +80,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UHFReader28CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Codigo ejemplo\Rfid_Plintec_Linea_Base\bin\Debug\UHFReader28CSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\BookPark.pubxml" />
@@ -127,6 +128,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\RFID.cs" />
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
     <Compile Include="Model\BootPark\AutorizacionOAD.cs" />

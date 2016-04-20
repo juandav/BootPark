@@ -7,8 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using Ext.Net;
 using JSONLibrary;
-using rfid.io;
 using Boot_Park.Controller.BootPark;
+using Boot_Park.Class;
 
 namespace Boot_Park.View.Public.BootPark.Circulacion
 {

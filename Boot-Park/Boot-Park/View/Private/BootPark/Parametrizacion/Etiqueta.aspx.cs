@@ -7,7 +7,8 @@ using System.Web.UI.WebControls;
 using Boot_Park.Controller.BootPark;
 using System.Data;
 using Ext.Net;
-using rfid.io;
+using Boot_Park.Class;
+
 
 namespace Boot_Park.View.Private.BootPark.Parametrizacion
 {

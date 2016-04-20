@@ -1,6 +1,6 @@
-﻿using Boot_Park.Controller.BootPark;
+﻿using Boot_Park.Class;
+using Boot_Park.Controller.BootPark;
 using Ext.Net;
-using rfid.io;
 using System;
 using System.Collections.Generic;
 using System.Data;
