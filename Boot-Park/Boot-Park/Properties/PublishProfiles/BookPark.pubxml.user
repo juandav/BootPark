@@ -1,7 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
 editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>http://localhost/BookPark</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Boot-Park.dll">
+      <publishTime>04/21/2016 15:00:08</publishTime>
+    </File>
+    <File Include="bin/Ext.Net.dll">
+      <publishTime>04/20/2016 09:45:28</publishTime>
+    </File>
+    <File Include="bin/Ext.Net.Utilities.dll">
+      <publishTime>04/20/2016 09:45:28</publishTime>
+    </File>
+    <File Include="bin/JSONLibrary.dll">
+      <publishTime>04/20/2016 09:45:28</publishTime>
+    </File>
+    <File Include="bin/Mono.Security.dll">
+      <publishTime>04/20/2016 09:45:28</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>10/02/2015 17:05:26</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>04/20/2016 09:45:28</publishTime>
+    </File>
+    <File Include="bin/UHFReader28CSharp.dll">
+      <publishTime>04/20/2016 09:45:37</publishTime>
+    </File>
+    <File Include="Content/css/desktop.css">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/carrotag.ico">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/circulacion.png">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/enrollmentFootprint.ico">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/fondo.jpg">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/footprint.ico">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/suma.png">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/user.png">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/images/vehiculo.png">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/js/BiometricDevice.js">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/js/Concurrent.Thread.js">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/js/Desktop.js">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="Content/js/jquery-2.2.1.js">
+      <publishTime>04/20/2016 12:16:32</publishTime>
+    </File>
+    <File Include="Content/js/jquery.scannerdetection.min.js">
+      <publishTime>04/20/2016 12:15:52</publishTime>
+    </File>
+    <File Include="Content/js/NUIP_Parser.js">
+      <publishTime>04/20/2016 14:35:41</publishTime>
+    </File>
+    <File Include="Content/js/socket.io.js">
+      <publishTime>04/20/2016 13:25:39</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Asignacion/Identidad.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Asignacion/Tarjeta.html">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Asignacion/Vehiculo.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Autorizacion/AutorizacionAdmin.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Autorizacion/AutorizacionPropietario.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Circulacion/Circulacion.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Parametrizacion/Etiqueta.aspx">
+      <publishTime>04/20/2016 10:14:23</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Parametrizacion/Particular.aspx">
+      <publishTime>04/20/2016 12:23:15</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Parametrizacion/Terminal.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/BootPark/Parametrizacion/Vehiculo.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Private/Desktop.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Public/BootPark/Circulacion/Validacion.aspx">
+      <publishTime>04/20/2016 09:45:25</publishTime>
+    </File>
+    <File Include="View/Public/test/index.aspx">
+      <publishTime>04/20/2016 09:45:26</publishTime>
+    </File>
+    <File Include="View/Public/test/test.aspx">
+      <publishTime>04/20/2016 14:09:42</publishTime>
+    </File>
+    <File Include="View/Public/TestPlugin.aspx">
+      <publishTime>04/20/2016 09:45:26</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/21/2016 15:01:57</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

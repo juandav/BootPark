@@ -24,8 +24,5 @@ C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
 C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.tlb
 C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\JSONLibrary.dll
 C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\UHFReader28CSharp.dll
-C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
 C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
 C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb
-C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
-C:\Users\GIECOM 3\Desktop\BootPark\Boot-Park\Boot-Park\bin\MySql.Data.dll

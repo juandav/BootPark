@@ -1,0 +1,40 @@
+
+        
+.shortcut-icon {
+    width: 64px;
+    height: 64px;
+}
+        
+.icon-circulacion {
+    background-image: url(../images/circulacion.png) !important;
+}
+
+.shortcut-icon-footprint {
+     width: 20px;
+    height: 20px;
+}
+
+.icon-footprint {
+    background-image: url(../images/footprint.ico) !important;
+}
+   
+.shortcut-icon-enrollment-Footprint {
+     width: 24px;
+    height: 20px;
+}
+
+.icon-enrollment-Footprint {
+    background-image: url(../images/enrollmentFootprint.ico) !important;
+}
+.shortcut-icon-TagCar {
+    width: 15px;
+    height: 16px;
+}
+
+.icon-TagCart {
+    background-image: url(../images/carrotag.ico) !important;
+}
+.FontCirculacion  {
+    font-family: "Lobster", "Times", serif;
+    font-size: 1.8em;
+}
