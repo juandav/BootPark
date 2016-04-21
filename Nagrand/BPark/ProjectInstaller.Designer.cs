@@ -28,30 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
-            this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
+            this.NagrandProcess = new System.ServiceProcess.ServiceProcessInstaller();
+            this.NagrandService = new System.ServiceProcess.ServiceInstaller();
             // 
-            // serviceProcessInstaller1
+            // NagrandProcess
             // 
-            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalService;
-            this.serviceProcessInstaller1.Password = null;
-            this.serviceProcessInstaller1.Username = null;
+            this.NagrandProcess.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
+            this.NagrandProcess.Password = null;
+            this.NagrandProcess.Username = null;
             // 
-            // serviceInstaller1
+            // NagrandService
             // 
-            this.serviceInstaller1.ServiceName = "BPark Windows Service";
+            this.NagrandService.Description = "Servicio que gestiona el dispositivo biometrico";
+            this.NagrandService.DisplayName = "Nagrand";
+            this.NagrandService.ServiceName = "BPark";
+            this.NagrandService.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.NagrandService.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller1,
-            this.serviceInstaller1});
+            this.NagrandProcess,
+            this.NagrandService});
 
         }
 
         #endregion
 
-        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
-        private System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        private System.ServiceProcess.ServiceProcessInstaller NagrandProcess;
+        private System.ServiceProcess.ServiceInstaller NagrandService;
     }
 }
