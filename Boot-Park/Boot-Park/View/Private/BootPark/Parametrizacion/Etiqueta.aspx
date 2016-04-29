@@ -13,6 +13,17 @@
         var socket = new WebSocket('ws://127.0.0.1:2012');
         var i = 0;
         var card = 0;
+
+        function emit(event) {
+
+            var msg = {
+                type: event,
+                payload: []
+            };
+            socket.send(JSON.stringify(msg));
+        }
+
+
         socket.onmessage = function (evt) {
             if (i == 0) {
                 var spli = evt.data.split(',');
@@ -30,7 +41,9 @@
 
         var focus = function (e) {
             if (CBETIQ_TIPO.getValue() === "TAG") {
-                
+                BDISCONECT.hide();
+            } else {
+                BDISCONECT.show();
             }
         };
 
@@ -191,6 +204,7 @@
                                 <Listeners>
                                     <Select Fn="focus " />
                                 </Listeners>
+                               
                             </ext:ComboBox>
                             <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false">
                                 <Listeners>
@@ -211,6 +225,11 @@
                 <BottomBar>
                     <ext:Toolbar runat="server">
                         <Items>
+                            <ext:Button runat="server" ID="BDISCONECT" Icon="Connect" Text="Reconectar" Hidden="true">
+                                <Listeners>
+                                    <Click Handler = "emit('connect'); " />
+                                </Listeners>
+                            </ext:Button>
                             <ext:ToolbarFill />
                             <ext:Button runat="server" Icon="Add" Text="Guardar" FormBind="true">
                                 <Listeners>

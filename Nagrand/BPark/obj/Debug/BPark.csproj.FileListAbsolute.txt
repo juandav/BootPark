@@ -21,3 +21,30 @@ C:\Users\casa\Desktop\Proyecto Grado\BootPark\Nagrand\BPark\obj\Debug\BPark.Proj
 C:\Users\casa\Desktop\Proyecto Grado\BootPark\Nagrand\BPark\obj\Debug\BPark.csproj.GenerateResource.Cache
 C:\Users\casa\Desktop\Proyecto Grado\BootPark\Nagrand\BPark\obj\Debug\BPark.exe
 C:\Users\casa\Desktop\Proyecto Grado\BootPark\Nagrand\BPark\obj\Debug\BPark.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\BPark.exe.config
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\Interop.zkemkeeper.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.csproj.ResolveComReference.cache
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\BPark.exe
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\BPark.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\log4net.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.Common.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.SocketBase.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.SocketEngine.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperWebSocket.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\log4net.xml
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.Common.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.SocketBase.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperSocket.SocketEngine.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperWebSocket.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Debug\SuperWebSocket.xml
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.ProjectInstaller.resources
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.csproj.GenerateResource.Cache
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.exe
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Debug\BPark.csprojResolveAssemblyReference.cache
+C:\Users\Usuario TI\Documents\Visual Studio 2015\Projects\Nagrand\BPark\bin\Debug\BPark.exe.config
+C:\Users\Usuario TI\Documents\Visual Studio 2015\Projects\Nagrand\BPark\obj\Debug\Interop.zkemkeeper.dll
+C:\Users\Usuario TI\Documents\Visual Studio 2015\Projects\Nagrand\BPark\obj\Debug\BPark.csproj.ResolveComReference.cache
+C:\Users\Usuario TI\Documents\Visual Studio 2015\Projects\Nagrand\BPark\obj\Debug\BPark.exe

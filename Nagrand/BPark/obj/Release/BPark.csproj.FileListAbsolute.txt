@@ -20,3 +20,9 @@ C:\Users\GIECOM 3\Desktop\BootPark\Nagrand\BPark\obj\Release\BPark.ProjectInstal
 C:\Users\GIECOM 3\Desktop\BootPark\Nagrand\BPark\obj\Release\BPark.csproj.GenerateResource.Cache
 C:\Users\GIECOM 3\Desktop\BootPark\Nagrand\BPark\obj\Release\BPark.exe
 C:\Users\GIECOM 3\Desktop\BootPark\Nagrand\BPark\obj\Release\BPark.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\bin\Release\BPark.exe.config
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Release\Interop.zkemkeeper.dll
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Release\BPark.csproj.ResolveComReference.cache
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Release\BPark.exe
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Release\BPark.pdb
+C:\Users\Usuario TI\Documents\Proyecto\BootPark\Nagrand\BPark\obj\Release\BPark.csprojResolveAssemblyReference.cache

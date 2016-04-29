@@ -113,13 +113,14 @@ namespace Boot_Park.Class
                         detecion = detectarEtiqueta();
                         Thread.Sleep(100);
                     }
-
+                    desconectarRFID();
                     return "YES";
 
                 }
                 catch
                 {
                     return "Ha ocurrido errores en la detección de la etiqueta.";
+                    desconectarRFID();
                 }
                 finally
                 {

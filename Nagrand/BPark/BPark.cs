@@ -53,6 +53,10 @@ namespace BPark
             Application.Run();
         }
 
+        public void ReconectBiometric() {
+            ConnectBiometric(_IP_BIOMETRICO,_reader);
+        }
+
         public void CapturarHuella(String usuarioID)
         {
             _reader.CancelOperation();
@@ -188,21 +192,27 @@ namespace BPark
             dynamic obj = serializer.Deserialize(json, typeof(object));
 
             string type = obj.type;
-            string user = obj.payload[0].user;
+            string user = "";
             
             switch (type)
             {
                 case "cardin":
+                    user = obj.payload[0].user;
                     string card = obj.payload[0].card;
                     string name = obj.payload[0].name;
                     this.RegistrarCarnet(card,name,user);
                     break;
                 case "fingerin":
+                    user = obj.payload[0].user;
                     this.CapturarHuella(user);
                     break;
                 case "fingerout":
+                    user = obj.payload[0].user;
                     string data = RecuperarHuella(user);
                     session.Send(data);
+                    break;
+                case "connect":
+                    ReconectBiometric();
                     break;
                 default:
                     break;
