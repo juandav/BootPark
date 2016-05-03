@@ -1,18 +1,4 @@
-<center> **BootPark** </center>
-=========================
+# BootPark
+"Desarrollo del Sistema de Gestión Vehicular apoyado en Tecnologías RFID y Sistemas Biométricos".
 
-<center>**“Desarrollo del Sistema de Gestión Vehicular apoyado en Tecnologías RFID y Sistemas Biométricos.”**</center>
-=========================
-
-
-Bootpark es un software propietario de la **Universidad de la Amazonia**. Proyecto enfocado al control de ingreso y salida de vehículos de la institución.  su <i class="icon-cog"></i> **Configuración** esta documentada paso a paso para lograr una correcta implementación del prototipo.
-
-----------
-
-## INSTALL dll
-
-----------
-
-regasm.exe myDll.dll /tlb /codebase
-
-
+Los servicios de gestión para cada uno de los dispositivos requeridos en el proyecto se encuentran [aqui](https://github.com/botpark).
