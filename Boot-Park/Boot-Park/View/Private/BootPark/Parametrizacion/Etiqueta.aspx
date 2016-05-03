@@ -11,8 +11,7 @@
     <script type="text/javascript">
   
         var socket = new WebSocket('ws://127.0.0.1:2012');
-        var i = 0;
-        var card = 0;
+        var rfid = new WebSocket('ws://127.0.0.1:2020');
 
         function emit(event) {
 
@@ -23,16 +22,38 @@
             socket.send(JSON.stringify(msg));
         }
 
+        rfid.onmessage = function (evt) {
+            var kyt = evt.data;
+            eval(kyt);
 
-        socket.onmessage = function (evt) {
-            if (i == 0) {
-                var spli = evt.data.split(',');
-                eval(evt.data);
-                console.log(card);
-                i++;
-            } else {
-                i = 0;
+            switch (kyt.type) {
+                case "connect":
+                    rfid.send('reset');
+                    break;
+                case "disconnect":
+                    alert(':) desconectado');
+                    break;
+                case "tag":
+                    // console.log(kyt.payload.tag)
+                    TFETIQ_ETIQUETA.setValue(String(kyt.payload.tag));
+                    break;
             }
+        }
+
+        var entry = false;
+        socket.onmessage = function (evt) {
+            var kuo = evt.data;
+            eval(kuo);
+
+            if(entry){
+                switch (kuo.type) {
+                    case "regcard":
+                        TFETIQ_ETIQUETA.setValue(String(kuo.payload.card));
+                        entry = false;
+                        break;
+                }
+            }
+
         };
 
         var afterEdit = function (e) {
@@ -40,22 +61,21 @@
         };
 
         var focus = function (e) {
+            TFETIQ_ETIQUETA.setValue("");
             if (CBETIQ_TIPO.getValue() === "TAG") {
                 BDISCONECT.hide();
+                TFETIQ_ETIQUETA.enable()
             } else {
+                TFETIQ_ETIQUETA.disable()
+                entry = true
                 BDISCONECT.show();
             }
         };
 
         var blur = function (e) {
             if (CBETIQ_TIPO.getValue() === "TAG") {
-                parametro.detectarTag();
-            }
-
-            if (CBETIQ_TIPO.getValue() === "CARNET") {
-                TFETIQ_ETIQUETA.setValue(card);
-            }
-            
+                rfid.send("single");
+            } 
         };
         var findCarnet = function (Store, texto, e) {
             if (e.getKey() == 13) {
@@ -202,7 +222,7 @@
                                     <ext:ListItem Text="Tag" Value="TAG" />
                                 </Items>
                                 <Listeners>
-                                    <Select Fn="focus " />
+                                    <Select Fn="focus" />
                                 </Listeners>
                                
                             </ext:ComboBox>
@@ -241,6 +261,12 @@
                 </BottomBar>
                 <Listeners>
                     <BeforeHide Handler="FREGISTRO.reset();" />
+                </Listeners>
+                <Listeners>
+                    <Show Handler="rfid.send('connect');" />
+                </Listeners>
+                <Listeners>
+                    <Close Handler="rfid.send('disconnect');" />
                 </Listeners>
             </ext:Window>
         </div>

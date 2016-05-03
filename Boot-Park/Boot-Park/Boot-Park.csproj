@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Boot_Park</RootNamespace>
     <AssemblyName>Boot-Park</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -30,7 +30,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>1</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,9 +49,6 @@
     <Reference Include="Ext.Net.Utilities, Version=1.0.0.36286, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Ext.Net.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="JSONLibrary">
-      <HintPath>..\..\BootParkBiom\JSONLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -80,13 +78,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UHFReader28CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Codigo ejemplo\Rfid_Plintec_Linea_Base\bin\Debug\UHFReader28CSharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\BookPark.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,22 +109,16 @@
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
     <Content Include="View\Private\BootPark\Autorizacion\AutorizacionPropietario.aspx" />
     <Content Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx" />
-    <Content Include="View\Private\BootPark\Circulacion\Circulacion.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Terminal.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
     <Content Include="View\Private\Desktop.aspx" />
-    <Content Include="View\Public\BootPark\Circulacion\Validacion.aspx" />
-    <Content Include="View\Public\TestPlugin.aspx" />
-    <Content Include="View\Public\test\index.aspx" />
-    <Content Include="View\Public\test\test.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\RFID.cs" />
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
     <Compile Include="Model\BootPark\AutorizacionOAD.cs" />
@@ -174,13 +161,6 @@
     <Compile Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx.designer.cs">
       <DependentUpon>AutorizacionAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\Private\BootPark\Circulacion\Circulacion.aspx.cs">
-      <DependentUpon>Circulacion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Private\BootPark\Circulacion\Circulacion.aspx.designer.cs">
-      <DependentUpon>Circulacion.aspx</DependentUpon>
-    </Compile>
     <Compile Include="View\Private\BootPark\Parametrizacion\Etiqueta.aspx.cs">
       <DependentUpon>Etiqueta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,34 +196,6 @@
     <Compile Include="View\Private\Desktop.aspx.designer.cs">
       <DependentUpon>Desktop.aspx</DependentUpon>
     </Compile>
-    <Compile Include="View\Public\BootPark\Circulacion\Validacion.aspx.cs">
-      <DependentUpon>Validacion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Public\BootPark\Circulacion\Validacion.aspx.designer.cs">
-      <DependentUpon>Validacion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\Public\TestPlugin.aspx.cs">
-      <DependentUpon>TestPlugin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Public\TestPlugin.aspx.designer.cs">
-      <DependentUpon>TestPlugin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\Public\test\index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Public\test\index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\Public\test\test.aspx.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Public\test\test.aspx.designer.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\logs\" />
@@ -263,7 +215,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56075/</IISUrl>
+          <IISUrl>http://localhost:56076/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

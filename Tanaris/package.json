@@ -4,7 +4,7 @@
   "description": "0.0.1",
   "main": "tanaris.js",
   "scripts": {
-    "test": "node tanaris.js"
+    "tanaris": "node tanaris.js"
   },
   "keywords": [
     "Arduino",

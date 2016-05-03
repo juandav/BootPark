@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using Boot_Park.Controller.BootPark;
 using System.Data;
 using Ext.Net;
-using Boot_Park.Class;
 
 
 namespace Boot_Park.View.Private.BootPark.Parametrizacion
@@ -16,7 +15,6 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
     {
 
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        RFID r = new RFID("192.168.1.250", "27011");
         private string pegeId = "53233";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -99,27 +97,7 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
         [DirectMethod(Namespace = "parametro")]
         public void detectarTag()
         {
-            string response = "NO";
-
-            try
-            {
-                response = r.iniciarDeteccion();
-            }
-            catch (Exception) { response = "Fail"; }
-
-            if (response.Equals("YES"))
-            {
-                string etiqueta = r.Tag;
-                TFETIQ_ETIQUETA.SetValue(etiqueta);
-                validarTarjeta(etiqueta, CBETIQ_TIPO.Text);
-
-            }
-
-            if (response == "Fail")
-            {
-                X.Msg.Notify("Fail", "Error en la detección del tag").Show();
-            }
-
+           
         }
 
         private void BindData()

@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server version:               5.5.10 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
@@ -13,50 +13,6 @@
 -- Dumping database structure for bootpark
 CREATE DATABASE IF NOT EXISTS `bootpark` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `bootpark`;
-
-
--- Dumping structure for table bootpark.autorizacion
-CREATE TABLE IF NOT EXISTS `autorizacion` (
-  `VEHI_ID` decimal(30,0) NOT NULL,
-  `USUA_ID` decimal(30,0) NOT NULL,
-  `AUTO_DESCRIPCION` varchar(4000) NOT NULL,
-  `AUTO_FECHAAUTORIZACION` date NOT NULL,
-  `AUTO_TIPO` varchar(30) NOT NULL,
-  `AUTO_ESTADO` varchar(30) NOT NULL,
-  `AUTO_REGISTRADOPOR` varchar(30) NOT NULL,
-  `AUTO_FECHACAMBIO` date NOT NULL,
-  PRIMARY KEY (`VEHI_ID`,`USUA_ID`),
-  KEY `AUTV` (`VEHI_ID`),
-  CONSTRAINT `AUTV` FOREIGN KEY (`VEHI_ID`) REFERENCES `vehiculo` (`VEHI_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table bootpark.autorizacion: ~0 rows (approximately)
-/*!40000 ALTER TABLE `autorizacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `autorizacion` ENABLE KEYS */;
-
-
--- Dumping structure for table bootpark.circulacion
-CREATE TABLE IF NOT EXISTS `circulacion` (
-  `CIRC_ID` decimal(30,0) NOT NULL,
-  `CIRC_TIPO` varchar(30) NOT NULL,
-  `CIRC_OBSERVACION` varchar(4000) NOT NULL,
-  `CIRC_FECHACIRCULA` date NOT NULL,
-  `CIRC_REGISTRADOPOR` varchar(30) NOT NULL,
-  `CIRC_FECHACAMBIO` date NOT NULL,
-  `VEHI_ID` decimal(30,0) NOT NULL,
-  `USUA_ID` decimal(30,0) NOT NULL,
-  `TERM_ID` int(10) NOT NULL,
-  PRIMARY KEY (`CIRC_ID`),
-  KEY `CIRA` (`VEHI_ID`,`USUA_ID`),
-  KEY `TERC` (`TERM_ID`),
-  CONSTRAINT `CIRA` FOREIGN KEY (`VEHI_ID`, `USUA_ID`) REFERENCES `autorizacion` (`VEHI_ID`, `USUA_ID`),
-  CONSTRAINT `TERC` FOREIGN KEY (`TERM_ID`) REFERENCES `terminal` (`TERM_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table bootpark.circulacion: ~0 rows (approximately)
-/*!40000 ALTER TABLE `circulacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `circulacion` ENABLE KEYS */;
-
 
 -- Dumping structure for table bootpark.etiqueta
 CREATE TABLE IF NOT EXISTS `etiqueta` (
@@ -96,27 +52,6 @@ CREATE TABLE IF NOT EXISTS `etiquetausuario` (
 -- Dumping data for table bootpark.etiquetausuario: ~0 rows (approximately)
 /*!40000 ALTER TABLE `etiquetausuario` DISABLE KEYS */;
 /*!40000 ALTER TABLE `etiquetausuario` ENABLE KEYS */;
-
-
--- Dumping structure for table bootpark.etiquetavehiculo
-CREATE TABLE IF NOT EXISTS `etiquetavehiculo` (
-  `VEHI_ID` decimal(30,0) NOT NULL,
-  `ETIQ_ID` decimal(30,0) NOT NULL,
-  `ETIQ_TIPO` varchar(30) NOT NULL,
-  `ETVE_OBSERVACION` varchar(4000) NOT NULL,
-  `ETVE_REGISTRADOPOR` varchar(30) NOT NULL,
-  `ETVE_FECHACAMBIO` date NOT NULL,
-  PRIMARY KEY (`VEHI_ID`,`ETIQ_ID`,`ETIQ_TIPO`),
-  KEY `ETIV` (`ETIQ_ID`,`ETIQ_TIPO`),
-  KEY `VEHE` (`VEHI_ID`),
-  CONSTRAINT `ETIV` FOREIGN KEY (`ETIQ_ID`, `ETIQ_TIPO`) REFERENCES `etiqueta` (`ETIQ_ID`, `ETIQ_TIPO`),
-  CONSTRAINT `VEHE` FOREIGN KEY (`VEHI_ID`) REFERENCES `vehiculo` (`VEHI_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table bootpark.etiquetavehiculo: ~0 rows (approximately)
-/*!40000 ALTER TABLE `etiquetavehiculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `etiquetavehiculo` ENABLE KEYS */;
-
 
 -- Dumping structure for table bootpark.huella
 CREATE TABLE IF NOT EXISTS `huella` (
@@ -248,6 +183,66 @@ INSERT INTO `vehiculo` (`VEHI_ID`, `MAVE_ID`, `VEHI_OBSERVACION`, `VEHI_PLACA`, 
 	(2, 9, '', 'DRWIF100', 2011, 'NEGRO', '53233', '2016-02-09');
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 
+-- Dumping structure for table bootpark.etiquetavehiculo
+CREATE TABLE IF NOT EXISTS `etiquetavehiculo` (
+  `VEHI_ID` decimal(30,0) NOT NULL,
+  `ETIQ_ID` decimal(30,0) NOT NULL,
+  `ETIQ_TIPO` varchar(30) NOT NULL,
+  `ETVE_OBSERVACION` varchar(4000) NOT NULL,
+  `ETVE_REGISTRADOPOR` varchar(30) NOT NULL,
+  `ETVE_FECHACAMBIO` date NOT NULL,
+  PRIMARY KEY (`VEHI_ID`,`ETIQ_ID`,`ETIQ_TIPO`),
+  KEY `ETIV` (`ETIQ_ID`,`ETIQ_TIPO`),
+  KEY `VEHE` (`VEHI_ID`),
+  CONSTRAINT `ETIV` FOREIGN KEY (`ETIQ_ID`, `ETIQ_TIPO`) REFERENCES `etiqueta` (`ETIQ_ID`, `ETIQ_TIPO`),
+  CONSTRAINT `VEHE` FOREIGN KEY (`VEHI_ID`) REFERENCES `vehiculo` (`VEHI_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table bootpark.etiquetavehiculo: ~0 rows (approximately)
+/*!40000 ALTER TABLE `etiquetavehiculo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `etiquetavehiculo` ENABLE KEYS */;
+
+
+-- Dumping structure for table bootpark.autorizacion
+CREATE TABLE IF NOT EXISTS `autorizacion` (
+  `VEHI_ID` decimal(30,0) NOT NULL,
+  `USUA_ID` decimal(30,0) NOT NULL,
+  `AUTO_DESCRIPCION` varchar(4000) NOT NULL,
+  `AUTO_FECHAAUTORIZACION` date NOT NULL,
+  `AUTO_TIPO` varchar(30) NOT NULL,
+  `AUTO_ESTADO` varchar(30) NOT NULL,
+  `AUTO_REGISTRADOPOR` varchar(30) NOT NULL,
+  `AUTO_FECHACAMBIO` date NOT NULL,
+  PRIMARY KEY (`VEHI_ID`,`USUA_ID`),
+  KEY `AUTV` (`VEHI_ID`),
+  CONSTRAINT `AUTV` FOREIGN KEY (`VEHI_ID`) REFERENCES `vehiculo` (`VEHI_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table bootpark.autorizacion: ~0 rows (approximately)
+/*!40000 ALTER TABLE `autorizacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `autorizacion` ENABLE KEYS */;
+
+-- Dumping structure for table bootpark.circulacion
+CREATE TABLE IF NOT EXISTS `circulacion` (
+  `CIRC_ID` decimal(30,0) NOT NULL,
+  `CIRC_TIPO` varchar(30) NOT NULL,
+  `CIRC_OBSERVACION` varchar(4000) NOT NULL,
+  `CIRC_FECHACIRCULA` date NOT NULL,
+  `CIRC_REGISTRADOPOR` varchar(30) NOT NULL,
+  `CIRC_FECHACAMBIO` date NOT NULL,
+  `VEHI_ID` decimal(30,0) NOT NULL,
+  `USUA_ID` decimal(30,0) NOT NULL,
+  `TERM_ID` int(10) NOT NULL,
+  PRIMARY KEY (`CIRC_ID`),
+  KEY `CIRA` (`VEHI_ID`,`USUA_ID`),
+  KEY `TERC` (`TERM_ID`),
+  CONSTRAINT `CIRA` FOREIGN KEY (`VEHI_ID`, `USUA_ID`) REFERENCES `autorizacion` (`VEHI_ID`, `USUA_ID`),
+  CONSTRAINT `TERC` FOREIGN KEY (`TERM_ID`) REFERENCES `terminal` (`TERM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table bootpark.circulacion: ~0 rows (approximately)
+/*!40000 ALTER TABLE `circulacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `circulacion` ENABLE KEYS */;
 
 -- Dumping structure for view bootpark.usuario
 -- Removing temporary table and create final VIEW structure
@@ -255,3 +250,5 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `usuario` AS (select `P`.`PART_IDENTIFICACION` AS `PEGE_ID`,`P`.`PART_IDENTIFICACION` AS `IDENTIFICACION`,`P`.`PART_NOMBRE` AS `NOMBRE`,`P`.`PART_APELLIDO` AS `APELLIDO`,'NOCHAIRA' AS `TIPOUSUARIO` from `BOOTPARK`.`PARTICULAR` `P`) union (select `PC`.`PEGE_ID` AS `PEGE_ID`,`PC`.`IDENTIFICACION` AS `IDENTIFICACION`,`PC`.`NOMBRE` AS `NOMBRE`,`PC`.`APELLIDO` AS `APELLIDO`,'DOCENTE' AS `TIPOUSUARIO` from `GENERAL`.`PERSONACHAIRA` `PC`) ;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
