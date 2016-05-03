@@ -1,6 +1,0 @@
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\bin\rfid.io.dll
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\bin\rfid.io.pdb
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\bin\rfid.io.tlb
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkRFID\rfid.io\obj\Debug\rfid.io.csprojResolveAssemblyReference.cache
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkRFID\rfid.io\obj\Debug\rfid.io.dll
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkRFID\rfid.io\obj\Debug\rfid.io.pdb

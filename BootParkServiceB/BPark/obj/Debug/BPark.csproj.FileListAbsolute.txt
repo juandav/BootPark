@@ -1,3 +1,0 @@
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkServiceB\BPark\bin\Debug\BPark.exe.config
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkServiceB\BPark\obj\Debug\Interop.zkemkeeper.dll
-C:\Users\casa\Desktop\Proyecto Grado\BootPark\BootParkServiceB\BPark\obj\Debug\BPark.csproj.ResolveComReference.cache

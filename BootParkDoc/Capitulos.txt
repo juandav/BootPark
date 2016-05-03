@@ -1,5 +1,0 @@
-Capitulo 1: Analisis de Requerimientos
-Capitulo 2: Diseño de los sistemas de información
-Capitulo 3: Implementación del prototipo
-		3.1. Metodologia
-		3.2. Prototipo

@@ -1,6 +1,0 @@
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll.config
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.dll
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\bin\Boot-Park.pdb
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.csprojResolveAssemblyReference.cache
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.dll
-C:\Users\juandav\Desktop\BootPark\Boot-Park\Boot-Park\obj\Debug\Boot-Park.pdb

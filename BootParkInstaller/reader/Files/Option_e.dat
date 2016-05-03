@@ -1,5 +1,0 @@
-[System]
-LocaleFile=zkemnetman.en
-DBConnect=
-MaxKeepLogsCount=12000
-IsSimple=1
