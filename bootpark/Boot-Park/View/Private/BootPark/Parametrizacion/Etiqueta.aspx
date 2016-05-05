@@ -49,7 +49,6 @@
                 switch (kuo.type) {
                     case "regcard":
                         TFETIQ_ETIQUETA.setValue(String(kuo.payload.card));
-                        entry = false;
                         break;
                 }
             }
@@ -65,6 +64,7 @@
             if (CBETIQ_TIPO.getValue() === "TAG") {
                 BDISCONECT.hide();
                 TFETIQ_ETIQUETA.enable()
+                entry = false;
             } else {
                 TFETIQ_ETIQUETA.disable()
                 entry = true
@@ -247,7 +247,7 @@
                         <Items>
                             <ext:Button runat="server" ID="BDISCONECT" Icon="Connect" Text="Reconectar" Hidden="true">
                                 <Listeners>
-                                    <Click Handler = "emit('connect'); " />
+                                    <Click Handler = "emit('reconnect'); " />
                                 </Listeners>
                             </ext:Button>
                             <ext:ToolbarFill />

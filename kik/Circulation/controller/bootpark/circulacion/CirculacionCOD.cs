@@ -6,34 +6,19 @@ namespace Circulation.controller.bootpark.circulacion
     {
         private CirculacionOAD _CIRCULATION = new CirculacionOAD();
 
-
-        public DataTable ValidateUser()
-        {
-            return null;
-        }
-
-        public DataTable ValidateLabelAndFingerprint()
-        {
-            return null;
-        }
-
-        public DataTable CheckTypeTerminal()
-        {
-            return null;
-        }
-
         public DataTable FindUser(string user)
         {
-            return null;
+            return _CIRCULATION.FindUser(user);
         }
 
-        public bool CreateCirculation(string user, string vehicle, string circulartion, string type, string pege)
+        public DataTable FindVehicle(string tag, string user)
         {
-            return false;
+            return _CIRCULATION.FindVehicle(tag, user);
         }
-        public DataTable CheckTypeCirculation(string vehicle)
+
+        public bool CreateCirculation(string tag, string user)
         {
-            return null;
+            return _CIRCULATION.CreateCirculation(tag, user);
         }
 
     }
