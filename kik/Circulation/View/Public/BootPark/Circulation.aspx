@@ -16,7 +16,7 @@
     <script src='../../../content/js/Circulations.js'></script>
 </head>
 <body>
-    <ext:ResourceManager runat="server" Theme="Crisp" />
+    <ext:ResourceManager runat="server" Theme="NeptuneTouch" />
     <form id="fcirculation" runat="server">
         <div>
             <ext:Viewport runat="server" Layout="BorderLayout">
@@ -32,31 +32,53 @@
                                     </ext:Panel>
                                     <ext:Panel runat="server">
                                         <Items>
-                                            <ext:Label runat="server" Text="Esperando Usuario...." Cls="x-btn-text"></ext:Label>
+                                            <ext:Label ID="LESTADO" runat="server" Text="Esperando Usuario...." Cls="x-btn-text"></ext:Label>
                                         </Items>
                                     </ext:Panel>
                                 </Items>
                             </ext:Panel>
                         </Items>
                     </ext:Panel>
-                    <ext:Panel runat="server" Region="East" Title="Datos del Usuario" Collapsed="true" Collapsible="true" Width="600" Icon="User" ID="USERID" Layout="CenterLayout">
+                    <ext:FormPanel runat="server" Region="East"  Title="Datos del Usuario" Collapsed="true" Split="true"  Collapsible="true" AnimCollapseDuration="800" Width="600" Icon="User" ID="USERID">
                         <Items>
                             <ext:Panel runat="server">
                                 <Items>
-                                    <ext:Panel runat="server">
+                                    <ext:FormPanel runat="server" >
                                         <Items>
-                                            <ext:Image runat="server" ID="IMUSUARIO" Width="200" Height="200" />
+                                            <ext:Panel runat="server" Layout="CenterLayout" Height="250">
+                                                <Items>
+                                                    <ext:Image runat="server" ID="IMUSUARIO" ImageUrl="../../../content/img/user.png" Width="200" Height="200" />
+                                                </Items>
+                                            </ext:Panel>
+                                             
                                         </Items>
-                                    </ext:Panel>
-                                    <ext:Panel runat="server">
+                                    </ext:FormPanel>
+                                    <ext:FormPanel runat="server" Layout="CenterLayout" Height="100">
                                         <Items>
-                                            <ext:TextField runat="server" ID="TIDENTIFICACION" FieldLabel="Identíficación" ReadOnly="true" />
+                                            <ext:FieldContainer runat="server"   Layout="HBoxLayout" >
+                                                <Items>
+                                                    <ext:Label runat="server" ID="LIDENTIFICACION" Height="100" MarginSpec="10 10 10 10" Text="dfdfddgf" />
+                                                    <ext:Label runat="server" ID="LNOMBRE" Height="100" MarginSpec="10 10 10 10" Text="dfgfgfghghghg" />
+                                                </Items>
+                                           </ext:FieldContainer>
                                         </Items>
-                                    </ext:Panel>
+                                    </ext:FormPanel>
+                                    
+                                </Items>
+                            </ext:Panel>
+                            <ext:Panel runat="server" ID="PVEHICULO" Title="Vehiculo I/O" Region="South" Collapsed="true"  Collapsible="true" Icon="Car" Height="400">
+                                <Items>
+                                    <ext:FormPanel ID="FVHEHICULO" runat="server" Layout="HBoxLayout" Height="300" MarginSpec="10">
+                                        <Items>
+                                            <ext:Label runat="server" ID="LVEHICULO" MarginSpec="10 10 10 10" Flex="1" Height="200" Text="kdjfd" />
+                                            <ext:Label runat="server" ID="LHORATIPO" MarginSpec="10 10 10 10" Flex="1" Height="200" Text="dfd" />
+                                        </Items>
+                                    </ext:FormPanel>
                                 </Items>
                             </ext:Panel>
                         </Items>
-                    </ext:Panel>
+                   </ext:FormPanel>
+                   
                 </Items>
             </ext:Viewport>
         </div>

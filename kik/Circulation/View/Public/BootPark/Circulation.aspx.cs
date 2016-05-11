@@ -2,6 +2,7 @@
 using System.Data;
 using Ext.Net;
 using Circulation.controller.bootpark.circulacion;
+using System.Threading;
 
 namespace Circulation.View.Public.BootPark
 {
@@ -10,20 +11,32 @@ namespace Circulation.View.Public.BootPark
 
         private CirculacionCOD c = new CirculacionCOD();
 
-        protected void Page_Load(object sender, EventArgs e) { }
+        protected void Page_Load(object sender, EventArgs e) { LHORATIPO.Text = DateTime.Now.ToString(); }
 
         // Cargar la información del usuario, si tiene uno en BootPark.
         [DirectMethod]
         public bool CargarUsuario(string user) {
+            LESTADO.Text = "Verificando.....";
             DataTable boot_user = c.FindUser(user);
             bool exist = boot_user.Rows.Count > 0;
+            if (exist)
+            {
+                LIDENTIFICACION.Text = boot_user.Rows[0]["IDENTIFICACION"].ToString();
+                LNOMBRE.Text = boot_user.Rows[0]["NOMBRE"].ToString() + " " + boot_user.Rows[0]["APELLIDO"];
+            }
             return exist;
         }
         // Cargar el vehiculo si y solo el tag detectado, se encuentra autorizado al usuario encontrado.
         [DirectMethod]
         public bool CargarVehiculo(string tag, string user) {
             DataTable boot_vehicle = c.FindVehicle(tag, user);
+            //X.Msg.Notify("Notificación", tag).Show();
             bool exist = boot_vehicle.Rows.Count > 0;
+            if (exist)
+            {
+                LVEHICULO.Text = boot_vehicle.Rows[0]["mave_marca"].ToString() + " - " + boot_vehicle.Rows[0]["VEHI_PLACA"].ToString();
+                LHORATIPO.Text = DateTime.Now.ToString();
+            }
             return exist;
         }
         // Registrar el historial de ingreso y salida de vehiculos, si y solo si el sistema lo permite.
@@ -32,6 +45,8 @@ namespace Circulation.View.Public.BootPark
             bool exist = c.CreateCirculation(tag, user);
             if (exist) {
                 // Aca muestre la data en los labels
+                LESTADO.Text = "Esperando Usuario....";
+                Thread.Sleep(4000);
             }
             return exist;
         }

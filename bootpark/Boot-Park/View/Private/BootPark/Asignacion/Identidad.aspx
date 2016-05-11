@@ -39,7 +39,7 @@
                     break;
                 case "user":
                     break;
-                case "fingerout":
+                case "getfinger":
                     var r = data.payload[0];
                     parametro.registraHuellausuario(r.data, r.index, r.length, r.user);
                     break;
@@ -120,7 +120,7 @@
             Ext.each(ddSource.dragData.selections, function (record) {
                 parametro.vincularCarnetAlUsuario(record.data.ETIQ_ID, HID_USER.getValue(), {
                     success: function (result) {
-                        emit('cardin', { user: String(HID_USER.getValue()), name: String(HNOMBRE_USER.getValue()), card: String(record.data.ETIQ_ETIQUETA) })
+                        emit('recordcard', { user: String(HID_USER.getValue()), name: String(HNOMBRE_USER.getValue()), card: String(record.data.ETIQ_ETIQUETA) })
                         addRow(STIQUETAIN, record, ddSource);
                     },
                     failure: function (errorMsg) {
@@ -268,11 +268,11 @@
                                         } 
 
                                         if(command=='enrollmentFootprint'){
-                                           emit('fingerin', { user:  String(record.data.ID)  });
+                                           emit('recordfinger', { user:  String(record.data.ID)  });
                                         } 
 
                                         if(command=='footprint'){
-                                            emit('fingerout', { user:  String(record.data.ID)  });
+                                            emit('getfinger', { user:  String(record.data.ID)  });
                                             
                                         }
                                         " />

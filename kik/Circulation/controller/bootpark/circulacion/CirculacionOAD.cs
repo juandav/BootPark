@@ -23,14 +23,20 @@ namespace Circulation.controller.bootpark.circulacion
 
         public DataTable FindVehicle(string tag, string user) {
             string sql = @"
-                SELECT *
-                FROM   vehiculo V
-                       INNER JOIN etiqueta E
-                               ON ( v.vehi_id = E.etiq_id )
-                       INNER JOIN autorizacion A
-                               ON ( V.vehi_id = A.vehi_id )
-                WHERE  E.etiq_etiqueta = '" + tag + @"'
-                       AND A.usua_id = '" + user + @"' 
+                        SELECT VEH.*, 
+                                   MV.mave_marca 
+                            FROM   (SELECT DISTINCT EV.vehi_id 
+                                    FROM   etiqueta E 
+                                           INNER JOIN etiquetavehiculo EV 
+                                                   ON EV.etiq_id = E.etiq_id 
+                                    WHERE  E.etiq_etiqueta = '"+ tag + @"') AS V 
+                                   INNER JOIN autorizacion AU 
+                                           ON AU.vehi_id = V.vehi_id 
+                                   INNER JOIN vehiculo VEH 
+                                           ON AU.vehi_id = VEH.vehi_id 
+                                   INNER JOIN marcavehiculo MV 
+                                           ON VEH.mave_id = MV.mave_id 
+                            WHERE  AU.usua_id = '"+  user + @"' 
             ";
             return _CONN.GetData(sql).Tables[0];
         }
@@ -38,7 +44,7 @@ namespace Circulation.controller.bootpark.circulacion
         public bool CreateCirculation(string tag, string user)
         {
             DataTable Max = GetMaxCirculation(tag, user);
-            bool isEmpty = Max.Rows[0]["CIRC_ID"].ToString() == "";
+            bool isEmpty = Max.Rows[0]["CIRC_ID"].ToString() == "" ? true: false ;
             string type;
 
             if (isEmpty)
@@ -77,10 +83,15 @@ namespace Circulation.controller.bootpark.circulacion
                              NOW(),
                              'SYSTEM',
                              NOW(),
-                             " + @"(SELECT V.vehi_id
-                                    FROM vehiculo V
-                                        INNER JOIN etiqueta E ON ( V.vehi_id = E.etiq_id)
-                                        WHERE E.etiq_etiqueta = '" + tag + @"'" + @"),
+                             " + @"(SELECT DISTINCT
+                                        EV.VEHI_ID
+                                    FROM
+                                        ETIQUETA E
+                                    INNER JOIN ETIQUETAVEHICULO EV
+                                    ON
+                                        EV.ETIQ_ID= E.ETIQ_ID
+                                    WHERE
+                                        E.ETIQ_ETIQUETA = '" + tag + @"'" + @"),
                              '" + user + @"',
                              '1') 
             ";
@@ -93,10 +104,15 @@ namespace Circulation.controller.bootpark.circulacion
                 SELECT Max(C.circ_id) AS CIRC_ID
                 FROM   circulacion C
                 WHERE  C.usua_id = '" + user + @"'
-                       AND C.vehi_id = (SELECT V.vehi_id
-                                        FROM   vehiculo V
-                                               INNER JOIN etiqueta E ON ( V.vehi_id = E.etiq_id )
-                                        WHERE E.etiq_etiqueta = '" + tag + @"')
+                           AND C.vehi_id = (SELECT DISTINCT
+                                            EV.VEHI_ID
+                                        FROM
+                                            ETIQUETA E
+                                        INNER JOIN ETIQUETAVEHICULO EV
+                                        ON
+                                            EV.ETIQ_ID= E.ETIQ_ID
+                                        WHERE
+                                            E.ETIQ_ETIQUETA = '" + tag + @"')
             ";
             return _CONN.GetData(sql).Tables[0];
         }

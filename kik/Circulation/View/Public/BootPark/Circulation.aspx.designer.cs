@@ -31,13 +31,22 @@ namespace Circulation.View.Public.BootPark {
         protected global::Ext.Net.Panel CIRCID;
         
         /// <summary>
+        /// Control LESTADO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Label LESTADO;
+        
+        /// <summary>
         /// Control USERID.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.Panel USERID;
+        protected global::Ext.Net.FormPanel USERID;
         
         /// <summary>
         /// Control IMUSUARIO.
@@ -49,12 +58,57 @@ namespace Circulation.View.Public.BootPark {
         protected global::Ext.Net.Image IMUSUARIO;
         
         /// <summary>
-        /// Control TIDENTIFICACION.
+        /// Control LIDENTIFICACION.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Ext.Net.TextField TIDENTIFICACION;
+        protected global::Ext.Net.Label LIDENTIFICACION;
+        
+        /// <summary>
+        /// Control LNOMBRE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Label LNOMBRE;
+        
+        /// <summary>
+        /// Control PVEHICULO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Panel PVEHICULO;
+        
+        /// <summary>
+        /// Control FVHEHICULO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.FormPanel FVHEHICULO;
+        
+        /// <summary>
+        /// Control LVEHICULO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Label LVEHICULO;
+        
+        /// <summary>
+        /// Control LHORATIPO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Label LHORATIPO;
     }
 }
