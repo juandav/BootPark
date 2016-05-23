@@ -1,5 +1,7 @@
 ﻿var kyts = new WebSocket('ws://127.0.0.1:2020') // RFID
 var kuos = new WebSocket('ws://127.0.0.1:2012') // Biometrico
+var socket = io.connect('http://localhost:2016');
+
 var count=0;
 kyts.onopen = function (event) {
     kyts.send("connect")
@@ -8,12 +10,16 @@ kyts.onopen = function (event) {
 kyts.onmessage = function (evt) {
     var kyt
     eval(evt.data)
+    console.log(kyt.payload.tag);
     if (kyt.type == 'tag') {
         if (count == '0') {
+            kyts.send("pause")
             App.direct.CargarVehiculo(kyt.payload.tag, localStorage.getItem("user"), {
                 success: function (res) {
                     App.PVEHICULO.expand();
+                    
                     if (res) {
+                        socket.emit('click');
                         App.direct.RegistarCiculación(kyt.payload.tag, localStorage.getItem("user"), {
                             success: function (res) {
                                 if (res) {
@@ -22,17 +28,22 @@ kyts.onmessage = function (evt) {
                                     Ext.net.Notification.show({
                                         title: 'Notificación', html: "Solicitud Confirmada"
                                     });
+                                    socket.emit('click');
                                 } else {
+                                    App.USERID.collapse();
                                     Ext.net.Notification.show({
                                         title: 'Advertencia', html: 'No hemos podido registrar su solicitud en bootpark'
                                     });
+                                    App.LESTADO.setText('Esperando Usuario....');
                                 }
                             }
                         })
                     } else {
+                        App.USERID.collapse();
                         Ext.net.Notification.show({
-                            title: 'Advertencia', html: 'El usuario no esta autorizado para sacar el vehiculo'
+                            title: 'Advertencia', html: 'No esta autorizado para sacar el vehiculo'
                         });
+                        App.LESTADO.setText('Esperando Usuario....');
                     }
                 }
             })
@@ -55,7 +66,9 @@ kuos.onmessage = function (evt) {
                     localStorage.setItem("user", kuo.payload.user);
                     kyts.send("connect")
                     kyts.send("reset")
-                    kyts.send("single")
+                    //kyts.send("pause")
+                    kyts.send("start")
+                    //kyts.send("single")
                    
                 } else {
                     Ext.net.Notification.show({

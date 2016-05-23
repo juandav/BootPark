@@ -57,8 +57,8 @@
                                         <Items>
                                             <ext:FieldContainer runat="server"   Layout="HBoxLayout" >
                                                 <Items>
-                                                    <ext:Label runat="server" ID="LIDENTIFICACION" Height="100" MarginSpec="10 10 10 10" Text="dfdfddgf" />
-                                                    <ext:Label runat="server" ID="LNOMBRE" Height="100" MarginSpec="10 10 10 10" Text="dfgfgfghghghg" />
+                                                    <ext:Label runat="server" ID="LIDENTIFICACION" Height="100" MarginSpec="10 10 10 10"  />
+                                                    <ext:Label runat="server" ID="LNOMBRE" Height="100" MarginSpec="10 10 10 10" />
                                                 </Items>
                                            </ext:FieldContainer>
                                         </Items>
@@ -70,8 +70,8 @@
                                 <Items>
                                     <ext:FormPanel ID="FVHEHICULO" runat="server" Layout="HBoxLayout" Height="300" MarginSpec="10">
                                         <Items>
-                                            <ext:Label runat="server" ID="LVEHICULO" MarginSpec="10 10 10 10" Flex="1" Height="200" Text="kdjfd" />
-                                            <ext:Label runat="server" ID="LHORATIPO" MarginSpec="10 10 10 10" Flex="1" Height="200" Text="dfd" />
+                                            <ext:Label runat="server" ID="LVEHICULO" MarginSpec="10 10 10 10" Flex="1" Height="200" />
+                                            <ext:Label runat="server" ID="LHORATIPO" MarginSpec="10 10 10 10" Flex="1" Height="200" />
                                         </Items>
                                     </ext:FormPanel>
                                 </Items>

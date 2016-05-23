@@ -18,7 +18,7 @@
             </Shortcuts>
 
             <Listeners>
-                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost:56075/View/Public/test/test.aspx' }else { alert('Link Malo'); }" />
+                <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost/kik/View/Public/BootPark/Circulation.aspx' }else { alert('Link Malo'); }" />
             </Listeners>
             
             <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">

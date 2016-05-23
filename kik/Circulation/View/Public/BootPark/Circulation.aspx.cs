@@ -11,7 +11,7 @@ namespace Circulation.View.Public.BootPark
 
         private CirculacionCOD c = new CirculacionCOD();
 
-        protected void Page_Load(object sender, EventArgs e) { LHORATIPO.Text = DateTime.Now.ToString(); }
+        protected void Page_Load(object sender, EventArgs e) {  }
 
         // Cargar la información del usuario, si tiene uno en BootPark.
         [DirectMethod]
@@ -46,6 +46,10 @@ namespace Circulation.View.Public.BootPark
             if (exist) {
                 // Aca muestre la data en los labels
                 LESTADO.Text = "Esperando Usuario....";
+                LVEHICULO.Text = "";
+                LHORATIPO.Text = "";
+                LNOMBRE.Text = "";
+                LIDENTIFICACION.Text = "";
                 Thread.Sleep(4000);
             }
             return exist;

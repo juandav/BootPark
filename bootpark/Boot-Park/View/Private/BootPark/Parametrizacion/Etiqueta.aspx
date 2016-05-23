@@ -35,7 +35,13 @@
                     break;
                 case "tag":
                     // console.log(kyt.payload.tag)
-                    TFETIQ_ETIQUETA.setValue(String(kyt.payload.tag));
+                    parametro.validarEtiqueta(String(kyt.payload.tag), 'TAG', {
+                        success: function (res) {
+                            if (res == 'true')
+                                TFETIQ_ETIQUETA.setValue(String(kyt.payload.tag));
+                        }
+                    });
+                    
                     break;
             }
         }
@@ -48,7 +54,12 @@
             if(entry){
                 switch (kuo.type) {
                     case "regcard":
-                        TFETIQ_ETIQUETA.setValue(String(kuo.payload.card));
+                        parametro.validarEtiqueta(String(kuo.payload.card), 'CARNET', {
+                            success: function (res) {
+                                if (res=='true') 
+                                    TFETIQ_ETIQUETA.setValue(String(kuo.payload.card));
+                            }});
+                       
                         break;
                 }
             }

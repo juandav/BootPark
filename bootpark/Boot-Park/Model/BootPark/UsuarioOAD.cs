@@ -56,7 +56,7 @@ namespace Boot_Park.Model.BootPark
                         + "     U.TIPOUSUARIO"
                         + " FROM"
                         + "     USUARIO U"
-                        + " WHERE U.TIPOUSUARIO='DOCENTE'";
+                        + " WHERE U.TIPOUSUARIO !='NOCHAIRA'";
       
             return connection.getDataMariaDB(sql).Tables[0];
         }
