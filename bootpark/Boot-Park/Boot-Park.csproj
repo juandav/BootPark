@@ -95,6 +95,7 @@
     <Content Include="Content\images\enrollmentFootprint.ico" />
     <Content Include="Content\images\fondo.jpg" />
     <Content Include="Content\images\footprint.ico" />
+    <Content Include="Content\images\login.jpg" />
     <Content Include="Content\images\suma.png" />
     <Content Include="Content\images\user.png" />
     <Content Include="Content\images\vehiculo.png" />
@@ -105,6 +106,7 @@
     <Content Include="Content\js\jquery.scannerdetection.min.js" />
     <Content Include="Content\js\NUIP_Parser.js" />
     <Content Include="Content\js\socket.io.js" />
+    <Content Include="Login.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
@@ -122,6 +124,14 @@
   <ItemGroup>
     <Compile Include="Conections\ConexionMariaDB.cs" />
     <Compile Include="Controller\BootPark\ParametrizacionCOD.cs" />
+    <Compile Include="Controller\login.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Model\BootPark\AutorizacionOAD.cs" />
     <Compile Include="Model\BootPark\CirculacionOAD.cs" />
     <Compile Include="Model\BootPark\EtiquetaOAD.cs" />
