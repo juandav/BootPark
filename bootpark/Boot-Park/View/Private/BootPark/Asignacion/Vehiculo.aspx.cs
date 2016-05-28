@@ -13,11 +13,15 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
     public partial class Vehiculo : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233";
+        private string pegeId = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                this.cargarVehiculos(); 
+            if (!IsPostBack)
+            {
+                pegeId = Convert.ToString(Session["accountSessionId"]);
+                this.cargarVehiculos();
+            }
         }
 
         [DirectMethod(Namespace = "parametro")]

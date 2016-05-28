@@ -13,10 +13,15 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
     public partial class AutorizacionAdmin : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233";
+        private string pegeId = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarUsuariosChaira();
+            if (!IsPostBack)
+            {
+                pegeId = Convert.ToString(Session["accountSessionId"]);
+                cargarUsuariosChaira();
+            }
+           
         }
         public void cargarUsuariosChaira()
         {

@@ -13,16 +13,21 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
     public partial class Autorizacion : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53234"; // Usuario Chaira al iniciar session
+        private string pegeId = ""; // Usuario Chaira al iniciar session
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarUsuarios();
-            DataTable data = parametro.ConsultarUsuarioCirculacion(pegeId);
-            if (data.Rows.Count > 0)
+
+            if (!IsPostBack)
             {
-                GPUSUARIO.Title = data.Rows[0]["NOMBRE"].ToString() + " " + data.Rows[0]["APELLIDO"].ToString();
+                pegeId = Convert.ToString(Session["accountSessionId"]);
+                cargarUsuarios();
+                DataTable data = parametro.ConsultarUsuarioCirculacion(pegeId);
+                if (data.Rows.Count > 0)
+                {
+                    GPUSUARIO.Title = data.Rows[0]["NOMBRE"].ToString() + " " + data.Rows[0]["APELLIDO"].ToString();
+                }
             }
-            
+    
         }
         public void cargarUsuarios()
         {

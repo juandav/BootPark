@@ -15,12 +15,15 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion
     {
 
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "53233";
+        private string pegeId = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+              
+                pegeId = Convert.ToString(Session["accountSessionId"]);
+                // X.Msg.Alert("", pegeId).Show();
                 cargarEtiquetas();
             }
         }

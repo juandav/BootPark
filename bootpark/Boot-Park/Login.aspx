@@ -47,7 +47,7 @@
             let creds = JSON.parse(localStorage.getItem('accountSession'))
 
             if (creds !== null) {
-                // ACA REDIRECCIONAR
+                window.location.href = 'http://localhost:56076/View/Private/Desktop.aspx'
                 console.log(creds)
             } else {
 

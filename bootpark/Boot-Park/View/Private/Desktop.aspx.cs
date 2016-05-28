@@ -12,11 +12,16 @@ namespace Boot_Park.View.Private
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
-           
+            if (!IsPostBack) {
+                X.Call("accountPege");
+            }
         }
-        public void  prueba(){
-            
+
+        [DirectMethod(Namespace = "login")]
+        public void createAccountSession(string PEGE_ID)
+        {
+   
+            Session["accountSessionId"] = PEGE_ID;
         }
     }
 }

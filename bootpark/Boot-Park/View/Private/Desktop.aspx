@@ -8,6 +8,16 @@
      <script src="../../Content/js/Desktop.js"></script>
      <LINK href="../../Content/css/desktop.css" rel="stylesheet" type="text/css">
     <title>Boot-Park</title>
+    <script>
+        'use strict'
+
+        let accountPege = () => {
+
+            let creds = JSON.parse(localStorage.getItem('accountSession'))
+            login.createAccountSession(creds.PEGE_ID)
+        }
+
+    </script>
 </head>
 <body>
    <ext:ResourceManager runat="server" />
