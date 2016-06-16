@@ -44,6 +44,7 @@ namespace Circulation.View.Public.BootPark
         public bool RegistarCiculación(string tag, string user) {
             bool exist = c.CreateCirculation(tag, user);
             if (exist) {
+                X.Call("socket.emit('click');");
                 // Aca muestre la data en los labels
                 LESTADO.Text = "Esperando Usuario....";
                 LVEHICULO.Text = "";

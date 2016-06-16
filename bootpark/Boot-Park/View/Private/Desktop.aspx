@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
      <script src="../../Content/js/Desktop.js"></script>
      <LINK href="../../Content/css/desktop.css" rel="stylesheet" type="text/css">
+
     <title>Boot-Park</title>
     <script>
         'use strict'
@@ -31,7 +32,7 @@
                 <ShortcutClick Handler="var d=#{DESCRITORIO}.getDesktop(); if(id == 'DSVALIDACION'){ window.location.href = 'http://localhost/kik/View/Public/BootPark/Circulation.aspx' }else { alert('Link Malo'); }" />
             </Listeners>
             
-            <StartMenu Title="BOOT - PARK " Icon="Car" Height="400">
+            <StartMenu Title="BOOT - PARK " Icon="Car" Height="400" >
                 <Items>
                     <ext:MenuItem ID="MENUPARAMETRIZACION" runat="server" Text="PARAMETRIZACIÓN" Icon="Folder" HideOnClick="false">
                         <Menu>
@@ -90,7 +91,7 @@
                                     </ext:MenuItem>
                                     <ext:MenuItem Text="AUTORIZACIÓN ADMIN" Icon="GroupKey" >
                                         <Listeners>
-                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Autorizacion/AutorizacionAdmin.aspx','Autorización Admin',800,500);" />
+                                            <Click Handler="crearVentanaWindow(#{DESCRITORIO},'BootPark/Autorizacion/AutorizacionAdmin.aspx','Autorización Admin',1200,500);" />
                                         </Listeners>
                                     </ext:MenuItem>
                                 </Items>
@@ -112,6 +113,16 @@
                     </ext:MenuItem>--%>
                     <ext:MenuSeparator />
                 </Items>
+                <ToolItems>
+                    <ext:MenuItem Text="Salir" Icon="Disconnect" Width="100">
+                         <DirectEvents>
+                            <Click OnEvent="Logout_Click">
+                                <EventMask ShowMask="true" Msg="Good Bye..." MinDelay="1000" />
+                            </Click>
+                        </DirectEvents>
+                    </ext:MenuItem>
+                    <ext:MenuSeparator />
+                </ToolItems>
             </StartMenu>
     </ext:Desktop>
     </form>

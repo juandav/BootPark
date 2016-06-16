@@ -108,7 +108,6 @@
     <Content Include="Content\js\socket.io.js" />
     <Content Include="Login.aspx" />
     <Content Include="View\Private\BootPark\Asignacion\Identidad.aspx" />
-    <Content Include="View\Private\BootPark\Asignacion\Tarjeta.html" />
     <Content Include="View\Private\BootPark\Asignacion\Vehiculo.aspx" />
     <Content Include="View\Private\BootPark\Autorizacion\AutorizacionPropietario.aspx" />
     <Content Include="View\Private\BootPark\Autorizacion\AutorizacionAdmin.aspx" />
@@ -226,7 +225,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56076/</IISUrl>
+          <IISUrl>http://localhost/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

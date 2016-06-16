@@ -76,6 +76,56 @@ namespace Boot_Park.Model.BootPark
 
             return connection.getDataMariaDB(sql).Tables[0];
         }
+        public DataTable consultarPermisoUsuarioOut(string codvehiculo) {
+
+            string sql = @"SELECT
+                            U.PEGE_ID        AS ID,
+                            U.IDENTIFICACION AS IDENT,
+                            U.NOMBRE         AS NOMBRE,
+                            U.APELLIDO       AS APELLIDO,
+                            U.TIPOUSUARIO    AS TIPO
+                        FROM
+                            USUARIO U
+                        LEFT JOIN 
+                            
+                            (
+                                SELECT
+                                    A.USUA_ID
+                                FROM
+                                    AUTORIZACION A
+                                WHERE
+                                    A.VEHI_ID='" + codvehiculo + @"' 
+                            ) R
+                            ON U.PEGE_ID = R.USUA_ID WHERE R.USUA_ID IS NULL";
+            return connection.getDataMariaDB(sql).Tables[0];
+      }
+    
+        public DataTable consultarPermisoUsuarioIn(string codvehiculo)
+        {
+            string sql = @"SELECT
+                            U.PEGE_ID        AS ID,
+                            U.IDENTIFICACION AS IDENT,
+                            U.NOMBRE         AS NOMBRE,
+                            U.APELLIDO       AS APELLIDO,
+                            U.TIPOUSUARIO    AS TIPO
+                        FROM
+                            USUARIO U
+                        INNER JOIN
+                            (
+                                SELECT
+                                    A.USUA_ID
+                                FROM
+                                    AUTORIZACION A
+                                WHERE
+                                    A.VEHI_ID='" + codvehiculo + @"'
+                                AND A.AUTO_TIPO='PARTICULAR'
+                            )
+                            R
+                        ON
+                            U.PEGE_ID= R.USUA_ID";
+
+            return connection.getDataMariaDB(sql).Tables[0];
+        }
 
     }
 }

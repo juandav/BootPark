@@ -9,9 +9,20 @@
     <title>Etiqueta</title>
     <script src="../../../../Content/js/BiometricDevice.js"></script>
     <script type="text/javascript">
-  
-        var socket = new WebSocket('ws://127.0.0.1:2012');
-        var rfid = new WebSocket('ws://127.0.0.1:2020');
+
+        var socket = new WebSocket('ws://172.16.31.150:2012');
+        var rfid = new WebSocket('ws://172.16.31.150:2020');
+
+        //var socket = new WebSocket('ws://127.0.0.1:2012');
+        //var rfid = new WebSocket('ws://127.0.0.1:2020');
+
+        socket.onerror = function (error) {
+            Ext.net.Notification.show({ iconCls: 'icon-information', html: 'El servicio del Lector ZK-F19 ID  esta inactivo', title: 'Notificación' });
+        };
+
+        rfid.onerror = function (error) {
+            Ext.net.Notification.show({ iconCls: 'icon-information', html: 'El servicio del Lector RFID PT-3L01Z esta inactivo', title: 'Notificación' });
+        };
 
         function emit(event) {
 
@@ -34,14 +45,16 @@
                     alert(':) desconectado');
                     break;
                 case "tag":
-                    // console.log(kyt.payload.tag)
+                
                     parametro.validarEtiqueta(String(kyt.payload.tag), 'TAG', {
                         success: function (res) {
-                            if (res == 'true')
+                            if (res == false){
+                                console.log(String(kyt.payload.tag));
                                 TFETIQ_ETIQUETA.setValue(String(kyt.payload.tag));
+                            }
                         }
                     });
-                    
+                    stoprfid();
                     break;
             }
         }
@@ -51,43 +64,57 @@
             var kuo = evt.data;
             eval(kuo);
 
-            if(entry){
+            if (entry) {
                 switch (kuo.type) {
                     case "regcard":
                         parametro.validarEtiqueta(String(kuo.payload.card), 'CARNET', {
                             success: function (res) {
-                                if (res=='true') 
+                                if (res == false){
+                                    console.log(String(kuo.payload.card));
                                     TFETIQ_ETIQUETA.setValue(String(kuo.payload.card));
-                            }});
-                       
+                                }
+                            }
+                        });
+
                         break;
                 }
             }
 
         };
 
+
         var afterEdit = function (e) {
             parametro.modificarEtiqueta(e.record.data.ETIQ_ID, e.record.data.ETIQ_TIPO, e.record.data.ETIQ_ETIQUETA, e.record.data.ETIQ_DESCRIPCION, e.record.data.ETIQ_OBSERVACION, e.record.data.ETIQ_ESTADO);
         };
+
+
+        function playRfid() {
+            BSTOP.show();
+            BPLAYER.hide();
+            rfid.send("reset")
+            rfid.send("start")
+        }
+        function stoprfid() {
+            rfid.send("pause");
+            BSTOP.hide();
+            BPLAYER.show();
+        }
 
         var focus = function (e) {
             TFETIQ_ETIQUETA.setValue("");
             if (CBETIQ_TIPO.getValue() === "TAG") {
                 BDISCONECT.hide();
+                BPLAYER.show();
                 TFETIQ_ETIQUETA.enable()
                 entry = false;
             } else {
                 TFETIQ_ETIQUETA.disable()
                 entry = true
                 BDISCONECT.show();
+                BPLAYER.hide();
             }
         };
-
-        var blur = function (e) {
-            if (CBETIQ_TIPO.getValue() === "TAG") {
-                rfid.send("single");
-            } 
-        };
+     
         var findCarnet = function (Store, texto, e) {
             if (e.getKey() == 13) {
                 var store = Store,
@@ -115,7 +142,7 @@
                     <ext:Panel ID="PPRESENTACION" runat="server" Layout="Fit" Region="Center" Padding="5">
                         <Items>
                             <ext:GridPanel ID="GPETIQUETA" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION">
-                                  <TopBar>
+                                <TopBar>
                                     <ext:Toolbar runat="server">
                                         <Items>
                                             <ext:TextField ID="TFfindCarnet" runat="server" EmptyText="Codigo, tag o estado para buscar" Width="400" EnableKeyEvents="true" Icon="Magnifier">
@@ -204,7 +231,7 @@
                                      " />
                                     <AfterEdit Fn="afterEdit" />
                                 </Listeners>
-                              
+
                             </ext:GridPanel>
                         </Items>
                         <BottomBar>
@@ -223,25 +250,44 @@
                 </Items>
             </ext:Viewport>
 
-            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="420" Width="350" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true">
+            <ext:Window ID="WREGISTRO" runat="server" Draggable="false" Resizable="false" Height="450" Width="350" Icon="User" Title="Nueva Etiqueta" Hidden="true" Modal="true">
                 <Items>
                     <ext:FormPanel runat="server" ID="FREGISTRO" Frame="true" Padding="10" LabelAlign="Top">
                         <Items>
-                            <ext:ComboBox ID="CBETIQ_TIPO" FieldLabel="Tipo" runat="server" Width="300" EmptyText="Tipo de la etiqueta" ForceSelection="true" AllowBlank="false">
+                          
+                            <ext:Container runat="server" >
                                 <Items>
-                                    <ext:ListItem Text="Carnet" Value="CARNET" />
-                                    <ext:ListItem Text="Tag" Value="TAG" />
+                                    <ext:Container runat="server" Layout="HBoxLayout" FieldLabel="  Tipo">
+                                        <Items>
+                                            <ext:ComboBox ID="CBETIQ_TIPO" runat="server" Width="275" EmptyText="Tipo de la etiqueta" ForceSelection="true" AllowBlank="false">
+                                                <Items>
+                                                    <ext:ListItem Text="Carnet" Value="CARNET" />
+                                                    <ext:ListItem Text="Tag" Value="TAG" />
+                                                </Items>
+                                                <Listeners>
+                                                    <Select Fn="focus" />
+                                                </Listeners>
+                                            </ext:ComboBox>
+                                            <ext:Container runat="server">
+                                                <Items>
+                                                    <ext:Button ID="BPLAYER" runat="server" Icon="PlayBlue" Hidden="true">
+                                                        <Listeners>
+                                                            <Click Handler="playRfid();" />
+                                                        </Listeners>
+                                                    </ext:Button>
+                                                    <ext:Button ID="BSTOP" runat="server" Icon="Stop" Hidden="true">
+                                                        <Listeners>
+                                                            <Click Handler="stoprfid()" />
+                                                        </Listeners>
+                                                    </ext:Button>
+                                                </Items>
+                                            </ext:Container>
+                                        </Items>
+                                    </ext:Container>
                                 </Items>
-                                <Listeners>
-                                    <Select Fn="focus" />
-                                </Listeners>
-                               
-                            </ext:ComboBox>
-                            <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false">
-                                <Listeners>
-                                    <Blur Fn="blur" />
-                                </Listeners>
-                            </ext:TextField>
+                            </ext:Container>
+                            
+                            <ext:TextField ID="TFETIQ_ETIQUETA" FieldLabel="Etiqueta" runat="server" Width="300" EmptyText="Codigo de la etiqueta" AllowBlank="false" />
                             <ext:TextArea ID="TFETIQ_DESCRIPCION" FieldLabel="Descripción" runat="server" Width="300" EmptyText="Descripcion de la etiqueta" />
                             <ext:TextArea ID="TFETIQ_OBSERVACION" FieldLabel="Observación" runat="server" Width="300" EmptyText="Observaciones de la etiqueta" />
                             <ext:ComboBox ID="CBESTADO" FieldLabel="Estado" runat="server" Width="300" EmptyText="Estado de la etiqueta" AllowBlank="false">
@@ -258,7 +304,7 @@
                         <Items>
                             <ext:Button runat="server" ID="BDISCONECT" Icon="Connect" Text="Reconectar" Hidden="true">
                                 <Listeners>
-                                    <Click Handler = "emit('reconnect'); " />
+                                    <Click Handler="emit('reconnect'); " />
                                 </Listeners>
                             </ext:Button>
                             <ext:ToolbarFill />
@@ -272,12 +318,6 @@
                 </BottomBar>
                 <Listeners>
                     <BeforeHide Handler="FREGISTRO.reset();" />
-                </Listeners>
-                <Listeners>
-                    <Show Handler="rfid.send('connect');" />
-                </Listeners>
-                <Listeners>
-                    <Close Handler="rfid.send('disconnect');" />
                 </Listeners>
             </ext:Window>
         </div>

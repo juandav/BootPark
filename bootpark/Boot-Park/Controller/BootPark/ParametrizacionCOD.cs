@@ -26,7 +26,8 @@ namespace Boot_Park.Controller.BootPark
         {
             return particular.consultarParticulares();
         }
-             
+
+      
 
         public bool registrarParticular(string identificacion, string nombre, string apellido, string registradoPor)
         {
@@ -64,6 +65,14 @@ namespace Boot_Park.Controller.BootPark
             return autorizacion.desvincularVehiculoUsuario(id, usuario);
         }
 
+        public DataTable consultarPermisoUsuarioOut(string codvehiculo)
+        {
+            return usuario.consultarPermisoUsuarioOut(codvehiculo);
+        }
+        public DataTable consultarPermisoUsuarioIn(string codvehiculo)
+        {
+            return usuario.consultarPermisoUsuarioIn(codvehiculo);
+        }
         #endregion
 
         #region AUTORIZACIONPROPIETARIO

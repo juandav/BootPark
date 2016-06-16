@@ -10,6 +10,45 @@
     <title>Vehiculo - Tag</title>
     <script type="text/javascript">
 
+        var rfid = new WebSocket('ws://172.16.31.150:2020');
+
+        rfid.onerror = function (error) {
+            Ext.net.Notification.show({ iconCls: 'icon-information', hideDelay: 2000, html: 'El servicio del Lector RFID PT-3L01Z esta inactivo', title: 'Notificación' });
+        };
+
+        rfid.onmessage = function (evt) {
+            var kyt = evt.data;
+            eval(kyt);
+
+            switch (kyt.type) {
+                case "connect":
+                    rfid.send('reset');
+                    break;
+                case "disconnect":
+                    alert(':) desconectado');
+                    break;
+                case "tag":
+                    console.log(kyt.payload.tag)
+                    var _tag = String(kyt.payload.tag)
+                    TFfindEtiquetaOut.setValue(_tag);
+                    findEtiquetaINSocket(GPETIQUETAOUT.store, _tag);
+                    stoprfid();
+                    break;
+            }
+        }
+
+        function playRfid() {
+            BSTOP.show();
+            BPLAYER.hide();
+            rfid.send("reset")
+            rfid.send("start")
+        }
+        function stoprfid() {
+            rfid.send("pause");
+            BSTOP.hide();
+            BPLAYER.show();
+        }
+
         var afterEdit = function (e) {
             var dataVehiculo = GPVEHICULO.selModel.getSelections();
             parametro.modificarTagalVehiculo(e.record.data.ETIQ_ID, dataVehiculo[0].data.VEHI_ID, e.record.data.ETVE_OBSERVACION, {
@@ -108,6 +147,7 @@
         };
 
         var findEtiquetaOUT = function (Store, texto, e) {
+           
             if (e.getKey() == 13) {
                 var store = Store,
                     text = texto;
@@ -117,12 +157,25 @@
                 }
                 var re = new RegExp(".*" + text + ".*", "i");
                 store.filterBy(function (node) {
-                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var RESUMEN = node.data.ETIQ_ETIQUETA + node.data.ETIQ_DESCRIPCION;
                     var a = re.test(RESUMEN);
                     return a;
                 });
             }
         };
+
+        var findEtiquetaINSocket = function (Store, texto) {
+                var store = Store,
+                    text = texto;
+                store.clearFilter();
+                var re = new RegExp(".*" + text + ".*", "i");
+                store.filterBy(function (node) {
+                    var RESUMEN = node.data.ETIQ_ETIQUETA + node.data.ETIQ_DESCRIPCION;
+                    var a = re.test(RESUMEN);
+                    return a;
+                });
+        };
+
         var findEtiquetaIN = function (Store, texto, e) {
             if (e.getKey() == 13) {
                 var store = Store,
@@ -133,7 +186,7 @@
                 }
                 var re = new RegExp(".*" + text + ".*", "i");
                 store.filterBy(function (node) {
-                    var RESUMEN = node.data.ETIQ_ID + node.data.ETIQ_ETIQUETA;
+                    var RESUMEN = node.data.ETIQ_ETIQUETA + node.data.ETIQ_DESCRIPCION;
                     var a = re.test(RESUMEN);
                     return a;
                 });
@@ -223,7 +276,17 @@
                                                                     <Listeners>
                                                                         <KeyPress Handler="findEtiquetaOUT(GPETIQUETAOUT.store, TFfindEtiquetaOut.getValue(), Ext.EventObject);" />
                                                                     </Listeners>
-                                                                </ext:TextField>
+                                                                </ext:TextField> 
+                                                                <ext:Button ID ="BPLAYER" runat="server" Icon="PlayBlue" Hidden="false">
+                                                                    <Listeners>
+                                                                        <Click Handler="playRfid();" />
+                                                                    </Listeners>
+                                                                </ext:Button>
+                                                                <ext:Button ID ="BSTOP" runat="server" Icon="Stop" Hidden="true" >
+                                                                    <Listeners>
+                                                                        <Click Handler="stoprfid()" />
+                                                                    </Listeners>
+                                                                </ext:Button>
                                                             </Items>
                                                         </ext:Toolbar>
                                                     </TopBar>

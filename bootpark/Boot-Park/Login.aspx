@@ -12,7 +12,7 @@
     </title>
     <style type="text/css">
         .back {
-            background-image: url('/Content/images/login.jpg');
+            background-image: url('Content/images/login.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -47,7 +47,7 @@
             let creds = JSON.parse(localStorage.getItem('accountSession'))
 
             if (creds !== null) {
-                window.location.href = 'http://localhost:56076/View/Private/Desktop.aspx'
+                window.location.href = 'http://localhost:/BootPark/View/Private/Desktop.aspx'
                 console.log(creds)
             } else {
 

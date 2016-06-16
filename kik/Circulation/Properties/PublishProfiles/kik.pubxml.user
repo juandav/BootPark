@@ -10,52 +10,52 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
   </PropertyGroup>
   <ItemGroup>
     <File Include=".gitignore">
-      <publishTime>05/05/2016 16:07:26</publishTime>
+      <publishTime>05/28/2016 13:59:16</publishTime>
     </File>
     <File Include="bin/Circulation.dll">
-      <publishTime>05/14/2016 12:27:08</publishTime>
-    </File>
-    <File Include="bin/Ext.Net.dll">
-      <publishTime>05/06/2016 13:09:44</publishTime>
-    </File>
-    <File Include="bin/Ext.Net.Utilities.dll">
-      <publishTime>05/06/2016 13:09:16</publishTime>
-    </File>
-    <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>05/06/2016 13:09:17</publishTime>
-    </File>
-    <File Include="bin/MySql.Data.dll">
-      <publishTime>05/05/2016 16:07:27</publishTime>
-    </File>
-    <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>05/06/2016 13:09:16</publishTime>
-    </File>
-    <File Include="bin/Transformer.NET.dll">
-      <publishTime>05/06/2016 13:09:17</publishTime>
-    </File>
-    <File Include="bin/WebActivatorEx.dll">
-      <publishTime>05/06/2016 13:09:17</publishTime>
-    </File>
-    <File Include="content/img/gears.gif">
-      <publishTime>05/05/2016 16:07:27</publishTime>
-    </File>
-    <File Include="content/img/user.png">
-      <publishTime>05/10/2016 18:49:27</publishTime>
-    </File>
-    <File Include="content/js/Circulations.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="bin/Ext.Net.dll">
+      <publishTime>06/13/2016 16:07:39</publishTime>
+    </File>
+    <File Include="bin/Ext.Net.Utilities.dll">
+      <publishTime>06/13/2016 16:07:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>06/13/2016 16:07:32</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>05/28/2016 13:59:16</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/13/2016 16:07:34</publishTime>
+    </File>
+    <File Include="bin/Transformer.NET.dll">
+      <publishTime>06/13/2016 16:07:33</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>06/13/2016 16:07:33</publishTime>
+    </File>
+    <File Include="content/img/gears.gif">
+      <publishTime>05/28/2016 13:59:16</publishTime>
+    </File>
+    <File Include="content/img/user.png">
+      <publishTime>05/28/2016 13:59:16</publishTime>
+    </File>
+    <File Include="content/js/Circulations.js">
+      <publishTime>06/14/2016 17:52:23</publishTime>
+    </File>
     <File Include="content/js/socket.io-1.4.5.js">
-      <publishTime>05/05/2016 16:07:27</publishTime>
+      <publishTime>05/28/2016 13:59:16</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/06/2016 13:12:58</publishTime>
+      <publishTime>06/13/2016 16:25:17</publishTime>
     </File>
     <File Include="View/Public/BootPark/Circulation.aspx">
-      <publishTime>05/14/2016 11:57:11</publishTime>
+      <publishTime>05/28/2016 13:59:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/14/2016 12:12:46</publishTime>
+      <publishTime>06/15/2016 10:40:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

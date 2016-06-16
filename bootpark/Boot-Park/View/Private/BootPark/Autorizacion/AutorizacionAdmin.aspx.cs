@@ -23,14 +23,14 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
             }
            
         }
+        #region PROPIETARIO
         public void cargarUsuariosChaira()
         {
             DataTable datos = parametro.consultarUsuariosChaira();
             SUSUARIO.DataSource = datos;
             SUSUARIO.DataBind();
         }
-
-        [DirectMethod(Namespace = "parametro")]
+                [DirectMethod(Namespace = "parametro")]
         public void cargarVehiculosOUT()
         {
             SVEHICULOOUT.DataSource = parametro.consultarVehiculosDisponibles();
@@ -50,9 +50,47 @@ namespace Boot_Park.View.Private.BootPark.Autorizacion
             return parametro.registrarVehiculoUsuario(id, usuario, "", pegeId);
         }
         [DirectMethod(Namespace = "parametro")]
-        public bool desvincularVehiculoAlUsuario(string id, string usuario)
+        public bool desvincularVehiculoAlUsuario(string idvehiculo, string usuario)
         {
-            return parametro.desvincularVehiculoUsuario(id, usuario);
+            int datos = parametro.consultarPermisoUsuarioIn(idvehiculo).Rows.Count;
+            if (datos>0)
+            {
+                return false;
+            }
+           
+                return parametro.desvincularVehiculoUsuario(idvehiculo, usuario);
+           
         }
+
+        #endregion
+
+        #region ASIGNACION PARTICULARES 
+
+        [DirectMethod(Namespace = "parametro")]
+        public bool vincularVehiculoAlParticular(string idvehiculo, string usuario)
+        {
+            return parametro.registrarVehiculoUsuarioPropietario(idvehiculo, usuario, "", pegeId);
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public bool desvincularVehiculoAlParticular(string idvehiculo, string usuario)
+        {
+                return parametro.desvincularVehiculoUsuario(idvehiculo, usuario);
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public void cargarusuarioIn(String codvehiculo)
+        {
+            DataTable datos = parametro.consultarPermisoUsuarioIn(codvehiculo);
+            SUSERIN.DataSource = datos;
+            SUSERIN.DataBind();
+        }
+        [DirectMethod(Namespace = "parametro")]
+        public void cargarusuarioOut(String codvehiculo)
+        {
+            DataTable datos = parametro.consultarPermisoUsuarioOut(codvehiculo);
+            SUSEROUT.DataSource = datos;
+            SUSEROUT.DataBind();
+        }
+
+        #endregion
     }
 }

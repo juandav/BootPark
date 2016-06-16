@@ -103,6 +103,24 @@ namespace Boot_Park.View.Private.BootPark.Parametrizacion {
         protected global::Ext.Net.ComboBox CBETIQ_TIPO;
         
         /// <summary>
+        /// Control BPLAYER.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Button BPLAYER;
+        
+        /// <summary>
+        /// Control BSTOP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Ext.Net.Button BSTOP;
+        
+        /// <summary>
         /// Control TFETIQ_ETIQUETA.
         /// </summary>
         /// <remarks>

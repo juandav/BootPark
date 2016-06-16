@@ -16,7 +16,11 @@
     <title>Identidad</title>
 
     <script type="text/javascript">
-        var io = new WebSocket("ws://127.0.0.1:2012");
+        var io = new WebSocket("ws://172.16.31.150:2012");
+
+        io.onerror = function (error) {
+            Ext.net.Notification.show({ iconCls: 'icon-information', hideDelay: 5000, html: 'El servicio del Lector ZK-F19 ID  esta inactivo', title: 'Notificación' });
+        };
 
         function emit(event, data) {
 
