@@ -47,7 +47,7 @@
             let creds = JSON.parse(localStorage.getItem('accountSession'))
 
             if (creds !== null) {
-                window.location.href = 'http://localhost:/BootPark/View/Private/Desktop.aspx'
+                parametro.direccionarDestop();
                 console.log(creds)
             } else {
 

@@ -28,6 +28,10 @@ namespace Boot_Park
             accountStore.DataSource = data;
             accountStore.DataBind();
         }
+        [DirectMethod(Namespace = "parametro")]
+        public void direccionarDestop() {
+            this.Response.Redirect("View/Private/Desktop.aspx");
+        }
 
     }
 }
