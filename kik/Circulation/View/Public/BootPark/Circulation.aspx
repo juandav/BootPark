@@ -13,7 +13,7 @@
         }
     </style>
     <script src='../../../content/js/socket.io-1.4.5.js'></script>
-    <script src='../../../content/js/Circulations.js'></script>
+    <script src='../../../content/js/Circulations9.js'></script>
 </head>
 <body>
     <ext:ResourceManager runat="server" Theme="NeptuneTouch" />
@@ -39,7 +39,7 @@
                             </ext:Panel>
                         </Items>
                     </ext:Panel>
-                    <ext:FormPanel runat="server" Region="East"  Title="Datos del Usuario" Collapsed="true" Split="true"  Collapsible="true" AnimCollapseDuration="800" Width="600" Icon="User" ID="USERID">
+                    <ext:FormPanel runat="server" Region="East"  Title="Datos del Usuario"  Split="true" Width="600" Icon="User" ID="USERID">
                         <Items>
                             <ext:Panel runat="server">
                                 <Items>
@@ -66,7 +66,7 @@
                                     
                                 </Items>
                             </ext:Panel>
-                            <ext:Panel runat="server" ID="PVEHICULO" Title="Vehiculo I/O" Region="South" Collapsed="true"  Collapsible="true" Icon="Car" Height="400">
+                            <ext:Panel runat="server" ID="PVEHICULO" Title="Vehiculo I/O" Region="South"  Icon="Car" Height="400">
                                 <Items>
                                     <ext:FormPanel ID="FVHEHICULO" runat="server" Layout="HBoxLayout" Height="300" MarginSpec="10">
                                         <Items>

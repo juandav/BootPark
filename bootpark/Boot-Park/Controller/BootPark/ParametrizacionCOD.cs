@@ -19,6 +19,8 @@ namespace Boot_Park.Controller.BootPark
         private EtiquetaVehiculoOAD etiquetaVehiculo = new EtiquetaVehiculoOAD();
         private CirculacionOAD _circulacion = new CirculacionOAD();
         private TerminalOAD terminal = new TerminalOAD();
+        private ReportOAD reporte = new ReportOAD();
+
         private General general = new General();
 
         #region GESTION DE PARTICULARES
@@ -313,7 +315,14 @@ namespace Boot_Park.Controller.BootPark
         }
         #endregion
 
-
+        #region REPORTE
+        public DataTable ListarVehiculosRegistrados() {
+            return reporte.ListarVehiculosRegistrados();
+        }
+        public DataTable ConsultarVehiculoActuales() {
+            return reporte.ConsultarVehiculoActuales();
+        }
+        #endregion
 
 
 

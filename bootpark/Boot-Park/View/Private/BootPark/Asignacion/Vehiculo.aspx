@@ -299,6 +299,7 @@
                                                                         <ext:RecordField Name="ETIQ_TIPO" />
                                                                         <ext:RecordField Name="ETIQ_ETIQUETA" />
                                                                         <ext:RecordField Name="ETIQ_DESCRIPCION" />
+                                                                        <ext:RecordField Name="ETVE_OBSERVACION" />
                                                                     </Fields>
                                                                 </ext:JsonReader>
                                                             </Reader>
@@ -388,7 +389,7 @@
                                                 </ext:Panel>
                                             </ext:LayoutColumn>
                                             <ext:LayoutColumn>
-                                                <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_OBSERVACION" ColumnWidth="0.5" Title="Etiquetas Asignados" Icon="TagBlueEdit" EnableDragDrop="true" DDGroup="firstGridDDGroup">
+                                                <ext:GridPanel ID="GPETIQUETAIN" runat="server" AutoExpandColumn="CETIQ_DESCRIPCION" ColumnWidth="0.5" Title="Etiquetas Asignados" Icon="TagBlueEdit" EnableDragDrop="true" DDGroup="firstGridDDGroup">
                                                     <TopBar>
                                                         <ext:Toolbar runat="server">
                                                             <Items>
@@ -421,11 +422,6 @@
                                                             <ext:Column ColumnID="CETIQ_ID" DataIndex="ETIQ_ID" Header="Codigo" />
                                                             <ext:Column ColumnID="CETIQ_ETIQUETA" DataIndex="ETIQ_ETIQUETA" Header="Tag" />
                                                             <ext:Column ColumnID="CETIQ_DESCRIPCION" DataIndex="ETIQ_DESCRIPCION" Width="150" Header="Descripción" />
-                                                            <ext:Column ColumnID="CETIQ_OBSERVACION" DataIndex="ETVE_OBSERVACION" Header="Observaciones">
-                                                                <Editor>
-                                                                    <ext:TextField runat="server" />
-                                                                </Editor>
-                                                            </ext:Column>
                                                         </Columns>
                                                     </ColumnModel>
                                                     <SelectionModel>

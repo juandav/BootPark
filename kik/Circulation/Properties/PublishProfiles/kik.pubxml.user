@@ -13,7 +13,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/28/2016 13:59:16</publishTime>
     </File>
     <File Include="bin/Circulation.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/20/2016 18:48:40</publishTime>
     </File>
     <File Include="bin/Ext.Net.dll">
       <publishTime>06/13/2016 16:07:39</publishTime>
@@ -43,7 +43,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/28/2016 13:59:16</publishTime>
     </File>
     <File Include="content/js/Circulations.js">
-      <publishTime>06/14/2016 17:52:23</publishTime>
+      <publishTime>06/17/2016 11:43:07</publishTime>
+    </File>
+    <File Include="content/js/Circulations9.js">
+      <publishTime>06/20/2016 18:33:20</publishTime>
     </File>
     <File Include="content/js/socket.io-1.4.5.js">
       <publishTime>05/28/2016 13:59:16</publishTime>
@@ -52,10 +55,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>06/13/2016 16:25:17</publishTime>
     </File>
     <File Include="View/Public/BootPark/Circulation.aspx">
-      <publishTime>05/28/2016 13:59:16</publishTime>
+      <publishTime>06/20/2016 17:48:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/15/2016 10:40:06</publishTime>
+      <publishTime>06/20/2016 18:48:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

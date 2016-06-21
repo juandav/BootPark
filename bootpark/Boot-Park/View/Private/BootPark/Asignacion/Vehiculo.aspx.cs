@@ -13,7 +13,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
     public partial class Vehiculo : System.Web.UI.Page
     {
         private ParametrizacionCOD parametro = new ParametrizacionCOD();
-        private string pegeId = "";
+        private string pegeId = "555";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,7 +52,7 @@ namespace Boot_Park.View.Private.BootPark.Asignacion
         [DirectMethod(Namespace = "parametro")]
         public bool vincularTagAlVehiculo(string etiqueta, string vehiculo, string observacion)
         {
-            return parametro.registrarEtiquetaVehiculo(etiqueta,vehiculo,observacion,pegeId);
+            return parametro.registrarEtiquetaVehiculo(etiqueta,vehiculo,observacion, pegeId);
         }
         [DirectMethod(Namespace = "parametro")]
         public bool DesvincularTagalVehiculo(string etiqueta,string vehiculo) {

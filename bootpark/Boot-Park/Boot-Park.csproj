@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Boot_Park</RootNamespace>
     <AssemblyName>Boot-Park</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -115,6 +115,9 @@
     <Content Include="View\Private\BootPark\Parametrizacion\Particular.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Terminal.aspx" />
     <Content Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx" />
+    <Content Include="View\Private\BootPark\Report\Content.aspx" />
+    <Content Include="View\Private\BootPark\Report\View\HistorialControl.aspx" />
+    <Content Include="View\Private\BootPark\Report\View\VehiculoActuales.aspx" />
     <Content Include="View\Private\Desktop.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -138,6 +141,7 @@
     <Compile Include="Model\BootPark\EtiquetaVehiculoOAD.cs" />
     <Compile Include="Model\BootPark\HuellaOAD.cs" />
     <Compile Include="Model\BootPark\ParticularOAD.cs" />
+    <Compile Include="Model\BootPark\ReportOAD.cs" />
     <Compile Include="Model\BootPark\TerminalOAD.cs" />
     <Compile Include="Model\BootPark\UsuarioOAD.cs" />
     <Compile Include="Model\BootPark\VehiculoOAD.cs" />
@@ -199,6 +203,27 @@
     <Compile Include="View\Private\BootPark\Parametrizacion\Vehiculo.aspx.designer.cs">
       <DependentUpon>Vehiculo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Private\BootPark\Report\Content.aspx.cs">
+      <DependentUpon>Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Report\Content.aspx.designer.cs">
+      <DependentUpon>Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Report\View\HistorialControl.aspx.cs">
+      <DependentUpon>HistorialControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Report\View\HistorialControl.aspx.designer.cs">
+      <DependentUpon>HistorialControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Report\View\VehiculoActuales.aspx.cs">
+      <DependentUpon>VehiculoActuales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Private\BootPark\Report\View\VehiculoActuales.aspx.designer.cs">
+      <DependentUpon>VehiculoActuales.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Private\Desktop.aspx.cs">
       <DependentUpon>Desktop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,7 +250,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56075</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/</IISUrl>
+          <IISUrl>http://localhost:1758/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

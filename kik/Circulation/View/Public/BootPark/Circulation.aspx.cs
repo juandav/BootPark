@@ -41,19 +41,29 @@ namespace Circulation.View.Public.BootPark
         }
         // Registrar el historial de ingreso y salida de vehiculos, si y solo si el sistema lo permite.
         [DirectMethod]
-        public bool RegistarCiculación(string tag, string user) {
+        public bool RegistarCiculacion(string tag, string user) {
+            
             bool exist = c.CreateCirculation(tag, user);
-            if (exist) {
-                X.Call("socket.emit('click');");
-                // Aca muestre la data en los labels
-                LESTADO.Text = "Esperando Usuario....";
-                LVEHICULO.Text = "";
-                LHORATIPO.Text = "";
-                LNOMBRE.Text = "";
-                LIDENTIFICACION.Text = "";
-                Thread.Sleep(4000);
-            }
+            Thread.Sleep(2000);
+            LimpiaDatos();
             return exist;
         }
+
+        [DirectMethod]
+        public string QueTipoEs() {
+            string foo = c.QueTipoEs().Rows[0]["TIPO"].ToString() + ", " + c.QueTipoEs().Rows[0]["MENSAJE"].ToString();
+            return foo;
+        }
+
+        [DirectMethod(Namespace = "parametro")]
+        public void LimpiaDatos()
+        {
+            LESTADO.Text = "Esperando Usuario....";
+            LVEHICULO.Text = "";
+            LHORATIPO.Text = "";
+            LNOMBRE.Text = "";
+            LIDENTIFICACION.Text = "";
+        }
+      
     }
 }

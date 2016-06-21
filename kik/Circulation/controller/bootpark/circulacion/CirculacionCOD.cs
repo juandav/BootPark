@@ -21,5 +21,10 @@ namespace Circulation.controller.bootpark.circulacion
             return _CIRCULATION.CreateCirculation(tag, user);
         }
 
+        public DataTable QueTipoEs()
+        {
+            return _CIRCULATION.QueTipoEs();
+        }
+
     }
 }

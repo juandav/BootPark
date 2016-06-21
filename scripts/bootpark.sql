@@ -1,9 +1,9 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.10 - MySQL Community Server (GPL)
--- Server OS:                    Win32
+-- Host:                         172.16.31.150
+-- Server version:               5.7.11-log - MySQL Community Server (GPL)
+-- Server OS:                    Win64
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2016-06-07 09:43:49
+-- Date/time:                    2016-06-20 11:07:47
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,7 +11,6 @@
 /*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 -- Dumping database structure for bootpark
-DROP DATABASE IF EXISTS `bootpark`;
 CREATE DATABASE IF NOT EXISTS `bootpark` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `bootpark`;
 
@@ -32,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `autorizacion` (
   CONSTRAINT `AUTV` FOREIGN KEY (`VEHI_ID`) REFERENCES `vehiculo` (`VEHI_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table bootpark.autorizacion: ~1 rows (approximately)
+-- Dumping data for table bootpark.autorizacion: ~0 rows (approximately)
 /*!40000 ALTER TABLE `autorizacion` DISABLE KEYS */;
 /*!40000 ALTER TABLE `autorizacion` ENABLE KEYS */;
 
@@ -48,13 +47,11 @@ CREATE TABLE IF NOT EXISTS `circulacion` (
   `CIRC_FECHACAMBIO` date NOT NULL,
   `VEHI_ID` decimal(30,0) NOT NULL,
   `USUA_ID` decimal(30,0) NOT NULL,
-  `TERM_ID` int(10) NOT NULL,
+  `CIRC_HORACIRCULA` time DEFAULT NULL,
   PRIMARY KEY (`CIRC_ID`),
   KEY `CIRA` (`VEHI_ID`,`USUA_ID`),
-  KEY `TERC` (`TERM_ID`),
-  CONSTRAINT `CIRA` FOREIGN KEY (`VEHI_ID`, `USUA_ID`) REFERENCES `autorizacion` (`VEHI_ID`, `USUA_ID`),
-  CONSTRAINT `TERC` FOREIGN KEY (`TERM_ID`) REFERENCES `terminal` (`TERM_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `CIRA` FOREIGN KEY (`VEHI_ID`, `USUA_ID`) REFERENCES `autorizacion` (`VEHI_ID`, `USUA_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table bootpark.circulacion: ~0 rows (approximately)
 /*!40000 ALTER TABLE `circulacion` DISABLE KEYS */;
@@ -76,12 +73,8 @@ CREATE TABLE IF NOT EXISTS `etiqueta` (
   UNIQUE KEY `ETIQ_ETIQUETA` (`ETIQ_ETIQUETA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table bootpark.etiqueta: ~3 rows (approximately)
+-- Dumping data for table bootpark.etiqueta: ~0 rows (approximately)
 /*!40000 ALTER TABLE `etiqueta` DISABLE KEYS */;
-INSERT INTO `etiqueta` (`ETIQ_ID`, `ETIQ_TIPO`, `ETIQ_ETIQUETA`, `ETIQ_DESCRIPCION`, `ETIQ_OBSERVACION`, `ETIQ_ESTADO`, `ETIQ_REGISTRADOPOR`, `ETIQ_FECHACAMBIO`) VALUES
-	(1, 'TAG', 'E2003020250F02191990487B', 'PRUEBA', 'PRUEBA', 'DISPONIBLE', '1212', '2016-06-02'),
-	(2, 'TAG', 'E2003020250F00632030430C', 'PRUEBA1', 'PRUEBA1', 'DISPONIBLE', '1212', '2016-06-02'),
-	(3, 'TAG', 'E2003020250F011820104378', 'PRUEBA2', 'PRUEBA2', 'DISPONIBLE', '1212', '2016-06-04');
 /*!40000 ALTER TABLE `etiqueta` ENABLE KEYS */;
 
 
@@ -140,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `huella` (
   PRIMARY KEY (`HUEL_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table bootpark.huella: ~1 rows (approximately)
+-- Dumping data for table bootpark.huella: ~0 rows (approximately)
 /*!40000 ALTER TABLE `huella` DISABLE KEYS */;
 /*!40000 ALTER TABLE `huella` ENABLE KEYS */;
 
@@ -250,10 +243,8 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
   CONSTRAINT `MAVV` FOREIGN KEY (`MAVE_ID`) REFERENCES `marcavehiculo` (`MAVE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table bootpark.vehiculo: ~1 rows (approximately)
+-- Dumping data for table bootpark.vehiculo: ~0 rows (approximately)
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` (`VEHI_ID`, `MAVE_ID`, `VEHI_OBSERVACION`, `VEHI_PLACA`, `VEHI_MODELO`, `VEHI_COLOR`, `VEHI_REGISTRADOPOR`, `VEHI_FECHACAMBIO`) VALUES
-	(1, 3, '', 'MK1200', 2012, 'NEGRO', '', '2016-06-01');
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 
 
@@ -261,6 +252,6 @@ INSERT INTO `vehiculo` (`VEHI_ID`, `MAVE_ID`, `VEHI_OBSERVACION`, `VEHI_PLACA`, 
 DROP VIEW IF EXISTS `usuario`;
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `usuario`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `usuario` AS (select `P`.`PART_ID` AS `PEGE_ID`,`P`.`PART_IDENTIFICACION` AS `IDENTIFICACION`,`P`.`PART_NOMBRE` AS `NOMBRE`,`P`.`PART_APELLIDO` AS `APELLIDO`,'NOCHAIRA' AS `TIPOUSUARIO` from `BOOTPARK`.`PARTICULAR` `P`) union (select `PC`.`PEGE_ID` AS `PEGE_ID`,`PC`.`IDENTIFICACION` AS `IDENTIFICACION`,`PC`.`NOMBRE` AS `NOMBRE`,`PC`.`APELLIDO` AS `APELLIDO`,`PC`.`CARGO`   AS `TIPOUSUARIO` from `GENERAL`.`PERSONACHAIRA` `PC`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `usuario` AS (select `p`.`PART_ID` AS `PEGE_ID`,`p`.`PART_IDENTIFICACION` AS `IDENTIFICACION`,`p`.`PART_NOMBRE` AS `NOMBRE`,`p`.`PART_APELLIDO` AS `APELLIDO`,'NOCHAIRA' AS `TIPOUSUARIO` from `bootpark`.`particular` `p`) union (select `pc`.`PEGE_ID` AS `PEGE_ID`,`pc`.`IDENTIFICACION` AS `IDENTIFICACION`,`pc`.`NOMBRE` AS `NOMBRE`,`pc`.`APELLIDO` AS `APELLIDO`,`pc`.`CARGO` AS `TIPOUSUARIO` from `general`.`personachaira` `pc`);
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

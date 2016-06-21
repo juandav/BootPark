@@ -91,7 +91,7 @@
   <ItemGroup>
     <Content Include="content\img\gears.gif" />
     <Content Include="content\img\user.png" />
-    <Content Include="content\js\Circulations.js" />
+    <Content Include="content\js\Circulations9.js" />
     <Content Include="content\js\socket.io-1.4.5.js" />
     <Content Include="View\Public\BootPark\Circulation.aspx" />
     <Content Include="Web.config">

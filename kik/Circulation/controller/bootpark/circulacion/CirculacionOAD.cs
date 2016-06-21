@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using Circulation.conecction;
+using Ext.Net;
 
 namespace Circulation.controller.bootpark.circulacion
 {
@@ -15,8 +16,7 @@ namespace Circulation.controller.bootpark.circulacion
             string sql = @"
                 SELECT *
                 FROM   usuario U
-                WHERE  U.tipousuario = 'DOCENTE'
-                       AND U.pege_id = '" + user + @"' 
+                WHERE  U.pege_id = '" + user + @"' 
             ";
             return _CONN.GetData(sql).Tables[0];
         }
@@ -45,7 +45,9 @@ namespace Circulation.controller.bootpark.circulacion
         {
             DataTable Max = GetMaxCirculation(tag, user);
             bool isEmpty = Max.Rows[0]["CIRC_ID"].ToString() == "" ? true: false ;
+            string clock = DateTime.Now.ToString("hh:mm:ss");
             string type;
+
 
             if (isEmpty)
             {
@@ -73,14 +75,15 @@ namespace Circulation.controller.bootpark.circulacion
                             (`circ_tipo`,
                              `circ_observacion`,
                              `circ_fechacircula`,
+                             `circ_horacircula`,                             
                              `circ_registradopor`,
                              `circ_fechacambio`,
                              `vehi_id`,
-                             `usua_id`,
-                             `term_id`)
+                             `usua_id`)
                 VALUES      ('" + type + @"',
                              'SYSTEM',
                              NOW(),
+                             '" + clock + @"',                                   
                              'SYSTEM',
                              NOW(),
                              " + @"(SELECT DISTINCT
@@ -92,11 +95,25 @@ namespace Circulation.controller.bootpark.circulacion
                                         EV.ETIQ_ID= E.ETIQ_ID
                                     WHERE
                                         E.ETIQ_ETIQUETA = '" + tag + @"'" + @"),
-                             '" + user + @"',
-                             '1') 
+                             '" + user + @"') 
             ";
+
+            X.AddScript(" App.LESTADO.setText('" + type + ": " + clock + "');");
             return _CONN.SendData(sql);
 
+        }
+
+        public DataTable QueTipoEs() {
+            string sql = @"
+                SELECT C.circ_tipo         AS TIPO, 
+                        Concat('Fecha: ', Date_format(C.circ_fechacircula, '%d %b %y'), 
+                        ', Hora: ', 
+                        C.circ_horacircula) AS MENSAJE
+                FROM   circulacion C 
+                WHERE  C.circ_id = (SELECT Max(C2.circ_id) 
+                                    FROM   circulacion C2) 
+            ";
+            return _CONN.GetData(sql).Tables[0];
         }
 
         private DataTable GetMaxCirculation(string tag, string user) {

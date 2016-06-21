@@ -3,13 +3,8 @@
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 
 <!DOCTYPE html>
-<%--<embed type="application/x-my-extension" id="pluginId">--%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<%--    <script>
-  var plugin = document.getElementById("pluginId");
-  var result = plugin.myPluginMethod();  // call a method in your plugin
-  console.log("my plugin returned: " + result);
-</script>--%>
 <head runat="server">
     <link href="../../../../Content/css/desktop.css" rel="stylesheet" />
     <script src="../../../../Content/js/BiometricDevice.js"></script>
@@ -246,7 +241,7 @@
                                                     <ToolTip Text="Registrar la huella vinculado al Chaira." />
                                                 </ext:GridCommand>
                                             </Commands>
-                                            <PrepareToolbar Fn="prepareCommand" />
+                                          
                                         </ext:CommandColumn>
 
                                     </Columns>
@@ -267,17 +262,15 @@
                                 </SelectionModel>
                                 <Listeners>
                                     <Command Handler="
-                                        if(command=='Detalle'){
-                                           WDETALLEUSUARIO.show();
-                                        } 
 
                                         if(command=='enrollmentFootprint'){
                                            emit('recordfinger', { user:  String(record.data.ID)  });
+                                           console.log(record.data.ID);
                                         } 
 
                                         if(command=='footprint'){
                                             emit('getfinger', { user:  String(record.data.ID)  });
-                                            
+                                            console.log(record.data.ID);
                                         }
                                         " />
                                                         
